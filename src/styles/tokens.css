@@ -1,0 +1,123 @@
+/* tokens.css — generated from DESIGN.md. Do not edit manually.
+   When DESIGN.md changes, update this file in the same commit. */
+
+:root {
+  /* ─── Color ─────────────────────────────────────────── */
+  --color-bg:     #F5F2EC;
+  --color-fg:     #0A0A0A;
+  --color-accent: #4B53F6;
+  --color-muted:  rgba(10, 10, 10, 0.6);
+  --color-border: rgba(10, 10, 10, 0.12);
+
+  /* ─── Spacing (8px base, editorial jumps) ────────────── */
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  48px;
+  --space-6:  64px;
+  --space-7:  96px;
+  --space-8:  128px;
+  --space-9:  192px;
+  --space-10: 256px;
+  --space-11: 384px;
+
+  /* ─── Typography — font families ─────────────────────── */
+  --font-display: 'PP Formula', sans-serif;
+  --font-body:    'PP Neue Montreal', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* ─── Type scale ──────────────────────────────────────── */
+  /* --text-xs: 12px | Mono 400 | lh 1.4 | tracking 0 */
+  --text-xs-size:        12px;
+  --text-xs-family:      var(--font-mono);
+  --text-xs-weight:      400;
+  --text-xs-line-height: 1.4;
+  --text-xs-tracking:    0;
+
+  /* --text-sm: 14px | Body 400 | lh 1.5 | tracking 0 */
+  --text-sm-size:        14px;
+  --text-sm-family:      var(--font-body);
+  --text-sm-weight:      400;
+  --text-sm-line-height: 1.5;
+  --text-sm-tracking:    0;
+
+  /* --text-base: 17px | Body 400 | lh 1.55 | tracking 0 */
+  --text-base-size:        17px;
+  --text-base-family:      var(--font-body);
+  --text-base-weight:      400;
+  --text-base-line-height: 1.55;
+  --text-base-tracking:    0;
+
+  /* --text-lg: 20px | Body 400 | lh 1.5 | tracking 0 */
+  --text-lg-size:        20px;
+  --text-lg-family:      var(--font-body);
+  --text-lg-weight:      400;
+  --text-lg-line-height: 1.5;
+  --text-lg-tracking:    0;
+
+  /* --text-xl: 28px | Display 500 | lh 1.2 | tracking -0.01em */
+  --text-xl-size:        28px;
+  --text-xl-family:      var(--font-display);
+  --text-xl-weight:      500;
+  --text-xl-line-height: 1.2;
+  --text-xl-tracking:    -0.01em;
+
+  /* --text-2xl: 40px | Display 500 | lh 1.1 | tracking -0.02em */
+  --text-2xl-size:        40px;
+  --text-2xl-family:      var(--font-display);
+  --text-2xl-weight:      500;
+  --text-2xl-line-height: 1.1;
+  --text-2xl-tracking:    -0.02em;
+
+  /* --text-3xl: 64px | Display 500 | lh 1.05 | tracking -0.03em */
+  --text-3xl-size:        64px;
+  --text-3xl-family:      var(--font-display);
+  --text-3xl-weight:      500;
+  --text-3xl-line-height: 1.05;
+  --text-3xl-tracking:    -0.03em;
+
+  /* --text-display-sm: 96px | Display 500 | lh 0.95 | tracking -0.04em */
+  --text-display-sm-size:        96px;
+  --text-display-sm-family:      var(--font-display);
+  --text-display-sm-weight:      500;
+  --text-display-sm-line-height: 0.95;
+  --text-display-sm-tracking:    -0.04em;
+
+  /* --text-display-md: 144px | Display 500 | lh 0.9 | tracking -0.04em */
+  --text-display-md-size:        144px;
+  --text-display-md-family:      var(--font-display);
+  --text-display-md-weight:      500;
+  --text-display-md-line-height: 0.9;
+  --text-display-md-tracking:    -0.04em;
+
+  /* --text-display-lg: clamp(120px,18vw,260px) | Display 500 | lh 0.85 | tracking -0.05em */
+  --text-display-lg-size:        clamp(120px, 18vw, 260px);
+  --text-display-lg-family:      var(--font-display);
+  --text-display-lg-weight:      500;
+  --text-display-lg-line-height: 0.85;
+  --text-display-lg-tracking:    -0.05em;
+
+  /* ─── Motion — easing ────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* --ease-spring: GSAP back.out(1.4) — applied in JS, not CSS */
+
+  /* ─── Motion — durations ─────────────────────────────── */
+  --duration-fast:      150ms;
+  --duration-base:      300ms;
+  --duration-slow:      600ms;
+  --duration-cinematic: 1200ms;
+
+  /* ─── Layout ──────────────────────────────────────────── */
+  --grid-columns:       8;
+  --grid-max-width:     1280px;
+  --grid-gutter:        var(--space-4);   /* 32px */
+  --grid-outer-margin:  8vw;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --grid-outer-margin: var(--space-3);  /* 24px */
+  }
+}

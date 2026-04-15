@@ -1,0 +1,57 @@
+/* fonts.css — @font-face declarations for self-hosted typefaces.
+   All files must be placed in public/fonts/ as .woff2.
+   Licenses: PP Formula & PP Neue Montreal — Pangram Pangram (personal use);
+             JetBrains Mono — OFL. */
+
+/* ─── PP Formula ────────────────────────────────────────── */
+@font-face {
+  font-family: 'PP Formula';
+  src: url('/fonts/PPFormula-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Formula';
+  src: url('/fonts/PPFormula-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── PP Neue Montreal ──────────────────────────────────── */
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('/fonts/PPNeueMontreal-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('/fonts/PPNeueMontreal-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── JetBrains Mono ────────────────────────────────────── */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: 'tnum' 1;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: 'tnum' 1;
+}
