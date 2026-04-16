@@ -98,6 +98,12 @@
     padding-block-end: var(--space-4);
   }
 
+  /* display-md (144px, nowrap) → fluid scale that fits on 375px phones */
+  .heroTitle {
+    font-size: clamp(48px, 13vw, 100px);
+    white-space: normal;
+  }
+
   .cases {
     padding-block-start: var(--space-7);
     padding-block-end: var(--space-7);

@@ -119,6 +119,15 @@
     padding-block-start: var(--space-9);
   }
 
+  /*
+   * "CASES." at 144px + eyebrow = ~648px, barely over the ~646px available
+   * at 768px. Fluid clamp keeps it just under the available width.
+   */
+  .sectionTitle {
+    font-size: clamp(80px, 10vw, 144px);
+    white-space: normal;
+  }
+
   .viewArchive {
     grid-column: 1 / -1;
   }

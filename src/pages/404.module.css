@@ -45,4 +45,11 @@
   .page {
     padding-block: var(--space-6);
   }
+
+  /* display-md (144px, nowrap) — "404." fits but muted text is decorative,
+     scaling it keeps consistent rhythm with page headlines */
+  .number {
+    font-size: clamp(48px, 13vw, 100px);
+    white-space: normal;
+  }
 }

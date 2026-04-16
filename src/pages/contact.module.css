@@ -64,4 +64,10 @@
     padding-block-end: var(--space-7);
     min-height: 70vh;
   }
+
+  /* display-md (144px, nowrap) — "Hablemos." would exceed 327px available */
+  .headline {
+    font-size: clamp(48px, 13vw, 100px);
+    white-space: normal;
+  }
 }

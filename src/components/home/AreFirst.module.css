@@ -107,6 +107,8 @@
 
   .heading {
     grid-column: 1 / -1;
+    /* 3xl (64px) → "un estudio." at 64px ≈ 385px > 327px available — reduce */
+    font-size: clamp(36px, 9vw, 56px);
   }
 
   .right {
