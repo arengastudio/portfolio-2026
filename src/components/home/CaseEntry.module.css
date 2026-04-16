@@ -1,32 +1,29 @@
 /*
  * CaseEntry.module.css
- * Full-width editorial case entry — two-column: narrow left (number + meta),
- * wide right (magazine-cover visual + tagline + link).
+ * Editorial case entry — two-column: number + meta on the left,
+ * magazine-cover visual + tagline + link on the right.
  *
  * Grid strategy:
- * CaseEntry spans the full Container width and creates its own 8-col sub-grid
- * mirroring the parent. This lets the left/right columns align precisely to
- * the same grid as the rest of the page without display:contents hacks.
+ * A simple auto / 1fr two-column grid. The left column (number + meta)
+ * takes its natural content width; the right column (visual block) takes
+ * all remaining space. No sub-grid needed — the Container's 8-col layout
+ * does not need to be mirrored inside each entry.
  *
- *   Col 1     : empty left margin (breathing room)
- *   Cols 2–3  : number (display-md, 144px) + mono meta below
- *   Cols 4–9  : visual card (aspect 16/10, magazine cover) + tagline + link
+ * The number aligns to the top of the color block — align-items: start
+ * on the grid ensures the left column's top edge sits flush with the
+ * right column's top edge, creating a diagonal reading line:
+ * number → across to visual → down to tagline.
  *
- * Spacing between entries: .caseEntry:not(:first-of-type) margin-block-start.
- * `:first-of-type` targets the first <article> among siblings — correct since
- * the section header (div) and archive link (a) are different element types.
+ * Spacing between entries: :not(:first-of-type) margin-block-start.
  *
- * Number hover: parent hover scales the number by 1.02 — a minimal magnetic
- * effect that signals the case is interactive without being distracting.
- *
+ * Number hover: scale(1.02) — subtle magnetic effect.
  * Visual parallax: HoverParallax island handles title shift on mouse move.
  */
 
 /* ─── Case color variants ─────────────────────────────────── */
 
 /*
- * CSS custom property --case-visual-bg is consumed by .visual below.
- * Set per case via a color-key class on the article.
+ * --case-visual-bg consumed by .visual below.
  * .dark uses a hardcoded hex — no token exists for this color yet.
  * TODO(juan): add --color-case-dark to tokens.css if this persists.
  */
@@ -39,8 +36,8 @@
 .caseEntry {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  column-gap: var(--grid-gutter);
+  grid-template-columns: auto 1fr;
+  gap: var(--space-5);
   align-items: start;
 }
 
@@ -50,8 +47,12 @@
 
 /* ─── Left column: number + meta ─────────────────────────── */
 
+/*
+ * No grid-column set — occupies the auto-sized first column.
+ * Width is determined by the display-md number (largest item).
+ */
 .left {
-  grid-column: 2 / 4;
+  /* natural auto width */
 }
 
 /*
@@ -82,8 +83,11 @@
 
 /* ─── Right column: visual + tagline + link ──────────────── */
 
+/*
+ * No grid-column set — occupies the 1fr second column.
+ */
 .right {
-  grid-column: 4 / 9;
+  /* 1fr via grid */
 }
 
 /* ─── Visual block ────────────────────────────────────────── */
@@ -99,20 +103,19 @@
 
 /*
  * Title inside the colored visual.
- * Specificity (0,2,0) beats Type's .displayLg (0,1,0) and .colorFg (0,1,0).
- * Overrides:
- *  - font-size: contextual clamp (display-lg token is too wide for this panel)
- *  - white-space: normal (display-lg has nowrap; title must wrap in card)
+ * Overrides display-lg defaults:
+ *  - clamp size (fits within the card without overflow)
+ *  - white-space: normal (display-lg has nowrap; title must wrap)
  *  - color: cream (--color-bg) against the colored background
- * HoverParallax moves the title element via transform — will-change optimizes
- * the compositor layer.
+ * HoverParallax moves this element via transform — will-change hints
+ * the compositor to promote it to its own layer.
  */
 .visual .visualTitle {
   font-size: clamp(40px, 5vw, 72px);
   white-space: normal;
   color: var(--color-bg);
   margin: 0;
-  max-width: 12ch;                 /* soft wrap after ~12 chars for rhythm */
+  max-width: 12ch;
   will-change: transform;
 }
 
@@ -127,47 +130,26 @@
   /* Link variant="standalone" handles underline + accent on hover */
 }
 
-/* ─── Tablet (4-col grid at ≤1023px) ─────────────────────── */
+/* ─── Mobile (<900px) ─────────────────────────────────────── */
 
-@media (max-width: 1023px) {
-  .caseEntry {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .left {
-    grid-column: 1 / 2;     /* narrow — just 1 col for number + meta */
-  }
-
-  .right {
-    grid-column: 2 / 5;     /* 3 of 4 cols */
-  }
-
-  .caseEntry:not(:first-of-type) {
-    margin-block-start: var(--space-7);
-  }
-}
-
-/* ─── Mobile (≤767px) ─────────────────────────────────────── */
-
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .caseEntry {
     grid-template-columns: 1fr;
     row-gap: var(--space-4);
   }
 
+  /*
+   * On mobile, number and meta sit inline at the top:
+   * "01     2022 — PRESENTE · AI · SPORTS..."
+   */
   .left {
-    grid-column: 1;
     display: flex;
     align-items: baseline;
     gap: var(--space-4);
   }
 
   .meta {
-    margin-block-start: 0;         /* meta sits inline with number on mobile */
-  }
-
-  .right {
-    grid-column: 1;
+    margin-block-start: 0;
   }
 
   .caseEntry:not(:first-of-type) {
