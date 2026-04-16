@@ -50,7 +50,7 @@ const { title, role, timeframe, outcome, client, colorKey, image } = Astro.props
               alt={`Visual del proyecto ${title}`}
               class={styles.visualPhoto}
               loading="eager"
-              decoding="sync"
+              decoding="async"
             />
           </div>
         )

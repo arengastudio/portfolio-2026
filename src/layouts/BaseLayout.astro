@@ -44,8 +44,8 @@ const isHome = currentPath === '/' || currentPath === '/en';
     {/* Custom cursor — dot + ring + follow label, fine-pointer only */}
     <Cursor client:load />
 
-    {/* Grid overlay — press G to toggle column guides */}
-    <GridOverlay />
+    {/* Grid overlay — press G to toggle column guides (dev only) */}
+    {import.meta.env.DEV && <GridOverlay />}
 
 
     {/* Fixed nav — scroll-aware via NavScroll island */}
