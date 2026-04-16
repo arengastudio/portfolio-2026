@@ -118,6 +118,9 @@
   --grid-max-width:     1280px;
   --grid-gutter:        var(--space-4);   /* 32px */
   --grid-outer-margin:  8vw;
+
+  /* ─── Nav ─────────────────────────────────────────────── */
+  --nav-height:         56px;
 }
 
 @media (max-width: 767px) {

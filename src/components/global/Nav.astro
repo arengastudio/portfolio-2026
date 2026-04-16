@@ -1,0 +1,62 @@
+---
+import Container from '../ui/Container.astro';
+import NavScroll from '../motion/NavScroll.tsx';
+import styles from './Nav.module.css';
+
+export interface Props {
+  /** Current page path — used to apply active state to matching link. */
+  currentPath?: string;
+  /** True on the home page: nav hides after hero scrolls out. */
+  isHome?: boolean;
+}
+
+const { currentPath = '/', isHome = false } = Astro.props;
+
+const links = [
+  { href: '/work',  label: 'work'  },
+  { href: '/about', label: 'about' },
+  { href: '/lab',   label: 'lab'   },
+  { href: '/stack', label: 'stack' },
+];
+
+/*
+ * Active detection: a link is active if the current path starts with its href.
+ * /work/librodepases → work link active ✓
+ * /about             → about link active ✓
+ * /                  → no link active (brand-only home) ✓
+ */
+const isActive = (href: string) => currentPath.startsWith(href);
+---
+
+{/* data-nav — targeted by NavScroll.tsx to toggle data-nav-hidden */}
+<header data-nav class={styles.nav}>
+  <Container>
+    <div class={styles.inner}>
+
+      {/* Left — brand links home */}
+      <a href="/" class={styles.brand} aria-label="Juan Cruz Luna — Inicio">
+        Juan Cruz Luna
+      </a>
+
+      {/* Right — primary navigation */}
+      <nav class={styles.links} aria-label="Navegación principal">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[styles.link, isActive(link.href) && styles.active]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+    </div>
+  </Container>
+</header>
+
+{/*
+  NavScroll handles scroll-aware visibility.
+  client:load — runs immediately so the nav responds from the first scroll event.
+*/}
+<NavScroll client:load isHome={isHome} />

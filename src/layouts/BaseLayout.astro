@@ -3,6 +3,7 @@ import '../styles/tokens.css';
 import '../styles/fonts.css';
 import '../styles/global.css';
 import SmoothScroll from '../components/motion/SmoothScroll.tsx';
+import Nav from '../components/global/Nav.astro';
 
 export interface Props {
   /** Page title. Default: 'Juan Cruz Luna'. */
@@ -18,6 +19,9 @@ const {
   description,
   lang = 'es',
 } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
 ---
 <!doctype html>
 <html lang={lang}>
@@ -32,8 +36,17 @@ const {
   <body>
     {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
     <SmoothScroll client:load />
+
+    {/* Fixed nav — scroll-aware via NavScroll island */}
+    <Nav currentPath={currentPath} isHome={isHome} />
+
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
-    <main id="main-content">
+
+    {/*
+      padding-block-start accounts for the fixed nav height.
+      All page content starts below the nav bar.
+    */}
+    <main id="main-content" style={`padding-block-start: var(--nav-height)`}>
       <slot />
     </main>
   </body>

@@ -1,0 +1,114 @@
+/*
+ * Nav.module.css
+ * Fixed nav bar — home + inner pages.
+ *
+ * Always position:fixed. NavScroll.tsx handles:
+ *   - Home: hides when hero scrolls out (scrollY > hero height)
+ *   - Inner: hides on scroll-down, shows on scroll-up
+ *
+ * Hidden state: data-nav-hidden attribute toggled by NavScroll.tsx.
+ * Uses transform (not display:none) so the transition fires correctly.
+ *
+ * Brand + links: Mono 13px / 0.05em tracking / lowercase — per DESIGN.md §4.
+ * Active link: underline only, no color shift.
+ */
+
+/* ─── Shell ───────────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+/*
+ * Hidden state — triggered by adding [data-nav-hidden] attribute via JS.
+ * Slides the nav above the viewport.
+ */
+.nav[data-nav-hidden] {
+  transform: translateY(-100%);
+}
+
+/* ─── Inner layout ────────────────────────────────────────── */
+
+.inner {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+}
+
+/* ─── Brand ───────────────────────────────────────────────── */
+
+.brand {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--color-fg);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.brand:hover {
+  color: var(--color-accent);
+}
+
+/* ─── Links ───────────────────────────────────────────────── */
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--color-fg);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+/*
+ * Active state: underline only — no background, no color shift.
+ * Per DESIGN.md §4: "Active state: underline only."
+ */
+.link.active {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* ─── Mobile (<768px) ─────────────────────────────────────── */
+
+/*
+ * Hide brand name on small screens — not enough horizontal space.
+ * Links remain, right-aligned via flex justify-content: flex-end.
+ */
+@media (max-width: 767px) {
+  .brand {
+    display: none;
+  }
+
+  .inner {
+    justify-content: flex-end;
+  }
+
+  .links {
+    gap: var(--space-3);
+  }
+}
