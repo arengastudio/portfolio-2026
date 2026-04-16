@@ -16,7 +16,7 @@
 .areFirst {
   padding-block: var(--space-8);
   border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  /* No border-bottom — Philosophy's border-top provides the next separator */
 }
 
 /* ─── Label row ───────────────────────────────────────────── */

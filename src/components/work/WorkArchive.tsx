@@ -91,7 +91,7 @@ export default function WorkArchive({ items }: Props) {
     if (!isVisible.current) {
       isVisible.current = true;
       float.style.opacity = '1';
-      float.style.transform += ' scale(1)';
+      float.style.transform = 'scale(1)';
     }
   };
 

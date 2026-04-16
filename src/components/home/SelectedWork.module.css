@@ -156,11 +156,14 @@
 
   /*
    * Mobile horizontal scroll carousel.
-   * display:block overrides display:contents so the wrapper becomes
-   * a real scroll container. Each CaseEntry becomes a snap-aligned card.
+   * display:flex creates a row — children stay in a single line without
+   * needing white-space:nowrap. Each CaseEntry snaps into place.
+   * display:contents on the ScrollReveal wrapper is transparent to flex,
+   * so the articles become direct flex items of this container.
    */
   .casesTrack {
-    display: block;
+    display: flex;
+    gap: var(--space-4);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--grid-outer-margin);
@@ -177,19 +180,15 @@
   }
 
   /*
-   * Each CaseEntry inside the track becomes a card.
-   * :global() needed because CaseEntry is a slotted Astro component —
-   * its article element isn't a direct child of this module's scope.
+   * Each CaseEntry: fixed 82vw, don't shrink, snap to start edge.
+   * flex:0 0 82vw replaces display:inline-block + width — no wrapping issue.
    */
   .casesTrack :global(article) {
-    display: inline-block;
-    width: 82vw;
+    flex: 0 0 82vw;
     scroll-snap-align: start;
-    vertical-align: top;
-    margin-inline-end: var(--space-4);
   }
 
-  /* Remove the block margin between entries — horizontal gap replaces it */
+  /* Remove the block margin between entries — flex gap replaces it */
   .casesTrack :global(article:not(:first-of-type)) {
     margin-block-start: 0;
   }

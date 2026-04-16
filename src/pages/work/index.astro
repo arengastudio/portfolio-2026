@@ -13,19 +13,21 @@ const cases = [
     year: '2022 — PRESENTE',
     tags: 'AI · SPORTS · SAAS',
     role: 'PRODUCT DESIGN LEAD',
-    tagline: 'Liderando el diseño de una plataforma AI para scouting de fútbol.',
+    tagline: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años.',
     href: '/work/librodepases',
     colorKey: 'accent' as const,
+    image: '/assets/cases/librodepases/01.png',
   },
   {
     number: '02',
-    title: 'Arenga Studio',
-    year: '2024 — PRESENTE',
-    tags: 'FOUNDER · STUDIO',
-    role: 'CO-FUNDADOR',
-    tagline: 'Co-fundé un estudio digital. Diseñamos y construimos productos.',
-    href: '/work/arenga',
+    title: 'SparkClub',
+    year: '2025',
+    tags: 'AI · EMPLOYEE ENGAGEMENT',
+    role: 'PRODUCT DESIGNER',
+    tagline: 'MVP end-to-end para plataforma de engagement con IA. De cero a prototipo en 6 semanas.',
+    href: '/work/sparkclub',
     colorKey: 'fg' as const,
+    image: '/assets/cases/sparkclub/cover.png',
   },
   {
     number: '03',
@@ -36,12 +38,13 @@ const cases = [
     tagline: 'End-to-end product design para una plataforma fintech.',
     href: '/work/garantear',
     colorKey: 'dark' as const,
+    image: '/assets/cases/garantear/01.png',
   },
 ];
 
 const archive = [
+  { name: 'Arenga Studio', year: '2024 — Presente' },
   { name: 'EEVA Studios', year: '2024' },
-  { name: 'Spark Club', year: '2025' },
   { name: 'Banndo', year: '2023' },
   { name: 'SimplePass', year: '2023' },
   { name: 'BeachWalk', year: '2022' },
@@ -76,6 +79,7 @@ const archive = [
           tagline={c.tagline}
           href={c.href}
           colorKey={c.colorKey}
+          image={c.image}
         />
       ))}
     </Container>
