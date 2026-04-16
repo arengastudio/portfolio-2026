@@ -1,0 +1,22 @@
+---
+import type { HTMLTag } from 'astro/types';
+import styles from './Container.module.css';
+
+export interface Props {
+  /** HTML element to render. Default: 'div'. */
+  as?: HTMLTag;
+  /** Number of grid columns on desktop. Default: 8. Tablet always collapses to 4, mobile to 1. */
+  cols?: number;
+  /** Full-bleed mode: removes max-width and outer padding. For hero sections. */
+  bleed?: boolean;
+  class?: string;
+}
+
+const { as: Tag = 'div', cols = 8, bleed = false, class: className } = Astro.props;
+---
+<Tag
+  class:list={[styles.container, bleed && styles.bleed, className]}
+  style={`--_cols: ${cols}`}
+>
+  <slot />
+</Tag>

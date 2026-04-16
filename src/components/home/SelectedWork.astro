@@ -1,0 +1,83 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import CaseEntry from './CaseEntry.astro';
+import ScrollReveal from '../motion/ScrollReveal.tsx';
+import styles from './SelectedWork.module.css';
+
+const cases = [
+  {
+    number: '01',
+    title: 'Librodepases',
+    year: '2022 — PRESENTE',
+    tags: 'AI · SPORTS · SAAS',
+    role: 'PRODUCT DESIGN LEAD',
+    tagline: 'Liderando el diseño de una plataforma AI para scouting de fútbol.',
+    href: '/work/librodepases',
+    colorKey: 'accent' as const,
+  },
+  {
+    number: '02',
+    title: 'Arenga Studio',
+    year: '2024 — PRESENTE',
+    tags: 'FOUNDER · STUDIO',
+    role: 'CO-FUNDADOR',
+    tagline: 'Co-fundé un estudio digital. Diseñamos y construimos productos.',
+    href: '/work/arenga',
+    colorKey: 'fg' as const,
+  },
+  {
+    number: '03',
+    title: 'Garantear',
+    year: '2025',
+    tags: 'FINTECH · END-TO-END',
+    role: 'END-TO-END DESIGN',
+    tagline: 'End-to-end product design para una plataforma fintech.',
+    href: '/work/garantear',
+    colorKey: 'dark' as const,
+  },
+];
+---
+<section class={styles.selectedWork}>
+  <Container>
+
+    {/* ─── Section header: title left, eyebrow right ─── */}
+    <ScrollReveal client:load variant="fade-up">
+      <div class={styles.sectionHeader}>
+        <Type as="h2" variant="display-md" class={styles.sectionTitle}>CASES.</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.sectionEyebrow}>SELECTED WORK · 2022–2025</Type>
+      </div>
+    </ScrollReveal>
+
+    {/* ─── Three case entries ─── */}
+    {/*
+      All three cases share ONE ScrollReveal so they're siblings under
+      the display:contents div — this preserves .caseEntry:not(:first-of-type)
+      selector correctness for margin-based spacing between entries.
+      Stagger: 01 at 0s, 02 at 0.15s, 03 at 0.3s.
+    */}
+    <ScrollReveal client:load variant="fade-up" stagger={0.15}>
+      {cases.map((c) => (
+        <CaseEntry
+          number={c.number}
+          title={c.title}
+          year={c.year}
+          tags={c.tags}
+          role={c.role}
+          tagline={c.tagline}
+          href={c.href}
+          colorKey={c.colorKey}
+        />
+      ))}
+    </ScrollReveal>
+
+    {/* ─── Archive link ─── */}
+    <ScrollReveal client:load variant="fade">
+      <Link href="/work" variant="standalone" class={styles.viewArchive}>
+        VER ARCHIVO COMPLETO →
+      </Link>
+    </ScrollReveal>
+
+  </Container>
+</section>

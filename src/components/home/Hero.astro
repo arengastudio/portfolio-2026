@@ -1,0 +1,54 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Button from '../ui/Button.astro';
+import TrackRecord from './TrackRecord.astro';
+import ScrollReveal from '../motion/ScrollReveal.tsx';
+import styles from './Hero.module.css';
+---
+<section class={styles.hero}>
+  <Container>
+
+    {/* ─── LEFT — display statement, bottom-anchored ─── */}
+    {/*
+      ScrollReveal wraps the 3 words (NOT the panel) so leftPanel stays
+      a direct grid child with its grid-column intact. display:contents
+      on the ScrollReveal div makes the <p> elements direct flex children
+      of leftPanel — layout is identical to the non-wrapped version.
+
+      Sequence: BUILD. at 0.3s → BREAK. at 0.45s → SHIP. at 0.6s.
+      The words fire on page load because they're above the fold.
+    */}
+    <div class={styles.leftPanel}>
+      <ScrollReveal client:load variant="fade-up" delay={0.3} stagger={0.15}>
+        <Type as="p" variant="display-lg" class={styles.displayWord}>BUILD.</Type>
+        <Type as="p" variant="display-lg" class={styles.displayWord}>BREAK.</Type>
+        <Type as="p" variant="display-lg" class={styles.displayWord}>SHIP.</Type>
+      </ScrollReveal>
+    </div>
+
+    {/* ─── RIGHT — identity + info, fades in after words ─── */}
+    {/*
+      Wraps the rightPanel div — display:contents keeps the div as a direct
+      grid child with grid-column:5/9. Fires on page load (above fold),
+      delay 1.2s lands after the statement finishes (0.3 + 3×0.15 + ~0.8s).
+    */}
+    <ScrollReveal client:load variant="fade" delay={1.2}>
+      <div class={styles.rightPanel}>
+        <Type as="h1" variant="xl" class={styles.name}>Juan Cruz Luna</Type>
+        <Type as="p" variant="lg" class={styles.positioning}>Product Designer & Builder. Buenos Aires.</Type>
+        <Type as="p" variant="base" color="fg" class={styles.subhead}>
+          Diseño productos digitales. Y a veces los rompo a propósito.
+        </Type>
+        <div class={styles.trackWrapper}>
+          <TrackRecord />
+        </div>
+        <div class={styles.ctas}>
+          <Button variant="primary" href="/work">VER MI TRABAJO →</Button>
+          <Button variant="secondary" href="#contact">Contactame</Button>
+        </div>
+      </div>
+    </ScrollReveal>
+
+  </Container>
+</section>

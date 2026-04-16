@@ -1,0 +1,109 @@
+/*
+ * SelectedWork.module.css
+ * Home work section — editorial case stack with dramatic section header.
+ *
+ * Header intent:
+ * "CASES." in display-md (144px) anchors the left. "SELECTED WORK · 2022–2025"
+ * in xs mono floats to the bottom-right of the same flex row. The size
+ * contrast (144px vs 12px) creates the magazine-layout tension referenced
+ * in Ravi Klaassens' and Cathy Dolle's work: huge structural label vs quiet
+ * contextual meta in one horizontal band.
+ *
+ * Case spacing:
+ * var(--space-11) = 384px between entries. Each case is its own moment —
+ * the space is not waste, it's rhythm. The user scrolls INTO each case.
+ *
+ * Archive link:
+ * "VER ARCHIVO COMPLETO →" at xl (28px) — navigation element, not a statement.
+ * Understated by design: the cases speak, the link just points the way out.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.selectedWork {
+  padding-block-start: var(--space-9);
+  padding-block-end: var(--space-9);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── Section header ──────────────────────────────────────── */
+
+.sectionHeader {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;           /* eyebrow aligns to baseline of display-md */
+  margin-block-end: var(--space-9);
+}
+
+/*
+ * display-md has white-space: nowrap; "CASES." (7 chars) at 144px is ~850px —
+ * fine within a 1184px container. Zero out browser default margins.
+ */
+.sectionTitle {
+  margin: 0;
+}
+
+/*
+ * Optical padding-block-end raises the eyebrow slightly off the true baseline
+ * so it feels aligned with the cap-height of "CASES." rather than hanging below.
+ */
+.sectionEyebrow {
+  letter-spacing: 0.05em;
+  padding-block-end: 0.3em;
+}
+
+/* ─── View archive link ───────────────────────────────────── */
+
+/*
+ * xl typography applied directly (not via Type) since this is a Link,
+ * and wrapping a Type inside a Link would block hover color inheritance.
+ * Link variant="standalone" handles accent color on hover (specificity 0,2,0)
+ * which beats this base color rule (0,1,0).
+ */
+.viewArchive {
+  grid-column: 2 / -1;
+  display: block;
+  padding-block-start: var(--space-6);
+  font-size: var(--text-xl-size);
+  font-family: var(--font-display);
+  font-weight: var(--text-xl-weight);
+  line-height: var(--text-xl-line-height);
+  letter-spacing: var(--text-xl-tracking);
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .selectedWork {
+    padding-block-start: var(--space-9);
+  }
+
+  .viewArchive {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .selectedWork {
+    padding-block-start: var(--space-7);
+    padding-block-end: var(--space-7);
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-block-end: var(--space-7);
+  }
+
+  .sectionEyebrow {
+    padding-block-end: 0;
+  }
+
+  .viewArchive {
+    padding-block-start: var(--space-7);
+  }
+}

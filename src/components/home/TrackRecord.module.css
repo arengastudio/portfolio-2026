@@ -1,0 +1,20 @@
+/*
+ * TrackRecord.module.css
+ * Three-line career track used in the Home Hero.
+ *
+ * Year prefix decision: <span class={styles.year}> with font-family override
+ * rather than Type variant="xs" inline.
+ * Reason: variant="xs" sets font-size to --text-xs-size (12px), which is
+ * smaller than the base line text (17px) — a jarring size mismatch mid-line.
+ * The year should read at the SAME size as the rest of the line, just in
+ * mono to signal "date / timestamp". font-family is the only override needed.
+ */
+
+.year {
+  font-family: var(--font-mono);
+}
+
+/* Vertical rhythm between lines — spec: var(--space-2) */
+.line + .line {
+  margin-block-start: var(--space-2);
+}

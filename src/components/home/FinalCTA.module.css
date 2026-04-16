@@ -1,0 +1,97 @@
+/*
+ * FinalCTA.module.css
+ * Contact section — id="contact", scrolled to by Hero's "Contactame" CTA.
+ *
+ * Editorial intent:
+ * Single display-md "Hablemos." (144px) — one word, maximum weight.
+ * No framing needed. The lg bajada clarifies availability. The 2xl mono
+ * email is the action: large, scannable, immediately clickable in accent.
+ * Metadata row (location · status · links) anchors at the bottom in xs mono.
+ *
+ * Spacing sequence: headline → bajada (space-3), bajada → email (space-6),
+ * email → meta (space-6). Opens at space-8 top, closes at space-6 bottom.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.finalCTA {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── Content column (cols 2/7) ───────────────────────────── */
+
+.inner {
+  grid-column: 2 / 7;
+}
+
+/* ─── Headline ────────────────────────────────────────────── */
+
+/*
+ * display-md (144px) — one word carries the entire section.
+ * margin: 0 removes browser default <p> spacing.
+ * margin-block-end space-3 (24px) closes tight against the bajada.
+ */
+.headline {
+  margin: 0 0 var(--space-3);
+}
+
+/* ─── Bajada ──────────────────────────────────────────────── */
+
+.bajada {
+  max-width: 40ch;
+  margin-block-end: var(--space-6);
+}
+
+/* ─── Email link ──────────────────────────────────────────── */
+
+/*
+ * 2xl size (40px) with mono font override — signals "contact data" without
+ * needing a label. accent prop on Link provides color: var(--color-accent).
+ * display: block makes the full line the touch target.
+ */
+.email {
+  font-size: var(--text-2xl-size);
+  font-family: var(--font-mono);
+  line-height: var(--text-2xl-line-height);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-block-end: var(--space-6);
+}
+
+/* ─── Metadata row ────────────────────────────────────────── */
+
+/*
+ * xs mono muted — location, availability, social links.
+ * letter-spacing 0.05em matches the xs mono standard across the system.
+ */
+.meta {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .inner {
+    grid-column: 1 / 5;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .finalCTA {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-5);
+  }
+
+  .inner {
+    grid-column: 1 / -1;
+  }
+
+  .email {
+    font-size: var(--text-xl-size);      /* 28px — still actionable on mobile */
+    letter-spacing: -0.01em;
+  }
+}

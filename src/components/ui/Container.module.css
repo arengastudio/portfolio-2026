@@ -1,0 +1,61 @@
+/*
+ * Container.module.css
+ * Implements the 8-column editorial grid from DESIGN.md §5.
+ * All values reference tokens — no hardcoded px, no hex, no Tailwind.
+ */
+
+.container {
+  /* --_cols is overridden per-instance via the `cols` prop inline style.
+     The fallback here matches the default prop value (8). */
+  --_cols: 8;
+
+  max-width: var(--grid-max-width);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--grid-outer-margin);
+  display: grid;
+  grid-template-columns: repeat(var(--_cols), 1fr);
+  column-gap: var(--grid-gutter);
+}
+
+/*
+ * Direct children span all columns by default.
+ * Override `grid-column` in child CSS Modules for specific layouts
+ * (e.g. `grid-column: 1 / 5` for a half-width prose column).
+ */
+.container > * {
+  grid-column: 1 / -1;
+}
+
+/*
+ * Full-bleed variant.
+ * Removes max-width and outer padding — for hero sections where
+ * the background or a media element must extend edge-to-edge.
+ * The grid columns remain active; content inside still aligns to them.
+ */
+.bleed {
+  max-width: none;
+  padding-inline: 0;
+  margin-inline: 0;
+}
+
+/*
+ * Tablet (768–1024px): collapse to 4 columns.
+ * The `cols` prop only controls desktop layout.
+ */
+@media (max-width: 1023px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*
+ * Mobile (<768px): single column.
+ * --grid-outer-margin already resolves to var(--space-3) at this
+ * breakpoint via the media query in tokens.css.
+ */
+@media (max-width: 767px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

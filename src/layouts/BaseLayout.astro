@@ -1,0 +1,40 @@
+---
+import '../styles/tokens.css';
+import '../styles/fonts.css';
+import '../styles/global.css';
+import SmoothScroll from '../components/motion/SmoothScroll.tsx';
+
+export interface Props {
+  /** Page title. Default: 'Juan Cruz Luna'. */
+  title?: string;
+  /** Optional — omitted from <head> when not provided. */
+  description?: string;
+  /** HTML lang attribute. Default: 'es'. */
+  lang?: 'es' | 'en';
+}
+
+const {
+  title = 'Juan Cruz Luna',
+  description,
+  lang = 'es',
+} = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
+    <SmoothScroll client:load />
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import ScrollReveal from '../motion/ScrollReveal.tsx';
+import styles from './FinalCTA.module.css';
+---
+<section id="contact" class={styles.finalCTA}>
+  <Container>
+
+    <div class={styles.inner}>
+
+      {/* "Hablemos." — display-md, fades up on scroll */}
+      <ScrollReveal client:load variant="fade-up">
+        <Type as="p" variant="display-md" class={styles.headline}>Hablemos.</Type>
+      </ScrollReveal>
+
+      {/* bajada — availability statement, lg muted, no animation (contextual) */}
+      <Type as="p" variant="lg" color="muted" class={styles.bajada}>
+        Disponible para roles de diseño de producto, colaboraciones de estudio y proyectos freelance.
+      </Type>
+
+      {/* email — 2xl mono, accent color at rest, fades up 0.2s after headline */}
+      <ScrollReveal client:load variant="fade-up" delay={0.2}>
+        <Link
+          href="mailto:juancruzluna234@gmail.com"
+          variant="standalone"
+          accent
+          class={styles.email}
+        >juancruzluna234@gmail.com</Link>
+      </ScrollReveal>
+
+      {/* metadata row — location · status · social in xs mono muted */}
+      <Type as="p" variant="xs" color="muted" class={styles.meta}>
+        BUENOS AIRES · AVAILABLE ·{' '}
+        <Link href="https://www.linkedin.com/in/juan-cruz-luna/" variant="standalone">LinkedIn</Link>
+        {' · '}
+        <Link href="https://github.com/juancrluna" variant="standalone">GitHub</Link>
+      </Type>
+
+    </div>
+
+  </Container>
+</section>

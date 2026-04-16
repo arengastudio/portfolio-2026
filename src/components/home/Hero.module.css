@@ -1,0 +1,134 @@
+/*
+ * Hero.module.css
+ * Home Hero — 50/50 horizontal split layout.
+ *
+ * Layout intent:
+ * Two full-height panels inside a standard (non-bleed) Container. LEFT holds
+ * the display statement (BUILD / BREAK / SHIP) anchored to the bottom. RIGHT
+ * holds identity + info vertically centered.
+ *
+ * Grid mapping (8-col Container, max-width 1280px):
+ *   Desktop ≥1024px:  left = 1/5, right = 5/9
+ *   Tablet 901-1023px: Container collapses to 4-col → remap 1/3 + 3/5
+ *   Mobile  ≤900px:   single column, panels stack vertically
+ *
+ * Outer margin: --grid-outer-margin is overridden to var(--space-5) on
+ * .hero so the Container's lateral padding is ~48px instead of the 8vw
+ * default (~120px at 1280px). The custom property cascades into the
+ * Container because it reads var(--grid-outer-margin) in its own styles.
+ */
+
+/* ─── Hero section ───────────────────────────────────────── */
+
+/*
+ * Override Container's outer margin for this section only.
+ * --grid-outer-margin is a custom property that Container reads;
+ * overriding it here cascades into the Container without touching its class.
+ */
+.hero {
+  --grid-outer-margin: var(--space-5);
+}
+
+/* ─── Panels ─────────────────────────────────────────────── */
+
+.leftPanel {
+  grid-column: 1 / 5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;         /* display statement anchors to bottom */
+  padding-block-end: var(--space-6);
+}
+
+.rightPanel {
+  grid-column: 5 / 9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;           /* identity stack floats in the middle */
+  padding-block: var(--space-5);
+}
+
+/* ─── Hero-scoped display word sizing ───────────────────── */
+
+/*
+ * display-lg token clamps to 260px assuming full-viewport context.
+ * LeftPanel is ~4/8 of the max-width container (~520–650px) — at that
+ * width 260px words overflow. Tighten the clamp here without touching
+ * the token, so other uses of display-lg remain unchanged.
+ */
+.leftPanel .displayWord {
+  font-size: clamp(64px, 10vw, 160px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+/* ─── Typography overrides ───────────────────────────────── */
+
+/*
+ * .displayMd has white-space: nowrap by default.
+ * "Juan Cruz Luna" at ~144px in a ~50vw column will wrap; allow it.
+ * Specificity: .hero h1 = (0,1,1) > .displayMd = (0,1,0).
+ * (The display-lg words "BUILD." etc. are single tokens — nowrap is fine.)
+ */
+.rightPanel h1 {
+  white-space: normal;
+}
+
+/* ─── Per-element spacing ────────────────────────────────── */
+
+.name {
+  margin-block-end: var(--space-2);
+}
+
+.positioning {
+  max-width: 32ch;
+  margin-block-end: var(--space-5);
+}
+
+.subhead {
+  max-width: 40ch;
+  margin-block-end: var(--space-5);
+}
+
+.trackWrapper {
+  margin-block-end: var(--space-5);
+}
+
+/* ─── CTAs ───────────────────────────────────────────────── */
+
+.ctas {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ─── Tablet (Container collapses to 4-col at ≤1023px) ───── */
+
+@media (max-width: 1023px) and (min-width: 901px) {
+  /*
+   * 8-col → 4-col remap: left 1/5 becomes 1/3, right 5/9 becomes 3/5.
+   * Both panels remain side-by-side, each ~50% of the 4-col grid.
+   */
+  .leftPanel  { grid-column: 1 / 3; }
+  .rightPanel { grid-column: 3 / 5; }
+}
+
+/* ─── Mobile (≤900px) ────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .leftPanel {
+    grid-column: 1 / -1;
+    min-height: 60vh;                /* statement doesn't need full viewport */
+    padding-inline-start: var(--grid-outer-margin);
+  }
+
+  .rightPanel {
+    grid-column: 1 / -1;
+    min-height: auto;
+    justify-content: flex-start;
+    padding-block: var(--space-5) var(--space-7);
+    padding-inline-end: var(--grid-outer-margin);
+  }
+}

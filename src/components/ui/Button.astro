@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import styles from './Button.module.css';
+
+type ButtonVariant = 'primary' | 'secondary';
+
+// Extends HTMLAttributes<'button'> for full button attribute validation
+// (type, disabled, form*, name, value, aria-*, data-*, etc.).
+// href is added manually for the link-button case.
+export interface Props extends Omit<HTMLAttributes<'button'>, 'class'> {
+  variant?: ButtonVariant;
+  /** Explicit element override. Defaults to 'a' when href is provided, else 'button'. */
+  as?: 'button' | 'a';
+  /** Renders as <a> when provided. */
+  href?: string;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  as: asProp,
+  href,
+  class: className,
+  type = 'button',
+  disabled = false,
+  ...rest
+} = Astro.props;
+
+// Explicit `as` wins; otherwise infer from href.
+const Tag = asProp ?? (href ? 'a' : 'button');
+---
+{Tag === 'a' ? (
+  <a
+    href={href}
+    aria-disabled={disabled ? 'true' : undefined}
+    class:list={[styles.btn, styles[variant], disabled && styles.isDisabled, className]}
+    {...rest}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    disabled={disabled}
+    class:list={[styles.btn, styles[variant], className]}
+    {...rest}
+  >
+    <slot />
+  </button>
+)}

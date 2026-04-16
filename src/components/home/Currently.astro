@@ -1,0 +1,50 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import LiveClock from './LiveClock.tsx';
+import ScrollReveal from '../motion/ScrollReveal.tsx';
+import styles from './Currently.module.css';
+---
+<section class={styles.currently}>
+  <Container>
+
+    {/* ─── Meta row: eyebrow left, date right ─── */}
+    <ScrollReveal client:load variant="fade">
+      <div class={styles.metaRow}>
+        <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>CURRENTLY</Type>
+        <Type as="span" variant="xs" color="muted" class={styles.dateMeta}>MAY 2026</Type>
+      </div>
+    </ScrollReveal>
+
+    {/* ─── Three activity links ─── */}
+    {/*
+      ScrollReveal inside the nav — display:contents makes links direct flex
+      children of nav, preserving gap and flex-direction from .activities.
+      Stagger 0.1s: line 1 at 0s, line 2 at 0.1s, line 3 at 0.2s.
+    */}
+    <nav class={styles.activities} aria-label="Actividad actual">
+      <ScrollReveal client:load variant="fade-up" stagger={0.1}>
+        <Link href="/work/librodepases" variant="standalone" class={styles.activityLink}>
+          Diseñando AI scouting en Librodepases <span class={styles.arrow} aria-hidden="true">→</span>
+        </Link>
+        <Link href="/work/arenga" variant="standalone" class={styles.activityLink}>
+          Co-fundador en Arenga Studio <span class={styles.arrow} aria-hidden="true">→</span>
+        </Link>
+        <Link href="#contact" variant="standalone" class={styles.activityLink}>
+          Disponible para nuevos proyectos <span class={styles.arrow} aria-hidden="true">→</span>
+        </Link>
+      </ScrollReveal>
+    </nav>
+
+    {/* ─── Live clock ticker (React island) ─── */}
+    <ScrollReveal client:load variant="fade" delay={0.3}>
+      <div class={styles.clockWrapper}>
+        <span class={styles.clock}>
+          <LiveClock client:load />
+        </span>
+      </div>
+    </ScrollReveal>
+
+  </Container>
+</section>

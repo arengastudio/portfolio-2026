@@ -1,0 +1,40 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import styles from './Footer.module.css';
+
+const year = new Date().getFullYear();
+---
+<footer class={styles.footer}>
+  <Container>
+
+    <div class={styles.row}>
+
+      {/* Left — copyright */}
+      <Type as="span" variant="xs" color="muted" class={styles.copy}>
+        © {year} Juan Cruz Luna
+      </Type>
+
+      {/* Center — inline nav */}
+      <nav class={styles.nav} aria-label="Navegación del sitio">
+        <Link href="/work" variant="standalone">Work</Link>
+        <span class={styles.sep} aria-hidden="true">·</span>
+        <Link href="/about" variant="standalone">About</Link>
+        <span class={styles.sep} aria-hidden="true">·</span>
+        <Link href="/lab" variant="standalone">Lab</Link>
+        <span class={styles.sep} aria-hidden="true">·</span>
+        <Link href="/stack" variant="standalone">Stack</Link>
+      </nav>
+
+      {/* Right — source link */}
+      <Link
+        href="https://github.com/juancrluna/portfolio-2026"
+        variant="standalone"
+        class={styles.source}
+      >Source ↗</Link>
+
+    </div>
+
+  </Container>
+</footer>

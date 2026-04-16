@@ -1,0 +1,164 @@
+/*
+ * Currently.module.css
+ * "What I'm doing right now" block — immediately after Hero.
+ *
+ * Editorial intent:
+ * Signals an active, present practice (ref: Ravi Klaassens's live clock +
+ * availability callout). Three large activity lines read like status updates
+ * — not a bio, not a feature list. The meta-row creates tension between the
+ * "CURRENTLY" eyebrow (left) and date stamp (right), a technique from
+ * editorial magazine layouts.
+ *
+ * Typography logic:
+ * Activity lines use 2xl (40px Display) — large enough to feel like
+ * declarations, small enough to read as a list.
+ *
+ * Hover: each line translates 12px right; the "→" arrow inside moves an
+ * additional 8px (total 20px from origin) to "pull ahead" — reinforces
+ * that each line is a navigable destination.
+ *
+ * Grid: metaRow at cols 2/8 (max tension on the right edge), activities at
+ * cols 2/7 (slightly narrower — editorial asymmetry). Clock at the far right.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.currently {
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── Meta row (CURRENTLY ←→ MAY 2026) ───────────────────── */
+
+.metaRow {
+  grid-column: 2 / 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-block-end: var(--space-5);
+}
+
+.eyebrow {
+  letter-spacing: 0.05em;
+}
+
+.dateMeta {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Activity links ──────────────────────────────────────── */
+
+.activities {
+  grid-column: 2 / 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/*
+ * Hover: the link itself moves 12px right. The .arrow inside moves
+ * an additional 8px relative to the link — creating the "pull ahead" effect.
+ * Both use --duration-base (300ms) for a slightly longer, more cinematic feel
+ * than the previous --duration-fast (150ms).
+ */
+.activityLink {
+  font-size: var(--text-2xl-size);
+  font-family: var(--font-display);
+  font-weight: var(--text-2xl-weight);
+  line-height: var(--text-2xl-line-height);
+  letter-spacing: var(--text-2xl-tracking);
+  display: block;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.activityLink:hover {
+  transform: translateX(12px);
+}
+
+/* ─── Arrow span ──────────────────────────────────────────── */
+
+/*
+ * Wraps the trailing "→" in each activity line. display:inline-block
+ * is required for transform to apply. Moves 8px right on hover of
+ * the parent link — additional to the link's own 12px shift.
+ */
+.arrow {
+  display: inline-block;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.activityLink:hover .arrow {
+  transform: translateX(8px);
+}
+
+/* ─── Live clock ──────────────────────────────────────────── */
+
+.clockWrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: var(--space-6);
+}
+
+.clock {
+  font-size: var(--text-xs-size);
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .metaRow {
+    grid-column: 1 / 5;
+  }
+
+  .activities {
+    grid-column: 1 / 5;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .currently {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-5);
+  }
+
+  .metaRow {
+    grid-column: 1 / -1;
+  }
+
+  .activities {
+    grid-column: 1 / -1;
+  }
+
+  .activityLink {
+    font-size: var(--text-xl-size);    /* 28px — still declarative, doesn't overflow */
+  }
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .activityLink {
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .activityLink:hover {
+    transform: none;
+  }
+
+  .arrow {
+    transition: none;
+  }
+
+  .activityLink:hover .arrow {
+    transform: none;
+  }
+}

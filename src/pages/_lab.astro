@@ -1,0 +1,235 @@
+---
+// Throwaway — delete before launch. Accessible at /test.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import Link from '../components/ui/Link.astro';
+import Button from '../components/ui/Button.astro';
+---
+<BaseLayout title="UI Primitives — Test">
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════
+       1. CONTAINER
+       ═════════════════════════════════════════════════ -->
+  <section class="sect">
+
+    <Container>
+      <Type as="h2" variant="2xl" class="sect-head">1 — Container</Type>
+    </Container>
+
+    <!-- 8-col default -->
+    <Container>
+      <Type as="p" variant="xs" color="muted" class="lbl">Default: 8 cols · 1280px max · outer margin 8vw</Type>
+      <div class="ruler">
+        <div class="col">1</div><div class="col">2</div><div class="col">3</div><div class="col">4</div>
+        <div class="col">5</div><div class="col">6</div><div class="col">7</div><div class="col">8</div>
+      </div>
+    </Container>
+
+    <!-- cols={4} -->
+    <Container cols={4}>
+      <Type as="p" variant="xs" color="muted" class="lbl">cols={4}</Type>
+      <div class="ruler">
+        <div class="col">1</div><div class="col">2</div><div class="col">3</div><div class="col">4</div>
+      </div>
+    </Container>
+
+    <!-- bleed — label must live outside so outer padding is visible -->
+    <p class="outer-lbl">bleed={true} — no max-width, no outer padding</p>
+    <Container bleed>
+      <div class="bleed-bar">Full-bleed bar · grid columns still active</div>
+    </Container>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       2. TYPE
+       ═════════════════════════════════════════════════ -->
+  <section class="sect">
+    <Container>
+      <Type as="h2" variant="2xl" class="sect-head">2 — Type</Type>
+
+      <!-- All 10 variants -->
+      <Type as="p" variant="display-lg">display-lg</Type>
+      <Type as="p" variant="display-md">display-md</Type>
+      <Type as="p" variant="display-sm">display-sm</Type>
+      <Type as="p" variant="3xl">3xl — page titles</Type>
+      <Type as="p" variant="2xl">2xl — section headers</Type>
+      <Type as="p" variant="xl">xl — sub-section headers</Type>
+      <Type as="p" variant="lg">lg — The quick brown fox jumps over the lazy dog.</Type>
+      <Type as="p" variant="base">base — The quick brown fox jumps over the lazy dog. El veloz murciélago hindú comía feliz cardillo y kiwi.</Type>
+      <Type as="p" variant="sm">sm — small body, footer, labels</Type>
+      <Type as="p" variant="xs">xs — meta · captions · 2026-04-15 · juancruzluna.com</Type>
+
+      <!-- Color and align modifiers -->
+      <div class="modifiers">
+        <Type as="p" variant="xs" color="muted" class="lbl">color="muted"</Type>
+        <Type as="p" variant="base" color="muted">Párrafo con color muted — secondary text, captions, metadata. The quick brown fox.</Type>
+
+        <Type as="p" variant="xs" color="muted" class="lbl">color="accent"</Type>
+        <Type as="p" variant="xl" color="accent">Accent — solo para momentos que lo ganan.</Type>
+
+        <Type as="p" variant="xs" color="muted" class="lbl">align="center"</Type>
+        <Type as="p" variant="base" align="center">Texto centrado. Raro en este sistema, pero funciona.</Type>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       3. LINK
+       ═════════════════════════════════════════════════ -->
+  <section class="sect">
+    <Container>
+      <Type as="h2" variant="2xl" class="sect-head">3 — Link</Type>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">inline (default) — en prosa · underline 1px · hover → accent + 2px</Type>
+      <Type as="p" variant="base">
+        Este párrafo tiene un <Link href="#">link inline default</Link> que hereda el color del padre,
+        underline 1px, 0.2em offset. Hover para ver la transición a accent + 2px thickness.
+      </Type>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">inline accent</Type>
+      <Type as="p" variant="base">
+        Ver también: <Link href="/work" accent>trabajos seleccionados</Link> — accent=true, color
+        ya parte del estado base.
+      </Type>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">external — href https:// → ↗ automático + target="_blank" + rel="noopener noreferrer"</Type>
+      <Type as="p" variant="base">
+        Construido con <Link href="https://astro.build" accent>Astro</Link> — verificar
+        que el ↗ no se desprende al final de línea (white-space: nowrap).
+      </Type>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">standalone — sin underline en reposo · hover → underline 2px accent</Type>
+      <nav class="nav-demo" aria-label="Standalone link demo">
+        <Link href="/work" variant="standalone">Trabajo</Link>
+        <Link href="/about" variant="standalone">Sobre mí</Link>
+        <Link href="/lab" variant="standalone">Lab</Link>
+        <Link href="/stack" variant="standalone">Stack</Link>
+        <Link href="/contact" variant="standalone">Contacto</Link>
+      </nav>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">focus — presionar Tab para verificar ring 2px solid accent · offset 2px</Type>
+      <Type as="p" variant="base">
+        <Link href="#">Tabear hasta este enlace</Link> — el outline debe ser 2px solid
+        --color-accent con 2px offset, sin border-radius.
+      </Type>
+    </Container>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       4. BUTTON
+       ═════════════════════════════════════════════════ -->
+  <section class="sect">
+    <Container>
+      <Type as="h2" variant="2xl" class="sect-head">4 — Button</Type>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">primary · border 1.5px · Display · --text-sm-size · --button-tracking · uppercase · hover: bg fills</Type>
+      <div class="btn-row">
+        <Button variant="primary">Ver trabajo</Button>
+        <Button variant="primary" disabled>Disabled</Button>
+        <Button variant="primary" href="/work">Como link (href)</Button>
+      </div>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">secondary · no border · underline 1px → 2px · same typographic baseline as primary</Type>
+      <div class="btn-row">
+        <Button variant="secondary">Leer más</Button>
+        <Button variant="secondary" disabled>Disabled</Button>
+        <Button variant="secondary" href="/about">Como link (href)</Button>
+      </div>
+
+      <Type as="p" variant="xs" color="muted" class="lbl">focus — Tab para verificar ring en ambos variants</Type>
+      <div class="btn-row">
+        <Button variant="primary">Primary focus</Button>
+        <Button variant="secondary">Secondary focus</Button>
+      </div>
+    </Container>
+  </section>
+
+</div>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-block: var(--space-7);
+  }
+
+  .sect {
+    margin-block-end: var(--space-9);
+  }
+
+  .sect-head {
+    padding-block-end: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    margin-block-end: var(--space-5);
+  }
+
+  .lbl {
+    margin-block-start: var(--space-5);
+    margin-block-end: var(--space-2);
+  }
+
+  /* Label outside any Container — aligned via outer margin padding */
+  .outer-lbl {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs-size);
+    color: var(--color-muted);
+    padding-inline: var(--grid-outer-margin);
+    margin-block-start: var(--space-5);
+    margin-block-end: var(--space-2);
+  }
+
+  /* Grid ruler: display contents lets .col children participate directly
+     in the parent Container grid without inheriting grid-column: 1/-1 */
+  .ruler {
+    grid-column: 1 / -1;
+    display: contents;
+  }
+
+  .col {
+    background-color: var(--color-border);
+    padding-block: var(--space-3);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs-size);
+    color: var(--color-muted);
+  }
+
+  /* Bleed demo bar */
+  .bleed-bar {
+    grid-column: 1 / -1;
+    background-color: var(--color-border);
+    padding-block: var(--space-3);
+    padding-inline: var(--grid-outer-margin);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs-size);
+    color: var(--color-muted);
+  }
+
+  /* Type modifier examples */
+  .modifiers {
+    margin-block-start: var(--space-6);
+    padding-block-start: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Standalone link nav demo */
+  .nav-demo {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs-size);
+    letter-spacing: 0.05em;
+  }
+
+  /* Button rows */
+  .btn-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-block-end: var(--space-4);
+  }
+</style>

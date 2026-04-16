@@ -1,0 +1,49 @@
+---
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import HoverParallax from '../motion/HoverParallax.tsx';
+import styles from './CaseEntry.module.css';
+
+export interface Props {
+  number: string;
+  title: string;
+  year: string;
+  tags: string;
+  role: string;
+  tagline: string;
+  href: string;
+  /** Controls the visual block background: 'accent' | 'fg' | 'dark' */
+  colorKey: 'accent' | 'fg' | 'dark';
+}
+
+const { number, title, year, tags, role, tagline, href, colorKey } = Astro.props;
+---
+<article class:list={[styles.caseEntry, styles[colorKey]]}>
+
+  {/* ─── LEFT: big number + stacked mono meta ─── */}
+  <div class={styles.left}>
+    <Type as="p" variant="display-md" class={styles.number}>{number}</Type>
+    <div class={styles.meta}>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{year}</Type>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{tags}</Type>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{role}</Type>
+    </div>
+  </div>
+
+  {/* ─── RIGHT: magazine-cover visual + tagline + link ─── */}
+  <div class={styles.right}>
+    {/*
+      HoverParallax wraps the colored visual block and moves the title h3
+      in the OPPOSITE direction of the mouse — subtle depth effect.
+      Skipped automatically on touch devices and prefers-reduced-motion.
+      class={styles.visual} applies the aspect-ratio + bg-color styling
+      to HoverParallax's wrapper div (same as the previous plain div).
+    */}
+    <HoverParallax client:visible wrapperClass={styles.visual}>
+      <Type as="h3" variant="display-lg" class={styles.visualTitle}>{title}</Type>
+    </HoverParallax>
+    <Type as="p" variant="lg" class={styles.tagline}>{tagline}</Type>
+    <Link href={href} variant="standalone" class={styles.cta}>VER CASO →</Link>
+  </div>
+
+</article>

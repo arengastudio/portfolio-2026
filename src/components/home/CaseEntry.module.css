@@ -1,0 +1,192 @@
+/*
+ * CaseEntry.module.css
+ * Full-width editorial case entry — two-column: narrow left (number + meta),
+ * wide right (magazine-cover visual + tagline + link).
+ *
+ * Grid strategy:
+ * CaseEntry spans the full Container width and creates its own 8-col sub-grid
+ * mirroring the parent. This lets the left/right columns align precisely to
+ * the same grid as the rest of the page without display:contents hacks.
+ *
+ *   Col 1     : empty left margin (breathing room)
+ *   Cols 2–3  : number (display-md, 144px) + mono meta below
+ *   Cols 4–9  : visual card (aspect 16/10, magazine cover) + tagline + link
+ *
+ * Spacing between entries: .caseEntry:not(:first-of-type) margin-block-start.
+ * `:first-of-type` targets the first <article> among siblings — correct since
+ * the section header (div) and archive link (a) are different element types.
+ *
+ * Number hover: parent hover scales the number by 1.02 — a minimal magnetic
+ * effect that signals the case is interactive without being distracting.
+ *
+ * Visual parallax: HoverParallax island handles title shift on mouse move.
+ */
+
+/* ─── Case color variants ─────────────────────────────────── */
+
+/*
+ * CSS custom property --case-visual-bg is consumed by .visual below.
+ * Set per case via a color-key class on the article.
+ * .dark uses a hardcoded hex — no token exists for this color yet.
+ * TODO(juan): add --color-case-dark to tokens.css if this persists.
+ */
+.accent { --case-visual-bg: var(--color-accent); }
+.fg     { --case-visual-bg: var(--color-fg); }
+.dark   { --case-visual-bg: #1A1A2E; }
+
+/* ─── Article ─────────────────────────────────────────────── */
+
+.caseEntry {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: start;
+}
+
+.caseEntry:not(:first-of-type) {
+  margin-block-start: var(--space-8);
+}
+
+/* ─── Left column: number + meta ─────────────────────────── */
+
+.left {
+  grid-column: 2 / 4;
+}
+
+/*
+ * Number scales 1.02 on parent article hover — magnetic effect.
+ * Uses transform only (no layout change) for GPU compositing.
+ */
+.number {
+  margin: 0;
+  display: block;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.caseEntry:hover .number {
+  transform: scale(1.02);
+  transform-origin: left center;
+}
+
+.meta {
+  margin-block-start: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metaItem {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Right column: visual + tagline + link ──────────────── */
+
+.right {
+  grid-column: 4 / 9;
+}
+
+/* ─── Visual block ────────────────────────────────────────── */
+
+.visual {
+  aspect-ratio: 16 / 10;
+  background-color: var(--case-visual-bg);
+  display: flex;
+  align-items: flex-end;           /* title anchors to bottom-left */
+  padding: var(--space-5);
+  margin-block-end: var(--space-4);
+}
+
+/*
+ * Title inside the colored visual.
+ * Specificity (0,2,0) beats Type's .displayLg (0,1,0) and .colorFg (0,1,0).
+ * Overrides:
+ *  - font-size: contextual clamp (display-lg token is too wide for this panel)
+ *  - white-space: normal (display-lg has nowrap; title must wrap in card)
+ *  - color: cream (--color-bg) against the colored background
+ * HoverParallax moves the title element via transform — will-change optimizes
+ * the compositor layer.
+ */
+.visual .visualTitle {
+  font-size: clamp(40px, 5vw, 72px);
+  white-space: normal;
+  color: var(--color-bg);
+  margin: 0;
+  max-width: 12ch;                 /* soft wrap after ~12 chars for rhythm */
+  will-change: transform;
+}
+
+/* ─── Tagline + CTA ───────────────────────────────────────── */
+
+.tagline {
+  max-width: 55ch;
+  margin-block-end: var(--space-3);
+}
+
+.cta {
+  /* Link variant="standalone" handles underline + accent on hover */
+}
+
+/* ─── Tablet (4-col grid at ≤1023px) ─────────────────────── */
+
+@media (max-width: 1023px) {
+  .caseEntry {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .left {
+    grid-column: 1 / 2;     /* narrow — just 1 col for number + meta */
+  }
+
+  .right {
+    grid-column: 2 / 5;     /* 3 of 4 cols */
+  }
+
+  .caseEntry:not(:first-of-type) {
+    margin-block-start: var(--space-7);
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .caseEntry {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-4);
+  }
+
+  .left {
+    grid-column: 1;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+
+  .meta {
+    margin-block-start: 0;         /* meta sits inline with number on mobile */
+  }
+
+  .right {
+    grid-column: 1;
+  }
+
+  .caseEntry:not(:first-of-type) {
+    margin-block-start: var(--space-7);
+  }
+
+  .visual .visualTitle {
+    font-size: clamp(32px, 8vw, 56px);
+  }
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .number {
+    transition: none;
+  }
+
+  .caseEntry:hover .number {
+    transform: none;
+  }
+}

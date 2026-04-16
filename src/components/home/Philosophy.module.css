@@ -1,0 +1,91 @@
+/*
+ * Philosophy.module.css
+ * Three working principles — placed between SelectedWork and FinalCTA.
+ *
+ * Editorial intent:
+ * After seeing the work, you read the beliefs behind it. Each principle is
+ * one declarative statement at 3xl (64px) — large enough to scan as a heading,
+ * small enough that all three fit without scrolling on desktop. The base muted
+ * bajada below each statement is the proof: one sentence, no elaboration.
+ *
+ * Cols 2/7 keeps the text left of center — the right side breathes.
+ * Each principle is separated by space-7 (96px) — the gap is the pause
+ * between convictions, not filler.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.philosophy {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── Content column (cols 2/7) ───────────────────────────── */
+
+.inner {
+  grid-column: 2 / 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+/* ─── Individual principle ────────────────────────────────── */
+
+.principle {
+  /* each block is self-contained */
+}
+
+/* ─── Number ──────────────────────────────────────────────── */
+
+.number {
+  letter-spacing: 0.05em;
+  margin-block-end: var(--space-2);
+}
+
+/* ─── Statement ───────────────────────────────────────────── */
+
+/*
+ * 3xl (64px) — below display-md for its declarative weight, above 2xl
+ * for the activity links in Currently. The sweet spot for a principle:
+ * impactful but not a headline competing with "CASES." or "Hablemos."
+ */
+.statement {
+  margin: 0 0 var(--space-2);
+}
+
+/* ─── Bajada ──────────────────────────────────────────────── */
+
+/*
+ * base (17px) muted — the proof behind the principle. One sentence, quiet.
+ * max-width 44ch keeps lines from stretching across the full column width.
+ */
+.bajada {
+  max-width: 44ch;
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .philosophy {
+    padding-block-start: var(--space-7);
+  }
+
+  .inner {
+    grid-column: 1 / 5;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .philosophy {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-5);
+  }
+
+  .inner {
+    grid-column: 1 / -1;
+    gap: var(--space-6);
+  }
+}

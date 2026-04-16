@@ -1,0 +1,83 @@
+/*
+ * Link.module.css
+ * Interactive text primitive from DESIGN.md §4.
+ * No font-family, no font-size — those come from context (parent Type or nav).
+ * No margin, no padding — layout is the container's job.
+ *
+ * ─── Variant rationale ────────────────────────────────────────────────────
+ *
+ * inline (default)
+ *   Embedded in flowing prose. Underlined at rest: the underline is a
+ *   hypertext affordance that running text demands. 1px / 0.2em offset
+ *   reads as functional, not decorative. Hover thickens to 2px.
+ *
+ * standalone
+ *   Used in nav items and link lists — NOT flowing in prose.
+ *   DESIGN.md §4 describes nav "active state: underline only", which signals
+ *   that underline is the *interaction indicator*, not the resting state.
+ *   A column of nav links with every item underlined reads as cluttered
+ *   against the editorial grid. Decision: no underline at rest; 2px underline
+ *   appears on hover.
+ *   Implementation note: text-decoration-thickness: 0 (not text-decoration:
+ *   none) keeps the underline property live so the thickness transition
+ *   animates smoothly without a snap.
+ */
+
+/* ─── Shared base ──────────────────────────────────────── */
+
+.link {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  transition:
+    color var(--duration-base) var(--ease-out),
+    text-decoration-thickness var(--duration-base) var(--ease-out);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ─── Inline variant ───────────────────────────────────── */
+
+.inline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.inline:hover {
+  color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+
+/* ─── Standalone variant (nav, link lists) ─────────────── */
+
+.standalone {
+  text-decoration: underline;
+  text-decoration-thickness: 0;
+}
+
+.standalone:hover {
+  color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+
+/* ─── Accent modifier ──────────────────────────────────── */
+
+/* Starts in accent color — for "see also", external callouts, CTAs. */
+.accent {
+  color: var(--color-accent);
+}
+
+/* ─── External link indicator ──────────────────────────── */
+
+/*
+ * Rendered as <span aria-hidden="true"> in the template — screen readers
+ * skip it entirely. Slightly smaller than the surrounding text so it sits
+ * as a mark, not a character.
+ */
+.externalIndicator {
+  margin-inline-start: 0.2em;
+  font-size: 0.75em;
+  white-space: nowrap;
+}

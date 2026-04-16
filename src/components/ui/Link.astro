@@ -1,0 +1,47 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import styles from './Link.module.css';
+
+type LinkVariant = 'inline' | 'standalone';
+
+export interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  /** Required. Destination URL or path. */
+  href: string;
+  /** When true, overrides inherited color with var(--color-accent). Default: false. */
+  accent?: boolean;
+  /** 'inline' (default) — used inside body text.
+   *  'standalone' — used in nav and link lists (not embedded in prose). */
+  variant?: LinkVariant;
+  class?: string;
+}
+
+const {
+  href,
+  accent = false,
+  variant = 'inline',
+  class: className,
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+// Detect external links: full URLs only (http:// or https://).
+// Relative paths (/work/ldp) and anchors (#section) are NOT external.
+const isExternal = href.startsWith('http://') || href.startsWith('https://');
+
+// Auto-apply safe defaults for external links; respect explicit overrides.
+const resolvedTarget = target ?? (isExternal ? '_blank' : undefined);
+const resolvedRel    = rel    ?? (isExternal ? 'noopener noreferrer' : undefined);
+---
+<a
+  href={href}
+  target={resolvedTarget}
+  rel={resolvedRel}
+  class:list={[
+    styles.link,
+    variant === 'standalone' ? styles.standalone : styles.inline,
+    accent && styles.accent,
+    className,
+  ]}
+  {...rest}
+><slot />{isExternal && <span aria-hidden="true" class={styles.externalIndicator}>↗</span>}</a>

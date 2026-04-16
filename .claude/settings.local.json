@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(pnpm astro *)",
+      "WebFetch(domain:www.raviklaassens.com)",
+      "WebFetch(domain:www.cathydolle.com)",
+      "WebFetch(domain:valientebrands.com)",
+      "WebFetch(domain:naughtyduk.com)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)"
+    ]
+  }
+}

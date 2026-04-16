@@ -1,0 +1,68 @@
+---
+import type { HTMLTag } from 'astro/types';
+import styles from './Type.module.css';
+
+type TypeVariant =
+  | 'xs' | 'sm' | 'base' | 'lg' | 'xl'
+  | '2xl' | '3xl' | 'display-sm' | 'display-md' | 'display-lg';
+
+type TypeColor = 'fg' | 'muted' | 'accent';
+type TypeAlign = 'left' | 'center' | 'right';
+
+export interface Props {
+  /** Required. Maps to a type token from DESIGN.md §3. */
+  variant: TypeVariant;
+  /** HTML element to render. Default: 'p'. */
+  as?: HTMLTag;
+  /** Text color. Default: 'fg'. */
+  color?: TypeColor;
+  /** Text alignment. Default: 'left'. */
+  align?: TypeAlign;
+  class?: string;
+}
+
+const {
+  variant,
+  as: Tag = 'p',
+  color = 'fg',
+  align = 'left',
+  class: className,
+} = Astro.props as Props;
+
+// CSS identifiers cannot start with digits or contain hyphens.
+// Prop values are mapped to valid CSS Module class names explicitly.
+const variantMap: Record<TypeVariant, string> = {
+  'xs':         styles.xs,
+  'sm':         styles.sm,
+  'base':       styles.base,
+  'lg':         styles.lg,
+  'xl':         styles.xl,
+  '2xl':        styles.xl2,
+  '3xl':        styles.xl3,
+  'display-sm': styles.displaySm,
+  'display-md': styles.displayMd,
+  'display-lg': styles.displayLg,
+};
+
+const colorMap: Record<TypeColor, string> = {
+  fg:     styles.colorFg,
+  muted:  styles.colorMuted,
+  accent: styles.colorAccent,
+};
+
+const alignMap: Record<TypeAlign, string> = {
+  left:   styles.alignLeft,
+  center: styles.alignCenter,
+  right:  styles.alignRight,
+};
+---
+<Tag
+  class:list={[
+    variantMap[variant],
+    colorMap[color],
+    alignMap[align],
+    className,
+  ]}
+>
+  <slot />
+</Tag>

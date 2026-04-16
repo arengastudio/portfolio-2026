@@ -1,0 +1,125 @@
+/*
+ * Type.module.css
+ * Maps every type token from DESIGN.md §3.
+ * No margin, padding, text-transform, or layout concerns here —
+ * this is a typography primitive only.
+ * All values reference tokens.css — no inline px, em, hex, or font names.
+ */
+
+/* ─── Shared bases (internal — composed into variants below) ─ */
+
+.monoBase   { font-family: var(--font-mono); }
+.bodyBase   { font-family: var(--font-body); }
+.displayBase { font-family: var(--font-display); }
+
+/* ─── Variants ───────────────────────────────────────────── */
+
+/* xs — JetBrains Mono */
+.xs {
+  composes: monoBase;
+  font-size: var(--text-xs-size);
+  font-weight: var(--text-xs-weight);
+  line-height: var(--text-xs-line-height);
+  letter-spacing: var(--text-xs-tracking);
+}
+
+/* sm — PP Neue Montreal */
+.sm {
+  composes: bodyBase;
+  font-size: var(--text-sm-size);
+  font-weight: var(--text-sm-weight);
+  line-height: var(--text-sm-line-height);
+  letter-spacing: var(--text-sm-tracking);
+}
+
+/* base — PP Neue Montreal */
+.base {
+  composes: bodyBase;
+  font-size: var(--text-base-size);
+  font-weight: var(--text-base-weight);
+  line-height: var(--text-base-line-height);
+  letter-spacing: var(--text-base-tracking);
+}
+
+/* lg — PP Neue Montreal */
+.lg {
+  composes: bodyBase;
+  font-size: var(--text-lg-size);
+  font-weight: var(--text-lg-weight);
+  line-height: var(--text-lg-line-height);
+  letter-spacing: var(--text-lg-tracking);
+}
+
+/* xl — PP Formula (display scale begins here) */
+.xl {
+  composes: displayBase;
+  font-size: var(--text-xl-size);
+  font-weight: var(--text-xl-weight);
+  line-height: var(--text-xl-line-height);
+  letter-spacing: var(--text-xl-tracking);
+}
+
+/* '2xl' prop → .xl2 (CSS identifiers cannot start with a digit) */
+.xl2 {
+  composes: displayBase;
+  font-size: var(--text-2xl-size);
+  font-weight: var(--text-2xl-weight);
+  line-height: var(--text-2xl-line-height);
+  letter-spacing: var(--text-2xl-tracking);
+}
+
+/* '3xl' prop → .xl3 */
+.xl3 {
+  composes: displayBase;
+  font-size: var(--text-3xl-size);
+  font-weight: var(--text-3xl-weight);
+  line-height: var(--text-3xl-line-height);
+  letter-spacing: var(--text-3xl-tracking);
+}
+
+/* 'display-sm' prop → .displaySm */
+.displaySm {
+  composes: displayBase;
+  font-size: var(--text-display-sm-size);
+  font-weight: var(--text-display-sm-weight);
+  line-height: var(--text-display-sm-line-height);
+  letter-spacing: var(--text-display-sm-tracking);
+}
+
+/* 'display-md' prop → .displayMd */
+.displayMd {
+  composes: displayBase;
+  font-size: var(--text-display-md-size);
+  font-weight: var(--text-display-md-weight);
+  line-height: var(--text-display-md-line-height);
+  letter-spacing: var(--text-display-md-tracking);
+  white-space: nowrap;
+}
+
+/*
+ * 'display-lg' prop → .displayLg
+ * font-size resolves to clamp(120px, 18vw, 260px) via the token —
+ * the clamp() lives in tokens.css, not here.
+ * white-space: nowrap — display statements are single-line dramatic moments.
+ * Overflow is intentional at small viewports; layout gives them room.
+ */
+.displayLg {
+  composes: displayBase;
+  font-size: var(--text-display-lg-size);
+  font-weight: var(--text-display-lg-weight);
+  line-height: var(--text-display-lg-line-height);
+  letter-spacing: var(--text-display-lg-tracking);
+  white-space: nowrap;
+}
+
+/* ─── Color ──────────────────────────────────────────────── */
+
+.colorFg     { color: var(--color-fg); }
+.colorMuted  { color: var(--color-muted); }
+.colorAccent { color: var(--color-accent); }
+
+/* ─── Alignment ──────────────────────────────────────────── */
+
+.alignLeft   { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight  { text-align: right; }

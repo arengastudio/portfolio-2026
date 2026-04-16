@@ -1,13 +1,21 @@
 ---
-// TODO(juan): Home page — wire up content/home/{locale}.mdx and build layout
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Currently from '../components/home/Currently.astro';
+import SelectedWork from '../components/home/SelectedWork.astro';
+import Philosophy from '../components/home/Philosophy.astro';
+import FinalCTA from '../components/home/FinalCTA.astro';
+import Footer from '../components/global/Footer.astro';
 ---
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Juan Cruz Luna</title>
-  </head>
-  <body>
-    <p>En construcción.</p>
-  </body>
-</html>
+<BaseLayout
+  title="Juan Cruz Luna — Product Designer & Builder"
+  description="Product Designer & Builder. Buenos Aires."
+  lang="es"
+>
+  <Hero />
+  <Currently />
+  <SelectedWork />
+  <Philosophy />
+  <FinalCTA />
+  <Footer />
+</BaseLayout>
