@@ -107,6 +107,22 @@ a:hover {
   outline: none;
 }
 
+/* ─── HeroWord initial state ─────────────────────────────── */
+/*
+ * Pre-hide hero display words before GSAP SplitText runs.
+ * Prevents a flash of the full word before char animation starts.
+ * GSAP calls gsap.set(el, { opacity: 1 }) in useEffect before animating chars.
+ */
+[data-hero-word] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-word] {
+    opacity: 1 !important;
+  }
+}
+
 /* ─── ScrollReveal initial states ────────────────────────── */
 /*
  * Elements inside ScrollReveal start hidden via CSS BEFORE GSAP loads.
@@ -140,12 +156,87 @@ a:hover {
   clip-path: inset(0 0 100% 0);
 }
 
+[data-scroll-reveal="clip-up"] > * {
+  clip-path: inset(100% 0 0 0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-scroll-reveal] > * {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
   }
+
+  /* clip-up uses clip-path only (no opacity/transform), needs separate reset */
+  [data-scroll-reveal="clip-up"] > * {
+    clip-path: none !important;
+  }
+}
+
+/* ─── Custom cursor ──────────────────────────────────────── */
+/*
+ * Hide the system cursor on fine-pointer (mouse) devices.
+ * Cursor.tsx renders a custom 2-layer cursor on these devices.
+ * Touch and stylus devices retain the system cursor.
+ */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* ─── View Transitions ───────────────────────────────────── */
+/*
+ * Clip-path curtain wipe: old page clips out upward, new page clips in upward.
+ * Duration 0.38s with a sharp cubic-bezier for a decisive, editorial feel.
+ * Both old and new run in parallel (default behavior for ::view-transition).
+ * Reduced-motion: animation disabled — Astro's ViewTransitions API falls back
+ * to an instant swap when both old and new have animation: none.
+ */
+@keyframes vt-clip-out {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes vt-clip-in {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0% 0 0% 0); }
+}
+
+::view-transition-old(root) {
+  animation: vt-clip-out 0.38s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+::view-transition-new(root) {
+  animation: vt-clip-in  0.38s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ─── Dark section inversion ─────────────────────────────── */
+/*
+ * Sections with data-dark-section get a smooth background-color transition
+ * when the .is-dark class is toggled by the IntersectionObserver in BaseLayout.
+ *
+ * .is-dark overrides the CSS custom properties that all child components read
+ * — color-fg, color-muted, color-border — so typography, links, and dividers
+ * all invert automatically without touching component CSS.
+ *
+ * background-color on body/html doesn't invert; only the flagged sections do.
+ * This creates a localized dark zone at the bottom of the page (CTA + footer).
+ */
+[data-dark-section] {
+  transition: background-color 0.6s var(--ease-out), color 0.6s var(--ease-out);
+}
+
+.is-dark {
+  background-color: #0A0A0A;
+  --color-fg:     #F5F2EC;
+  --color-muted:  rgba(245, 242, 236, 0.45);
+  --color-border: rgba(245, 242, 236, 0.12);
 }
 
 /* ─── Reduced motion ─────────────────────────────────────── */

@@ -69,8 +69,17 @@
 .fg     { --hero-visual-bg: var(--color-fg); }
 .dark   { --hero-visual-bg: #1A1A2E; }
 
-.visual {
+/*
+ * overflow: hidden clips the parallax travel (CaseHeroParallax.tsx moves
+ * [data-case-visual] yPercent 0 → 12 on scroll). Without this the visual
+ * would peek out below its container as it lags behind.
+ */
+.visualWrap {
   grid-column: 1 / -1;
+  overflow: hidden;
+}
+
+.visual {
   aspect-ratio: 16 / 7;
   background-color: var(--hero-visual-bg);
   display: flex;
@@ -95,6 +104,27 @@
   user-select: none;
 }
 
+/* ─── Visual image (real photo) ──────────────────────────── */
+
+/*
+ * Used when coverImage is present in the case frontmatter.
+ * Same aspect ratio as .visual so the layout doesn't shift.
+ * overflow: hidden is already on .visualWrap — redundant here but
+ * explicit for clarity and in case .visualWrap ever changes.
+ */
+.visualImg {
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+}
+
+.visualPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform; /* promoted layer for CaseHeroParallax yPercent */
+}
+
 /* ─── Tablet ──────────────────────────────────────────────── */
 
 @media (max-width: 1023px) {
@@ -115,7 +145,12 @@
     gap: var(--space-1);
   }
 
-  .visual {
+  .visualWrap {
+    overflow: hidden;
+  }
+
+  .visual,
+  .visualImg {
     aspect-ratio: 4 / 3;
   }
 }

@@ -67,6 +67,29 @@
   margin: 0;
 }
 
+/* ─── Spotlight hover effect ──────────────────────────────── */
+
+/*
+ * When any case entry inside .cases is hovered, dim all entries to 25%
+ * opacity — then restore the hovered entry to 100%.
+ *
+ * Uses CSS :has() (supported in all modern browsers).
+ * Wrapped in (hover: hover) to skip on touch-only devices where
+ * hover states behave inconsistently.
+ *
+ * The [data-case-color] attribute is set on each article in CaseEntry.astro.
+ * Opacity transition is on .caseEntry in CaseEntry.module.css.
+ */
+@media (hover: hover) {
+  .cases:has([data-case-color]:hover) [data-case-color] {
+    opacity: 0.2;
+  }
+
+  .cases:has([data-case-color]:hover) [data-case-color]:hover {
+    opacity: 1;
+  }
+}
+
 /* ─── Mobile ──────────────────────────────────────────────── */
 
 @media (max-width: 767px) {

@@ -1,0 +1,26 @@
+---
+/*
+ * EN home shell — mirrors /index.astro.
+ * Same components render for now; copy will be translated to English in a later pass.
+ * TODO(juan): Replace all Spanish copy with English equivalents.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import Currently from '../../components/home/Currently.astro';
+import SelectedWork from '../../components/home/SelectedWork.astro';
+import Philosophy from '../../components/home/Philosophy.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import Footer from '../../components/global/Footer.astro';
+---
+<BaseLayout
+  title="Juan Cruz Luna — Product Designer & Builder"
+  description="Product Designer & Builder. Buenos Aires."
+  lang="en"
+>
+  <Hero />
+  <Currently />
+  <SelectedWork />
+  <Philosophy />
+  <FinalCTA />
+  <Footer />
+</BaseLayout>

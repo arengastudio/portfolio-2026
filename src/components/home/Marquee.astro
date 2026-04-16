@@ -1,0 +1,76 @@
+---
+/**
+ * Marquee.astro
+ * Horizontal infinite-scroll text strip between Hero and Currently.
+ *
+ * Implementation: single .track with the content duplicated exactly once.
+ * animation: marquee translates from 0 to -50% — exactly one copy width —
+ * then loops instantly to 0 creating a seamless repeat.
+ *
+ * No JS. Pure CSS animation.
+ * prefers-reduced-motion: pauses the animation (content still visible).
+ */
+---
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    {/* Two identical copies — -50% translate = one copy width = seamless loop */}
+    <span class="marquee-content">
+      PRODUCT DESIGN&nbsp;&nbsp;·&nbsp;&nbsp;BUILD&nbsp;&nbsp;·&nbsp;&nbsp;AI&nbsp;&nbsp;·&nbsp;&nbsp;SCOUTING&nbsp;&nbsp;·&nbsp;&nbsp;FINTECH&nbsp;&nbsp;·&nbsp;&nbsp;DESIGN SYSTEMS&nbsp;&nbsp;·&nbsp;&nbsp;BUENOS AIRES&nbsp;&nbsp;·&nbsp;&nbsp;
+    </span>
+    <span class="marquee-content" aria-hidden="true">
+      PRODUCT DESIGN&nbsp;&nbsp;·&nbsp;&nbsp;BUILD&nbsp;&nbsp;·&nbsp;&nbsp;AI&nbsp;&nbsp;·&nbsp;&nbsp;SCOUTING&nbsp;&nbsp;·&nbsp;&nbsp;FINTECH&nbsp;&nbsp;·&nbsp;&nbsp;DESIGN SYSTEMS&nbsp;&nbsp;·&nbsp;&nbsp;BUENOS AIRES&nbsp;&nbsp;·&nbsp;&nbsp;
+    </span>
+  </div>
+</div>
+
+<style>
+  /* ─── Strip ──────────────────────────────────────────────── */
+
+  .marquee-strip {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+    padding-block: var(--space-3);
+  }
+
+  /* ─── Track ──────────────────────────────────────────────── */
+
+  /*
+   * display: flex keeps both spans in a single row.
+   * white-space: nowrap prevents line breaks inside each span.
+   * Translating the full track by -50% moves exactly one copy offscreen,
+   * while the second copy fills the gap — seamless visual loop.
+   */
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 28s linear infinite;
+  }
+
+  /* ─── Text ───────────────────────────────────────────────── */
+
+  .marquee-content {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-fg);
+    opacity: 0.35;
+    flex-shrink: 0;
+  }
+
+  /* ─── Animation ──────────────────────────────────────────── */
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── Reduced motion ──────────────────────────────────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+</style>

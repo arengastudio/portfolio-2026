@@ -1,0 +1,96 @@
+/*
+ * Cursor.module.css
+ * Custom cursor layers — fixed positioned, pointer-events: none.
+ * z-index 9000 to appear above content, below dialogs (if any).
+ *
+ * .dot: 8px filled circle, tracks mouse near-instantly.
+ * .ring: 36px outlined circle, lags behind via GSAP quickTo.
+ *
+ * Expansion on interactive hover is driven by data-expanded attribute
+ * set from Cursor.tsx — avoids stale CSS module class name issues.
+ *
+ * System cursor is hidden globally for pointer: fine devices in global.css.
+ */
+
+/* ─── Dot ────────────────────────────────────────────────── */
+
+/*
+ * mix-blend-mode: difference — CSS-only dark/light inversion.
+ * White blended against the cream bg (#F5F2EC) produces near-black (10,13,19).
+ * White blended against the dark bg (#0A0A0A) produces near-white (245,245,245).
+ * No JS required — the cursor self-adapts to any background section.
+ */
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9000;
+  will-change: transform;
+}
+
+/* ─── Ring ───────────────────────────────────────────────── */
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9000;
+  will-change: transform;
+  opacity: 0.45;
+  transition:
+    width  0.25s var(--ease-out),
+    height 0.25s var(--ease-out),
+    opacity 0.25s var(--ease-out);
+}
+
+/* Ring expands when hovering interactive elements */
+.ring[data-expanded] {
+  width: 56px;
+  height: 56px;
+  opacity: 0.8;
+}
+
+/* ─── Follow cursor label ─────────────────────────────────── */
+
+/*
+ * Appears over [data-follow-cursor] elements (case cards).
+ * Replaces the ring while active — ring hides via GSAP autoAlpha.
+ * z-index: 9001 — above ring (9000) so it renders on top.
+ * Scale and autoAlpha are GSAP-managed (initial state set in useEffect).
+ */
+.label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background-color: var(--color-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9001;
+  will-change: transform;
+}
+
+.labelText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-bg);
+  user-select: none;
+  white-space: nowrap;
+}

@@ -1,0 +1,67 @@
+---
+/*
+ * EN /lab shell — mirrors /lab.astro.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Type from '../../components/ui/Type.astro';
+import Footer from '../../components/global/Footer.astro';
+import styles from '../lab.module.css';
+
+const experiments = [
+  {
+    name: 'Scroll Animations',
+    desc: 'Explorations with GSAP ScrollTrigger and Lenis.',
+    colorKey: 'accent' as const,
+  },
+  {
+    name: 'Design System Tokens',
+    desc: 'From DESIGN.md to CSS: a token pipeline.',
+    colorKey: 'fg' as const,
+  },
+  {
+    name: 'AI Prototyping',
+    desc: 'Quick prototypes with Claude and code generation.',
+    colorKey: 'dark' as const,
+  },
+  {
+    name: 'WebGL Experiments',
+    desc: 'Shaders, particles and things that glow.',
+    colorKey: 'accent' as const,
+  },
+];
+---
+<BaseLayout
+  title="Lab — Juan Cruz Luna"
+  description="Experiments, prototypes and things that don't fit anywhere else."
+  lang="en"
+>
+
+  {/* ─── Hero ─── */}
+  <section class={styles.hero}>
+    <Container>
+      <Type as="h1" variant="display-md" class={styles.heroTitle}>Lab.</Type>
+      <Type as="p" variant="lg" color="muted" class={styles.heroSub}>
+        Experiments, prototypes and things that don't fit anywhere else.
+      </Type>
+    </Container>
+  </section>
+
+  {/* ─── Experiment cards ─── */}
+  <section class={styles.experiments}>
+    <Container>
+      <div class={styles.grid}>
+        {experiments.map((exp) => (
+          <article class:list={[styles.card, styles[exp.colorKey]]}>
+            <div class={styles.cardVisual}>
+              <p class={styles.cardName}>{exp.name}</p>
+            </div>
+            <Type as="p" variant="sm" class={styles.cardDesc}>{exp.desc}</Type>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>

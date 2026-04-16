@@ -16,6 +16,7 @@ const cases = [
     tagline: 'Liderando el diseño de una plataforma AI para scouting de fútbol.',
     href: '/work/librodepases',
     colorKey: 'accent' as const,
+    image: '/assets/cases/librodepases/01.png',
   },
   {
     number: '02',
@@ -26,6 +27,7 @@ const cases = [
     tagline: 'Co-fundé un estudio digital. Diseñamos y construimos productos.',
     href: '/work/arenga',
     colorKey: 'fg' as const,
+    image: '/assets/cases/arenga/cover.png',
   },
   {
     number: '03',
@@ -36,6 +38,7 @@ const cases = [
     tagline: 'End-to-end product design para una plataforma fintech.',
     href: '/work/garantear',
     colorKey: 'dark' as const,
+    image: '/assets/cases/garantear/01.png',
   },
 ];
 ---
@@ -43,7 +46,7 @@ const cases = [
   <Container>
 
     {/* ─── Section header: title left, eyebrow right ─── */}
-    <ScrollReveal client:load variant="fade-up">
+    <ScrollReveal client:load variant="clip-up" duration={1.0}>
       <div class={styles.sectionHeader}>
         <Type as="h2" variant="display-md" class={styles.sectionTitle}>CASES.</Type>
         <Type as="p" variant="xs" color="muted" class={styles.sectionEyebrow}>SELECTED WORK · 2022–2025</Type>
@@ -68,6 +71,7 @@ const cases = [
           tagline={c.tagline}
           href={c.href}
           colorKey={c.colorKey}
+          image={c.image}
         />
       ))}
     </ScrollReveal>

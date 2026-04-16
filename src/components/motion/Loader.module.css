@@ -1,0 +1,143 @@
+/*
+ * Loader.module.css
+ * Splash screen overlay — intentionally outside the design system.
+ * Uses hard-coded color values that mirror the token values:
+ *   #0A0A0A = --color-fg / near-black background
+ *   #F5F2EC = --color-bg / cream text
+ *   #4B53F6 = --color-accent
+ *
+ * z-index 10000 — above everything including the custom cursor (9000).
+ *
+ * The overlay is a single panel. GSAP lifts it via yPercent: -100 on
+ * complete, revealing the hero underneath as a "curtain rising" effect.
+ * will-change: transform enables GPU compositing for the lift.
+ */
+
+/* ─── Overlay panel ───────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: #0A0A0A;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* ─── Content wrapper ─────────────────────────────────────── */
+
+/*
+ * Fills the overlay. Holds the name, meta strip, and progress bar.
+ * Fades out as a unit before the overlay lifts.
+ * align-items: flex-start so the name sits left-aligned at mid-height.
+ */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: 8vw;
+}
+
+/* ─── Name clip container ─────────────────────────────────── */
+
+/*
+ * overflow: hidden clips the translateY reveal — the name starts at
+ * y: 115% (below the container bounds, invisible) and slides up into view.
+ * This is the same "text rising from below" pattern used in HeroWords.
+ */
+.nameWrap {
+  overflow: hidden;
+}
+
+/* ─── Display name ────────────────────────────────────────── */
+
+/*
+ * PP Formula, same spec as the display words in the hero.
+ * opacity: 0 prevents a flash between mount and the gsap.set() call
+ * that repositions it to y:115%. GSAP sets opacity:1 before animating.
+ *
+ * Left-aligned (not centered) — brutalist editorial, matches the hero grid.
+ * clamp range positions below the hero display words (which go to 160px)
+ * so there's a clear size hierarchy between loader name and hero statement.
+ */
+.name {
+  display: block;
+  font-family: 'PP Formula', sans-serif;
+  font-size: clamp(56px, 8.5vw, 144px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: #F5F2EC;
+  user-select: none;
+  will-change: transform;
+  opacity: 0;
+}
+
+/* ─── Bottom meta strip ───────────────────────────────────── */
+
+/*
+ * Sits at the bottom of the overlay.
+ * 20px from the bottom edge leaves room for the 2px progress line.
+ */
+.meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-inline: 8vw;
+  padding-block-end: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #F5F2EC;
+  opacity: 0.28;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+/*
+ * tabular-nums: digits are fixed-width — prevents layout shift
+ * as the counter increments (000 → 001 → ... → 100).
+ */
+.counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #F5F2EC;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+/* ─── Accent progress line ────────────────────────────────── */
+
+/*
+ * 2px accent line at the very bottom edge.
+ * Fills from left to right as the counter runs (scaleX: 0 → 1 via GSAP).
+ * transform-origin: left center is critical — without it scaleX animates
+ * from the center, appearing to grow in both directions.
+ */
+.progressTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(245, 242, 236, 0.06);
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0;
+  background-color: #4B53F6;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}

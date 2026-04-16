@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Loader from '../components/motion/Loader.tsx';
 import Hero from '../components/home/Hero.astro';
+import Marquee from '../components/home/Marquee.astro';
 import Currently from '../components/home/Currently.astro';
 import SelectedWork from '../components/home/SelectedWork.astro';
 import Philosophy from '../components/home/Philosophy.astro';
@@ -12,7 +14,11 @@ import Footer from '../components/global/Footer.astro';
   description="Product Designer & Builder. Buenos Aires."
   lang="es"
 >
+  {/* Splash loader — first visit only, sessionStorage prevents replay */}
+  <Loader client:load />
+
   <Hero />
+  <Marquee />
   <Currently />
   <SelectedWork />
   <Philosophy />

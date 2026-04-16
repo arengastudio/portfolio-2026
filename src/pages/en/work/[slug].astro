@@ -1,0 +1,91 @@
+---
+/**
+ * EN /work/[slug] — mirrors /work/[slug].astro.
+ *
+ * Until EN case MDX content exists, these routes render the ES case
+ * with lang="en" on the <html> element. This keeps the language switcher
+ * functional from any ES case page (it links to /en/work/[slug]).
+ *
+ * When EN MDX is ready: add a second getStaticPaths pass for locale='en'
+ * and render those entries here instead.
+ */
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Container from '../../../components/ui/Container.astro';
+import Type from '../../../components/ui/Type.astro';
+import Link from '../../../components/ui/Link.astro';
+import CaseHero from '../../../components/case/CaseHero.astro';
+import TLDR from '../../../components/case/TLDR.astro';
+import Footer from '../../../components/global/Footer.astro';
+import styles from '../../work/case.module.css';
+
+export async function getStaticPaths() {
+  /*
+   * Reuse ES case entries — EN content doesn't exist yet.
+   * Generates /en/work/librodepases, /en/work/arenga, /en/work/garantear.
+   */
+  const entries = await getCollection('cases', ({ data }) =>
+    data.locale === 'es' && data.slug !== ''
+  );
+
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'cases'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, figmaDeepDive } = entry.data;
+---
+<BaseLayout
+  title={`${title} — Juan Cruz Luna`}
+  description={outcome}
+  lang="en"
+>
+
+  {/* ─── Block 1: Hero ─── */}
+  <CaseHero
+    title={title}
+    role={role}
+    timeframe={timeframe}
+    outcome={outcome}
+    client={client}
+    colorKey={colorKey}
+  />
+
+  {/* ─── Block 2: TL;DR ─── */}
+  <TLDR
+    client={client}
+    role={role}
+    team={team}
+    timeframe={timeframe}
+    platforms={platforms}
+    tags={tags}
+    outcome={outcome}
+  />
+
+  {/* ─── Blocks 3–9: MDX prose body ─── */}
+  <Container>
+    <div class={styles.prose}>
+      <Content />
+    </div>
+
+    {/* ─── Deep dive link (if Figma WorkBook exists) ─── */}
+    {figmaDeepDive && (
+      <div class={styles.deepDive}>
+        <Type as="p" variant="xs" color="muted" class={styles.deepDiveLabel}>DEEP DIVE</Type>
+        <Link href={figmaDeepDive} variant="standalone">
+          See the work in Figma →
+        </Link>
+      </div>
+    )}
+  </Container>
+
+  <Footer />
+</BaseLayout>

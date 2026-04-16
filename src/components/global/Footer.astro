@@ -6,7 +6,7 @@ import styles from './Footer.module.css';
 
 const year = new Date().getFullYear();
 ---
-<footer class={styles.footer}>
+<footer class={styles.footer} data-dark-section="footer">
   <Container>
 
     <div class={styles.row}>
@@ -37,6 +37,30 @@ const year = new Date().getFullYear();
       >Source ↗</Link>
 
     </div>
+
+    {/* ─── Bottom strip: tagline + colofón ─── */}
+    <div class={styles.bottom}>
+
+      {/* Left — made-in statement */}
+      <Type as="p" variant="xs" color="muted" class={styles.tagline}>
+        Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.
+      </Type>
+
+      {/* Right — technical colophon */}
+      <Type as="p" variant="xs" color="muted" class={styles.colofon}>
+        Astro · Vercel · PP Formula · Neue Montreal · JBM
+      </Type>
+
+    </div>
+
+    {/* ─── That's all. ─── */}
+    {/*
+      Miranda Priestly. Cinephiles smile.
+      Everyone else reads it as an elegant close.
+    */}
+    <Type as="p" variant="xs" color="muted" class={styles.thatsAll}>
+      That's all.
+    </Type>
 
   </Container>
 </footer>

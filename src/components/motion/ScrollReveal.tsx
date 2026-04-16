@@ -20,7 +20,7 @@ import { useRef, useEffect, type ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
-  variant?: 'fade-up' | 'fade' | 'slide-left' | 'clip';
+  variant?: 'fade-up' | 'fade' | 'slide-left' | 'clip' | 'clip-up';
   /** Initial delay before animation starts (seconds). */
   delay?: number;
   /** Animation duration (seconds). */
@@ -92,6 +92,13 @@ export default function ScrollReveal({
       } else if (variant === 'clip') {
         fromVars.clipPath = 'inset(0 0 100% 0)';
         toVars.clipPath = 'inset(0 0 0% 0)';
+      } else if (variant === 'clip-up') {
+        // Reveals bottom-to-top: text appears to slide up from behind a clip.
+        // inset(100% 0 0 0) = entire element clipped from top (nothing visible).
+        // As T reduces to 0%, the element reveals from bottom edge upward.
+        fromVars.clipPath = 'inset(100% 0 0 0)';
+        toVars.clipPath = 'inset(0% 0 0% 0)';
+        toVars.ease = 'power4.out';   // sharper snap for the editorial feel
       }
 
       ctx = gsap.context(() => {

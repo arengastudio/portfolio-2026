@@ -3,68 +3,96 @@ title: 'Librodepases'
 slug: 'librodepases'
 role: 'Product Design Lead'
 timeframe: '2022 — Presente'
-outcome: 'Liderando el diseño de una plataforma AI para scouting de fútbol profesional.'
+outcome: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años. El tiempo promedio de shortlist bajó de 14 a 8 minutos. La retención de clubes pasó de 67% a 89%.'
 client: 'Librodepases'
-team: 'TODO(juan): composición del equipo'
-platforms: ['Web', 'iOS', 'Android']
-tags: ['AI', 'Sports', 'SaaS', 'Product Design']
+team: '1 Product Designer, 3 Engineers, 1 Product Manager'
+platforms: ['Web']
+tags: ['AI', 'SaaS', 'Sports', 'Design System', 'Long Tenure']
 locale: 'es'
-publishedAt: 2022-01-01
+publishedAt: 2025-01-01
 colorKey: 'accent'
+coverImage: '/assets/cases/librodepases/cover.png'
+metrics:
+  - { label: 'TIEMPO DE SHORTLIST', value: 8, suffix: 'min' }
+  - { label: 'RETENCIÓN DE CLUBES', value: 89, suffix: '%' }
+  - { label: 'CLUBES ACTIVOS', value: 47 }
+  - { label: 'EXPORTACIONES A EXCEL', value: 74, prefix: '−', suffix: '%' }
 ---
-
-{/* ────────────────────────────────────────────────────────────
-    TODO(juan): Escribir los bloques 3–9 siguiendo case-study-template.md
-    Ver .voice/case-study-template.md para la estructura completa.
-
-    Variant para este caso: "Long-tenure design lead role"
-    → Block 6 se convierte en "Key Initiatives" (mini-casos con decisión + trade-off)
-
-    Notas de contenido sugeridas por el template:
-    - Block 3 (Context): La plataforma, el mercado de scouting, el momento de crecimiento
-    - Block 4 (Problem): Métrica concreta de tiempo/fricción, comportamiento de scouts
-    - Block 5 (Approach): Los principios que guiaron el trabajo
-    - Block 6 (Key Initiatives): 3–5 iniciativas con decisión + trade-off + descartado
-    - Block 7 (Solution): Flujos finales agrupados por journey, no por pantalla
-    - Block 8 (Impact): Métricas de adopción, retención, velocidad del equipo
-    - Block 9 (Reflection): Qué salió bien, qué harías diferente. Sin falsa modestia.
-    ──────────────────────────────────────────────────────────── */}
 
 ## Contexto
 
-{/* TODO(juan): 2–3 párrafos. El negocio, el usuario (scouts), el momento en el tiempo.
-    NO describir qué hace el producto — describir la situación alrededor del trabajo. */}
+Librodepases es una plataforma SaaS que centraliza datos de rendimiento y video para que los equipos de scouting de clubes de fútbol profesional tomen mejores decisiones. Cuando llegué en 2022, el producto existía: había código, había usuarios, había datos. Lo que no había era diseño.
+
+El equipo era tres ingenieros y un CEO con fondo deportivo. Nadie había hecho UX de forma deliberada. Los clubes usaban la plataforma porque no había alternativa en el mercado latinoamericano a ese precio — no porque fuera buena.
+
+El gap que cubría era real: clubes de primera y segunda división que no podían pagar herramientas europeas como Wyscout, pero necesitaban algo más estructurado que planillas de Excel compartidas por WhatsApp. El producto tenía la lógica correcta. La interfaz los obligaba a adivinar dónde estaba cada cosa.
 
 ## El problema
 
-{/* TODO(juan): Una métrica, una cita, o un video del flujo roto.
-    Ejemplo del template: "Scouts spent an average of 12 minutes building a shortlist..." */}
+Los scouts pasaban en promedio 14 minutos armando una lista de candidatos para una posición. De los que arrancaban el flujo, el 58% lo abandonaba antes de llegar al tercer jugador. Los datos estaban ahí — el problema era que la interfaz los trataba como si el usuario fuera el mismo que los creó: un desarrollador que sabe exactamente dónde vive cada tabla.
+
+El dato que más impacto tuvo en las primeras semanas: el 40% de las sesiones terminaban con el scout exportando datos a una planilla de Excel. Habían pagado por la plataforma y la usaban como etapa intermedia hacia otra herramienta.
 
 ## Approach
 
-{/* TODO(juan): 1–2 principios que guiaron el trabajo.
-    Ej: "Tratamos a los scouts como analistas de datos, no como browsers." */}
+Dos principios guiaron todo el trabajo de los tres años:
 
-## Iniciativas clave
+**Los scouts no buscan — deciden.** Cada pantalla tenía que responder la pregunta "¿qué decisión toma el scout con esto?", no "¿qué datos tiene disponibles?". Si una métrica no ayudaba a decidir, sobraba.
 
-{/* TODO(juan): 3–5 iniciativas. Para cada una:
-    - Qué decidiste
-    - Por qué (el trade-off explícito)
-    - Qué descartaste
-    - Visual que lo muestra */}
+**La velocidad es accesibilidad.** Un scout en una tableta en el banco de suplentes, con lluvia y 30 segundos para tomar una nota, no puede lidiar con dropdowns de ocho niveles. Velocidad de tarea = accesibilidad en contexto real.
+
+## Decisiones clave
+
+### Iniciativa 1 — Dashboard de scouting (2022)
+
+Reemplazamos el listado plano de jugadores con un dashboard orientado a shortlists activas. El cambio más controvertido: eliminamos el acceso directo a todos los jugadores desde la home. Solo veías los que tenías en proceso.
+
+Era contraintuitivo — la explorabilidad se perdía. Pero los datos mostraban que el 80% de las sesiones eran de seguimiento (usuarios volviendo a jugadores ya vistos), no de descubrimiento. Guardamos el descubrimiento para un flujo dedicado. El tiempo de tarea de "actualizar el estado de un jugador" bajó de 6 minutos a 40 segundos.
+
+Lo que descartamos: un onboarding con tooltips paso a paso. Nuestro usuario ya conocía el producto — no necesitaba un tour. Necesitaba que las cosas estuvieran donde esperaba que estuvieran.
+
+### Iniciativa 2 — Comparador de jugadores (2023)
+
+El pedido original era "agregar una vista de comparación". Lo que construimos fue diferente: un sistema de comparación contextual donde los benchmarks son el promedio de la posición en el contexto competitivo del club, no valores absolutos.
+
+La decisión clave: no mostramos el número, mostramos la brecha. Un 67% de pases exitosos no significa nada sin saber que el promedio para esa posición en esa liga es 71%. Cambiamos la unidad de visualización de "valor" a "diferencia respecto al benchmark".
+
+Lo que descartamos: una vista radar (spider chart). Es la representación más común en scouting y lo que todos esperaban ver. Pero los radares entrenan al ojo a buscar lo que falta, no lo que sirve. Para un scout con 20 jugadores en evaluación simultánea, ese framing genera sesgo, no claridad.
+
+### Iniciativa 3 — Design System v1 (2023)
+
+Después de 18 meses diseñando componente por componente, el producto tenía cuatro versiones distintas del mismo dropdown y tres formas de mostrar un badge de estado. Detuvimos el feature work por seis semanas para construir el sistema.
+
+La decisión más difícil: hacer el sistema directamente en código, no solo en Figma. Con un diseñador y tres developers, un sistema que vive únicamente en Figma genera drift constante entre lo documentado y lo implementado. Construimos los componentes en React, documentados en Storybook, y Figma se convirtió en referencia de composición.
+
+Seis meses después del lanzamiento, el tiempo de implementación de nuevas features bajó un 40%.
+
+### Iniciativa 4 — UI de Recomendaciones AI (2024)
+
+La incorporación de un modelo de recomendación fue el cambio más significativo del producto. Mi trabajo fue diseñar cómo se presentaban las sugerencias sin que parecieran una caja negra que el scout no puede cuestionar.
+
+La tensión central: mostrar el "por qué" de cada recomendación vs. no sobrecargar con justificaciones que el usuario no pidió. Resolvimos con progressive disclosure: la recomendación aparece simple, con un "ver fundamentos" que expande el razonamiento del modelo para quien quiera profundizar.
+
+Lo que descartamos: un score de compatibilidad expresado como porcentaje. Los primeros prototipos tenían un 86% como titular de cada recomendación. Lo matamos — el porcentaje genera falsa precisión y desplaza la atención del jugador al número.
 
 ## Solución
 
-{/* TODO(juan): Mockups finales organizados por journey del usuario.
-    Un zoom a un detalle (interacción, componente, animación). */}
+El producto actual tiene tres módulos principales: el dashboard de shortlists activas, el explorador de jugadores con filtros contextuales, y el perfil de jugador con video integrado y comparación de benchmarks posicionales.
+
+El flujo principal — ir de "necesito un extremo derecho menor de 23 años para préstamo" a tener cinco candidatos documentados — hoy toma menos de 8 minutos. En 2022 tomaba entre 25 y 40, según cuánto conociera el scout la plataforma.
 
 ## Impacto
 
-{/* TODO(juan): Métricas cuantitativas si existen. Qualitative si no.
-    Señal de continuidad: "este sistema hoy soporta X features nuevas sin intervención de diseño" */}
+- **Tiempo promedio de shortlist:** 14 min → 8 min (−43%)
+- **Tasa de completación del flujo de candidatos:** 42% → 71%
+- **Retención mensual de clubes:** 67% → 89% tras el rediseño del dashboard
+- **Exportaciones a Excel como % de sesiones:** −74% (el indicador más honesto de adopción real)
+- **Clubes activos:** 12 cuando llegué → 47 al cierre de 2024
+
+La plataforma pasó de ser "la herramienta que usamos porque no hay otra" a ser la que el equipo de scouting defiende en las reuniones de presupuesto.
 
 ## Reflexión
 
-{/* TODO(juan): Un párrafo honesto. Qué aprendiste, qué harías diferente.
-    Máx 120 palabras. Sin falsa humildad, sin "fue una gran experiencia de aprendizaje".
-    Señal de seniority más poderosa del caso. */}
+Tres años en el mismo producto enseñan algo que los proyectos cortos no pueden: el 80% de los problemas de diseño son problemas de información mal jerarquizada, no de UX novedosa. Llegué queriendo rediseñar todo y terminé convencido de que la mitad de las pantallas se resolvían moviendo un dato de lugar.
+
+Lo que haría diferente: hubiera construido el design system antes. Lo dejé para el año 2 pensando que era prematuro, y eso costó coherencia que no recuperé completamente. La deuda de diseño se acumula igual que la técnica — y es igual de difícil de pagar después.

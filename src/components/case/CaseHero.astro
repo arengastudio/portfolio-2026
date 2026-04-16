@@ -10,11 +10,13 @@ export interface Props {
   outcome: string;
   client: string;
   colorKey: 'accent' | 'fg' | 'dark';
+  /** Path to the hero cover image (relative to /public). When provided, replaces the colored placeholder. */
+  image?: string;
 }
 
-const { title, role, timeframe, outcome, client, colorKey } = Astro.props;
+const { title, role, timeframe, outcome, client, colorKey, image } = Astro.props;
 ---
-<section class={styles.hero}>
+<section class={styles.hero} data-case-hero>
   <Container>
 
     {/* ─── Client · Role · Timeframe ─── */}
@@ -32,14 +34,32 @@ const { title, role, timeframe, outcome, client, colorKey } = Astro.props;
     {/* ─── One-line outcome ─── */}
     <Type as="p" variant="lg" class={styles.outcome}>{outcome}</Type>
 
-    {/* ─── Visual placeholder ─── */}
+    {/* ─── Visual block ─── */}
     {/*
-      TODO(juan): replace with <video autoplay muted loop playsinline>
-      or <Image> when screen recording / mockup is ready.
-      Keep the aspect-ratio and colorKey — just swap the inner content.
+      When coverImage is provided: renders the real photo.
+      Fallback: colored placeholder block with watermark text.
+      TODO(juan): swap fallback for <video autoplay muted loop playsinline>
+      when screen recording is ready — keep the colorKey block as the poster.
     */}
-    <div class:list={[styles.visual, styles[colorKey]]} role="img" aria-label={`Visual del proyecto ${title}`}>
-      <p class={styles.visualTitle} aria-hidden="true">{title}</p>
+    <div class={styles.visualWrap}>
+      {image
+        ? (
+          <div class={styles.visualImg} data-case-visual>
+            <img
+              src={image}
+              alt={`Visual del proyecto ${title}`}
+              class={styles.visualPhoto}
+              loading="eager"
+              decoding="sync"
+            />
+          </div>
+        )
+        : (
+          <div class:list={[styles.visual, styles[colorKey]]} data-case-visual role="img" aria-label={`Visual del proyecto ${title}`}>
+            <p class={styles.visualTitle} aria-hidden="true">{title}</p>
+          </div>
+        )
+      }
     </div>
 
   </Container>

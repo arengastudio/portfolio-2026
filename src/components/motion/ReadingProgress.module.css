@@ -1,0 +1,25 @@
+/*
+ * ReadingProgress.module.css
+ * Fixed 2px accent bar at the very top of the viewport.
+ *
+ * z-index 200 — above the fixed nav (typically ~100) so the bar is
+ * always visible as a thin stripe at the top of the screen.
+ *
+ * transform-origin: left center — set via GSAP in useEffect.
+ * scaleX animates from 0 (page top) to 1 (page bottom).
+ *
+ * pointer-events: none — never intercepts clicks or hovers.
+ * No border-radius — brutalist, flat line.
+ */
+
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  pointer-events: none;
+  z-index: 200;
+  /* GSAP manages scaleX and transformOrigin via inline styles */
+}

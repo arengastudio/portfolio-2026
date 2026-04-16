@@ -78,6 +78,51 @@
   content: ' ·';
 }
 
+/* ─── Key metrics ─────────────────────────────────────────── */
+
+/*
+ * Large display numbers rendered with CountUp animation.
+ * Flex-wrap: wraps to new row if more than 4 metrics on narrow viewports.
+ * border-bottom separates metrics band from the outcome text below.
+ */
+.metrics {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) var(--space-7);
+  margin-block-end: var(--space-5);
+  padding-block-end: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 120px;
+}
+
+.metricLabel {
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/*
+ * The large number — display-scale typography.
+ * CountUp renders inline spans; this div supplies the font/size context.
+ * tabular-nums: digits are fixed-width — no layout shift during count animation.
+ * line-height: 0.9 — tighter than body, matching display-word treatment.
+ */
+.metricValue {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: var(--text-display-lg-weight);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--color-fg);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ─── Outcome ─────────────────────────────────────────────── */
 
 .outcome {

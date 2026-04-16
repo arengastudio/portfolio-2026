@@ -1,6 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
+import CountUp from '../motion/CountUp.tsx';
 import styles from './TLDR.module.css';
 
 export interface Props {
@@ -11,9 +12,19 @@ export interface Props {
   platforms: string[];
   tags: string[];
   outcome: string;
+  /**
+   * Optional key metrics — rendered as large CountUp numbers above the outcome.
+   * Each metric: label (uppercase mono), numeric value, optional prefix/suffix.
+   */
+  metrics?: Array<{
+    label: string;
+    value: number;
+    prefix?: string;
+    suffix?: string;
+  }>;
 }
 
-const { client, role, team, timeframe, platforms, tags, outcome } = Astro.props;
+const { client, role, team, timeframe, platforms, tags, outcome, metrics } = Astro.props;
 ---
 <section class={styles.tldr} aria-label="Resumen del caso">
   <Container>
@@ -56,6 +67,31 @@ const { client, role, team, timeframe, platforms, tags, outcome } = Astro.props;
       </div>
 
     </div>
+
+    {/* ─── Key metrics (CountUp) ─── */}
+    {/*
+      Visible only when `metrics` is present in the case frontmatter.
+      CountUp is client:visible — hydrates when metric enters the viewport,
+      then counts from 0 to value. Large display numbers make the impact
+      data feel earned rather than declared.
+    */}
+    {metrics && metrics.length > 0 && (
+      <div class={styles.metrics}>
+        {metrics.map((m) => (
+          <div class={styles.metric}>
+            <Type as="p" variant="xs" color="muted" class={styles.metricLabel}>{m.label}</Type>
+            <div class={styles.metricValue}>
+              <CountUp
+                client:visible
+                value={m.value}
+                prefix={m.prefix}
+                suffix={m.suffix}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
 
     {/* ─── Outcome ─── */}
     <Type as="p" variant="lg" class={styles.outcomeText}>{outcome}</Type>

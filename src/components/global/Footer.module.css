@@ -121,6 +121,56 @@
   width: 100%;
 }
 
+/* ─── Bottom strip ────────────────────────────────────────── */
+
+/*
+ * Two-column strip below the nav row.
+ * Left: made-in statement. Right: technical colophon.
+ * border-top creates a visual breath before the closing area.
+ */
+.bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-block-start: var(--space-3);
+  margin-block-start: var(--space-4);
+}
+
+.tagline {
+  margin: 0;
+  max-width: 48ch;
+  letter-spacing: 0.02em;
+}
+
+.colofon {
+  margin: 0;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── That's all. ─────────────────────────────────────────── */
+
+/*
+ * Last element in the footer. Right-aligned, opacity below the muted
+ * baseline — barely there, noticed only if you're looking.
+ * font-style: italic — the one italic moment on the site.
+ */
+.thatsAll {
+  grid-column: 1 / -1;
+  text-align: right;
+  margin: 0;
+  margin-block-start: var(--space-3);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  opacity: 0.4;
+  font-style: italic;
+}
+
 /* ─── Mobile (≤767px) ─────────────────────────────────────── */
 
 @media (max-width: 767px) {
@@ -132,5 +182,14 @@
   .source {
     text-align: left;
     justify-self: start;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .colofon {
+    white-space: normal;
   }
 }

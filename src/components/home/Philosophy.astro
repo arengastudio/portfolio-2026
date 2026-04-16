@@ -1,7 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
-import ScrollReveal from '../motion/ScrollReveal.tsx';
+import PhilosophyPin from '../motion/PhilosophyPin.tsx';
 import styles from './Philosophy.module.css';
 
 const principles = [
@@ -22,26 +22,27 @@ const principles = [
   },
 ];
 ---
-<section class={styles.philosophy}>
+<section class={styles.philosophy} data-philosophy-section>
   <Container>
 
     {/*
-      Each principle gets its own ScrollReveal with increasing delay:
-      01 at 0s, 02 at 0.15s, 03 at 0.3s. They're separate islands wrapping
-      separate articles — display:contents makes each article a direct flex
-      child of .inner, preserving the gap-based spacing.
+      PhilosophyPin handles all animation:
+      Desktop — pins the section and scrubs principles 2+3 in on scroll.
+      Mobile / reduced-motion — simple fade-in per principle.
+      data-principle={i+1} is the hook PhilosophyPin uses to target each article.
     */}
     <div class={styles.inner}>
       {principles.map((p, i) => (
-        <ScrollReveal client:load variant="fade-up" delay={i * 0.15}>
-          <article class={styles.principle}>
-            <Type as="p" variant="xs" color="muted" class={styles.number}>{p.number}</Type>
-            <Type as="p" variant="3xl" class={styles.statement}>{p.statement}</Type>
-            <Type as="p" variant="base" color="muted" class={styles.bajada}>{p.bajada}</Type>
-          </article>
-        </ScrollReveal>
+        <article class={styles.principle} data-principle={i + 1}>
+          <Type as="p" variant="xs" color="muted" class={styles.number}>{p.number}</Type>
+          <Type as="p" variant="3xl" class={styles.statement}>{p.statement}</Type>
+          <Type as="p" variant="base" color="muted" class={styles.bajada}>{p.bajada}</Type>
+        </article>
       ))}
     </div>
 
   </Container>
+
+  {/* Pin controller — renders nothing, pure GSAP side-effect */}
+  <PhilosophyPin client:visible />
 </section>

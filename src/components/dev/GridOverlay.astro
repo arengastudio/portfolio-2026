@@ -1,0 +1,105 @@
+---
+/*
+ * GridOverlay.astro
+ * Press G to toggle an 8-column grid overlay matching the Container grid.
+ *
+ * Intended as a design inspection tool — useful for verifying column alignment
+ * while working on the portfolio. It's also a quiet "designer who builds" Easter
+ * egg for anyone who reads the source and discovers the keybinding.
+ *
+ * z-index 8900 — above all page content, below cursor (9000) and Loader (10000).
+ * pointer-events: none — never intercepts clicks or hovers.
+ * Does not fire inside <input> / <textarea> / contenteditable elements.
+ */
+---
+<div id="grid-overlay" aria-hidden="true">
+  <div class="grid-inner">
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+    <div class="grid-col" />
+  </div>
+</div>
+
+<style>
+  #grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 8900;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  #grid-overlay.active {
+    opacity: 1;
+  }
+
+  /*
+   * Mirrors Container exactly:
+   *   max-width: 1280px, centered, padding: 8vw, 8 cols, gap: 32px
+   */
+  .grid-inner {
+    max-width: var(--grid-max-width);
+    height: 100%;
+    margin-inline: auto;
+    padding-inline: var(--grid-outer-margin);
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: var(--grid-gutter);
+  }
+
+  /* Accent color at 6% fill + 15% border — visible but non-dominating */
+  .grid-col {
+    background-color: rgba(75, 83, 246, 0.06);
+    border-inline: 1px solid rgba(75, 83, 246, 0.15);
+  }
+
+  @media (max-width: 1023px) {
+    .grid-inner {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .grid-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  /*
+   * Single addEventListener — the overlay DOM persists across View Transitions
+   * (it lives in BaseLayout, not in <main>), so no re-init on page-load.
+   * The listener persists for the lifetime of the session.
+   */
+  const overlay = document.getElementById('grid-overlay');
+
+  if (overlay) {
+    let visible = false;
+
+    document.addEventListener('keydown', (e) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable
+      ) return;
+
+      if (e.key === 'g' || e.key === 'G') {
+        visible = !visible;
+        overlay.classList.toggle('active', visible);
+      }
+
+      if (e.key === 'Escape' && visible) {
+        visible = false;
+        overlay.classList.remove('active');
+      }
+    });
+  }
+</script>

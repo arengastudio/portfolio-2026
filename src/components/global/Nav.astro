@@ -12,17 +12,34 @@ export interface Props {
 
 const { currentPath = '/', isHome = false } = Astro.props;
 
+/*
+ * Language detection + switcher URL generation.
+ * ES is the default locale (no prefix). EN lives at /en/*.
+ * Strip /en prefix to get the canonical base path, then rebuild both URLs.
+ */
+const isEN = currentPath.startsWith('/en');
+const basePath = isEN ? (currentPath.slice(3) || '/') : currentPath;
+const esUrl   = basePath;
+const enUrl   = basePath === '/' ? '/en' : `/en${basePath}`;
+const activeLang = isEN ? 'en' : 'es';
+
+/*
+ * Links always point to the current-locale equivalent.
+ * Active detection strips /en prefix before comparing.
+ */
+const makeLink = (base: string) => isEN ? `/en${base}` : base;
+
 const links = [
-  { href: '/work',  label: 'work'  },
-  { href: '/about', label: 'about' },
-  { href: '/lab',   label: 'lab'   },
-  { href: '/stack', label: 'stack' },
+  { href: makeLink('/work'),  label: 'work'  },
+  { href: makeLink('/about'), label: 'about' },
+  { href: makeLink('/lab'),   label: 'lab'   },
+  { href: makeLink('/stack'), label: 'stack' },
 ];
 
 /*
- * Active detection: a link is active if the current path starts with its href.
+ * Active detection: compare against locale-correct href.
  * /work/librodepases → work link active ✓
- * /about             → about link active ✓
+ * /en/about          → about link active ✓
  * /                  → no link active (brand-only home) ✓
  */
 const isActive = (href: string) => currentPath.startsWith(href);
@@ -33,23 +50,42 @@ const isActive = (href: string) => currentPath.startsWith(href);
   <Container>
     <div class={styles.inner}>
 
-      {/* Left — brand links home */}
-      <a href="/" class={styles.brand} aria-label="Juan Cruz Luna — Inicio">
+      {/* Left — brand links to locale home */}
+      <a href={isEN ? '/en' : '/'} class={styles.brand} aria-label="Juan Cruz Luna — Inicio">
         Juan Cruz Luna
       </a>
 
-      {/* Right — primary navigation */}
-      <nav class={styles.links} aria-label="Navegación principal">
-        {links.map((link) => (
+      {/* Right — primary navigation + language switcher */}
+      <div class={styles.right}>
+        <nav class={styles.links} aria-label="Navegación principal">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[styles.link, isActive(link.href) && styles.active]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Language switcher — compact ES · EN */}
+        <div class={styles.langSwitch} aria-label="Cambiar idioma">
           <a
-            href={link.href}
-            class:list={[styles.link, isActive(link.href) && styles.active]}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
-      </nav>
+            href={esUrl}
+            hreflang="es"
+            class:list={[styles.lang, activeLang === 'es' && styles.langActive]}
+            aria-current={activeLang === 'es' ? 'true' : undefined}
+          >ES</a>
+          <span class={styles.langSep} aria-hidden="true">·</span>
+          <a
+            href={enUrl}
+            hreflang="en"
+            class:list={[styles.lang, activeLang === 'en' && styles.langActive]}
+            aria-current={activeLang === 'en' ? 'true' : undefined}
+          >EN</a>
+        </div>
+      </div>
 
     </div>
   </Container>

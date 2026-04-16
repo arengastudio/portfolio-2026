@@ -14,11 +14,13 @@ export interface Props {
   href: string;
   /** Controls the visual block background: 'accent' | 'fg' | 'dark' */
   colorKey: 'accent' | 'fg' | 'dark';
+  /** Optional thumbnail image path (relative to /public). Renders behind the title. */
+  image?: string;
 }
 
-const { number, title, year, tags, role, tagline, href, colorKey } = Astro.props;
+const { number, title, year, tags, role, tagline, href, colorKey, image } = Astro.props;
 ---
-<article class:list={[styles.caseEntry, styles[colorKey]]}>
+<article class:list={[styles.caseEntry, styles[colorKey]]} data-case-color={colorKey} data-follow-cursor>
 
   {/* ─── LEFT: big number + stacked mono meta ─── */}
   <div class={styles.left}>
@@ -33,15 +35,29 @@ const { number, title, year, tags, role, tagline, href, colorKey } = Astro.props
   {/* ─── RIGHT: magazine-cover visual + tagline + link ─── */}
   <div class={styles.right}>
     {/*
-      HoverParallax wraps the colored visual block and moves the title h3
-      in the OPPOSITE direction of the mouse — subtle depth effect.
-      Skipped automatically on touch devices and prefers-reduced-motion.
-      class={styles.visual} applies the aspect-ratio + bg-color styling
-      to HoverParallax's wrapper div (same as the previous plain div).
+      .visual is the containing block (aspect-ratio, bg-color, position:relative).
+      When `image` is provided, it sits as a position:absolute layer below the title.
+      HoverParallax MUST NOT wrap the <img> — it uses firstElementChild as the
+      parallax target, which would move the photo instead of the title.
+      The image is therefore placed directly inside .visual, before HoverParallax.
+      HoverParallax gets wrapperClass={styles.visualContent} — a full-inset absolute
+      div — so the title sits on top and shifts on mouse move.
     */}
-    <HoverParallax client:visible wrapperClass={styles.visual}>
-      <Type as="h3" variant="display-lg" class={styles.visualTitle}>{title}</Type>
-    </HoverParallax>
+    <div class:list={[styles.visual, styles[colorKey]]}>
+      {image && (
+        <img
+          src={image}
+          alt=""
+          aria-hidden="true"
+          class={styles.visualImg}
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <HoverParallax client:visible wrapperClass={styles.visualContent}>
+        <Type as="h3" variant="display-lg" class={styles.visualTitle}>{title}</Type>
+      </HoverParallax>
+    </div>
     <Type as="p" variant="lg" class={styles.tagline}>{tagline}</Type>
     <Link href={href} variant="standalone" class={styles.cta}>VER CASO →</Link>
   </div>

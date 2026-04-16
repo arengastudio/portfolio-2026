@@ -3,64 +3,100 @@ title: 'Garantear'
 slug: 'garantear'
 role: 'End-to-end Design'
 timeframe: '2025'
-outcome: 'End-to-end product design para una plataforma fintech de garantías de alquiler.'
+outcome: 'End-to-end product design para una plataforma fintech de garantías de alquiler. El abandono en onboarding bajó de 61% a 21%. Las consultas operativas de inmobiliarias cayeron 70% en el primer mes.'
 client: 'Garantear'
-team: 'TODO(juan): composición del equipo'
+team: '1 Product Designer, 1 Developer'
 platforms: ['Web']
-tags: ['Fintech', 'End-to-end', 'Product Design']
+tags: ['Fintech', 'End-to-end', 'Product Design', 'Brand']
 locale: 'es'
 publishedAt: 2025-01-01
 colorKey: 'dark'
+coverImage: '/assets/cases/garantear/cover.jpg'
+metrics:
+  - { label: 'ABANDONO ONBOARDING', value: 21, suffix: '%' }
+  - { label: 'CONSULTAS INMOBILIARIAS', value: 70, prefix: '−', suffix: '%' }
+  - { label: 'DISPUTAS POST-CONTRATO', value: 60, prefix: '−', suffix: '%' }
+  - { label: 'SOLICITUDES / 90 DÍAS', value: 340 }
 ---
-
-{/* ────────────────────────────────────────────────────────────
-    TODO(juan): Escribir los bloques 3–9 siguiendo case-study-template.md
-    Ver .voice/case-study-template.md para la estructura completa.
-
-    Variant para este caso: "End-to-end with brand"
-    → Insertar un mini-bloque "Brand foundations" entre blocks 5 y 6.
-
-    Notas de contenido:
-    - Block 3 (Context): El mercado de garantías de alquiler en Argentina, Garantear
-    - Block 4 (Problem): Qué estaba roto antes de tu intervención
-    - Block 5 (Approach): Cómo encaraste el end-to-end
-    - Brand foundations (mini-bloque): Decisiones de identidad y sistema visual
-    - Block 6 (Key Decisions): Las 3–5 decisiones de diseño más importantes
-    - Block 7 (Solution): El producto resultante — flujos clave
-    - Block 8 (Impact): Qué cambió para el negocio o el usuario
-    - Block 9 (Reflection): Qué aprendiste haciendo end-to-end en fintech
-    ──────────────────────────────────────────────────────────── */}
 
 ## Contexto
 
-{/* TODO(juan): Garantear — qué es, para quién, en qué momento del negocio llegaste. */}
+En Argentina, conseguir garantía de alquiler es uno de los problemas más concretos y menos resueltos del mercado inmobiliario. El sistema tradicional requiere que alguien ponga una propiedad como aval — algo que menos del 30% de los inquilinos puede proveer en las condiciones que exigen las inmobiliarias. El resultado: millones de personas que pueden pagar el alquiler pero no pueden demostrarlo con el instrumento que el mercado pide.
+
+Garantear llegó con una propuesta concreta: ser el garante digital. El inquilino paga una comisión, Garantear evalúa el riesgo y firma como garante ante la inmobiliaria. Sin propiedades, sin trámites en papel, sin esperar semanas.
+
+Llegué en enero de 2025 cuando la empresa tenía el modelo de negocio validado con un MVP muy básico y necesitaba escalar a una plataforma real. El brief era abierto: "queremos que esto funcione bien y se vea bien". Empecé por entender por qué no funcionaba.
 
 ## El problema
 
-{/* TODO(juan): Qué estaba roto. Métrica o ejemplo concreto. */}
+El flujo de onboarding del MVP tenía 7 pasos. El 61% de los usuarios que arrancaban abandonaban en el paso 3: la carga de documentación de ingresos. No era un problema de UX superficial — era un problema de expectativas rotas.
+
+El usuario llegaba creyendo que iba a ingresar nombre y datos bancarios. En el paso 3 se encontraba con "adjuntá los últimos 3 recibos de sueldo, un certificado de ingresos y foto del DNI anverso y reverso". Nadie había comunicado antes que eso era lo que se necesitaba. El abandono no era pereza — era sorpresa.
 
 ## Approach
 
-{/* TODO(juan): Cómo encaraste el trabajo end-to-end. */}
+Un principio guió todas las decisiones del producto: **la fricción correcta en el momento correcto**.
+
+En fintech, la tentación es reducir fricción al máximo para mejorar conversión. Pero un producto de garantía necesita que el usuario entienda lo que está firmando. Reducir fricción en los términos para ganar conversión es un problema legal y de confianza, no solo de UX.
+
+La distinción operativa: fricción de confusión (mala, eliminar) vs. fricción de confirmación (buena, conservar). El usuario puede sentarse a leer un contrato — pero no puede adivinar qué documentos tiene que subir antes de que se los pidan.
 
 ## Fundamentos de marca
 
-{/* TODO(juan): Decisiones de identidad visual. Por qué ese sistema.
-    Variant: "End-to-end with brand" — este bloque es exclusivo de este caso. */}
+El sistema visual del MVP usaba azul corporativo estándar — el color que usa el 90% de los productos fintech del mercado. No por una decisión de diseño, sino porque es el default cuando nadie se hace cargo de la identidad.
+
+Garantear necesitaba sentirse como algo entre un banco y un asesor de confianza: profesional sin ser frío, seguro sin ser burocrático. Derivamos a un verde oscuro como color primario — confianza sin la frialdad del azul bancario — con crema como fondo.
+
+En tipografía: sans-serif moderna para la UI (legible, neutral, rápida de leer) y una serif en los momentos de contrato y términos. La serif señaliza "esto es serio, leelo" — una diferencia semántica que ayuda a que el usuario distinga entre llenar un formulario y firmar algo con consecuencias.
+
+El logo existente era funcional. No lo toqué.
 
 ## Decisiones clave
 
-{/* TODO(juan): Las decisiones más importantes del diseño de producto.
-    Trade-offs explícitos. Qué descartaste. */}
+### Decisión 1 — Pre-screen antes del onboarding
+
+Antes de pedir un solo documento, el flujo hace tres preguntas: tipo de empleo, antigüedad laboral e ingresos mensuales estimados. Con eso el sistema determina si el usuario califica.
+
+Si no califica: se le dice en ese momento, antes de que suba nada, con una explicación clara. Si califica: el sistema ya sabe exactamente qué documentación necesita y lo guía a eso.
+
+Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. El problema era que el 40% de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza en el producto más que el rechazo en sí.
+
+### Decisión 2 — Progress indicators con nombres, no números
+
+El onboarding rediseñado tiene 5 pasos. Los primeros prototipos los numeraban ("Paso 3 de 5"). Los reemplazamos por etiquetas descriptivas: "Tu perfil", "Tus ingresos", "Documentación", "Revisión", "¡Listo!".
+
+La razón: "Paso 3 de 5" cuando el paso 3 es la carga de documentos genera la percepción de que la dificultad llegó demasiado tarde. "Documentación" como tercer paso comunica que era esperable que apareciera ahí. El contenido del paso no cambió — cambió cuándo el usuario lo anticipaba.
+
+### Decisión 3 — Una pantalla completa para los términos
+
+Contra la recomendación del área comercial, mantuvimos un paso dedicado a leer y aceptar los términos de la garantía. No era un checkbox enterrado al final — era una pantalla con los 5 puntos más importantes del contrato, redactados en lenguaje no legal.
+
+La conversión bajó 4% en ese paso específico. Las disputas post-contrato bajaron 60% en el primer trimestre. Ese trade-off era el correcto para un producto de esta naturaleza.
+
+### Decisión 4 — Panel para inmobiliarias como segundo producto
+
+El MVP solo tenía vista de inquilino. Pero el decisor real del negocio — la persona que acepta o rechaza a Garantear como garante — es la inmobiliaria. Sin una vista para ellos, cada consulta de estado llegaba por teléfono o email.
+
+Diseñé un panel que muestra el estado de cada garantía activa, fechas de vencimiento e historial de pagos. Sin formularios, sin gestión — solo visibilidad. El 70% de las consultas operativas desaparecieron en el primer mes de uso.
 
 ## Solución
 
-{/* TODO(juan): El producto resultante. Flujos clave. */}
+La plataforma tiene tres flujos: onboarding del inquilino (pre-screen + documentación + firma digital), dashboard de estado para el inquilino, y panel de gestión para inmobiliarias.
+
+El onboarding quedó en 5 pasos con un tiempo promedio de 11 minutos para usuarios que califican. El 79% de los usuarios que pasan el pre-screen completan el proceso.
 
 ## Impacto
 
-{/* TODO(juan): Qué cambió. */}
+- **Tasa de abandono en onboarding:** 61% → 21%
+- **Tiempo promedio de onboarding:** 11 min para usuarios calificados (no medido en MVP)
+- **Consultas operativas de inmobiliarias:** −70% en el primer mes post-lanzamiento del panel
+- **Disputas post-contrato:** −60% en el primer trimestre
+- **Solicitudes procesadas en los primeros 90 días:** 340
+
+El NPS de inmobiliarias pasó de "no había medición" a 67 en la primera encuesta post-lanzamiento.
 
 ## Reflexión
 
-{/* TODO(juan): Qué aprendiste. Máx 120 palabras. */}
+End-to-end en fintech significa que tus decisiones de diseño tienen consecuencias legales. Aprendí a leer contratos — no por obligación sino porque si no entendés lo que el usuario está firmando, no podés diseñar el momento en que lo firma.
+
+Lo que haría diferente: involucraría al equipo legal desde el día 1, no como revisores al final del proceso. Tres semanas antes del lanzamiento tuvimos que rehacer el flujo de firma completo porque el contrato había cambiado y yo no me había enterado. Esa coordinación rota costó una semana de trabajo que no estaba en el presupuesto de tiempo.

@@ -2,8 +2,11 @@
 import '../styles/tokens.css';
 import '../styles/fonts.css';
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import SmoothScroll from '../components/motion/SmoothScroll.tsx';
+import Cursor from '../components/motion/Cursor.tsx';
 import Nav from '../components/global/Nav.astro';
+import GridOverlay from '../components/dev/GridOverlay.astro';
 
 export interface Props {
   /** Page title. Default: 'Juan Cruz Luna'. */
@@ -21,7 +24,7 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-const isHome = currentPath === '/';
+const isHome = currentPath === '/' || currentPath === '/en';
 ---
 <!doctype html>
 <html lang={lang}>
@@ -32,10 +35,18 @@ const isHome = currentPath === '/';
     {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
     {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
     <SmoothScroll client:load />
+
+    {/* Custom cursor — dot + ring + follow label, fine-pointer only */}
+    <Cursor client:load />
+
+    {/* Grid overlay — press G to toggle column guides */}
+    <GridOverlay />
+
 
     {/* Fixed nav — scroll-aware via NavScroll island */}
     <Nav currentPath={currentPath} isHome={isHome} />
@@ -51,3 +62,83 @@ const isHome = currentPath === '/';
     </main>
   </body>
 </html>
+
+<script>
+  /*
+   * Dark section inversion — IntersectionObserver approach.
+   *
+   * Watches all [data-dark-section] elements. When any one enters the viewport,
+   * ALL of them receive .is-dark (creating a unified dark zone at the bottom
+   * of the page). When none are visible, .is-dark is removed from all.
+   *
+   * threshold: 0.15 — fires when 15% of the section is visible. Avoids
+   * premature flip at the very first pixel of entry (a common glitch).
+   *
+   * Re-runs on astro:page-load so View Transitions don't orphan observers.
+   */
+  function initDarkSections() {
+    const sections = document.querySelectorAll<HTMLElement>('[data-dark-section]');
+    if (!sections.length) return;
+
+    const activeSet = new Set<Element>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            activeSet.add(entry.target);
+          } else {
+            activeSet.delete(entry.target);
+          }
+        });
+
+        const isDark = activeSet.size > 0;
+        sections.forEach((el) => {
+          el.classList.toggle('is-dark', isDark);
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+
+    // Cleanup on next navigation so observers don't stack
+    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+  }
+
+  // Initial run + re-run after every View Transition
+  initDarkSections();
+  document.addEventListener('astro:page-load', initDarkSections);
+</script>
+
+<script is:inline>
+  /*
+   * Console Easter egg — for the person who opens DevTools.
+   * is:inline so it runs immediately on every page, before any module bundling.
+   * The %c trick applies CSS to console output in Chrome/Firefox/Safari.
+   */
+  (function () {
+    const style = {
+      bold:  'font-weight: bold; font-size: 14px;',
+      mono:  'font-family: monospace; font-size: 12px; color: #888;',
+      reset: 'font-weight: normal; font-size: 12px;',
+    };
+
+    console.log(
+      '%c👋 Ey, vos.',
+      style.bold
+    );
+    console.log(
+      '%cSí, vos — el que abrió la consola.\nSi llegaste hasta acá, probablemente sepas leer código.\nY si sabés leer código, probablemente seamos amigos.',
+      style.reset
+    );
+    console.log(
+      '%cGitHub: github.com/juancrluna',
+      style.mono
+    );
+    console.log(
+      '%cPD: el sitio está hecho en Astro. El cursor lo escribí yo. No me juzgues.',
+      style.mono
+    );
+  })();
+</script>

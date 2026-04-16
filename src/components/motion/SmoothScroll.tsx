@@ -16,20 +16,28 @@ export default function SmoothScroll() {
     if (prefersReduced) return;
 
     let destroyed = false;
-    let lenisRef: { raf: (t: number) => void; destroy: () => void } | null = null;
+    let lenisRef: { raf: (t: number) => void; destroy: () => void; on: (event: string, fn: () => void) => void } | null = null;
     let tickFn: ((time: number) => void) | null = null;
 
     void (async () => {
-      const [{ default: Lenis }, { gsap }] = await Promise.all([
+      const [{ default: Lenis }, { gsap }, { ScrollTrigger }] = await Promise.all([
         import('@studio-freight/lenis'),
         import('gsap'),
+        import('gsap/ScrollTrigger'),
       ]);
 
       if (destroyed) return;
 
+      gsap.registerPlugin(ScrollTrigger);
+
       const lenis = new Lenis();
       lenisRef = lenis;
       (window as unknown as Record<string, unknown>).__lenis = lenis;
+
+      // Keep ScrollTrigger in sync with Lenis' virtual scroll position.
+      // Without this, pinned sections and scrub triggers use the native
+      // scroll position (always 0 with Lenis) and never fire correctly.
+      lenis.on('scroll', () => ScrollTrigger.update());
 
       tickFn = (time: number) => lenis.raf(time * 1000);
       gsap.ticker.add(tickFn);

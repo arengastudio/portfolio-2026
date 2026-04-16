@@ -20,6 +20,19 @@ const cases = defineCollection({
     figmaDeepDive: z.string().url().optional(),
     /** Color key for the case hero visual block. Matches CaseEntry colorKey. */
     colorKey: z.enum(['accent', 'fg', 'dark']).default('accent'),
+    /** Path to the hero cover image (relative to /public). Replaces the colored placeholder. */
+    coverImage: z.string().optional(),
+    /**
+     * Key metrics shown in the TLDR section with CountUp animation.
+     * Each metric: label (uppercase mono), numeric value to count to,
+     * optional prefix (e.g. '−') and suffix (e.g. '%', 'min').
+     */
+    metrics: z.array(z.object({
+      label:  z.string(),
+      value:  z.number(),
+      prefix: z.string().optional(),
+      suffix: z.string().optional(),
+    })).optional(),
   }),
 });
 
