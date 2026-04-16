@@ -1,0 +1,215 @@
+---
+/**
+ * /1985 — Easter egg. Hidden page, not in sitemap or nav.
+ * Retro terminal aesthetic. noindex meta prevents indexing.
+ *
+ * Standalone page — intentionally bypasses BaseLayout and the
+ * design system color palette. This page earns the right to
+ * break the rules by being a deliberate surprise.
+ *
+ * TODO(juan): Escribir el contenido. Qué pasó en 1985 para vos?
+ * El texto va en la sección marcada abajo. Máx 3 párrafos en mono.
+ * Recordá: voz conversacional, no nostálgica de manual.
+ */
+import '../styles/fonts.css';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1985</title>
+    <!-- Hidden page: no indexing, no robots -->
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <main class="terminal">
+
+      {/* ─── Prompt header ─── */}
+      <p class="prompt">
+        <span class="cursor" aria-hidden="true">▋</span>
+        <span class="path">juancruzluna.com/1985</span>
+      </p>
+
+      {/* ─── Year ─── */}
+      <h1 class="year">1985.</h1>
+
+      {/* ─── Content ─── */}
+      {/*
+        TODO(juan): Tu historia de 1985.
+        Qué significa ese año para vos — puede ser tu año de nacimiento,
+        una referencia cultural, o algo completamente diferente.
+        Entre 1 y 3 párrafos. Mono. Conversacional.
+        No tiene que ser serio — puede ser raro, divertido, honesto.
+      */}
+      <div class="content">
+        <p class="placeholder">
+          {/* TODO(juan): contenido va acá */}
+        </p>
+      </div>
+
+      {/* ─── Return link ─── */}
+      <a href="/" class="return" aria-label="Volver al inicio">
+        ← volver al presente
+      </a>
+
+    </main>
+
+  </body>
+</html>
+
+<style is:global>
+  /* ── Reset ──────────────────────────────────────────────── */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── Base ───────────────────────────────────────────────── */
+  /*
+   * Intentional design system inversion:
+   * bg → near-black, text → cream. Same values as --color-fg and --color-bg,
+   * hard-coded here since we're not importing tokens.css.
+   */
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #F5F2EC;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Scanlines ──────────────────────────────────────────── */
+  /*
+   * Subtle CRT scanline texture. repeating-linear-gradient at 2px pitch,
+   * 3% opacity — barely visible, removes the "flat LCD" look.
+   * pointer-events: none so it doesn't intercept clicks.
+   */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 1px,
+      rgba(255, 255, 255, 0.03) 1px,
+      rgba(255, 255, 255, 0.03) 2px
+    );
+  }
+
+  /* ── Terminal container ─────────────────────────────────── */
+  .terminal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px clamp(24px, 8vw, 128px);
+    max-width: 860px;
+  }
+
+  /* ── Prompt ─────────────────────────────────────────────── */
+  .prompt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(245, 242, 236, 0.4);
+    letter-spacing: 0.05em;
+    margin-block-end: 48px;
+  }
+
+  /*
+   * Blinking block cursor — CSS only, no JS.
+   * Uses step-start for the hard on/off blink of old terminals.
+   */
+  .cursor {
+    display: inline-block;
+    color: #F5F2EC;
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .path {
+    color: rgba(245, 242, 236, 0.4);
+  }
+
+  /* ── Year ───────────────────────────────────────────────── */
+  .year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(72px, 16vw, 200px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #F5F2EC;
+    margin-block-end: 48px;
+  }
+
+  /* ── Content ────────────────────────────────────────────── */
+  .content {
+    max-width: 56ch;
+    margin-block-end: 64px;
+  }
+
+  .content p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(245, 242, 236, 0.75);
+    margin-block-end: 24px;
+  }
+
+  .content p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Placeholder when content is empty — shown only in dev */
+  .placeholder:empty::before {
+    content: '/* TODO(juan): contenido pendiente */';
+    color: rgba(245, 242, 236, 0.2);
+    font-style: italic;
+  }
+
+  /* ── Return link ────────────────────────────────────────── */
+  .return {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: rgba(245, 242, 236, 0.5);
+    text-decoration: none;
+    transition: color 300ms ease;
+  }
+
+  .return:hover {
+    color: #F5F2EC;
+  }
+
+  /* ── Reduced motion ─────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  /* ── Mobile ─────────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .terminal {
+      padding: 32px 24px;
+    }
+  }
+</style>
