@@ -1,0 +1,96 @@
+/*
+ * stack.module.css
+ * /stack — Stack page styles.
+ * Shell: hero, three tool category sections.
+ */
+
+/* ─── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroTitle {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.heroSub {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-2);
+}
+
+/* ─── Tool categories ─────────────────────────────────────── */
+
+.categories {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-8);
+}
+
+/*
+ * Category wrapper — each category sits as a full-width grid item.
+ * Multiple categories spaced by margin-block-start.
+ */
+.category {
+  grid-column: 1 / -1;
+}
+
+.category:not(:first-of-type) {
+  margin-block-start: var(--space-7);
+  padding-block-start: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+
+.categoryLabel {
+  margin: 0;
+  margin-block-end: var(--space-4);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Tool list ───────────────────────────────────────────── */
+
+.toolList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.toolItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block-end: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.toolName {
+  font-weight: 500;
+  margin: 0;
+}
+
+.toolNote {
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-4);
+  }
+
+  .categories {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+
+  .toolItem {
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: flex-start;
+  }
+}

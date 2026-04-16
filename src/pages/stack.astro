@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import Footer from '../components/global/Footer.astro';
+import styles from './stack.module.css';
+
+const categories = [
+  {
+    label: 'DISEÑO',
+    tools: [
+      { name: 'Figma', note: 'Diseño de producto, prototipos, design systems' },
+      { name: 'Framer', note: 'Sitios y landing pages' },
+      { name: 'Photoshop + Illustrator', note: 'Gráfica, retoque, assets' },
+    ],
+  },
+  {
+    label: 'DESARROLLO',
+    tools: [
+      { name: 'Astro', note: 'Este sitio' },
+      { name: 'React', note: 'Componentes interactivos' },
+      { name: 'CSS Modules', note: 'Styling sin abstracciones' },
+      { name: 'GSAP + Lenis', note: 'Motion y smooth scroll' },
+      { name: 'Vercel', note: 'Deploy y hosting' },
+      { name: 'Claude Code', note: 'AI-assisted development' },
+    ],
+  },
+  {
+    label: 'PRODUCTIVIDAD',
+    tools: [
+      { name: 'Notion', note: 'Documentación y gestión' },
+      { name: 'Linear', note: 'Project management' },
+      { name: 'Slack + Discord', note: 'Comunicación' },
+      { name: 'GitHub', note: 'Código y versionado' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Stack — Juan Cruz Luna"
+  description="Las herramientas que uso para diseñar y construir."
+  lang="es"
+>
+
+  {/* ─── Hero ─── */}
+  <section class={styles.hero}>
+    <Container>
+      <Type as="h1" variant="display-md" class={styles.heroTitle}>Stack.</Type>
+      <Type as="p" variant="lg" color="muted" class={styles.heroSub}>
+        Las herramientas que uso para diseñar y construir.
+      </Type>
+    </Container>
+  </section>
+
+  {/* ─── Categories ─── */}
+  <section class={styles.categories}>
+    <Container>
+      {categories.map((cat) => (
+        <div class={styles.category}>
+          <Type as="h2" variant="xl" class={styles.categoryLabel}>{cat.label}</Type>
+          <div class={styles.toolList}>
+            {cat.tools.map((tool) => (
+              <div class={styles.toolItem}>
+                <Type as="p" variant="base" class={styles.toolName}>{tool.name}</Type>
+                <Type as="p" variant="xs" color="muted" class={styles.toolNote}>{tool.note}</Type>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>

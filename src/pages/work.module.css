@@ -1,0 +1,87 @@
+/*
+ * work.module.css
+ * /work — Work index page styles.
+ * Shell: hero, case list, archive.
+ */
+
+/* ─── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroTitle {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.heroSub {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-2);
+}
+
+/* ─── Cases ───────────────────────────────────────────────── */
+
+.cases {
+  padding-block-start: var(--space-9);
+  padding-block-end: var(--space-9);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Archive ─────────────────────────────────────────────── */
+
+.archive {
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-7);
+}
+
+.archiveLabel {
+  grid-column: 1 / -1;
+  letter-spacing: 0.05em;
+  margin-block-end: var(--space-5);
+}
+
+.archiveList {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.archiveItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block-end: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.archiveName {
+  margin: 0;
+}
+
+.archiveYear {
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-4);
+  }
+
+  .cases {
+    padding-block-start: var(--space-7);
+    padding-block-end: var(--space-7);
+  }
+
+  .archive {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+}

@@ -1,0 +1,156 @@
+/*
+ * about.module.css
+ * /about — About page styles.
+ * Shell: hero, intro (photo + bio), experience.
+ */
+
+/* ─── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroTitle {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.heroSub {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-2);
+}
+
+/* ─── Intro: photo + bio ──────────────────────────────────── */
+
+.intro {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/*
+ * Photo placeholder: fg-colored block, cream [FOTO] text.
+ * Spans cols 1–4 on desktop. Fixed 4/5 aspect ratio (≈400×500 proportions).
+ */
+.photoBlock {
+  grid-column: 1 / 5;
+  background-color: var(--color-fg);
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+}
+
+.photoLabel {
+  color: var(--color-bg);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/*
+ * Bio text: spans cols 5–9 on desktop.
+ */
+.bio {
+  grid-column: 5 / 9;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-self: start;
+}
+
+.bioPara {
+  margin: 0;
+}
+
+/* ─── Experience ──────────────────────────────────────────── */
+
+.experience {
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-7);
+}
+
+.experienceLabel {
+  grid-column: 1 / -1;
+  letter-spacing: 0.05em;
+  margin-block-end: var(--space-5);
+}
+
+.experienceList {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.expItem {
+  display: grid;
+  grid-template-columns: 12ch 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  padding-block-end: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.expYear {
+  letter-spacing: 0.05em;
+  margin: 0;
+  padding-block-start: 0.2em; /* optical alignment with role text */
+}
+
+.expRole {
+  margin: 0;
+  font-weight: 500;
+}
+
+.expCompany {
+  margin: 0;
+  margin-block-start: var(--space-1);
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .photoBlock {
+    grid-column: 1 / 3;
+  }
+
+  .bio {
+    grid-column: 3 / 5;
+  }
+}
+
+/* ─── Mobile (<768px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-4);
+  }
+
+  .intro {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+
+  .photoBlock {
+    grid-column: 1 / -1;
+    aspect-ratio: 3 / 2;
+  }
+
+  .bio {
+    grid-column: 1 / -1;
+  }
+
+  .expItem {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .experience {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+}

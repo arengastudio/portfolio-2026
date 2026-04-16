@@ -1,0 +1,102 @@
+/*
+ * lab.module.css
+ * /lab — Lab page styles.
+ * Shell: hero, 2-col experiment card grid.
+ */
+
+/* ─── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroTitle {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.heroSub {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-2);
+}
+
+/* ─── Experiments grid ────────────────────────────────────── */
+
+.experiments {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-8);
+}
+
+/*
+ * 2-col grid of experiment cards.
+ * Uses a separate inner grid (not the Container's 8-col) so the cards
+ * can have equal width regardless of container column count changes.
+ */
+.grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* ─── Card color variants ─────────────────────────────────── */
+
+.accent { --card-bg: var(--color-accent); }
+.fg     { --card-bg: var(--color-fg); }
+.dark   { --card-bg: #1A1A2E; }
+
+/* ─── Experiment card ─────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * Colored block containing the experiment name.
+ * Name uses display-sm (96px) in cream — editorial scale inside the block.
+ */
+.cardVisual {
+  background-color: var(--card-bg);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  margin-block-end: var(--space-2);
+}
+
+.cardName {
+  color: var(--color-bg);
+  font-size: clamp(32px, 4vw, 64px);
+  white-space: normal;
+  max-width: 10ch;
+  margin: 0;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.cardDesc {
+  margin: 0;
+}
+
+/* ─── Mobile (<768px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-4);
+  }
+
+  .experiments {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import Footer from '../components/global/Footer.astro';
+import styles from './about.module.css';
+
+const experience = [
+  {
+    years: '2022–Presente',
+    role: 'Product Design Lead',
+    company: 'Librodepases',
+  },
+  {
+    years: '2024–Presente',
+    role: 'Co-founder & Product Designer',
+    company: 'Arenga Studio',
+  },
+  {
+    years: '2021–2024',
+    role: 'UX/UI Designer',
+    company: 'Freelance',
+  },
+  {
+    years: '2017–2021',
+    role: 'Diseño gráfico y comunicación',
+    company: 'Entre Ríos',
+  },
+];
+---
+<BaseLayout
+  title="About — Juan Cruz Luna"
+  description="Product Designer & Builder. Buenos Aires."
+  lang="es"
+>
+
+  {/* ─── Hero ─── */}
+  <section class={styles.hero}>
+    <Container>
+      <Type as="h1" variant="display-md" class={styles.heroTitle}>About.</Type>
+      <Type as="p" variant="lg" color="muted" class={styles.heroSub}>
+        Product Designer & Builder. Buenos Aires.
+      </Type>
+    </Container>
+  </section>
+
+  {/* ─── Photo + Bio ─── */}
+  <section class={styles.intro}>
+    <Container>
+
+      {/* LEFT: photo placeholder */}
+      <div class={styles.photoBlock} role="img" aria-label="Foto de Juan Cruz Luna — próximamente">
+        <Type as="p" variant="xs" color="muted" class={styles.photoLabel}>[FOTO]</Type>
+      </div>
+
+      {/* RIGHT: bio paragraphs */}
+      <div class={styles.bio}>
+        <Type as="p" variant="base" class={styles.bioPara}>
+          Soy Juan Cruz Luna. Diseño productos digitales desde Buenos Aires. Arranqué en Entre Ríos
+          haciendo gráfica e imprenta, y hoy lidero diseño de producto en Librodepases, una plataforma
+          AI para scouting de fútbol.
+        </Type>
+        <Type as="p" variant="base" class={styles.bioPara}>
+          En 2024 co-fundé Arenga Studio, un estudio digital donde diseñamos y construimos productos
+          para startups y empresas en crecimiento. Trabajo end-to-end: desde strategy y research hasta
+          UI, sistemas de diseño e implementación.
+        </Type>
+        <Type as="p" variant="base" class={styles.bioPara}>
+          Creo que los diseñadores que construyen hacen mejor diseño. Por eso no solo diseño — también
+          buildeo. Este sitio es código propio, no un template.
+        </Type>
+      </div>
+
+    </Container>
+  </section>
+
+  {/* ─── Experience ─── */}
+  <section class={styles.experience}>
+    <Container>
+      <Type as="h2" variant="xs" color="muted" class={styles.experienceLabel}>EXPERIENCIA</Type>
+      <div class={styles.experienceList}>
+        {experience.map((item) => (
+          <div class={styles.expItem}>
+            <Type as="p" variant="xs" color="muted" class={styles.expYear}>{item.years}</Type>
+            <div>
+              <Type as="p" variant="lg" class={styles.expRole}>{item.role}</Type>
+              <Type as="p" variant="base" color="muted" class={styles.expCompany}>{item.company}</Type>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>

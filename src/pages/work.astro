@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import CaseEntry from '../components/home/CaseEntry.astro';
+import Footer from '../components/global/Footer.astro';
+import styles from './work.module.css';
+
+const cases = [
+  {
+    number: '01',
+    title: 'Librodepases',
+    year: '2022 — PRESENTE',
+    tags: 'AI · SPORTS · SAAS',
+    role: 'PRODUCT DESIGN LEAD',
+    tagline: 'Liderando el diseño de una plataforma AI para scouting de fútbol.',
+    href: '/work/librodepases',
+    colorKey: 'accent' as const,
+  },
+  {
+    number: '02',
+    title: 'Arenga Studio',
+    year: '2024 — PRESENTE',
+    tags: 'FOUNDER · STUDIO',
+    role: 'CO-FUNDADOR',
+    tagline: 'Co-fundé un estudio digital. Diseñamos y construimos productos.',
+    href: '/work/arenga',
+    colorKey: 'fg' as const,
+  },
+  {
+    number: '03',
+    title: 'Garantear',
+    year: '2025',
+    tags: 'FINTECH · END-TO-END',
+    role: 'END-TO-END DESIGN',
+    tagline: 'End-to-end product design para una plataforma fintech.',
+    href: '/work/garantear',
+    colorKey: 'dark' as const,
+  },
+];
+
+const archive = [
+  { name: 'EEVA Studios', year: '2024' },
+  { name: 'Spark Club', year: '2025' },
+  { name: 'Banndo', year: '2023' },
+  { name: 'SimplePass', year: '2023' },
+  { name: 'BeachWalk', year: '2022' },
+];
+---
+<BaseLayout
+  title="Work — Juan Cruz Luna"
+  description="Casos seleccionados y archivo de proyectos de Juan Cruz Luna."
+  lang="es"
+>
+
+  {/* ─── Hero ─── */}
+  <section class={styles.hero}>
+    <Container>
+      <Type as="h1" variant="display-md" class={styles.heroTitle}>Work.</Type>
+      <Type as="p" variant="lg" color="muted" class={styles.heroSub}>
+        Casos seleccionados y archivo de proyectos.
+      </Type>
+    </Container>
+  </section>
+
+  {/* ─── Case entries ─── */}
+  <section class={styles.cases}>
+    <Container>
+      {cases.map((c) => (
+        <CaseEntry
+          number={c.number}
+          title={c.title}
+          year={c.year}
+          tags={c.tags}
+          role={c.role}
+          tagline={c.tagline}
+          href={c.href}
+          colorKey={c.colorKey}
+        />
+      ))}
+    </Container>
+  </section>
+
+  {/* ─── Archivo ─── */}
+  <section class={styles.archive}>
+    <Container>
+      <Type as="h2" variant="xs" color="muted" class={styles.archiveLabel}>ARCHIVO</Type>
+      <div class={styles.archiveList}>
+        {archive.map((item) => (
+          <div class={styles.archiveItem}>
+            <Type as="p" variant="lg" class={styles.archiveName}>{item.name}</Type>
+            <Type as="p" variant="xs" color="muted" class={styles.archiveYear}>— {item.year}</Type>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>
