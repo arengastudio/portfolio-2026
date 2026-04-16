@@ -1,0 +1,146 @@
+/*
+ * case.module.css
+ * /work/[slug] — case study page layout.
+ *
+ * .prose wraps the MDX <Content /> output. Uses :global() selectors
+ * to style the raw HTML elements that MDX renders — h2, h3, p, etc.
+ * Max-width 680px for readability on long-form prose (DESIGN.md §5).
+ *
+ * Full-bleed images/videos break out of the prose column via negative
+ * margin — no extra wrapper class needed in MDX.
+ */
+
+/* ─── Prose container ─────────────────────────────────────── */
+
+.prose {
+  grid-column: 2 / 8;
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-9);
+}
+
+/* ─── Prose typography ────────────────────────────────────── */
+
+.prose :global(h2) {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl-size);
+  font-weight: var(--text-2xl-weight);
+  line-height: var(--text-2xl-line-height);
+  letter-spacing: var(--text-2xl-tracking);
+  color: var(--color-fg);
+  margin: 0;
+  margin-block-start: var(--space-7);
+  margin-block-end: var(--space-4);
+}
+
+.prose :global(h3) {
+  font-family: var(--font-display);
+  font-size: var(--text-xl-size);
+  font-weight: var(--text-xl-weight);
+  line-height: var(--text-xl-line-height);
+  letter-spacing: var(--text-xl-tracking);
+  color: var(--color-fg);
+  margin: 0;
+  margin-block-start: var(--space-5);
+  margin-block-end: var(--space-3);
+}
+
+.prose :global(p) {
+  font-family: var(--font-body);
+  font-size: var(--text-base-size);
+  font-weight: var(--text-base-weight);
+  line-height: var(--text-base-line-height);
+  color: var(--color-fg);
+  margin: 0;
+  margin-block-end: var(--space-3);
+  max-width: 68ch;
+}
+
+.prose :global(p:last-child) {
+  margin-block-end: 0;
+}
+
+.prose :global(ul),
+.prose :global(ol) {
+  padding-inline-start: var(--space-3);
+  margin-block-end: var(--space-3);
+}
+
+.prose :global(li) {
+  font-family: var(--font-body);
+  font-size: var(--text-base-size);
+  line-height: var(--text-base-line-height);
+  color: var(--color-fg);
+  margin-block-end: var(--space-1);
+  max-width: 68ch;
+}
+
+.prose :global(blockquote) {
+  border-left: 2px solid var(--color-accent);
+  padding-inline-start: var(--space-3);
+  margin: 0;
+  margin-block: var(--space-4);
+}
+
+.prose :global(blockquote p) {
+  color: var(--color-fg);
+  font-style: normal;
+}
+
+.prose :global(strong) {
+  font-weight: 500;
+}
+
+.prose :global(hr) {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-block: var(--space-6);
+}
+
+/* ─── Full-bleed images inside prose ─────────────────────── */
+
+/*
+ * img and video that are direct children of .prose (not wrapped in p)
+ * break out to span the full container width.
+ */
+.prose :global(img),
+.prose :global(video) {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: var(--space-5);
+}
+
+/* ─── Deep dive link ──────────────────────────────────────── */
+
+.deepDive {
+  grid-column: 2 / 8;
+  padding-block-start: var(--space-5);
+  padding-block-end: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+
+.deepDiveLabel {
+  margin-block-end: var(--space-2);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Tablet ──────────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .prose {
+    grid-column: 1 / -1;
+  }
+
+  .deepDive {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .prose {
+    padding-block-start: var(--space-5);
+    padding-block-end: var(--space-7);
+  }
+}

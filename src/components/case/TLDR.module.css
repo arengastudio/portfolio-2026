@@ -1,0 +1,111 @@
+/*
+ * TLDR.module.css
+ * Scannable metadata card — block 2 of the case study template.
+ * "Read in 10 seconds": client, role, team, timeframe, platforms, tags, outcome.
+ *
+ * Layout: CSS grid with auto-fill columns that collapse to fewer cols on mobile.
+ * Each cell is a label (xs mono muted) stacked above a value (base fg).
+ * Outcome bullets sit below the grid, full-width.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.tldr {
+  padding-block-start: var(--space-6);
+  padding-block-end: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Label ───────────────────────────────────────────────── */
+
+.sectionLabel {
+  grid-column: 1 / -1;
+  letter-spacing: 0.05em;
+  margin-block-end: var(--space-4);
+}
+
+/* ─── Metadata grid ───────────────────────────────────────── */
+
+/*
+ * auto-fill + minmax: fills as many columns as fit at ≥200px each.
+ * On desktop (1184px container) this gives ~5 columns.
+ * Collapses gracefully to 2 on mobile.
+ */
+.grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin-block-end: var(--space-5);
+}
+
+/* ─── Cell ────────────────────────────────────────────────── */
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.cellLabel {
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.cellValue {
+  margin: 0;
+}
+
+/* ─── Tags ────────────────────────────────────────────────── */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  font-weight: var(--text-xs-weight);
+  line-height: var(--text-xs-line-height);
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  /* No border, no background — type only, per brutalist rules */
+}
+
+.tag:not(:last-child)::after {
+  content: ' ·';
+}
+
+/* ─── Outcome ─────────────────────────────────────────────── */
+
+.outcome {
+  grid-column: 1 / -1;
+}
+
+.outcomeText {
+  grid-column: 1 / 6;
+  margin: 0;
+  max-width: 65ch;
+  border-left: 2px solid var(--color-accent);
+  padding-inline-start: var(--space-3);
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .outcomeText {
+    grid-column: 1 / -1;
+  }
+
+  .tldr {
+    padding-block-start: var(--space-4);
+    padding-block-end: var(--space-4);
+  }
+}

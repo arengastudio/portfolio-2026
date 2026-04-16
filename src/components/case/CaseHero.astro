@@ -1,0 +1,46 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import styles from './CaseHero.module.css';
+
+export interface Props {
+  title: string;
+  role: string;
+  timeframe: string;
+  outcome: string;
+  client: string;
+  colorKey: 'accent' | 'fg' | 'dark';
+}
+
+const { title, role, timeframe, outcome, client, colorKey } = Astro.props;
+---
+<section class={styles.hero}>
+  <Container>
+
+    {/* ─── Client · Role · Timeframe ─── */}
+    <div class={styles.meta}>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{client}</Type>
+      <span class={styles.metaSep} aria-hidden="true">·</span>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{role}</Type>
+      <span class={styles.metaSep} aria-hidden="true">·</span>
+      <Type as="p" variant="xs" color="muted" class={styles.metaItem}>{timeframe}</Type>
+    </div>
+
+    {/* ─── Project title ─── */}
+    <Type as="h1" variant="3xl" class={styles.title}>{title}</Type>
+
+    {/* ─── One-line outcome ─── */}
+    <Type as="p" variant="lg" class={styles.outcome}>{outcome}</Type>
+
+    {/* ─── Visual placeholder ─── */}
+    {/*
+      TODO(juan): replace with <video autoplay muted loop playsinline>
+      or <Image> when screen recording / mockup is ready.
+      Keep the aspect-ratio and colorKey — just swap the inner content.
+    */}
+    <div class:list={[styles.visual, styles[colorKey]]} role="img" aria-label={`Visual del proyecto ${title}`}>
+      <p class={styles.visualTitle} aria-hidden="true">{title}</p>
+    </div>
+
+  </Container>
+</section>

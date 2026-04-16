@@ -1,0 +1,64 @@
+---
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import styles from './TLDR.module.css';
+
+export interface Props {
+  client: string;
+  role: string;
+  team: string;
+  timeframe: string;
+  platforms: string[];
+  tags: string[];
+  outcome: string;
+}
+
+const { client, role, team, timeframe, platforms, tags, outcome } = Astro.props;
+---
+<section class={styles.tldr} aria-label="Resumen del caso">
+  <Container>
+
+    <Type as="p" variant="xs" color="muted" class={styles.sectionLabel}>TL;DR</Type>
+
+    {/* ─── Metadata grid ─── */}
+    <div class={styles.grid}>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>CLIENTE</Type>
+        <Type as="p" variant="base" class={styles.cellValue}>{client}</Type>
+      </div>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>ROL</Type>
+        <Type as="p" variant="base" class={styles.cellValue}>{role}</Type>
+      </div>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>EQUIPO</Type>
+        <Type as="p" variant="base" class={styles.cellValue}>{team}</Type>
+      </div>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>PERÍODO</Type>
+        <Type as="p" variant="base" class={styles.cellValue}>{timeframe}</Type>
+      </div>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>PLATAFORMAS</Type>
+        <Type as="p" variant="base" class={styles.cellValue}>{platforms.join(', ')}</Type>
+      </div>
+
+      <div class={styles.cell}>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>TAGS</Type>
+        <div class={styles.tags}>
+          {tags.map((tag) => <span class={styles.tag}>{tag}</span>)}
+        </div>
+      </div>
+
+    </div>
+
+    {/* ─── Outcome ─── */}
+    <Type as="p" variant="lg" class={styles.outcomeText}>{outcome}</Type>
+
+  </Container>
+</section>

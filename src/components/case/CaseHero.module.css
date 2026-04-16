@@ -1,0 +1,121 @@
+/*
+ * CaseHero.module.css
+ * Case study hero section — top of every /work/[slug] page.
+ *
+ * Layout (top → bottom):
+ *   meta row   — client · role · timeframe in mono xs muted
+ *   title      — 3xl display, the project name
+ *   outcome    — lg, one-line result
+ *   visual     — full-width colored block (placeholder for screen recording)
+ *
+ * Color variants: .accent / .fg / .dark — same system as CaseEntry.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-7);
+  padding-block-end: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Meta row ────────────────────────────────────────────── */
+
+.meta {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-4);
+}
+
+.metaItem {
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.metaSep {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+  user-select: none;
+}
+
+/* ─── Title ───────────────────────────────────────────────── */
+
+.title {
+  grid-column: 1 / -1;
+  margin: 0;
+  margin-block-end: var(--space-3);
+}
+
+/* ─── Outcome ─────────────────────────────────────────────── */
+
+.outcome {
+  grid-column: 1 / 7;
+  margin: 0;
+  margin-block-end: var(--space-6);
+  max-width: 60ch;
+}
+
+/* ─── Visual block ────────────────────────────────────────── */
+
+/*
+ * Color variants — same custom property pattern as CaseEntry.
+ * TODO(juan): replace with <video> or <Image> when assets are ready.
+ *             The aspect-ratio and background-color stay; swap the content.
+ */
+.accent { --hero-visual-bg: var(--color-accent); }
+.fg     { --hero-visual-bg: var(--color-fg); }
+.dark   { --hero-visual-bg: #1A1A2E; }
+
+.visual {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 7;
+  background-color: var(--hero-visual-bg);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-5);
+  /* No margin-block-end — section padding-block-end is 0, border-bottom from .hero */
+}
+
+/*
+ * Repeated project name as visual texture inside the placeholder.
+ * Will be replaced by a screen recording or mockup.
+ */
+.visualTitle {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 128px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--color-bg);
+  opacity: 0.15;
+  margin: 0;
+  user-select: none;
+}
+
+/* ─── Tablet ──────────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .outcome {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-5);
+  }
+
+  .meta {
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .visual {
+    aspect-ratio: 4 / 3;
+  }
+}

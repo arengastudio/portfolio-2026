@@ -18,6 +18,8 @@ const cases = defineCollection({
     locale: z.enum(['es', 'en']),
     publishedAt: z.date(),
     figmaDeepDive: z.string().url().optional(),
+    /** Color key for the case hero visual block. Matches CaseEntry colorKey. */
+    colorKey: z.enum(['accent', 'fg', 'dark']).default('accent'),
   }),
 });
 
