@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import Footer from '../components/global/Footer.astro';
+import styles from './contact.module.css';
+---
+<BaseLayout
+  title="Contacto — Juan Cruz Luna"
+  description="Hablemos. juancruzluna@arengastudio.com"
+  lang="es"
+>
+
+  <section class={styles.hero}>
+    <Container>
+
+      <Type as="p" variant="xs" color="muted" class={styles.label}>CONTACTO</Type>
+
+      <Type as="h1" variant="display-md" class={styles.headline}>Hablemos.</Type>
+
+      {/*
+        mailto: link — el único CTA de la página.
+        Anti-fricción máxima: un click, se abre el cliente de mail.
+      */}
+      <a
+        href="mailto:juancruzluna@arengastudio.com"
+        class={styles.emailLink}
+      >
+        juancruzluna@arengastudio.com
+      </a>
+
+      <Type as="p" variant="base" color="muted" class={styles.note}>
+        El formulario de contacto es un email. Anti-fricción máxima.
+      </Type>
+
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>

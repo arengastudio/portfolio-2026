@@ -1,0 +1,48 @@
+/*
+ * 404.module.css
+ * Custom 404 error page.
+ * Brief, on-brand. Type is the hero.
+ */
+
+.page {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-8);
+}
+
+.number {
+  grid-column: 1 / -1;
+  margin: 0;
+  /* Muted — the 404 itself is not the point */
+  color: var(--color-muted);
+}
+
+.headline {
+  grid-column: 1 / -1;
+  margin: 0;
+  margin-block-start: var(--space-3);
+}
+
+.sub {
+  grid-column: 1 / 5;
+  margin-block-start: var(--space-4);
+}
+
+.back {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-5);
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .sub {
+    grid-column: 1 / -1;
+  }
+
+  .page {
+    padding-block: var(--space-6);
+  }
+}

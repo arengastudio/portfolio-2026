@@ -1,0 +1,67 @@
+/*
+ * contact.module.css
+ * /contact — email-only contact page.
+ * The email IS the page. No form, no friction.
+ */
+
+/* ─── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  padding-block-start: var(--space-8);
+  padding-block-end: var(--space-9);
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label {
+  grid-column: 1 / -1;
+  letter-spacing: 0.05em;
+  margin-block-end: var(--space-5);
+}
+
+.headline {
+  grid-column: 1 / -1;
+  margin: 0;
+  margin-block-end: var(--space-4);
+}
+
+/*
+ * Email link — the primary interactive element of the page.
+ * Mono font per DESIGN.md §2: "mono email/contact text".
+ * Accent color per DESIGN.md §2: "mono email/contact text" listed as a
+ * valid accent use case. Font size via display-md for maximum presence.
+ * No default underline — the element earns its own weight at this scale.
+ */
+.emailLink {
+  grid-column: 1 / -1;
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 3vw, 40px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: opacity var(--duration-base) var(--ease-out);
+  margin-block-end: var(--space-5);
+}
+
+.emailLink:hover {
+  opacity: 0.7;
+}
+
+.note {
+  grid-column: 1 / -1;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero {
+    padding-block-start: var(--space-6);
+    padding-block-end: var(--space-7);
+    min-height: 70vh;
+  }
+}
