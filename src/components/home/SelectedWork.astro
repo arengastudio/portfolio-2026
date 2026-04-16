@@ -13,21 +13,21 @@ const cases = [
     year: '2022 — PRESENTE',
     tags: 'AI · SPORTS · SAAS',
     role: 'PRODUCT DESIGN LEAD',
-    tagline: 'Liderando el diseño de una plataforma AI para scouting de fútbol.',
+    tagline: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años.',
     href: '/work/librodepases',
     colorKey: 'accent' as const,
     image: '/assets/cases/librodepases/01.png',
   },
   {
     number: '02',
-    title: 'Arenga Studio',
-    year: '2024 — PRESENTE',
-    tags: 'FOUNDER · STUDIO',
-    role: 'CO-FUNDADOR',
-    tagline: 'Co-fundé un estudio digital. Diseñamos y construimos productos.',
-    href: '/work/arenga',
+    title: 'SparkClub',
+    year: '2025',
+    tags: 'AI · EMPLOYEE ENGAGEMENT',
+    role: 'PRODUCT DESIGNER',
+    tagline: 'MVP end-to-end para plataforma de engagement con IA. De cero a prototipo en 6 semanas.',
+    href: '/work/sparkclub',
     colorKey: 'fg' as const,
-    image: '/assets/cases/arenga/cover.png',
+    image: '/assets/cases/sparkclub/cover.png',
   },
   {
     number: '03',
@@ -53,32 +53,45 @@ const cases = [
       </div>
     </ScrollReveal>
 
+    {/* ─── Drag hint (mobile only) ─── */}
+    {/*
+      Visual cue that content is scrollable/swipeable on mobile.
+      Hidden on desktop via CSS. Appears between header and cards.
+    */}
+    <div class={styles.dragHint} aria-hidden="true">
+      <span class={styles.dragLine}></span>
+      <span class={styles.dragLabel}>DESLIZÁ</span>
+      <span class={styles.dragLine}></span>
+    </div>
+
     {/* ─── Three case entries ─── */}
     {/*
-      All three cases share ONE ScrollReveal so they're siblings under
-      the display:contents div — this preserves .caseEntry:not(:first-of-type)
-      selector correctness for margin-based spacing between entries.
-      Stagger: 01 at 0s, 02 at 0.15s, 03 at 0.3s.
+      Wrapped in .casesTrack — on mobile this becomes a horizontal scroll
+      container with scroll-snap so each case snaps into place.
+      On desktop, display:contents preserves the grid layout as before,
+      so .caseEntry:not(:first-of-type) margin spacing still works.
     */}
-    <ScrollReveal client:load variant="fade-up" stagger={0.15}>
-      {cases.map((c) => (
-        <CaseEntry
-          number={c.number}
-          title={c.title}
-          year={c.year}
-          tags={c.tags}
-          role={c.role}
-          tagline={c.tagline}
-          href={c.href}
-          colorKey={c.colorKey}
-          image={c.image}
-        />
-      ))}
-    </ScrollReveal>
+    <div class={styles.casesTrack}>
+      <ScrollReveal client:load variant="fade-up" stagger={0.15}>
+        {cases.map((c) => (
+          <CaseEntry
+            number={c.number}
+            title={c.title}
+            year={c.year}
+            tags={c.tags}
+            role={c.role}
+            tagline={c.tagline}
+            href={c.href}
+            colorKey={c.colorKey}
+            image={c.image}
+          />
+        ))}
+      </ScrollReveal>
+    </div>
 
     {/* ─── Archive link ─── */}
     <ScrollReveal client:load variant="fade">
-      <Link href="/work" variant="standalone" class={styles.viewArchive}>
+      <Link href="/archivo" variant="standalone" class={styles.viewArchive}>
         VER ARCHIVO COMPLETO →
       </Link>
     </ScrollReveal>

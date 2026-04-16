@@ -1,0 +1,234 @@
+/*
+ * WorkArchive.module.css
+ * All-works list with description panel + floating hover image.
+ *
+ * Layout: full-width wrapper with left description panel (fixed-width,
+ * hidden at rest) and right list (full remaining width on desktop).
+ * On mobile: list only, description hidden (no hover on touch).
+ *
+ * The floating image is position:fixed — follows the cursor via GSAP.
+ * pointer-events: none so it never intercepts click/hover events.
+ */
+
+/* ─── Outer wrapper ───────────────────────────────────────── */
+
+.archiveWrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  column-gap: var(--space-6);
+  align-items: start;
+  position: relative;
+}
+
+/* ─── Description panel (left, cols 1) ───────────────────── */
+
+.descPanel {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-6));
+  padding-block-start: var(--space-4);
+}
+
+.descInner {
+  transition:
+    opacity     0.25s var(--ease-out),
+    transform   0.25s var(--ease-out);
+}
+
+.descTitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  margin-block-end: var(--space-2);
+  text-transform: uppercase;
+}
+
+.descText {
+  font-family: var(--font-body);
+  font-size: var(--text-sm-size);
+  line-height: 1.55;
+  color: var(--color-muted);
+  max-width: 22ch;
+}
+
+/* ─── List ────────────────────────────────────────────────── */
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ─── Row ─────────────────────────────────────────────────── */
+
+.row {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.2s var(--ease-out);
+}
+
+.row:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.rowActive .rowInner {
+  padding-inline-start: var(--space-3);
+}
+
+.rowActive .rowNumber {
+  color: var(--color-accent);
+}
+
+/* ─── Row inner (the actual link or span) ─────────────────── */
+
+.rowInner {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  padding-inline: 0 var(--space-2);
+  text-decoration: none !important;
+  color: inherit;
+  transition:
+    padding-inline-start 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+
+/* ─── Row cells ───────────────────────────────────────────── */
+
+.rowNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  transition: color 0.25s var(--ease-out);
+  flex-shrink: 0;
+}
+
+.rowTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl-size);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowYear {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.rowTags {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.rowArrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  color: var(--color-muted);
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  display: inline-block;
+}
+
+.row:hover .rowArrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* ─── Floating image ──────────────────────────────────────── */
+
+/*
+ * position: fixed — moves with cursor regardless of scroll position.
+ * GSAP translates it via quickSetter (x, y props in px).
+ * will-change: transform promotes it to its own compositor layer.
+ * transition: opacity for smooth show/hide.
+ */
+.floatImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  aspect-ratio: 16 / 10;
+  pointer-events: none;
+  z-index: 8000;
+  will-change: transform;
+  transition: opacity 0.2s var(--ease-out);
+  overflow: hidden;
+}
+
+.floatPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.15s ease;
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .archiveWrap {
+    grid-template-columns: 160px 1fr;
+    column-gap: var(--space-4);
+  }
+
+  .rowInner {
+    grid-template-columns: 36px 1fr auto auto;
+  }
+
+  /* Hide tags column, keep year */
+  .rowTags {
+    display: none;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .archiveWrap {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide description panel and floating image on touch */
+  .descPanel {
+    display: none;
+  }
+
+  .floatImg {
+    display: none;
+  }
+
+  .rowInner {
+    grid-template-columns: 32px 1fr auto;
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+  }
+
+  .rowYear {
+    display: none;
+  }
+
+  .rowTags {
+    display: none;
+  }
+
+  .rowTitle {
+    font-size: var(--text-lg-size);
+  }
+
+  .rowArrow {
+    opacity: 1;
+    display: block;
+  }
+}

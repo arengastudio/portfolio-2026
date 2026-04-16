@@ -139,7 +139,15 @@
   }
 
   .activityLink {
-    font-size: var(--text-xl-size);    /* 28px — still declarative, doesn't overflow */
+    font-size: clamp(20px, 5.5vw, 28px); /* scales gracefully on small screens */
+  }
+}
+
+/* ─── Small mobile (≤480px) ──────────────────────────────── */
+
+@media (max-width: 480px) {
+  .activityLink {
+    font-size: 18px;
   }
 }
 

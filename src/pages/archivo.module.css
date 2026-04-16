@@ -1,0 +1,46 @@
+/*
+ * archivo.module.css
+ * Archive page layout styles.
+ */
+
+/* ─── Page section ────────────────────────────────────────── */
+
+.page {
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-8);
+}
+
+/* ─── Header ──────────────────────────────────────────────── */
+
+.header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-block-end: var(--space-7);
+  border-bottom: 1px solid var(--color-border);
+  padding-block-end: var(--space-4);
+}
+
+.title {
+  margin: 0;
+}
+
+.subtitle {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .page {
+    padding-block-start: var(--space-5);
+    padding-block-end: var(--space-6);
+  }
+
+  .header {
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-block-end: var(--space-5);
+  }
+}

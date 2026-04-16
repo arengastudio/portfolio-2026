@@ -1,15 +1,17 @@
 ---
-import Type from '../ui/Type.astro';
 import styles from './TrackRecord.module.css';
 ---
-<div>
-  <Type as="p" variant="base" class={styles.line}>
-    <span class={styles.year}>2022 —</span> Lideré diseño de producto en Librodepases. Plataforma AI para fútbol.
-  </Type>
-  <Type as="p" variant="base" class={styles.line}>
-    <span class={styles.year}>2024 —</span> Co-fundé Arenga Studio. Diseñamos y construimos productos digitales.
-  </Type>
-  <Type as="p" variant="base" class={styles.line}>
-    <span class={styles.year}>2017 —</span> Empecé diseñando en Entre Ríos. Imprenta, gráfica, primera computadora.
-  </Type>
-</div>
+<ul class={styles.track}>
+  <li class={styles.line}>
+    <span class={styles.year}>2024</span>
+    <span class={styles.text}>Co-fundé Arenga Studio. Diseñamos y construimos productos digitales.</span>
+  </li>
+  <li class={styles.line}>
+    <span class={styles.year}>2022</span>
+    <span class={styles.text}>Lideré diseño de producto en Librodepases. Plataforma AI para fútbol.</span>
+  </li>
+  <li class={styles.line}>
+    <span class={styles.year}>2017</span>
+    <span class={styles.text}>Empecé diseñando en Entre Ríos. Así conocí el diseño gráfico y comunicacional.</span>
+  </li>
+</ul>

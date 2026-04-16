@@ -1,0 +1,52 @@
+---
+/**
+ * AreFirst.astro
+ * Arenga Studio spotlight section — between SelectedWork and Philosophy.
+ *
+ * Tells the story of the studio as a co-founder: what it is, what they do,
+ * link to the live site. Not a case study — a declaration.
+ * Full-width text block, editorial asymmetry: heading left, body right.
+ */
+import Container from '../ui/Container.astro';
+import Type from '../ui/Type.astro';
+import Link from '../ui/Link.astro';
+import ScrollReveal from '../motion/ScrollReveal.tsx';
+import styles from './AreFirst.module.css';
+---
+<section class={styles.areFirst}>
+  <Container>
+
+    {/* ─── Top label ─── */}
+    <ScrollReveal client:load variant="fade">
+      <div class={styles.label}>
+        <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>ARENGA STUDIO · 2024 — PRESENTE</Type>
+      </div>
+    </ScrollReveal>
+
+    {/* ─── Two-col block: heading left / body right ─── */}
+    <div class={styles.body}>
+
+      <ScrollReveal client:load variant="clip-up">
+        <Type as="h2" variant="3xl" class={styles.heading}>
+          Co-fundé<br />un estudio.
+        </Type>
+      </ScrollReveal>
+
+      <ScrollReveal client:load variant="fade-up" delay={0.15}>
+        <div class={styles.right}>
+          <Type as="p" variant="lg" class={styles.description}>
+            Arenga Studio diseña y construye productos digitales para startups y empresas que quieren moverse rápido. MVP, productos escalables, sistemas de diseño — de la estrategia a la implementación.
+          </Type>
+          <Type as="p" variant="base" color="muted" class={styles.detail}>
+            Dos personas. Sin agencia intermedia. El cliente habla directo con quien diseña y construye.
+          </Type>
+          <Link href="https://www.arengastudio.com" variant="standalone" class={styles.siteLink}>
+            arengastudio.com ↗
+          </Link>
+        </div>
+      </ScrollReveal>
+
+    </div>
+
+  </Container>
+</section>

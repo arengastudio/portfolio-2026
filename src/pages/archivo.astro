@@ -1,0 +1,88 @@
+---
+/**
+ * archivo.astro
+ * All-works archive — every project, no case studies required.
+ * List format with floating hover image + description panel.
+ * Linked from SelectedWork "VER ARCHIVO COMPLETO →".
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Type from '../components/ui/Type.astro';
+import ScrollReveal from '../components/motion/ScrollReveal.tsx';
+import WorkArchive from '../components/work/WorkArchive.tsx';
+import Footer from '../components/global/Footer.astro';
+import styles from './archivo.module.css';
+
+const works = [
+  {
+    number: '01',
+    title: 'Arenga Studio',
+    year: '2024 — Presente',
+    tags: ['Studio', 'Fundador', 'End-to-end'],
+    description: 'Co-fundé un estudio digital. 8 productos entregados en 18 meses.',
+    image: '/assets/cases/arenga/cover.png',
+    href: '/work/arenga',
+  },
+  {
+    number: '02',
+    title: 'SparkClub',
+    year: '2025',
+    tags: ['AI', 'Employee Engagement', 'MVP'],
+    description: 'MVP de plataforma de engagement con IA. Prototipo para inversores en 6 semanas.',
+    image: '/assets/cases/sparkclub/cover.png',
+    href: '/work/sparkclub',
+  },
+  {
+    number: '03',
+    title: 'Garantear',
+    year: '2025',
+    tags: ['Fintech', 'End-to-end', 'Brand'],
+    description: 'End-to-end design para plataforma de garantías de alquiler. Abandono de onboarding de 61% a 21%.',
+    image: '/assets/cases/garantear/cover.jpg',
+    href: '/work/garantear',
+  },
+  {
+    number: '04',
+    title: 'EEVA Studios',
+    year: '2025',
+    tags: ['E-commerce', 'Digital', 'Identidad'],
+    description: 'Identidad digital y design system para estudio de experiencias.',
+    image: '/assets/cases/arenga/03.png',
+  },
+  {
+    number: '05',
+    title: 'Librodepases',
+    year: '2022 — 2026',
+    tags: ['AI', 'Sports', 'SaaS', 'Design System'],
+    description: 'Plataforma AI para scouting de fútbol. Product Design Lead durante 3 años.',
+    image: '/assets/cases/librodepases/cover.png',
+    href: '/work/librodepases',
+  },
+];
+---
+<BaseLayout
+  title="Archivo — Juan Cruz Luna"
+  description="Todos los proyectos. Sin filtros."
+  lang="es"
+>
+  <section class={styles.page}>
+    <Container>
+
+      {/* ─── Header ─── */}
+      <ScrollReveal client:load variant="clip-up">
+        <div class={styles.header}>
+          <Type as="h1" variant="display-md" class={styles.title}>TRABAJO.</Type>
+          <Type as="p" variant="xs" color="muted" class={styles.subtitle}>
+            TODOS LOS PROYECTOS · 2017–2026
+          </Type>
+        </div>
+      </ScrollReveal>
+
+      {/* ─── Archive list ─── */}
+      <WorkArchive client:load items={works} />
+
+    </Container>
+  </section>
+
+  <Footer />
+</BaseLayout>

@@ -34,6 +34,8 @@ const principles = [
     <div class={styles.inner}>
       {principles.map((p, i) => (
         <article class={styles.principle} data-principle={i + 1}>
+          {/* Decorative oversized number — editorial accent, aria-hidden */}
+          <span class={styles.bgNumber} aria-hidden="true">{p.number}</span>
           <Type as="p" variant="xs" color="muted" class={styles.number}>{p.number}</Type>
           <Type as="p" variant="3xl" class={styles.statement}>{p.statement}</Type>
           <Type as="p" variant="base" color="muted" class={styles.bajada}>{p.bajada}</Type>

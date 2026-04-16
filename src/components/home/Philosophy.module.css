@@ -33,7 +33,40 @@
 /* ─── Individual principle ────────────────────────────────── */
 
 .principle {
-  /* each block is self-contained */
+  position: relative;   /* stacking context for .bgNumber */
+  overflow: hidden;     /* clips bgNumber so it doesn't bleed into next principle */
+}
+
+/* ─── Oversized background number ────────────────────────── */
+
+/*
+ * Decorative large number behind each principle — the Tresmares/agency
+ * editorial pattern: massive index number as visual texture, not content.
+ *
+ * Positioned absolute so it doesn't affect the text layout.
+ * The number sits at the right edge, partially clipped by overflow:hidden.
+ * opacity 0.04 — barely there on light bg, just enough to add depth.
+ * user-select: none + pointer-events: none: invisible to interaction.
+ *
+ * font-size: 30vw creates a dramatic scale — at 1280px that's ~384px.
+ * The number bleeds off the right edge for an intentionally cropped look.
+ */
+.bgNumber {
+  position: absolute;
+  right: -0.1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(120px, 22vw, 340px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--color-fg);
+  opacity: 0.04;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  /* Everything else (text) will sit above via z-index in child elements */
 }
 
 /* ─── Number ──────────────────────────────────────────────── */
@@ -41,6 +74,8 @@
 .number {
   letter-spacing: 0.05em;
   margin-block-end: var(--space-2);
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Statement ───────────────────────────────────────────── */
@@ -52,6 +87,8 @@
  */
 .statement {
   margin: 0 0 var(--space-2);
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Bajada ──────────────────────────────────────────────── */
@@ -62,6 +99,8 @@
  */
 .bajada {
   max-width: 44ch;
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Tablet (≤1023px) ────────────────────────────────────── */
@@ -87,5 +126,13 @@
   .inner {
     grid-column: 1 / -1;
     gap: var(--space-6);
+  }
+
+  /*
+   * 3xl (64px) overflows at 375px. Reduce to 40px — keeps the statement
+   * impact without wrapping onto 4+ lines.
+   */
+  .statement {
+    font-size: clamp(32px, 8vw, 48px);
   }
 }

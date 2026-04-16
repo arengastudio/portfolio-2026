@@ -53,6 +53,46 @@
   padding-block-end: 0.3em;
 }
 
+/* ─── Cases track ────────────────────────────────────────── */
+
+/*
+ * Desktop: display:contents — lets Container grid govern layout.
+ * Mobile: horizontal scroll with scroll-snap (see @media below).
+ */
+.casesTrack {
+  grid-column: 1 / -1;
+  display: contents;
+}
+
+/* ─── Drag hint (mobile only) ────────────────────────────── */
+
+/*
+ * Hidden on desktop. Appears on mobile between header and cases.
+ * Three-element row: line · DESLIZÁ · line — editorial separator.
+ */
+.dragHint {
+  grid-column: 1 / -1;
+  display: none;                    /* hidden by default (desktop) */
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-end: var(--space-4);
+}
+
+.dragLine {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.dragLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+
 /* ─── View archive link ───────────────────────────────────── */
 
 /*
@@ -90,20 +130,73 @@
   .selectedWork {
     padding-block-start: var(--space-7);
     padding-block-end: var(--space-7);
+    /* Allow the cases track to bleed past the container on mobile */
+    overflow: visible;
   }
 
   .sectionHeader {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2);
-    margin-block-end: var(--space-7);
+    margin-block-end: var(--space-4);
+  }
+
+  .sectionTitle {
+    font-size: clamp(56px, 14vw, 144px);
   }
 
   .sectionEyebrow {
     padding-block-end: 0;
   }
 
+  /* Show drag hint on mobile */
+  .dragHint {
+    display: flex;
+  }
+
+  /*
+   * Mobile horizontal scroll carousel.
+   * display:block overrides display:contents so the wrapper becomes
+   * a real scroll container. Each CaseEntry becomes a snap-aligned card.
+   */
+  .casesTrack {
+    display: block;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--grid-outer-margin);
+    /* Bleed past container padding */
+    margin-inline: calc(-1 * var(--grid-outer-margin));
+    padding-inline: var(--grid-outer-margin);
+    padding-block-end: var(--space-3);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .casesTrack::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+   * Each CaseEntry inside the track becomes a card.
+   * :global() needed because CaseEntry is a slotted Astro component —
+   * its article element isn't a direct child of this module's scope.
+   */
+  .casesTrack :global(article) {
+    display: inline-block;
+    width: 82vw;
+    scroll-snap-align: start;
+    vertical-align: top;
+    margin-inline-end: var(--space-4);
+  }
+
+  /* Remove the block margin between entries — horizontal gap replaces it */
+  .casesTrack :global(article:not(:first-of-type)) {
+    margin-block-start: 0;
+  }
+
   .viewArchive {
-    padding-block-start: var(--space-7);
+    padding-block-start: var(--space-6);
+    font-size: var(--text-lg-size);
+    grid-column: 1 / -1;
   }
 }

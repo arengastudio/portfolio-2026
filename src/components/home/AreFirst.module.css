@@ -1,0 +1,116 @@
+/*
+ * AreFirst.module.css
+ * Arenga Studio spotlight — between SelectedWork and Philosophy.
+ *
+ * Layout: label full-width, then two-col block.
+ * Left: 3xl heading (cols 1/4) — the declaration.
+ * Right: body copy + link (cols 4/8) — the detail.
+ *
+ * Border-top separates it from SelectedWork. The heading size (3xl, 64px)
+ * intentionally sits below case section headers (display-md) but above
+ * the philosophy statements (also 3xl) — same level, different register.
+ */
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.areFirst {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Label row ───────────────────────────────────────────── */
+
+.label {
+  grid-column: 1 / -1;
+  margin-block-end: var(--space-5);
+}
+
+.eyebrow {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Body (two-col) ──────────────────────────────────────── */
+
+.body {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: start;
+}
+
+/* ─── Left: heading ───────────────────────────────────────── */
+
+.heading {
+  grid-column: 1 / 4;
+  margin: 0;
+  line-height: 1.0;
+}
+
+/* ─── Right: description + link ──────────────────────────── */
+
+.right {
+  grid-column: 4 / 8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block-start: var(--space-1);
+}
+
+.description {
+  margin: 0;
+}
+
+.detail {
+  margin: 0;
+}
+
+.siteLink {
+  margin-block-start: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.06em;
+}
+
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .areFirst {
+    padding-block: var(--space-7);
+  }
+
+  .body {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .heading {
+    grid-column: 1 / 3;
+  }
+
+  .right {
+    grid-column: 3 / 5;
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .areFirst {
+    padding-block: var(--space-6);
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .heading {
+    grid-column: 1 / -1;
+  }
+
+  .right {
+    grid-column: 1 / -1;
+    padding-block-start: 0;
+  }
+}

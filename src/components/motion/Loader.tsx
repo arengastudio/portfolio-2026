@@ -90,8 +90,8 @@ export default function Loader() {
 
       gsap.to(counter, {
         val: 100,
-        duration: 1.9,
-        delay: 0.4,
+        duration: 2.8,
+        delay: 0.5,
         ease: 'power2.inOut',
         onUpdate() {
           const v = Math.round(counter.val);
@@ -102,7 +102,7 @@ export default function Loader() {
           if (destroyed) return;
 
           // ── Phase 3: hold → fade content ──────────────────────
-          gsap.delayedCall(0.35, () => {
+          gsap.delayedCall(0.6, () => {
             if (destroyed) return;
 
             gsap.to(content, {

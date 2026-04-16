@@ -102,11 +102,8 @@
 }
 
 /*
- * Grain overlay — same SVG feTurbulence as body in global.css, tiled at 200px.
- * mix-blend-mode: overlay blends naturally with each colorKey background.
- * Opacity 0.06 — visible on hover, barely there at rest.
- * z-index: 1 — above background, below .visualTitle (z-index: 2).
- * pointer-events: none — never intercepts clicks.
+ * Grain overlay — same SVG feTurbulence as body in global.css.
+ * z-index: 2 — above background image and hover overlay, below title (z-3).
  */
 .visual::after {
   content: '';
@@ -117,7 +114,48 @@
   background-repeat: repeat;
   background-size: 200px 200px;
   mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+/*
+ * Hover overlay — dark gradient from bottom (Tresmares pattern).
+ * Makes the image "deepen" on hover — improves title legibility and
+ * signals interactivity with a cinematic darkening effect.
+ *
+ * Uses ::before (::after is the grain layer above).
+ * opacity: 0 at rest → 1 on hover, smooth 0.4s.
+ * z-index: 1 — above the image (z-0), below grain (z-2) and title (z-3).
+ */
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.15) 55%,
+    transparent 100%
+  );
+  opacity: 0;
   z-index: 1;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.caseEntry:hover .visual::before {
+  opacity: 1;
+}
+
+/* ─── Visual link wrapper ─────────────────────────────────── */
+
+/*
+ * Wraps .visual so the image block is clickable.
+ * display: block needed because <a> is inline by default.
+ * text-decoration: none prevents underline leaking from global a styles.
+ */
+.visualLink {
+  display: block;
+  text-decoration: none !important;
 }
 
 /* ─── Cover image (behind title) ─────────────────────────── */
@@ -149,7 +187,7 @@
   display: flex;
   align-items: flex-end;
   padding: var(--space-5);
-  z-index: 2;
+  z-index: 3;  /* above grain (2), overlay (1), image (0) */
 }
 
 /*
@@ -169,7 +207,7 @@
   max-width: 12ch;
   will-change: transform;
   position: relative;
-  z-index: 2;              /* above grain ::after (z-index: 1) */
+  z-index: 3;              /* above overlay (1), grain (2) */
 }
 
 /* ─── Tagline + CTA ───────────────────────────────────────── */
@@ -188,17 +226,22 @@
 @media (max-width: 899px) {
   .caseEntry {
     grid-template-columns: 1fr;
-    row-gap: var(--space-4);
+    row-gap: var(--space-3);
   }
 
-  /*
-   * On mobile, number and meta sit inline at the top:
-   * "01     2022 — PRESENTE · AI · SPORTS..."
-   */
   .left {
     display: flex;
     align-items: baseline;
-    gap: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  /*
+   * Number: display-md (144px) is far too large for mobile.
+   * Reduce to a compact mono label — still shows hierarchy, doesn't overwhelm.
+   */
+  .number {
+    font-size: 36px !important;
+    line-height: 1;
   }
 
   .meta {
@@ -206,11 +249,19 @@
   }
 
   .caseEntry:not(:first-of-type) {
-    margin-block-start: var(--space-7);
+    margin-block-start: var(--space-6);
   }
 
   .visual .visualTitle {
     font-size: clamp(32px, 8vw, 56px);
+  }
+}
+
+/* ─── Small mobile (≤480px) ──────────────────────────────── */
+
+@media (max-width: 480px) {
+  .visual .visualTitle {
+    font-size: clamp(24px, 9vw, 48px);
   }
 }
 

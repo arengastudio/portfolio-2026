@@ -1,20 +1,91 @@
 /*
  * TrackRecord.module.css
- * Three-line career track used in the Home Hero.
+ * Career bullets in the Hero right panel.
  *
- * Year prefix decision: <span class={styles.year}> with font-family override
- * rather than Type variant="xs" inline.
- * Reason: variant="xs" sets font-size to --text-xs-size (12px), which is
- * smaller than the base line text (17px) — a jarring size mismatch mid-line.
- * The year should read at the SAME size as the rest of the line, just in
- * mono to signal "date / timestamp". font-family is the only override needed.
+ * Layout: each line is a flex row — year (mono, accent on hover) + text.
+ * Hover: the entire line shifts 6px right + border-left grows from 0 to 2px
+ * in accent color — creates a "bookmark" visual that signals interactivity
+ * without competing with the CTA buttons below.
+ *
+ * The border-left approach: border-left width transitions from 0 to 2px.
+ * padding-inline-start grows from 0 to var(--space-2) simultaneously to
+ * maintain text alignment as the border appears.
  */
+
+/* ─── List reset ──────────────────────────────────────────── */
+
+.track {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Individual line ─────────────────────────────────────── */
+
+.line {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding-block: 10px;
+  padding-inline-start: 0;
+  border-left: 0px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
+  transition:
+    transform       var(--duration-base) var(--ease-out),
+    border-left-width var(--duration-base) var(--ease-out),
+    padding-inline-start var(--duration-base) var(--ease-out);
+  cursor: default;
+}
+
+.line:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.line:hover {
+  transform: translateX(6px);
+  border-left-width: 2px;
+  padding-inline-start: var(--space-2);
+}
+
+/* ─── Year ────────────────────────────────────────────────── */
 
 .year {
   font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  flex-shrink: 0;
+  transition: color var(--duration-base) var(--ease-out);
 }
 
-/* Vertical rhythm between lines — spec: var(--space-2) */
-.line + .line {
-  margin-block-start: var(--space-2);
+.line:hover .year {
+  color: var(--color-accent);
+}
+
+/* ─── Text ────────────────────────────────────────────────── */
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--text-sm-size);
+  line-height: var(--text-sm-line-height);
+  color: var(--color-fg);
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    transition: none;
+  }
+
+  .line:hover {
+    transform: none;
+  }
+
+  .year {
+    transition: none;
+  }
 }

@@ -112,24 +112,44 @@
 
 /* ─── Per-element spacing ────────────────────────────────── */
 
+/*
+ * Name — secondary label. Mono xs with letter-spacing, muted.
+ * Sits above the role/positioning as a caption-level identifier.
+ * TextScramble handles the scramble-in animation.
+ */
 .name {
-  font-family: var(--font-display);
-  font-size: var(--text-xl-size);
-  font-weight: var(--text-xl-weight);
-  line-height: var(--text-xl-line-height);
-  letter-spacing: var(--text-xl-tracking);
-  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
   margin-block-end: var(--space-2);
+  text-transform: uppercase;
 }
 
+/*
+ * Role/positioning — the headline of the right panel.
+ * 2xl (40px display) gives it clear hierarchy over the name label.
+ */
 .positioning {
-  max-width: 32ch;
-  margin-block-end: var(--space-5);
+  max-width: 18ch;
+  margin-block-end: var(--space-1);
+  line-height: 1.1;
 }
 
+.location {
+  letter-spacing: 0.06em;
+  margin-block-end: var(--space-4);
+}
+
+/*
+ * Subhead — italic for personality. lg (20px) body font.
+ * The <em> inside gives semantic meaning; font-style here reinforces it.
+ */
 .subhead {
-  max-width: 40ch;
+  max-width: 38ch;
   margin-block-end: var(--space-5);
+  font-style: italic;
 }
 
 .trackWrapper {
@@ -161,16 +181,36 @@
 @media (max-width: 900px) {
   .leftPanel {
     grid-column: 1 / -1;
-    min-height: 60vh;
+    min-height: 50vh;
     padding-block: var(--space-5);
-    padding-inline-start: var(--grid-outer-margin);
+  }
+
+  .displayWord {
+    font-size: clamp(48px, 13vw, 160px);
   }
 
   .rightPanel {
     grid-column: 1 / -1;
     min-height: auto;
     justify-content: flex-start;
-    padding-block: var(--space-5) var(--space-7);
-    padding-inline-end: var(--grid-outer-margin);
+    padding-block: var(--space-4) var(--space-7);
+  }
+
+  .positioning {
+    font-size: var(--text-xl-size);
+    max-width: none;
+  }
+
+  .subhead {
+    font-size: var(--text-base-size);
+    max-width: none;
+  }
+}
+
+/* ─── Small mobile (≤480px) ──────────────────────────────── */
+
+@media (max-width: 480px) {
+  .displayWord {
+    font-size: clamp(40px, 14vw, 80px);
   }
 }

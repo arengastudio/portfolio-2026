@@ -43,21 +43,27 @@ const { number, title, year, tags, role, tagline, href, colorKey, image } = Astr
       HoverParallax gets wrapperClass={styles.visualContent} — a full-inset absolute
       div — so the title sits on top and shifts on mouse move.
     */}
-    <div class:list={[styles.visual, styles[colorKey]]}>
-      {image && (
-        <img
-          src={image}
-          alt=""
-          aria-hidden="true"
-          class={styles.visualImg}
-          loading="lazy"
-          decoding="async"
-        />
-      )}
-      <HoverParallax client:visible wrapperClass={styles.visualContent}>
-        <Type as="h3" variant="display-lg" class={styles.visualTitle}>{title}</Type>
-      </HoverParallax>
-    </div>
+    {/*
+      Visual block is also wrapped in <a> so clicking the image redirects.
+      aria-hidden + tabindex=-1: the CTA Link below is the accessible entry
+      point — this link is for mouse users who click the image.
+    */}
+    <a href={href} class={styles.visualLink} aria-hidden="true" tabindex="-1">
+      <div class:list={[styles.visual, styles[colorKey]]}>
+        {image && (
+          <img
+            src={image}
+            alt=""
+            class={styles.visualImg}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <HoverParallax client:visible wrapperClass={styles.visualContent}>
+          <Type as="h3" variant="display-lg" class={styles.visualTitle}>{title}</Type>
+        </HoverParallax>
+      </div>
+    </a>
     <Type as="p" variant="lg" class={styles.tagline}>{tagline}</Type>
     <Link href={href} variant="standalone" class={styles.cta}>VER CASO →</Link>
   </div>
