@@ -29,12 +29,13 @@
 /* ─── Headline ────────────────────────────────────────────── */
 
 /*
- * display-md (144px) — one word carries the entire section.
- * margin: 0 removes browser default <p> spacing.
- * margin-block-end space-3 (24px) closes tight against the bajada.
+ * Reduced from display-md (144px) by ~25% to 108px.
+ * Keeps the editorial weight without overwhelming the section.
  */
 .headline {
   margin: 0 0 var(--space-3);
+  font-size: 108px;
+  line-height: 0.9;
 }
 
 /* ─── Bajada ──────────────────────────────────────────────── */
@@ -68,6 +69,17 @@
  */
 .meta {
   letter-spacing: 0.05em;
+}
+
+/* ─── Metadata divider — between location/status and social links ─── */
+
+/*
+ * Pipe with generous inline padding creates clear visual break between
+ * the contextual info (location, availability) and the action links (social).
+ */
+.metaDivider {
+  padding-inline: 0.75em;
+  opacity: 0.3;
 }
 
 /* ─── AVAILABLE status with animated green dot ────────────── */
@@ -109,13 +121,8 @@
     grid-column: 1 / 5;
   }
 
-  /*
-   * display-md (144px) is nowrap by default. At 768px with 8vw margins the
-   * available width is ~646px — "Hablemos." at 144px exceeds that.
-   * Scale down fluid so the word stays on one line.
-   */
   .headline {
-    font-size: clamp(72px, 10vw, 144px);
+    font-size: clamp(54px, 8vw, 108px);
     white-space: normal;
   }
 }
@@ -133,7 +140,7 @@
   }
 
   .headline {
-    font-size: clamp(48px, 13vw, 96px);
+    font-size: clamp(36px, 11vw, 72px);
   }
 
   .email {

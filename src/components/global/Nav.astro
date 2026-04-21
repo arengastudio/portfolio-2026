@@ -32,7 +32,6 @@ const makeLink = (base: string) => isEN ? `/en${base}` : base;
 const links = [
   { href: makeLink('/work'),  label: 'work'  },
   { href: makeLink('/about'), label: 'about' },
-  { href: makeLink('/lab'),   label: 'lab'   },
   { href: makeLink('/stack'), label: 'stack' },
 ];
 
@@ -52,6 +51,14 @@ const isActive = (href: string) => currentPath.startsWith(href);
 
       {/* Left — brand links to locale home */}
       <a href={isEN ? '/en' : '/'} class={styles.brand} aria-label="Juan Cruz Luna — Inicio">
+        <img
+          src="/assets/LogoJuan.svg"
+          alt=""
+          class={styles.brandLogo}
+          width="24"
+          height="24"
+          aria-hidden="true"
+        />
         Juan Cruz Luna
       </a>
 

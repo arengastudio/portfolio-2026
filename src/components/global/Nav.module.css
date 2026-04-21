@@ -24,7 +24,15 @@
   height: var(--nav-height);
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
-  transition: transform var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-base) var(--ease-out),
+              background-color var(--duration-base) var(--ease-out),
+              backdrop-filter var(--duration-base) var(--ease-out);
+}
+
+.nav[data-scrolled] {
+  background: rgba(245, 242, 236, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /*
@@ -58,6 +66,9 @@
 /* ─── Brand ───────────────────────────────────────────────── */
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 400;
@@ -69,6 +80,14 @@
 
 .brand:hover {
   color: var(--color-accent);
+}
+
+.brandLogo {
+  display: block;
+  height: 24px;
+  width: auto;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 /* ─── Links ───────────────────────────────────────────────── */
@@ -105,10 +124,16 @@
 
 /* ─── Language switcher ───────────────────────────────────── */
 
+/*
+ * Pipe divider between nav links and lang toggle.
+ * border-left creates a subtle vertical rule as a visual separator.
+ */
 .langSwitch {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  padding-inline-start: var(--space-4);
+  border-left: 1px solid var(--color-border);
 }
 
 .langSep {
@@ -118,23 +143,28 @@
   user-select: none;
 }
 
+/*
+ * Toggle style: both labels use fg color, inactive at 40% opacity.
+ * Clearer active/inactive signal than color shift alone.
+ */
 .lang {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-decoration: none;
-  color: var(--color-muted);
-  transition: color var(--duration-base) var(--ease-out);
+  color: var(--color-fg);
+  opacity: 0.4;
+  transition: opacity var(--duration-base) var(--ease-out);
 }
 
 .lang:hover {
-  color: var(--color-fg);
+  opacity: 0.7;
 }
 
-/* Active language — full opacity, no underline */
+/* Active language — full opacity */
 .lang.langActive {
-  color: var(--color-fg);
+  opacity: 1;
 }
 
 /* ─── Mobile (<768px) ─────────────────────────────────────── */
@@ -154,5 +184,9 @@
 
   .links {
     gap: var(--space-3);
+  }
+
+  .langSwitch {
+    padding-inline-start: var(--space-3);
   }
 }

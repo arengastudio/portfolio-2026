@@ -1,22 +1,17 @@
 ---
 import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
-import Link from '../ui/Link.astro';
 import styles from './Footer.module.css';
 
-const year = new Date().getFullYear();
-
 /*
- * Activity grid — pseudo-random contribution graph, visually similar to GitHub.
+ * Activity grid — pseudo-random contribution graph.
  * Fixed seed (42) guarantees the same pattern on every render.
- * 24 cols × 7 rows — compact block that fits left of the stack on desktop.
- * 5 levels: 0 = empty, 1–4 = progressively more opaque accent color.
+ * 24 cols × 7 rows. 5 levels: 0 = empty, 1–4 = progressively more opaque.
  */
 const COLS = 24;
 const ROWS = 7;
-const LEVELS = 5; // 0–4
+const LEVELS = 5;
 
-// Simple seeded PRNG (mulberry32)
 function mulberry32(seed: number) {
   return function () {
     seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -31,51 +26,41 @@ const grid: number[][] = Array.from({ length: ROWS }, () =>
   Array.from({ length: COLS }, () => Math.floor(rand() * LEVELS))
 );
 
-// Opacity per level: 0 = near-zero, 1–4 = increasing
 const levelOpacity = [0.08, 0.28, 0.48, 0.70, 1.0];
 ---
 <footer class={styles.footer} data-dark-section="footer">
   <Container>
 
-    <div class={styles.row}>
+    <div class={styles.footerGrid}>
 
-      {/* Left — copyright */}
-      <Type as="span" variant="xs" color="muted" class={styles.copy}>
-        © {year} Juan Cruz Luna
-      </Type>
+      {/* ─── LEFT column — identity + tagline ─── */}
+      <div class={styles.leftCol}>
 
-      {/* Center — inline nav */}
-      <nav class={styles.nav} aria-label="Navegación del sitio">
-        <Link href="/work" variant="standalone">Work</Link>
-        <span class={styles.sep} aria-hidden="true">·</span>
-        <Link href="/about" variant="standalone">About</Link>
-        <span class={styles.sep} aria-hidden="true">·</span>
-        <Link href="/lab" variant="standalone">Lab</Link>
-        <span class={styles.sep} aria-hidden="true">·</span>
-        <Link href="/stack" variant="standalone">Stack</Link>
-        <span class={styles.sep} aria-hidden="true">·</span>
-        <Link href="/contact" variant="standalone">Contacto</Link>
-      </nav>
+        {/* Logo — white via filter (works for currentColor and hardcoded-fill SVGs) */}
+        <img
+          src="/assets/LogoJuan.svg"
+          alt="Juan Cruz Luna"
+          class={styles.footerLogo}
+          width="32"
+          height="32"
+        />
 
+        <Type as="p" variant="xs" color="muted" class={styles.tagline}>
+          Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.
+        </Type>
 
-    </div>
+        <Type as="p" variant="xs" color="muted" class={styles.thatsAll}>
+          <em>That's all.</em>
+        </Type>
 
-    {/* ─── Bottom strip: left col (activity + stack) / right col (tagline) ─── */}
-    {/*
-      Activity grid sits above the STACK label in the left column.
-      Both are inside .bottomLeft — no border between them, just gap.
-      Tagline occupies the right side of the same strip.
-    */}
-    <div class={styles.bottom}>
+      </div>
 
-      {/* Left: activity grid stacked above stack info */}
-      <div class={styles.bottomLeft}>
+      {/* ─── RIGHT column — activity + stack ─── */}
+      <div class={styles.rightCol}>
 
+        {/* Activity block */}
         <div class={styles.activityBlock} aria-hidden="true">
-          <div class={styles.activityMeta}>
-            <span class={styles.activityLabel}>ACTIVIDAD</span>
-            <span class={styles.activityLabel}>{year}</span>
-          </div>
+          <span class={styles.sectionLabel}>ACTIVIDAD</span>
           <div class={styles.activityGrid}>
             {grid.map((row) =>
               row.map((level, _colIdx) => (
@@ -88,30 +73,31 @@ const levelOpacity = [0.08, 0.28, 0.48, 0.70, 1.0];
           </div>
         </div>
 
+        {/* Stack block */}
         <div class={styles.stackBlock}>
-          <span class={styles.stackLabel}>STACK</span>
-          <Type as="p" variant="xs" color="muted" class={styles.colofon}>
-            Astro · Vercel · PP Formula · Neue Montreal · JBM
+          <span class={styles.sectionLabel}>STACK</span>
+          <Type as="p" variant="xs" color="muted" class={styles.stackList}>
+            Astro · Claude Code · Vercel ·{' '}
+            <a
+              href="https://pangrampangram.com/products/formula"
+              target="_blank"
+              rel="noopener noreferrer"
+              class={styles.fontLink}
+            >PP Formula</a>
+            {' · '}
+            <a
+              href="https://pangrampangram.com/products/neue-montreal"
+              target="_blank"
+              rel="noopener noreferrer"
+              class={styles.fontLink}
+            >Neue Montreal</a>
+            {' · '}JBM
           </Type>
         </div>
 
       </div>
 
-      {/* Right — made-in statement */}
-      <Type as="p" variant="xs" color="muted" class={styles.tagline}>
-        Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.
-      </Type>
-
     </div>
-
-    {/* ─── That's all. ─── */}
-    {/*
-      Miranda Priestly. Cinephiles smile.
-      Everyone else reads it as an elegant close.
-    */}
-    <Type as="p" variant="xs" color="muted" class={styles.thatsAll}>
-      That's all.
-    </Type>
 
   </Container>
 </footer>

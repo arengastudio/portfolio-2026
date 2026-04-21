@@ -33,11 +33,29 @@ const isHome = currentPath === '/' || currentPath === '/en';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/assets/LogoJuan.svg" />
     <title>{title}</title>
     <ViewTransitions />
+    {import.meta.env.DEV && <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>}
   </head>
   <body>
+    {/*
+      Language redirect — only on first visit to the root.
+      sessionStorage prevents re-triggering on subsequent navigations.
+      Non-Spanish browsers land on /en; Spanish stays at /.
+    */}
+    {lang === 'es' && (
+      <script is:inline>
+        if (!sessionStorage.getItem('lang-set')) {
+          sessionStorage.setItem('lang-set', 'true');
+          var lang = navigator.language || 'en';
+          if (!lang.startsWith('es') && window.location.pathname === '/') {
+            window.location.replace('/en');
+          }
+        }
+      </script>
+    )}
+
     {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
     <SmoothScroll client:load />
 

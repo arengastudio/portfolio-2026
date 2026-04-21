@@ -1,149 +1,98 @@
 /*
  * Footer.module.css
- * Footer — nav row + bottom strip (activity + stack / tagline).
+ * Two-column layout: left (identity) / right (activity + stack).
  *
- * Structure:
- * .row    — copyright left, nav right.
- * .bottom — two columns: .bottomLeft (activity grid above stack) / tagline.
- *           No internal border between activity grid and stack — just gap.
- * .thatsAll — right-aligned closing note, barely visible.
+ * Left col: logo → tagline → "That's all."
+ * Right col: ACTIVIDAD label + 24×7 grid → STACK label + tools list.
  *
- * Activity grid: 24 cols × 7 rows. Reduced from 52 — compact decorative block
- * that reads as a contribution graph without dominating the footer.
+ * Desktop: two equal columns, top-aligned.
+ * Mobile: stacked vertically, left col first.
  */
 
 /* ─── Footer ──────────────────────────────────────────────── */
 
 .footer {
   border-top: 1px solid var(--color-border);
-  padding-block: var(--space-4);
+  padding-block: var(--space-5);
 }
 
-/* ─── Single row ──────────────────────────────────────────── */
+/* ─── Two-column grid ─────────────────────────────────────── */
 
-/*
- * Two columns: copyright left (1fr = fills remaining space), nav right (auto).
- */
-.row {
+.footerGrid {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
   gap: var(--grid-gutter);
+  align-items: start;
 }
 
-/* ─── Copyright ───────────────────────────────────────────── */
+/* ─── LEFT column ─────────────────────────────────────────── */
 
-.copy {
-  font-family: var(--font-mono);
-  letter-spacing: 0.05em;
-}
-
-/* ─── Inline nav ──────────────────────────────────────────── */
-
-/*
- * :global(a) targets <a> elements inside .nav without fighting the Link
- * component's scoped class names. text-decoration: none !important overrides
- * Link's .standalone underline to prevent double-underline with ::after line.
- */
-.nav {
-  display: flex;
-  align-items: center;
-  font-size: var(--text-xs-size);
-  font-family: var(--font-mono);
-  color: var(--color-muted);
-  letter-spacing: 0.05em;
-}
-
-.nav :global(a) {
-  text-decoration: none !important;
-  position: relative;
-  color: var(--color-muted);
-}
-
-.nav :global(a)::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--color-fg);
-  transition: width var(--duration-base) var(--ease-out);
-}
-
-.nav :global(a):hover {
-  color: var(--color-fg);
-}
-
-.nav :global(a):hover::after {
-  width: 100%;
-}
-
-.sep {
-  color: var(--color-muted);
-  padding-inline: 0.4em;
-  user-select: none;
-}
-
-/* ─── Bottom strip ────────────────────────────────────────── */
-
-/*
- * Two columns: .bottomLeft (activity + stack) / tagline.
- * border-top separates from the nav row.
- * align-items: flex-start so both sides top-align (activity grid is taller).
- */
-.bottom {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-5);
-  border-top: 1px solid var(--color-border);
-  padding-block-start: var(--space-3);
-  margin-block-start: var(--space-4);
-}
-
-/* ─── Left column: activity grid above stack ──────────────── */
-
-/*
- * Flex column — activity grid sits above STACK label + tools.
- * No border between them: gap-only separation (var(--space-3) = 24px).
- */
-.bottomLeft {
+.leftCol {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  flex-shrink: 0;
 }
-
-/* ─── Activity grid ───────────────────────────────────────── */
 
 /*
- * Symbolic contribution graph — 24 cols × 7 rows.
- * Reduced from 52 — fits left of the stack without overflow.
- * Decorative only (aria-hidden on wrapper).
+ * Logo in dark section context: filter inverts a black SVG to white.
+ * Works for SVGs with hardcoded fill="black" and currentColor alike.
+ * opacity: 0.7 — present but not competing with the tagline copy.
  */
-.activityBlock {
-  /* no border — contained inside .bottomLeft with gap */
+.footerLogo {
+  display: block;
+  height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
 }
 
-.activityMeta {
+.tagline {
+  margin: 0;
+  max-width: 38ch;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/*
+ * "That's all." — barely there closing note.
+ * font-style: italic is the one italic moment on the site.
+ * opacity: 0.4 — noticed only if you're looking.
+ */
+.thatsAll {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.05em;
+  opacity: 0.4;
+}
+
+/* ─── RIGHT column ────────────────────────────────────────── */
+
+.rightCol {
   display: flex;
-  justify-content: space-between;
-  margin-block-end: var(--space-2);
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
-.activityLabel {
+/* Shared label style for ACTIVIDAD and STACK headings */
+.sectionLabel {
+  display: block;
   font-family: var(--font-mono);
   font-size: var(--text-xs-size);
   letter-spacing: 0.08em;
   color: var(--color-muted);
+  margin-block-end: var(--space-2);
+}
+
+/* ─── Activity grid ───────────────────────────────────────── */
+
+.activityBlock {
+  /* contained by rightCol gap */
 }
 
 /*
  * 24 columns × 10px + 23 × 2px gap = 286px total width.
- * No overflow-x needed at this size.
  */
 .activityGrid {
   display: grid;
@@ -162,81 +111,43 @@
 
 /* ─── Stack block ─────────────────────────────────────────── */
 
-/* Left-aligned — sits in the left column below the activity grid */
 .stackBlock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  /* contained by rightCol gap */
 }
 
-.stackLabel {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs-size);
-  letter-spacing: 0.08em;
-  color: var(--color-muted);
-}
-
-.colofon {
+.stackList {
   margin: 0;
   font-family: var(--font-mono);
   letter-spacing: 0.05em;
 }
-
-/* ─── Tagline ─────────────────────────────────────────────── */
-
-/* Right side of .bottom — made-in statement */
-.tagline {
-  margin: 0;
-  max-width: 36ch;
-  letter-spacing: 0.02em;
-  text-align: right;
-  align-self: flex-end;   /* anchor to bottom of the strip */
-}
-
-/* ─── That's all. ─────────────────────────────────────────── */
 
 /*
- * Last element in the footer. Right-aligned, opacity below the muted
- * baseline — barely there, noticed only if you're looking.
- * font-style: italic — the one italic moment on the site.
+ * Font links — inherit footer text color, underline on hover.
+ * Subtle so they don't visually compete with the stack items.
  */
-.thatsAll {
-  grid-column: 1 / -1;
-  text-align: right;
-  margin: 0;
-  margin-block-start: var(--space-3);
-  font-family: var(--font-mono);
-  letter-spacing: 0.05em;
-  opacity: 0.4;
-  font-style: italic;
+.fontLink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  opacity: 0.7;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.fontLink:hover {
+  opacity: 1;
+  text-decoration: none;
 }
 
 /* ─── Mobile (≤767px) ─────────────────────────────────────── */
 
 @media (max-width: 767px) {
-  .row {
+  .footerGrid {
     grid-template-columns: 1fr;
-    gap: var(--space-3);
+    gap: var(--space-5);
   }
 
-  /* Stack .bottom vertically on mobile */
-  .bottom {
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .bottomLeft {
-    gap: var(--space-3);
-  }
-
-  /* Mobile activity grid: 12 cols × 7 rows */
+  /* Mobile activity grid: 12 cols × 7 rows — fits within single column */
   .activityGrid {
     grid-template-columns: repeat(12, 10px);
-  }
-
-  .tagline {
-    text-align: left;
-    align-self: auto;
-    max-width: 100%;
   }
 }

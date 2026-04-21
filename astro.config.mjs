@@ -12,6 +12,10 @@ export default defineConfig({
     locales: ['es', 'en'],
     routing: { prefixDefaultLocale: false }
   },
+  redirects: {
+    '/lab':    '/',
+    '/en/lab': '/en',
+  },
   output: 'static',
   adapter: vercel({ webAnalytics: { enabled: true } })
 });

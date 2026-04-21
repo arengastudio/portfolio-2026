@@ -35,6 +35,14 @@ export default function NavScroll({ isHome }: Props) {
     const hide = () => nav.setAttribute('data-nav-hidden', '');
     const show = () => nav.removeAttribute('data-nav-hidden');
 
+    const setScrolled = (scrolled: boolean) => {
+      if (scrolled) {
+        nav.setAttribute('data-scrolled', '');
+      } else {
+        nav.removeAttribute('data-scrolled');
+      }
+    };
+
     if (isHome) {
       /*
        * Home: hide after hero scrolls out.
@@ -46,7 +54,9 @@ export default function NavScroll({ isHome }: Props) {
         hero ? hero.offsetHeight : Math.round(window.innerHeight * 0.85);
 
       const onScroll = () => {
-        if (window.scrollY > getThreshold()) {
+        const y = window.scrollY;
+        setScrolled(y > 10);
+        if (y > getThreshold()) {
           hide();
         } else {
           show();
@@ -62,9 +72,11 @@ export default function NavScroll({ isHome }: Props) {
        * Hide on down, show on up. Deadzone of 80px prevents trigger at top.
        */
       let lastY = window.scrollY;
+      setScrolled(lastY > 10);
 
       const onScroll = () => {
         const y = window.scrollY;
+        setScrolled(y > 10);
         if (y > lastY && y > 80) {
           hide();
         } else {
