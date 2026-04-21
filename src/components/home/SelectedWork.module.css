@@ -112,6 +112,126 @@
   letter-spacing: var(--text-xl-tracking);
 }
 
+/* ─── Archive preview block ──────────────────────────────── */
+
+/*
+ * Mini archive section below the 3 featured cases.
+ * Replaces the single "VER ARCHIVO COMPLETO →" link with a titled block
+ * showing 3 more projects in the same list style as /archivo, followed by
+ * the full-archive CTA.
+ */
+.archiveBlock {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--color-border);
+  padding-block-start: var(--space-7);
+  padding-block-end: var(--space-4);
+}
+
+/*
+ * Same flex + size-contrast pattern as .sectionHeader: huge label left,
+ * quiet eyebrow right. Margin-bottom matches .sectionHeader.
+ */
+.archiveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-block-end: var(--space-6);
+}
+
+.arcHeading {
+  margin: 0;
+}
+
+.arcEyebrow {
+  letter-spacing: 0.05em;
+  padding-block-end: 0.3em;
+}
+
+/* ─── Archive list ────────────────────────────────────────── */
+
+/*
+ * Matches WorkArchive list style: full-width ol, items in a horizontal row
+ * with columns for number, name, year, tags, arrow.
+ * Borders between rows echo the /archivo page.
+ */
+.arcList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.arcRow {
+  border-top: 1px solid var(--color-border);
+}
+
+.arcRow:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.arcRowInner {
+  display: grid;
+  grid-template-columns: 3ch 1fr auto auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  text-decoration: none;
+  color: var(--color-fg);
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+a.arcRowInner:hover {
+  opacity: 0.6;
+}
+
+.arcNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.arcName {
+  font-family: var(--font-display);
+  font-size: var(--text-lg-size);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arcYear {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.arcTags {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+.arcArrow {
+  font-size: var(--text-sm-size);
+  opacity: 0.5;
+}
+
+/* ─── View archive CTA ────────────────────────────────────── */
+
+.viewArchive {
+  display: block;
+  margin-block-start: var(--space-5);
+  font-size: var(--text-xl-size);
+  font-family: var(--font-display);
+  font-weight: var(--text-xl-weight);
+  line-height: var(--text-xl-line-height);
+  letter-spacing: var(--text-xl-tracking);
+}
+
 /* ─── Tablet (≤1023px) ────────────────────────────────────── */
 
 @media (max-width: 1023px) {
@@ -128,8 +248,15 @@
     white-space: normal;
   }
 
-  .viewArchive {
-    grid-column: 1 / -1;
+  .archiveHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .arcHeading {
+    font-size: clamp(80px, 10vw, 144px);
+    white-space: normal;
   }
 }
 
@@ -202,9 +329,22 @@
     margin-block-start: 0;
   }
 
+  .arcRowInner {
+    grid-template-columns: 3ch 1fr;
+    row-gap: var(--space-1);
+  }
+
+  .arcYear,
+  .arcTags,
+  .arcArrow {
+    display: none;
+  }
+
+  .arcHeading {
+    font-size: clamp(56px, 14vw, 144px);
+  }
+
   .viewArchive {
-    padding-block-start: var(--space-6);
     font-size: var(--text-lg-size);
-    grid-column: 1 / -1;
   }
 }

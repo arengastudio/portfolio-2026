@@ -49,11 +49,21 @@
 
 /* ─── Activity links ──────────────────────────────────────── */
 
+/*
+ * .currently .activities has specificity (0,2,0) — beats the Container's
+ * `.container > * { grid-column: 1/-1 }` rule (specificity 0,1,0).
+ * This ensures the activities nav stays at columns 2/7, aligned with
+ * the metaRow eyebrow above it.
+ */
 .activities {
   grid-column: 2 / 7;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+}
+
+.currently .activities {
+  grid-column: 2 / 7;
 }
 
 /*

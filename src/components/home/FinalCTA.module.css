@@ -70,6 +70,38 @@
   letter-spacing: 0.05em;
 }
 
+/* ─── AVAILABLE status with animated green dot ────────────── */
+
+.available {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/*
+ * 8px green dot — signals real-time availability.
+ * Pulse animation: box-shadow expands and fades (not scale) to avoid
+ * layout shift. The glow color matches the dot's green (#22c55e).
+ */
+.availableDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50%       { opacity: 0.8; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .availableDot { animation: none; }
+}
+
 /* ─── Tablet (≤1023px) ────────────────────────────────────── */
 
 @media (max-width: 1023px) {

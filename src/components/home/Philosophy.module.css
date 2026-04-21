@@ -34,7 +34,7 @@
 
 .principle {
   position: relative;   /* stacking context for .bgNumber */
-  overflow: hidden;     /* clips bgNumber so it doesn't bleed into next principle */
+  overflow: visible;    /* allow bgNumber to show outside the text bounds */
 }
 
 /* ─── Oversized background number ────────────────────────── */

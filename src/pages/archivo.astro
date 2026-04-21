@@ -12,53 +12,7 @@ import ScrollReveal from '../components/motion/ScrollReveal.tsx';
 import WorkArchive from '../components/work/WorkArchive.tsx';
 import Footer from '../components/global/Footer.astro';
 import styles from './archivo.module.css';
-
-const works = [
-  {
-    number: '01',
-    title: 'Arenga Studio',
-    year: '2024 — Presente',
-    tags: ['Studio', 'Fundador', 'End-to-end'],
-    description: 'Co-fundé un estudio digital. 8 productos entregados en 18 meses.',
-    image: '/assets/cases/arenga/cover.png',
-    href: '/work/arenga',
-  },
-  {
-    number: '02',
-    title: 'SparkClub',
-    year: '2025',
-    tags: ['AI', 'Employee Engagement', 'MVP'],
-    description: 'MVP de plataforma de engagement con IA. Prototipo para inversores en 6 semanas.',
-    image: '/assets/cases/sparkclub/cover.png',
-    href: '/work/sparkclub',
-  },
-  {
-    number: '03',
-    title: 'Garantear',
-    year: '2025',
-    tags: ['Fintech', 'End-to-end', 'Brand'],
-    description: 'End-to-end design para plataforma de garantías de alquiler. Abandono de onboarding de 61% a 21%.',
-    image: '/assets/cases/garantear/cover.jpg',
-    href: '/work/garantear',
-  },
-  {
-    number: '04',
-    title: 'EEVA Studios',
-    year: '2025',
-    tags: ['E-commerce', 'Digital', 'Identidad'],
-    description: 'Identidad digital y design system para estudio de experiencias.',
-    image: '/assets/cases/arenga/03.png',
-  },
-  {
-    number: '05',
-    title: 'Librodepases',
-    year: '2022 — Presente',
-    tags: ['AI', 'Sports', 'SaaS', 'Design System'],
-    description: 'Plataforma AI para scouting de fútbol. Product Design Lead durante 3 años.',
-    image: '/assets/cases/librodepases/cover.png',
-    href: '/work/librodepases',
-  },
-];
+import { works } from '../data/works';
 ---
 <BaseLayout
   title="Archivo — Juan Cruz Luna"

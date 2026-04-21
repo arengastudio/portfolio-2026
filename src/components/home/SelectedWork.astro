@@ -5,37 +5,41 @@ import Link from '../ui/Link.astro';
 import CaseEntry from './CaseEntry.astro';
 import ScrollReveal from '../motion/ScrollReveal.tsx';
 import styles from './SelectedWork.module.css';
+import { works } from '../../data/works';
+
+// Items 04, 05, 06 shown in the home archive preview (after the 3 featured cases)
+const archiveItems = works.slice(3, 6);
 
 const cases = [
   {
     number: '01',
     title: 'Librodepases',
-    year: '2022 — PRESENTE',
-    tags: 'AI · SPORTS · SAAS',
+    year: '2022 — 2025',
+    tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
     role: 'PRODUCT DESIGN LEAD',
-    tagline: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años.',
+    tagline: 'Tres años liderando diseño en una plataforma que centraliza datos, video e IA para que los equipos de scouting de fútbol tomen mejores decisiones. De interfaz sin sistema a producto con design system propio.',
     href: '/work/librodepases',
     colorKey: 'accent' as const,
     image: '/assets/cases/librodepases/01.png',
   },
   {
     number: '02',
-    title: 'Arenga Studio',
-    year: '2024 — PRESENTE',
-    tags: 'FOUNDER · STUDIO · END-TO-END',
-    role: 'CO-FOUNDER & PRODUCT DESIGNER',
-    tagline: 'Co-fundé un estudio digital. 8 productos entregados en 18 meses.',
-    href: '/work/arenga',
+    title: 'SparkClub',
+    year: '2025',
+    tags: 'AI · EMPLOYEE ENGAGEMENT · MVP · END-TO-END',
+    role: 'PRODUCT DESIGNER',
+    tagline: 'MVP end-to-end para una plataforma de employee engagement con IA. Tres roles de usuario, design system desde cero, y prototipo interactivo listo para pitch a inversores. De brief a prototipo navegable en 6 semanas.',
+    href: '/work/sparkclub',
     colorKey: 'fg' as const,
-    image: '/assets/cases/arenga/cover.png',
+    image: '/assets/cases/sparkclub/cover.png',
   },
   {
     number: '03',
     title: 'Garantear',
     year: '2025',
-    tags: 'FINTECH · END-TO-END',
+    tags: 'FINTECH · BRAND',
     role: 'END-TO-END DESIGN',
-    tagline: 'End-to-end product design para una plataforma fintech.',
+    tagline: 'End-to-end product design para una fintech de garantías de alquiler en Argentina. Desde identidad visual hasta flujos de onboarding, firma digital y panel para inmobiliarias.',
     href: '/work/garantear',
     colorKey: 'dark' as const,
     image: '/assets/cases/garantear/01.png',
@@ -49,7 +53,7 @@ const cases = [
     <ScrollReveal client:load variant="clip-up" duration={1.0}>
       <div class={styles.sectionHeader}>
         <Type as="h2" variant="display-md" class={styles.sectionTitle}>CASES.</Type>
-        <Type as="p" variant="xs" color="muted" class={styles.sectionEyebrow}>SELECTED WORK · 2022–2025</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.sectionEyebrow}>SELECTED WORK · 2024–2026</Type>
       </div>
     </ScrollReveal>
 
@@ -89,11 +93,44 @@ const cases = [
       </ScrollReveal>
     </div>
 
-    {/* ─── Archive link ─── */}
+    {/* ─── Archive preview ─── */}
+    {/*
+      Three projects from the archive (04–06) shown below the featured cases.
+      Same list style as /archivo, data shared from src/data/works.ts.
+    */}
     <ScrollReveal client:load variant="fade">
-      <Link href="/archivo" variant="standalone" class={styles.viewArchive}>
-        VER ARCHIVO COMPLETO →
-      </Link>
+      <div class={styles.archiveBlock}>
+
+        <div class={styles.archiveHeader}>
+          <Type as="h2" variant="display-md" class={styles.arcHeading}>ARCHIVO.</Type>
+          <Type as="p" variant="xs" color="muted" class={styles.arcEyebrow}>TODOS LOS PROYECTOS · 2017–2026</Type>
+        </div>
+
+        <ol class={styles.arcList}>
+          {archiveItems.map((item) => {
+            const Tag = item.href ? 'a' : 'span';
+            return (
+              <li class={styles.arcRow}>
+                <Tag
+                  {...(item.href ? { href: item.href } : {})}
+                  class={styles.arcRowInner}
+                >
+                  <span class={styles.arcNumber}>{item.number}</span>
+                  <span class={styles.arcName}>{item.title}</span>
+                  <span class={styles.arcYear}>{item.year}</span>
+                  <span class={styles.arcTags}>{item.tags.join(' · ')}</span>
+                  {item.href && <span class={styles.arcArrow} aria-hidden="true">→</span>}
+                </Tag>
+              </li>
+            );
+          })}
+        </ol>
+
+        <Link href="/archivo" variant="standalone" class={styles.viewArchive}>
+          VER ARCHIVO COMPLETO →
+        </Link>
+
+      </div>
     </ScrollReveal>
 
   </Container>

@@ -165,6 +165,17 @@
   align-items: center;
 }
 
+/* ─── Beat Container's default .container > * { grid-column: 1/-1 } ─── */
+
+/*
+ * Container.module.css sets `grid-column: 1/-1` for all direct DOM children.
+ * Specificity (0,1,0) ties with the panel rules above — tie goes to last-in-
+ * stylesheet, which is Container when it's processed after Hero.
+ * Using the ancestor .hero gives specificity (0,2,0), always wins.
+ */
+.hero .leftPanel  { grid-column: 1 / 5; }
+.hero .rightPanel { grid-column: 5 / 9; }
+
 /* ─── Tablet (Container collapses to 4-col at ≤1023px) ───── */
 
 @media (max-width: 1023px) and (min-width: 901px) {
@@ -174,6 +185,9 @@
    */
   .leftPanel  { grid-column: 1 / 3; }
   .rightPanel { grid-column: 3 / 5; }
+  /* Higher-specificity overrides for tablet (same reasoning as above) */
+  .hero .leftPanel  { grid-column: 1 / 3; }
+  .hero .rightPanel { grid-column: 3 / 5; }
 }
 
 /* ─── Mobile (≤900px) ────────────────────────────────────── */

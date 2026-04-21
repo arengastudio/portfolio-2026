@@ -32,7 +32,7 @@ import styles from './FinalCTA.module.css';
 
       {/* metadata row — location · status · social in xs mono muted */}
       <Type as="p" variant="xs" color="muted" class={styles.meta}>
-        BUENOS AIRES · AVAILABLE ·{' '}
+        BUENOS AIRES · <span class={styles.available}><span class={styles.availableDot} aria-hidden="true"></span>AVAILABLE</span> ·{' '}
         <Link href="https://www.linkedin.com/in/juan-cruz-luna/" variant="standalone">LinkedIn</Link>
         {' · '}
         <Link href="https://github.com/juancrluna" variant="standalone">GitHub</Link>

@@ -34,6 +34,13 @@ import styles from './AreFirst.module.css';
 
       <ScrollReveal client:load variant="fade-up" delay={0.15}>
         <div class={styles.right}>
+          {/*
+            Arenga wordmark placeholder — no standalone logo asset available yet.
+            Rendered as display text in accent color. Replace with <img> tag
+            once a proper SVG/PNG wordmark exists at /assets/arenga/wordmark.svg.
+            TODO(juan): swap for real logo asset when available.
+          */}
+          <p class={styles.logoMark} aria-hidden="true">ARENGA</p>
           <Type as="p" variant="lg" class={styles.description}>
             Arenga Studio diseña y construye productos digitales para startups y empresas que quieren moverse rápido. MVP, productos escalables, sistemas de diseño — de la estrategia a la implementación.
           </Type>

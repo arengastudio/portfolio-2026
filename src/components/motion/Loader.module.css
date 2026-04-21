@@ -45,9 +45,14 @@
  * overflow: hidden clips the translateY reveal — the name starts at
  * y: 115% (below the container bounds, invisible) and slides up into view.
  * This is the same "text rising from below" pattern used in HeroWords.
+ *
+ * padding-top: gives breathing room for PP Formula's cap-height ascenders.
+ * With line-height: 0.9 the line box is tighter than the visual letterform —
+ * without padding the top few pixels of tall caps (J, U, A…) get clipped.
  */
 .nameWrap {
   overflow: hidden;
+  padding-top: 0.12em;
 }
 
 /* ─── Display name ────────────────────────────────────────── */
