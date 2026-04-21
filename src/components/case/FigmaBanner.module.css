@@ -1,0 +1,122 @@
+/*
+ * FigmaBanner.module.css
+ * Full-width accent section — end of case study, before footer.
+ *
+ * Background: --color-accent (blue-violet). Text and borders use --color-bg (cream)
+ * to invert the site palette and signal a visual break.
+ *
+ * Two-column grid on desktop: label + bajada on the left, CTA link on the right.
+ * Stacks to single column on mobile with CTA below.
+ *
+ * CTA button: outlined (border cream), 0 border-radius (brutalist rule).
+ * Hover: fills cream, text flips to accent.
+ */
+
+/* ─── Banner ──────────────────────────────────────────────── */
+
+.banner {
+  background-color: var(--color-accent);
+  padding-block: var(--space-7);
+}
+
+/* ─── Inner wrapper (mirrors Container spacing) ───────────── */
+
+.inner {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-outer-margin);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* ─── Left: label + bajada ────────────────────────────────── */
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/*
+ * Label in display type — same scale as section headers (2xl).
+ * 40px is legible at a glance without being overwhelming in a banner context.
+ */
+.label {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl-size);
+  font-weight: var(--text-2xl-weight);
+  line-height: var(--text-2xl-line-height);
+  letter-spacing: var(--text-2xl-tracking);
+  color: var(--color-bg);
+  margin: 0;
+}
+
+/*
+ * Bajada in mono — describes what's inside the link.
+ * Opacity 0.65 keeps it secondary without disappearing on the accent bg.
+ */
+.bajada {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs-size);
+  letter-spacing: 0.05em;
+  /* cream at 65% opacity — readable against accent without full weight */
+  color: rgba(245, 242, 236, 0.65);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* ─── CTA link ────────────────────────────────────────────── */
+
+/*
+ * Outlined button: cream border + cream text on accent bg.
+ * border-radius: 0 — brutalist rule, no exceptions on CTA elements.
+ * Hover: fill cream, text flips to accent. Duration matches --duration-base.
+ */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border: 1.5px solid var(--color-bg);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: var(--text-sm-size);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color           var(--duration-base) var(--ease-out);
+}
+
+.cta:hover {
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .banner {
+    padding-block: var(--space-5);
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .label {
+    font-size: var(--text-xl-size);
+    letter-spacing: var(--text-xl-tracking);
+  }
+
+  /* Full-width CTA on mobile */
+  .cta {
+    justify-content: center;
+    width: 100%;
+  }
+}

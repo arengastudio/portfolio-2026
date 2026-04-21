@@ -1,7 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
-import CountUp from '../motion/CountUp.tsx';
 import styles from './TLDR.module.css';
 
 export interface Props {
@@ -13,18 +12,13 @@ export interface Props {
   tags: string[];
   outcome: string;
   /**
-   * Optional key metrics — rendered as large CountUp numbers above the outcome.
-   * Each metric: label (uppercase mono), numeric value, optional prefix/suffix.
+   * Optional qualitative impact bullets — rendered below the metadata grid.
+   * Short statements, no percentages or specific figures.
    */
-  metrics?: Array<{
-    label: string;
-    value: number;
-    prefix?: string;
-    suffix?: string;
-  }>;
+  bullets?: string[];
 }
 
-const { client, role, team, timeframe, platforms, tags, outcome, metrics } = Astro.props;
+const { client, role, team, timeframe, platforms, tags, outcome, bullets } = Astro.props;
 ---
 <section class={styles.tldr} aria-label="Resumen del caso">
   <Container>
@@ -68,29 +62,21 @@ const { client, role, team, timeframe, platforms, tags, outcome, metrics } = Ast
 
     </div>
 
-    {/* ─── Key metrics (CountUp) ─── */}
+    {/* ─── Impact bullets ─── */}
     {/*
-      Visible only when `metrics` is present in the case frontmatter.
-      CountUp is client:visible — hydrates when metric enters the viewport,
-      then counts from 0 to value. Large display numbers make the impact
-      data feel earned rather than declared.
+      Visible only when `bullets` is present in the case frontmatter.
+      Short qualitative statements — no percentages, no invented figures.
+      Each bullet has an accent dash prefix and plain base-size body text.
     */}
-    {metrics && metrics.length > 0 && (
-      <div class={styles.metrics}>
-        {metrics.map((m) => (
-          <div class={styles.metric}>
-            <Type as="p" variant="xs" color="muted" class={styles.metricLabel}>{m.label}</Type>
-            <div class={styles.metricValue}>
-              <CountUp
-                client:visible
-                value={m.value}
-                prefix={m.prefix}
-                suffix={m.suffix}
-              />
-            </div>
-          </div>
+    {bullets && bullets.length > 0 && (
+      <ul class={styles.bullets}>
+        {bullets.map((bullet) => (
+          <li class={styles.bullet}>
+            <span class={styles.bulletDash} aria-hidden="true">—</span>
+            <Type as="span" variant="base" class={styles.bulletText}>{bullet}</Type>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
 
     {/* ─── Outcome ─── */}

@@ -41,7 +41,7 @@ import styles from './Currently.module.css';
     <ScrollReveal client:load variant="fade" delay={0.3}>
       <div class={styles.clockWrapper}>
         <span class={styles.clock}>
-          <LiveClock client:load />
+          <LiveClock client:only="react" />
         </span>
       </div>
     </ScrollReveal>

@@ -69,6 +69,10 @@
  * Replaces the ring while active — ring hides via GSAP autoAlpha.
  * z-index: 9001 — above ring (9000) so it renders on top.
  * Scale and autoAlpha are GSAP-managed (initial state set in useEffect).
+ *
+ * visibility: hidden as CSS default prevents the label from flashing
+ * visible at top-left corner before GSAP runs gsap.set(label, { autoAlpha: 0 }).
+ * GSAP's autoAlpha animation overrides this via inline style.
  */
 .label {
   position: fixed;
@@ -84,6 +88,7 @@
   pointer-events: none;
   z-index: 9001;
   will-change: transform;
+  visibility: hidden;
 }
 
 .labelText {

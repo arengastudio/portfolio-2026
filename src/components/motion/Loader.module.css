@@ -100,6 +100,8 @@
   opacity: 0.28;
   user-select: none;
   text-transform: uppercase;
+  /* flex: 1 ensures label expands to push counter to the right edge */
+  flex: 1;
 }
 
 /*

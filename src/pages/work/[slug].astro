@@ -7,6 +7,7 @@ import Type from '../../components/ui/Type.astro';
 import Link from '../../components/ui/Link.astro';
 import CaseHero from '../../components/case/CaseHero.astro';
 import TLDR from '../../components/case/TLDR.astro';
+import FigmaBanner from '../../components/case/FigmaBanner.astro';
 import Footer from '../../components/global/Footer.astro';
 import ReadingProgress from '../../components/motion/ReadingProgress.tsx';
 import CaseHeroParallax from '../../components/motion/CaseHeroParallax.tsx';
@@ -34,7 +35,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, coverImage, figmaDeepDive, metrics } = entry.data;
+const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, coverImage, figmaDeepDive, bullets, figmaBannerLabel, figmaBannerUrl } = entry.data;
 ---
 <BaseLayout
   title={`${title} — Juan Cruz Luna`}
@@ -64,7 +65,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
     platforms={platforms}
     tags={tags}
     outcome={outcome}
-    metrics={metrics}
+    bullets={bullets}
   />
 
   {/* ─── Blocks 3–9: MDX prose body ─── */}
@@ -83,6 +84,11 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
       </div>
     )}
   </Container>
+
+  {/* ─── Figma / Proto banner ─── */}
+  {figmaBannerLabel && (
+    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} />
+  )}
 
   <Footer />
 </BaseLayout>

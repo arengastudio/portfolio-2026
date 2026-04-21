@@ -23,16 +23,18 @@ const cases = defineCollection({
     /** Path to the hero cover image (relative to /public). Replaces the colored placeholder. */
     coverImage: z.string().optional(),
     /**
-     * Key metrics shown in the TLDR section with CountUp animation.
-     * Each metric: label (uppercase mono), numeric value to count to,
-     * optional prefix (e.g. '−') and suffix (e.g. '%', 'min').
+     * Qualitative impact bullets shown in the TLDR section.
+     * Short statements without percentages or specific figures.
      */
-    metrics: z.array(z.object({
-      label:  z.string(),
-      value:  z.number(),
-      prefix: z.string().optional(),
-      suffix: z.string().optional(),
-    })).optional(),
+    bullets: z.array(z.string()).optional(),
+    /** Label for the Figma/proto banner at the end of the case (e.g. 'Ver workbook'). */
+    figmaBannerLabel: z.string().optional(),
+    /**
+     * URL for the Figma/proto banner.
+     * Must be a valid https:// URL or the '#' placeholder.
+     * Defaults to '#' in [slug].astro when not set.
+     */
+    figmaBannerUrl: z.union([z.literal('#'), z.string().url()]).optional(),
   }),
 });
 

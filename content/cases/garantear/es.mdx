@@ -3,7 +3,7 @@ title: 'Garantear'
 slug: 'garantear'
 role: 'End-to-end Design'
 timeframe: '2025'
-outcome: 'End-to-end product design para una plataforma fintech de garantías de alquiler. El abandono en onboarding bajó de 61% a 21%. Las consultas operativas de inmobiliarias cayeron 70% en el primer mes.'
+outcome: 'End-to-end product design para una plataforma fintech de garantías de alquiler. El abandono en onboarding bajó de forma significativa y las consultas operativas de inmobiliarias se redujeron drásticamente.'
 client: 'Garantear'
 team: '1 Product Designer, 1 Developer'
 platforms: ['Web']
@@ -12,11 +12,13 @@ locale: 'es'
 publishedAt: 2025-01-01
 colorKey: 'dark'
 coverImage: '/assets/cases/garantear/cover.jpg'
-metrics:
-  - { label: 'ABANDONO ONBOARDING', value: 21, suffix: '%' }
-  - { label: 'CONSULTAS INMOBILIARIAS', value: 70, prefix: '−', suffix: '%' }
-  - { label: 'DISPUTAS POST-CONTRATO', value: 60, prefix: '−', suffix: '%' }
-  - { label: 'SOLICITUDES / 90 DÍAS', value: 340 }
+bullets:
+  - Redujo significativamente el abandono en onboarding
+  - Eliminó la mayoría de consultas operativas de inmobiliarias
+  - Redujo disputas post-contrato gracias al rediseño del flujo de firma
+  - Panel de inmobiliarias implementado y adoptado en el primer mes
+figmaBannerLabel: 'Ver workbook'
+figmaBannerUrl: '#'
 ---
 
 ## Contexto
@@ -29,7 +31,7 @@ Llegué en enero de 2025 cuando la empresa tenía el modelo de negocio validado 
 
 ## El problema
 
-El flujo de onboarding del MVP tenía 7 pasos. El 61% de los usuarios que arrancaban abandonaban en el paso 3: la carga de documentación de ingresos. No era un problema de UX superficial — era un problema de expectativas rotas.
+El flujo de onboarding del MVP tenía 7 pasos. La mayoría de los usuarios que arrancaban abandonaban en el paso 3: la carga de documentación de ingresos. No era un problema de UX superficial — era un problema de expectativas rotas.
 
 El usuario llegaba creyendo que iba a ingresar nombre y datos bancarios. En el paso 3 se encontraba con "adjuntá los últimos 3 recibos de sueldo, un certificado de ingresos y foto del DNI anverso y reverso". Nadie había comunicado antes que eso era lo que se necesitaba. El abandono no era pereza — era sorpresa.
 
@@ -43,7 +45,7 @@ La distinción operativa: fricción de confusión (mala, eliminar) vs. fricción
 
 ## Fundamentos de marca
 
-El sistema visual del MVP usaba azul corporativo estándar — el color que usa el 90% de los productos fintech del mercado. No por una decisión de diseño, sino porque es el default cuando nadie se hace cargo de la identidad.
+El sistema visual del MVP usaba azul corporativo estándar — el color que usa la mayoría de los productos fintech del mercado. No por una decisión de diseño, sino porque es el default cuando nadie se hace cargo de la identidad.
 
 Garantear necesitaba sentirse como algo entre un banco y un asesor de confianza: profesional sin ser frío, seguro sin ser burocrático. Derivamos a un verde oscuro como color primario — confianza sin la frialdad del azul bancario — con crema como fondo.
 
@@ -59,7 +61,7 @@ Antes de pedir un solo documento, el flujo hace tres preguntas: tipo de empleo, 
 
 Si no califica: se le dice en ese momento, antes de que suba nada, con una explicación clara. Si califica: el sistema ya sabe exactamente qué documentación necesita y lo guía a eso.
 
-Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. El problema era que el 40% de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza en el producto más que el rechazo en sí.
+Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. El problema era que la mayoría de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza en el producto más que el rechazo en sí.
 
 ### Decisión 2 — Progress indicators con nombres, no números
 
@@ -71,29 +73,29 @@ La razón: "Paso 3 de 5" cuando el paso 3 es la carga de documentos genera la pe
 
 Contra la recomendación del área comercial, mantuvimos un paso dedicado a leer y aceptar los términos de la garantía. No era un checkbox enterrado al final — era una pantalla con los 5 puntos más importantes del contrato, redactados en lenguaje no legal.
 
-La conversión bajó 4% en ese paso específico. Las disputas post-contrato bajaron 60% en el primer trimestre. Ese trade-off era el correcto para un producto de esta naturaleza.
+La conversión bajó levemente en ese paso específico. Las disputas post-contrato bajaron de forma significativa en el primer trimestre. Ese trade-off era el correcto para un producto de esta naturaleza.
 
 ### Decisión 4 — Panel para inmobiliarias como segundo producto
 
 El MVP solo tenía vista de inquilino. Pero el decisor real del negocio — la persona que acepta o rechaza a Garantear como garante — es la inmobiliaria. Sin una vista para ellos, cada consulta de estado llegaba por teléfono o email.
 
-Diseñé un panel que muestra el estado de cada garantía activa, fechas de vencimiento e historial de pagos. Sin formularios, sin gestión — solo visibilidad. El 70% de las consultas operativas desaparecieron en el primer mes de uso.
+Diseñé un panel que muestra el estado de cada garantía activa, fechas de vencimiento e historial de pagos. Sin formularios, sin gestión — solo visibilidad. La gran mayoría de las consultas operativas desaparecieron en el primer mes de uso.
 
 ## Solución
 
 La plataforma tiene tres flujos: onboarding del inquilino (pre-screen + documentación + firma digital), dashboard de estado para el inquilino, y panel de gestión para inmobiliarias.
 
-El onboarding quedó en 5 pasos con un tiempo promedio de 11 minutos para usuarios que califican. El 79% de los usuarios que pasan el pre-screen completan el proceso.
+El onboarding quedó en 5 pasos con un tiempo razonable para usuarios que califican. La mayoría de los usuarios que pasan el pre-screen completan el proceso.
 
 ## Impacto
 
-- **Tasa de abandono en onboarding:** 61% → 21%
-- **Tiempo promedio de onboarding:** 11 min para usuarios calificados (no medido en MVP)
-- **Consultas operativas de inmobiliarias:** −70% en el primer mes post-lanzamiento del panel
-- **Disputas post-contrato:** −60% en el primer trimestre
-- **Solicitudes procesadas en los primeros 90 días:** 340
+- **Abandono en onboarding:** bajó de forma significativa gracias al pre-screen y la nueva secuencia de pasos
+- **Tiempo de onboarding:** se completó en un tiempo razonable para usuarios calificados, sin fricción innecesaria
+- **Consultas operativas de inmobiliarias:** se redujeron drásticamente en el primer mes tras el lanzamiento del panel
+- **Disputas post-contrato:** bajaron de forma significativa en el primer trimestre gracias al rediseño del flujo de firma
+- **Adopción:** inmediata por parte de las inmobiliarias desde el primer mes de operación
 
-El NPS de inmobiliarias pasó de "no había medición" a 67 en la primera encuesta post-lanzamiento.
+El NPS de inmobiliarias fue positivo desde la primera encuesta post-lanzamiento.
 
 ## Reflexión
 

@@ -3,7 +3,7 @@ title: 'Librodepases'
 slug: 'librodepases'
 role: 'Product Design Lead'
 timeframe: '2022 — Presente'
-outcome: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años. El tiempo promedio de shortlist bajó de 14 a 8 minutos. La retención de clubes pasó de 67% a 89%.'
+outcome: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años, mejorando el flujo de trabajo de los scouts y la retención de clubes.'
 client: 'Librodepases'
 team: '1 Product Designer, 3 Engineers, 1 Product Manager'
 platforms: ['Web']
@@ -12,11 +12,13 @@ locale: 'es'
 publishedAt: 2025-01-01
 colorKey: 'accent'
 coverImage: '/assets/cases/librodepases/cover.png'
-metrics:
-  - { label: 'TIEMPO DE SHORTLIST', value: 8, suffix: 'min' }
-  - { label: 'RETENCIÓN DE CLUBES', value: 89, suffix: '%' }
-  - { label: 'CLUBES ACTIVOS', value: 47 }
-  - { label: 'EXPORTACIONES A EXCEL', value: 74, prefix: '−', suffix: '%' }
+bullets:
+  - Redujo considerablemente el tiempo promedio de shortlist
+  - Mejoró la retención de clubes tras el rediseño del dashboard
+  - Redujo la dependencia de Excel como herramienta de trabajo
+  - Design system adoptado por el equipo de desarrollo en producción
+figmaBannerLabel: 'Ver workbook'
+figmaBannerUrl: '#'
 ---
 
 ## Contexto
@@ -29,9 +31,9 @@ El gap que cubría era real: clubes de primera y segunda división que no podía
 
 ## El problema
 
-Los scouts pasaban en promedio 14 minutos armando una lista de candidatos para una posición. De los que arrancaban el flujo, el 58% lo abandonaba antes de llegar al tercer jugador. Los datos estaban ahí — el problema era que la interfaz los trataba como si el usuario fuera el mismo que los creó: un desarrollador que sabe exactamente dónde vive cada tabla.
+Los scouts pasaban demasiado tiempo armando una lista de candidatos para una posición. De los que arrancaban el flujo, la mayoría lo abandonaba antes de llegar al tercer jugador. Los datos estaban ahí — el problema era que la interfaz los trataba como si el usuario fuera el mismo que los creó: un desarrollador que sabe exactamente dónde vive cada tabla.
 
-El dato que más impacto tuvo en las primeras semanas: el 40% de las sesiones terminaban con el scout exportando datos a una planilla de Excel. Habían pagado por la plataforma y la usaban como etapa intermedia hacia otra herramienta.
+El dato que más impacto tuvo en las primeras semanas: gran parte de las sesiones terminaban con el scout exportando datos a una planilla de Excel. Habían pagado por la plataforma y la usaban como etapa intermedia hacia otra herramienta.
 
 ## Approach
 
@@ -47,7 +49,7 @@ Dos principios guiaron todo el trabajo de los tres años:
 
 Reemplazamos el listado plano de jugadores con un dashboard orientado a shortlists activas. El cambio más controvertido: eliminamos el acceso directo a todos los jugadores desde la home. Solo veías los que tenías en proceso.
 
-Era contraintuitivo — la explorabilidad se perdía. Pero los datos mostraban que el 80% de las sesiones eran de seguimiento (usuarios volviendo a jugadores ya vistos), no de descubrimiento. Guardamos el descubrimiento para un flujo dedicado. El tiempo de tarea de "actualizar el estado de un jugador" bajó de 6 minutos a 40 segundos.
+Era contraintuitivo — la explorabilidad se perdía. Pero los datos mostraban que la mayoría de las sesiones eran de seguimiento (usuarios volviendo a jugadores ya vistos), no de descubrimiento. Guardamos el descubrimiento para un flujo dedicado. El tiempo de tarea de "actualizar el estado de un jugador" se redujo drásticamente.
 
 Lo que descartamos: un onboarding con tooltips paso a paso. Nuestro usuario ya conocía el producto — no necesitaba un tour. Necesitaba que las cosas estuvieran donde esperaba que estuvieran.
 
@@ -55,9 +57,9 @@ Lo que descartamos: un onboarding con tooltips paso a paso. Nuestro usuario ya c
 
 El pedido original era "agregar una vista de comparación". Lo que construimos fue diferente: un sistema de comparación contextual donde los benchmarks son el promedio de la posición en el contexto competitivo del club, no valores absolutos.
 
-La decisión clave: no mostramos el número, mostramos la brecha. Un 67% de pases exitosos no significa nada sin saber que el promedio para esa posición en esa liga es 71%. Cambiamos la unidad de visualización de "valor" a "diferencia respecto al benchmark".
+La decisión clave: no mostramos el número, mostramos la brecha. Un porcentaje de pases exitosos no significa nada sin saber cuál es el promedio para esa posición en esa liga. Cambiamos la unidad de visualización de "valor" a "diferencia respecto al benchmark".
 
-Lo que descartamos: una vista radar (spider chart). Es la representación más común en scouting y lo que todos esperaban ver. Pero los radares entrenan al ojo a buscar lo que falta, no lo que sirve. Para un scout con 20 jugadores en evaluación simultánea, ese framing genera sesgo, no claridad.
+Lo que descartamos: una vista radar (spider chart). Es la representación más común en scouting y lo que todos esperaban ver. Pero los radares entrenan al ojo a buscar lo que falta, no lo que sirve. Para un scout con muchos jugadores en evaluación simultánea, ese framing genera sesgo, no claridad.
 
 ### Iniciativa 3 — Design System v1 (2023)
 
@@ -65,7 +67,7 @@ Después de 18 meses diseñando componente por componente, el producto tenía cu
 
 La decisión más difícil: hacer el sistema directamente en código, no solo en Figma. Con un diseñador y tres developers, un sistema que vive únicamente en Figma genera drift constante entre lo documentado y lo implementado. Construimos los componentes en React, documentados en Storybook, y Figma se convirtió en referencia de composición.
 
-Seis meses después del lanzamiento, el tiempo de implementación de nuevas features bajó un 40%.
+Seis meses después del lanzamiento, el tiempo de implementación de nuevas features bajó de forma significativa.
 
 ### Iniciativa 4 — UI de Recomendaciones AI (2024)
 
@@ -73,21 +75,21 @@ La incorporación de un modelo de recomendación fue el cambio más significativ
 
 La tensión central: mostrar el "por qué" de cada recomendación vs. no sobrecargar con justificaciones que el usuario no pidió. Resolvimos con progressive disclosure: la recomendación aparece simple, con un "ver fundamentos" que expande el razonamiento del modelo para quien quiera profundizar.
 
-Lo que descartamos: un score de compatibilidad expresado como porcentaje. Los primeros prototipos tenían un 86% como titular de cada recomendación. Lo matamos — el porcentaje genera falsa precisión y desplaza la atención del jugador al número.
+Lo que descartamos: un score de compatibilidad expresado como porcentaje. Los primeros prototipos tenían un score numérico como titular de cada recomendación. Lo matamos — el número genera falsa precisión y desplaza la atención del jugador al indicador.
 
 ## Solución
 
 El producto actual tiene tres módulos principales: el dashboard de shortlists activas, el explorador de jugadores con filtros contextuales, y el perfil de jugador con video integrado y comparación de benchmarks posicionales.
 
-El flujo principal — ir de "necesito un extremo derecho menor de 23 años para préstamo" a tener cinco candidatos documentados — hoy toma menos de 8 minutos. En 2022 tomaba entre 25 y 40, según cuánto conociera el scout la plataforma.
+El flujo principal — ir de "necesito un extremo derecho menor de 23 años para préstamo" a tener cinco candidatos documentados — hoy toma una fracción del tiempo que tomaba al inicio, sin importar cuánto conociera el scout la plataforma.
 
 ## Impacto
 
-- **Tiempo promedio de shortlist:** 14 min → 8 min (−43%)
-- **Tasa de completación del flujo de candidatos:** 42% → 71%
-- **Retención mensual de clubes:** 67% → 89% tras el rediseño del dashboard
-- **Exportaciones a Excel como % de sesiones:** −74% (el indicador más honesto de adopción real)
-- **Clubes activos:** 12 cuando llegué → 47 al cierre de 2024
+- **Tiempo promedio de shortlist:** se redujo de forma significativa tras el rediseño del flujo principal
+- **Completación del flujo de candidatos:** mejoró considerablemente tras reorganizar la navegación y el dashboard
+- **Retención mensual de clubes:** mejoró de forma sostenida tras el rediseño del dashboard
+- **Dependencia de Excel:** se redujo drásticamente — el indicador más honesto de adopción real
+- **Base de clubes activos:** creció de forma continua durante los tres años
 
 La plataforma pasó de ser "la herramienta que usamos porque no hay otra" a ser la que el equipo de scouting defiende en las reuniones de presupuesto.
 

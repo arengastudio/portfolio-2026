@@ -30,27 +30,32 @@ export default function CountUp({ value, prefix = '', suffix = '', duration = 1.
     if (!el) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      el.textContent = String(value);
-      return;
-    }
+    if (prefersReduced) return; // value already shown in DOM
+
+    // Reset to 0 before animation so the count-up runs from zero
+    el.textContent = '0';
 
     let destroyed = false;
 
     void (async () => {
-      const { gsap } = await import('gsap');
-      if (destroyed) return;
+      try {
+        const { gsap } = await import('gsap');
+        if (destroyed) return;
 
-      const counter = { val: 0 };
-      gsap.to(counter, {
-        val: value,
-        duration,
-        ease: 'power2.out',
-        roundProps: 'val',
-        onUpdate() {
-          if (el) el.textContent = String(Math.round(counter.val));
-        },
-      });
+        const counter = { val: 0 };
+        gsap.to(counter, {
+          val: value,
+          duration,
+          ease: 'power2.out',
+          roundProps: 'val',
+          onUpdate() {
+            if (el) el.textContent = String(Math.round(counter.val));
+          },
+        });
+      } catch {
+        // GSAP failed to load — restore the final value
+        if (el && !destroyed) el.textContent = String(value);
+      }
     })();
 
     return () => { destroyed = true; };
@@ -58,9 +63,10 @@ export default function CountUp({ value, prefix = '', suffix = '', duration = 1.
 
   return (
     // aria-label = final value so screen readers skip the counting animation
+    // Initial render shows the real value; useEffect resets to 0 before animating
     <span aria-label={`${prefix}${value}${suffix}`}>
       <span aria-hidden="true">{prefix}</span>
-      <span ref={numRef} aria-hidden="true">0</span>
+      <span ref={numRef} aria-hidden="true">{value}</span>
       <span aria-hidden="true">{suffix}</span>
     </span>
   );

@@ -1,0 +1,42 @@
+---
+/**
+ * FigmaBanner.astro
+ * Full-width accent banner at the end of each case study.
+ * Links to the Figma workbook or interactive prototype in a new tab.
+ *
+ * Layout: two columns — left has the label (display) + bajada (mono),
+ * right has the CTA link. Stacks vertically on mobile.
+ *
+ * Colors: accent background (#4B53F6) with cream text/border — inverts
+ * the site palette to signal a clear break before the footer.
+ */
+import styles from './FigmaBanner.module.css';
+
+export interface Props {
+  /** CTA label — e.g. "Ver workbook" or "Ver prototipo interactivo" */
+  label: string;
+  /** Destination URL. Opens in new tab. Use '#' as placeholder. */
+  url: string;
+}
+
+const { label, url } = Astro.props;
+---
+<section class={styles.banner} aria-label={label}>
+  <div class={styles.inner}>
+
+    <div class={styles.left}>
+      <p class={styles.label}>{label}</p>
+      <p class={styles.bajada}>Arquitectura de información, flujos y decisiones de diseño.</p>
+    </div>
+
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={styles.cta}
+    >
+      {label} →
+    </a>
+
+  </div>
+</section>

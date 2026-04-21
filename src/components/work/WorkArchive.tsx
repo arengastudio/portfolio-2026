@@ -156,7 +156,7 @@ export default function WorkArchive({ items }: Props) {
         style={{ opacity: 0, pointerEvents: 'none' }}
         aria-hidden="true"
       >
-        <img ref={imgRef} src="" alt="" className={styles.floatPhoto} />
+        <img ref={imgRef} alt="" className={styles.floatPhoto} />
       </div>
 
     </div>

@@ -13,7 +13,7 @@
 import { useState, useEffect } from 'react';
 
 export default function LiveClock() {
-  const [time, setTime] = useState('--:--:--');
+  const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
     const tick = () => {
@@ -32,5 +32,7 @@ export default function LiveClock() {
     return () => clearInterval(id);
   }, []);
 
+  // Render nothing until first tick fires (avoids "--:--:--" flash)
+  if (!time) return null;
   return <>BUENOS AIRES — {time} ART</>;
 }

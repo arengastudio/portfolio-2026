@@ -26,4 +26,5 @@ Thumbs.db
 # Vercel
 .vercel
 
-.vercel
+# Claude Code local settings (machine-specific, not for repo)
+.claude/
