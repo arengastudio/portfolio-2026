@@ -120,11 +120,17 @@
  * showing 3 more projects in the same list style as /archivo, followed by
  * the full-archive CTA.
  */
+/*
+ * margin-block-start: space-7 (96px) creates breathing room between the
+ * last case entry's CTA button and this section's border-top rule.
+ * Without it the border lands immediately below "VER CASO →".
+ */
 .archiveBlock {
   grid-column: 1 / -1;
   border-top: 1px solid var(--color-border);
   padding-block-start: var(--space-7);
   padding-block-end: var(--space-4);
+  margin-block-start: var(--space-7);
 }
 
 /*

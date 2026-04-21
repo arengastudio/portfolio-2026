@@ -9,10 +9,10 @@ const year = new Date().getFullYear();
 /*
  * Activity grid — pseudo-random contribution graph, visually similar to GitHub.
  * Fixed seed (42) guarantees the same pattern on every render.
- * Columns × rows = 52 × 7 (one year of weeks × days per week).
+ * 24 cols × 7 rows — compact block that fits left of the stack on desktop.
  * 5 levels: 0 = empty, 1–4 = progressively more opaque accent color.
  */
-const COLS = 52;
+const COLS = 24;
 const ROWS = 7;
 const LEVELS = 5; // 0–4
 
@@ -60,44 +60,47 @@ const levelOpacity = [0.08, 0.28, 0.48, 0.70, 1.0];
 
     </div>
 
-    {/* ─── Activity grid ─── */}
+    {/* ─── Bottom strip: left col (activity + stack) / right col (tagline) ─── */}
     {/*
-      Symbolic contribution graph — 52 cols × 7 rows (1 year of weeks).
-      Values generated with a fixed seed so the pattern is stable.
-      Decorative only (aria-hidden).
+      Activity grid sits above the STACK label in the left column.
+      Both are inside .bottomLeft — no border between them, just gap.
+      Tagline occupies the right side of the same strip.
     */}
-    <div class={styles.activityBlock} aria-hidden="true">
-      <div class={styles.activityMeta}>
-        <span class={styles.activityLabel}>ACTIVIDAD</span>
-        <span class={styles.activityLabel}>{year}</span>
-      </div>
-      <div class={styles.activityGrid}>
-        {grid.map((row) =>
-          row.map((level, colIdx) => (
-            <div
-              class={styles.activityCell}
-              style={`opacity: ${levelOpacity[level]}`}
-            />
-          ))
-        )}
-      </div>
-    </div>
-
-    {/* ─── Bottom strip: tagline + stack ─── */}
     <div class={styles.bottom}>
 
-      {/* Left — made-in statement */}
+      {/* Left: activity grid stacked above stack info */}
+      <div class={styles.bottomLeft}>
+
+        <div class={styles.activityBlock} aria-hidden="true">
+          <div class={styles.activityMeta}>
+            <span class={styles.activityLabel}>ACTIVIDAD</span>
+            <span class={styles.activityLabel}>{year}</span>
+          </div>
+          <div class={styles.activityGrid}>
+            {grid.map((row) =>
+              row.map((level, _colIdx) => (
+                <div
+                  class={styles.activityCell}
+                  style={`opacity: ${levelOpacity[level]}`}
+                />
+              ))
+            )}
+          </div>
+        </div>
+
+        <div class={styles.stackBlock}>
+          <span class={styles.stackLabel}>STACK</span>
+          <Type as="p" variant="xs" color="muted" class={styles.colofon}>
+            Astro · Vercel · PP Formula · Neue Montreal · JBM
+          </Type>
+        </div>
+
+      </div>
+
+      {/* Right — made-in statement */}
       <Type as="p" variant="xs" color="muted" class={styles.tagline}>
         Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.
       </Type>
-
-      {/* Right — stack with title */}
-      <div class={styles.stackBlock}>
-        <span class={styles.stackLabel}>STACK</span>
-        <Type as="p" variant="xs" color="muted" class={styles.colofon}>
-          Astro · Vercel · PP Formula · Neue Montreal · JBM
-        </Type>
-      </div>
 
     </div>
 

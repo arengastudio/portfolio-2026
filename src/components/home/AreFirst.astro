@@ -34,21 +34,19 @@ import styles from './AreFirst.module.css';
 
       <ScrollReveal client:load variant="fade-up" delay={0.15}>
         <div class={styles.right}>
-          {/*
-            Arenga wordmark placeholder — no standalone logo asset available yet.
-            Rendered as display text in accent color. Replace with <img> tag
-            once a proper SVG/PNG wordmark exists at /assets/arenga/wordmark.svg.
-            TODO(juan): swap for real logo asset when available.
-          */}
-          <p class={styles.logoMark} aria-hidden="true">ARENGA</p>
           <Type as="p" variant="lg" class={styles.description}>
             Arenga Studio diseña y construye productos digitales para startups y empresas que quieren moverse rápido. MVP, productos escalables, sistemas de diseño — de la estrategia a la implementación.
           </Type>
           <Type as="p" variant="base" color="muted" class={styles.detail}>
             Dos personas. Sin agencia intermedia. El cliente habla directo con quien diseña y construye.
           </Type>
+          {/*
+            No manual ↗ here — Link.astro appends one automatically for all
+            external (https://) links via the externalIndicator span.
+            Writing ↗ in the slot would render two arrows.
+          */}
           <Link href="https://www.arengastudio.com" variant="standalone" class={styles.siteLink}>
-            arengastudio.com ↗
+            arengastudio.com
           </Link>
         </div>
       </ScrollReveal>

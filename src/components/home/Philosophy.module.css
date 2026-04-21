@@ -51,22 +51,28 @@
  * font-size: 30vw creates a dramatic scale — at 1280px that's ~384px.
  * The number bleeds off the right edge for an intentionally cropped look.
  */
+/*
+ * Size reduced from clamp(120px, 22vw, 340px): the original range was
+ * proportionally too heavy alongside the 3xl statement text (64px).
+ * New range clamp(80px, 12vw, 180px) keeps it clearly subordinate —
+ * a texture element, not a visual competitor. overflow:visible on .principle
+ * lets it extend slightly past the principle box without being clipped.
+ */
 .bgNumber {
   position: absolute;
   right: -0.1em;
   top: 50%;
   transform: translateY(-50%);
   font-family: var(--font-display);
-  font-size: clamp(120px, 22vw, 340px);
+  font-size: clamp(80px, 12vw, 180px);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.05em;
   color: var(--color-fg);
-  opacity: 0.04;
+  opacity: 0.05;
   user-select: none;
   pointer-events: none;
   z-index: 0;
-  /* Everything else (text) will sit above via z-index in child elements */
 }
 
 /* ─── Number ──────────────────────────────────────────────── */

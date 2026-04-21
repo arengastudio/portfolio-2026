@@ -33,10 +33,16 @@
 
 /* ─── Article ─────────────────────────────────────────────── */
 
+/*
+ * Left column: 160px fixed (accommodates display-md numbers at 144px + gutter).
+ * Previously `auto 1fr` — auto would expand to the widest meta item (tags),
+ * causing the right column to start at different x-positions across cases.
+ * Fixed 160px guarantees vertical alignment between all three entries.
+ */
 .caseEntry {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 160px 1fr;
   gap: var(--space-5);
   align-items: start;
   transition: opacity 0.4s var(--ease-out);
