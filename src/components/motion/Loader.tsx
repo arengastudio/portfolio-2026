@@ -156,7 +156,7 @@ export default function Loader() {
         {/* Bottom strip — label left, counter right */}
         <div className={styles.meta}>
           <span className={styles.label}>PORTFOLIO — 2026</span>
-          <span ref={numRef} className={styles.counter}>000</span>
+          <span ref={numRef} className={styles.counter}></span>
         </div>
 
         {/* Accent progress line at the very bottom edge */}
