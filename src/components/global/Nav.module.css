@@ -170,23 +170,32 @@
 /* ─── Mobile (<768px) ─────────────────────────────────────── */
 
 /*
- * Hide brand name on small screens — not enough horizontal space.
- * Links remain, right-aligned via flex justify-content: flex-end.
+ * Mobile: logo + lang toggle only. Nav links hidden — no hamburger menu.
+ * Brand is shown (logo + name). justify-content: space-between keeps
+ * brand at the left edge and lang switcher at the right.
+ *
+ * Lang toggle touch targets: min 44×44px per Apple HIG / WCAG 2.5.5.
+ * Each .lang anchor gets an explicit hit area via padding so the visible
+ * 11px text is still compact while the tappable zone is accessible.
+ *
+ * The .langSwitch border-left separator is removed — it existed only to
+ * visually divide from the nav links, which are now hidden.
  */
 @media (max-width: 767px) {
-  .brand {
+  .links {
     display: none;
   }
 
-  .inner {
-    justify-content: flex-end;
-  }
-
-  .links {
-    gap: var(--space-3);
-  }
-
   .langSwitch {
-    padding-inline-start: var(--space-3);
+    padding-inline-start: 0;
+    border-left: none;
+  }
+
+  .lang {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
