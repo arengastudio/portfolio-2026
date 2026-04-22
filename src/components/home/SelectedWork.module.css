@@ -322,11 +322,12 @@ a.arcRowInner:hover {
   }
 
   /*
-   * Each CaseEntry: fixed 82vw, don't shrink, snap to start edge.
-   * flex:0 0 82vw replaces display:inline-block + width — no wrapping issue.
+   * Each CaseEntry: fixed 85vw, don't shrink, snap to start edge.
+   * 85vw leaves 15vw of the next card visible (minus gap) — clearer affordance
+   * that more cards exist. flex:0 0 85vw prevents any wrapping issue.
    */
   .casesTrack :global(article) {
-    flex: 0 0 82vw;
+    flex: 0 0 85vw;
     scroll-snap-align: start;
   }
 
