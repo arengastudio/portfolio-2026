@@ -21,6 +21,7 @@ export interface WorkItem {
   description: string;
   image: string;
   href?: string;
+  external?: boolean;
 }
 
 interface Props {
@@ -135,7 +136,10 @@ export default function WorkArchive({ items }: Props) {
               onMouseLeave={handleLeave}
             >
               <Tag
-                {...(item.href ? { href: item.href } : {})}
+                {...(item.href ? {
+                  href: item.href,
+                  ...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+                } : {})}
                 className={styles.rowInner}
               >
                 <span className={styles.rowNumber}>{item.number}</span>

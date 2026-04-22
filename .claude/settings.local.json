@@ -12,7 +12,22 @@
       "Bash(pnpm build *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(gh repo *)"
+      "Bash(gh repo *)",
+      "Bash(pnpm run *)",
+      "Bash(cp \"C:/Users/juanc/OneDrive/Escritorio/Arenga Studio/Portfolio/ProfileNew.png\" \"C:/Users/juanc/portfolio-2026/public/assets/profile.png\")",
+      "Bash(cp \"C:/Users/juanc/OneDrive/Escritorio/Arenga Studio/Portfolio/ldp07.png\" \"C:/Users/juanc/portfolio-2026/public/assets/cases/librodepases/cover.png\")",
+      "Bash(cp \"C:/Users/juanc/OneDrive/Escritorio/Arenga Studio/Portfolio/ldp01.png\" \"C:/Users/juanc/portfolio-2026/public/assets/cases/librodepases/01.png\")",
+      "Bash(cp \"C:/Users/juanc/OneDrive/Escritorio/Arenga Studio/Portfolio/ldp04.png\" \"C:/Users/juanc/portfolio-2026/public/assets/cases/librodepases/02.png\")",
+      "Bash(cp \"C:/Users/juanc/OneDrive/Escritorio/Arenga Studio/Portfolio/ldp02.png\" \"C:/Users/juanc/portfolio-2026/public/assets/cases/librodepases/03.png\")",
+      "Bash(vercel whoami *)",
+      "Bash(vercel --yes)",
+      "WebFetch(domain:juancruzluna.framer.ai)",
+      "WebFetch(domain:www.tresmarescapital.com)",
+      "Bash(npx astro *)",
+      "WebFetch(domain:portfolio-2026-plum.vercel.app)",
+      "Bash(npm audit *)",
+      "Bash(pnpm audit *)",
+      "Bash(pnpm install *)"
     ]
   }
 }

@@ -12,13 +12,14 @@ export interface WorkItem {
   description: string;
   image: string;
   href?: string;
+  external?: boolean;
 }
 
 export const works: WorkItem[] = [
   {
     number: '01',
     title: 'Librodepases',
-    year: '2022 — 2025',
+    year: '2022 — 2026',
     tags: ['AI', 'Sports', 'SaaS', 'Design System'],
     description: 'Plataforma AI para scouting de fútbol. Product Design Lead durante 3 años.',
     image: '/assets/cases/librodepases/cover.png',
@@ -54,17 +55,51 @@ export const works: WorkItem[] = [
   {
     number: '05',
     title: 'EEVA Studios',
-    year: '2024',
-    tags: ['E-commerce', 'Digital', 'Identidad'],
-    description: 'Identidad digital y design system para estudio de experiencias.',
-    image: '/assets/cases/arenga/03.png',
+    year: '2025',
+    tags: ['Brand', 'Design System', 'Web'],
+    description: 'Identidad digital y sistema de booking para estudio de fotografía y video.',
+    image: '/assets/archive/eeva01.png',
+    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1851',
+    external: true,
   },
   {
     number: '06',
     title: 'Banndo',
-    year: '2023',
+    year: '2024 — 2025',
     tags: ['App', 'Producto', 'Música'],
     description: 'Diseño de producto para plataforma de música y entretenimiento.',
-    image: '/assets/cases/librodepases/cover.png',
+    image: '/assets/archive/banndo.png',
+    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1852',
+    external: true,
+  },
+  {
+    number: '07',
+    title: 'SimplePass',
+    year: '2024 — 2025',
+    tags: ['SaaS', 'Product Design', 'Accesibilidad'],
+    description: 'Rediseño de plataforma de gestión de accesos y membresías.',
+    image: '/assets/archive/simple.png',
+    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1853',
+    external: true,
+  },
+  {
+    number: '08',
+    title: 'Beachwalk',
+    year: '2024',
+    tags: ['Brand', 'Web', 'Hospitality'],
+    description: 'Identidad y sitio web para complejo de playa.',
+    image: '/assets/archive/beachwalk.png',
+    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1854',
+    external: true,
+  },
+  {
+    number: '09',
+    title: 'Ranch',
+    year: '2025',
+    tags: ['Brand', 'Web', 'Food & Beverage'],
+    description: 'Identidad y presencia digital para marca gastronómica.',
+    image: '/assets/archive/ranch.png',
+    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1856',
+    external: true,
   },
 ];

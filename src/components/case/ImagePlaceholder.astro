@@ -1,9 +1,16 @@
 ---
 export interface Props {
+  src?: string;
+  alt?: string;
   label?: string;
 }
-const { label = 'Imagen' } = Astro.props;
+const { src, alt = '', label = 'Imagen' } = Astro.props;
 ---
-<div class="image-placeholder">
-  <span class="image-placeholder-label">{label}</span>
-</div>
+{src
+  ? <img src={src} alt={alt} class="case-image" />
+  : (
+    <div class="image-placeholder">
+      <span class="image-placeholder-label">{label}</span>
+    </div>
+  )
+}

@@ -114,6 +114,15 @@
   margin-block: var(--space-5);
 }
 
+/* ─── Full-bleed case images ─────────────────────────────── */
+
+.prose :global(.case-image) {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: var(--space-7);
+}
+
 /* ─── Full-bleed image placeholder ───────────────────────── */
 
 .prose :global(.image-placeholder) {
