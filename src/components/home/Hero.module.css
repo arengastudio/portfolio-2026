@@ -28,6 +28,8 @@
 .hero {
   --grid-outer-margin: var(--space-5);
   position: relative;           /* canvas anchor */
+  overflow: hidden;
+  max-width: 100%;
 }
 
 /* ─── WebGL canvas ───────────────────────────────────────── */
@@ -225,6 +227,25 @@
 
 @media (max-width: 480px) {
   .displayWord {
-    font-size: clamp(40px, 14vw, 80px);
+    font-size: clamp(2.8rem, 13vw, 9rem);
+  }
+}
+
+/* ─── CTA column layout (≤640px) ─────────────────────────── */
+
+/*
+ * At 375-640px the hero outer margin is 48px per side, leaving ~279px.
+ * Two inline-flex buttons side-by-side overflow or crowd that space.
+ * Column layout + stretch makes each button full-width for touch targets.
+ * .ctas > * min-height: 48px meets WCAG 2.5.5 touch target sizing.
+ */
+@media (max-width: 640px) {
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ctas > * {
+    min-height: 48px;
   }
 }
