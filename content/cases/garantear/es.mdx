@@ -1,17 +1,17 @@
 ---
 title: 'Garantear'
 slug: 'garantear'
-role: 'End-to-end Design'
+role: 'Product Designer'
 timeframe: '2025'
-outcome: 'End-to-end product design para una plataforma fintech de garantías de alquiler. El abandono en onboarding bajó de forma significativa y las consultas operativas de inmobiliarias se redujeron drásticamente.'
+outcome: 'Diseñé end-to-end una garantía de alquiler digital: cotizador, portal del solicitante y comunicaciones para cada estado del trámite.'
 client: 'Garantear'
-team: '1 Product Designer, 1 Developer'
+team: '1 Designer, 1 Dev — Arenga Studio'
 platforms: ['Web']
-tags: ['Fintech', 'End-to-end', 'Product Design', 'Brand']
+tags: ['Fintech', 'End-to-end', 'Product Design', 'Comunicaciones']
 locale: 'es'
 publishedAt: 2025-01-01
 colorKey: 'dark'
-coverImage: '/assets/cases/garantear/cover.jpg'
+coverImage: '/assets/cases/garantear/cover.png'
 figmaBannerLabel: 'Ver workbook'
 figmaBannerUrl: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1850'
 ---
@@ -20,90 +20,84 @@ import ImagePlaceholder from '../../../src/components/case/ImagePlaceholder.astr
 
 ## Contexto
 
-En Argentina, conseguir garantía de alquiler es uno de los problemas más concretos y menos resueltos del mercado inmobiliario. El sistema tradicional requiere que alguien ponga una propiedad como aval — algo que menos del 30% de los inquilinos puede proveer en las condiciones que exigen las inmobiliarias. El resultado: millones de personas que pueden pagar el alquiler pero no pueden demostrarlo con el instrumento que el mercado pide.
+Conseguir una garantía de alquiler en Argentina es, para la mayoría de las personas, una caja negra. Sabés que la necesitás. No sabés exactamente qué documentación presentar, cuánto tiempo demora, ni en qué estado está tu trámite mientras esperás. El resultado es una experiencia que mezcla incertidumbre, llamados telefónicos y documentos que van y vienen sin que quede claro quién hace qué.
 
-Garantear llegó con una propuesta concreta: ser el garante digital. El inquilino paga una comisión, Garantear evalúa el riesgo y firma como garante ante la inmobiliaria. Sin propiedades, sin trámites en papel, sin esperar semanas.
-
-Llegué en enero de 2025 cuando la empresa tenía el modelo de negocio validado con un MVP muy básico y necesitaba escalar a una plataforma real. El brief era abierto: "queremos que esto funcione bien y se vea bien". Empecé por entender por qué no funcionaba.
+Garantear quería romper ese modelo con algo 100% digital. El desafío de diseño era doble: construir una interfaz clara para el solicitante, y diseñar las comunicaciones operativas que acompañan cada hito del proceso — porque de nada sirve una plataforma bien diseñada si los emails que llegan son genéricos, confusos o no dicen qué hacer después.
 
 ## El problema
 
-El flujo de onboarding del MVP tenía 7 pasos. La mayoría de los usuarios que arrancaban abandonaban en el paso 3: la carga de documentación de ingresos. No era un problema de UX superficial — era un problema de expectativas rotas.
+El producto no era una sola pantalla ni un solo flujo. Era un sistema con varios actores y múltiples bifurcaciones según el estado del legajo: un cotizador, un portal de documentación, comunicaciones para cada momento clave, un área de riesgos, y un proceso de cierre. Los estados posibles de un trámite son muchos — cotización inicial, pre-aprobado, en revisión, devuelto por riesgos, rechazado, aprobado con o sin cogarante, garantía otorgada. Cada estado genera una experiencia distinta y requiere una comunicación distinta.
 
-El usuario llegaba creyendo que iba a ingresar nombre y datos bancarios. En el paso 3 se encontraba con "adjuntá los últimos 3 recibos de sueldo, un certificado de ingresos y foto del DNI anverso y reverso". Nadie había comunicado antes que eso era lo que se necesitaba. El abandono no era pereza — era sorpresa.
+El problema real no era la falta de features. Era que cada actor del sistema veía un producto distinto — o no veía nada. El solicitante no sabía en qué estado estaba su legajo. El área comercial recibía consultas por teléfono. La inmobiliaria no tenía visibilidad de nada. Diseñar esto sin mapear primero los estados del sistema era imposible.
 
 ## Approach
 
-Un principio guió todas las decisiones del producto: **la fricción correcta en el momento correcto**.
+Dos principios estructuraron el trabajo.
 
-En fintech, la tentación es reducir fricción al máximo para mejorar conversión. Pero un producto de garantía necesita que el usuario entienda lo que está firmando. Reducir fricción en los términos para ganar conversión es un problema legal y de confianza, no solo de UX.
+**Primero el estado, después la pantalla.** La pregunta "¿qué pantalla diseño?" es prematura si no respondiste antes "¿en qué estado está el usuario, qué sabe, qué necesita saber, y cuál es la siguiente acción posible?". Ese mapa es el diseño real. Las pantallas son la consecuencia.
 
-> La distinción operativa: fricción de confusión —mala, eliminar— vs. fricción de confirmación —buena, conservar—. El usuario puede sentarse a leer un contrato. Pero no puede adivinar qué documentos tiene que subir antes de que se los pidan.
+**Las comunicaciones son producto.** En un proceso con alta fricción emocional — el usuario a punto de firmar un contrato, esperando una aprobación o recibiendo un rechazo — el email que llega es parte de la experiencia del producto. Diseñarlo como template genérico es un error de alcance, no de ejecución.
 
-## Fundamentos de marca
-
-El sistema visual del MVP usaba azul corporativo estándar — el color que usa la mayoría de los productos fintech del mercado. No por una decisión de diseño, sino porque es el default cuando nadie se hace cargo de la identidad.
-
-Garantear necesitaba sentirse como algo entre un banco y un asesor de confianza: profesional sin ser frío, seguro sin ser burocrático. Derivamos a un verde oscuro como color primario — confianza sin la frialdad del azul bancario — con crema como fondo.
-
-En tipografía: sans-serif moderna para la UI y una serif en los momentos de contrato y términos. La serif señaliza "esto es serio, leelo" — una diferencia semántica que ayuda al usuario a distinguir entre llenar un formulario y firmar algo con consecuencias.
-
-<ImagePlaceholder src="/assets/cases/garantear/garantear01.png" />
+<ImagePlaceholder src="/assets/cases/garantear/garantear05.png" />
 
 ## Decisiones clave
 
-### Decisión 1 — Pre-screen antes del onboarding
+### El cotizador como punto de entrada
 
-Antes de pedir un solo documento, el flujo hace tres preguntas: tipo de empleo, antigüedad laboral e ingresos mensuales estimados. Con eso el sistema determina si el usuario califica.
+El primer contacto del usuario con el producto no podía ser un formulario de registro. Necesitaba ser una herramienta que le permita entender si el servicio le sirve antes de comprometerse con nada.
 
-Si no califica: se le dice en ese momento, antes de que suba nada, con una explicación clara. Si califica: el sistema ya sabe exactamente qué documentación necesita y lo guía a eso.
+El cotizador cumple esa función: anticipar condiciones, desdramatizar el proceso y habilitar una primera validación antes de la evaluación formal. La decisión de poner esa herramienta al frente del funnel no era obvia — implica diferir el registro — pero era la única forma de reducir la fricción real en la entrada al sistema.
 
-Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. La mayoría de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza más que el rechazo en sí.
+Lo que descartamos: empezar por un formulario de datos personales. Es el patrón más común en servicios financieros y el que más abandono genera. Si el usuario no entiende todavía si el servicio le sirve, no tiene sentido pedirle datos.
 
-### Decisión 2 — Progress indicators con nombres, no números
+### Comunicaciones que acompañan, no que informan
 
-El onboarding rediseñado tiene 5 pasos. Los primeros prototipos los numeraban ("Paso 3 de 5"). Los reemplazamos por etiquetas descriptivas: "Tu perfil", "Tus ingresos", "Documentación", "Revisión", "¡Listo!".
+El bloque de trabajo más denso del proyecto fue el sistema de comunicaciones operativas. Cada pieza tenía que sostener el tono de marca en momentos de altísima tensión emocional para el usuario.
 
-La razón: "Paso 3 de 5" cuando el paso 3 es la carga de documentos genera la percepción de que la dificultad llegó demasiado tarde. "Documentación" como tercer paso comunica que era esperable que apareciera ahí. El contenido del paso no cambió — cambió cuándo el usuario lo anticipaba.
+La pre-aprobación llega cuando alguien está a punto de firmar un contrato. El rechazo llega cuando tenía la expectativa de que iba a funcionar. La devolución por riesgos llega cuando el proceso se frena y no sabe por cuánto tiempo.
 
-### Decisión 3 — Una pantalla completa para los términos
+La decisión fue consistente en todos los estados: cada comunicación termina con un próximo paso concreto y un contacto humano identificado por nombre, teléfono y mail. No "el equipo de Garantear" — una persona. Ese detalle cambia completamente cómo el usuario procesa la información que recibe.
 
-Contra la recomendación del área comercial, mantuvimos un paso dedicado a leer y aceptar los términos de la garantía. No era un checkbox enterrado al final — era una pantalla con los 5 puntos más importantes del contrato, redactados en lenguaje no legal.
+Lo que descartamos: estados genéricos tipo "tu solicitud está en proceso". Son informativamente válidos y emocionalmente inútiles. Un usuario que recibe ese mensaje sabe lo mismo que antes de recibirlo.
 
-La conversión bajó levemente en ese paso específico. Las disputas post-contrato bajaron de forma significativa en el primer trimestre. Ese trade-off era el correcto para un producto de esta naturaleza.
+<ImagePlaceholder src="/assets/cases/garantear/garantear01.png" />
 
-### Decisión 4 — Panel para inmobiliarias como segundo producto
+### La bifurcación del flujo según cogarante
 
-El MVP solo tenía vista de inquilino. Pero el decisor real del negocio —la persona que acepta o rechaza a Garantear como garante— es la inmobiliaria. Sin una vista para ellos, cada consulta de estado llegaba por teléfono o email.
+Cuando el legajo se aprueba, el flujo se divide según si existe o no cogarante. Con cogarante hay un paso adicional de firma electrónica que cambia los próximos pasos para el solicitante y requiere coordinación adicional.
 
-Diseñé un panel que muestra el estado de cada garantía activa, fechas de vencimiento e historial de pagos. Sin formularios, sin gestión — solo visibilidad. La gran mayoría de las consultas operativas desaparecieron en el primer mes de uso.
+La decisión fue no unificar las comunicaciones de aprobación en una sola pieza genérica con variables. Las experiencias son distintas en lo emocional y en lo operativo — merecen comunicaciones distintas. La versión con cogarante explica explícitamente el paso de firma electrónica desde el primer mensaje de aprobación, para que el usuario llegue a esa instancia sin sorpresa.
 
-<ImagePlaceholder src="/assets/cases/garantear/garantear04.png" />
+### El certificado preliminar y la gestión de expectativas
+
+El certificado de aprobación preliminar fue uno de los artefactos más delicados del sistema. Es un documento que el solicitante puede presentar en una inmobiliaria antes de la emisión formal de la garantía — lo cual tiene valor práctico enorme — pero no es la garantía. Confundir los dos estados es un riesgo real.
+
+La decisión fue incluir en el propio certificado una aclaración explícita: tiene carácter meramente informativo y preliminar, no implica emisión efectiva, y la garantía queda formalmente otorgada solo después del pago, la firma del contrato y el cumplimiento de todos los pasos. Esa aclaración no es fine print. Es parte del diseño de contenido del documento — ubicada visiblemente, en lenguaje claro.
 
 ## Solución
 
-La plataforma tiene tres flujos: onboarding del inquilino (pre-screen + documentación + firma digital), dashboard de estado para el inquilino, y panel de gestión para inmobiliarias.
+El producto final tiene tres capas: el sitio comercial con el cotizador como punto de entrada, el portal del solicitante con seguimiento de estados y carga de documentación, y el sistema de comunicaciones transaccionales que cubre cada bifurcación del proceso.
 
-> El onboarding quedó en 5 pasos con un tiempo razonable para usuarios que califican. La mayoría de los que pasan el pre-screen completan el proceso — sin recordatorios, sin intervención manual.
+> El flujo completo — desde "¿cuánto me cuesta la garantía?" hasta "garantía emitida" — hoy es navegable sin llamar a nadie. Cada hito del proceso tiene una comunicación que dice exactamente qué pasó, qué sigue y con quién hablar si algo no cierra.
 
 ## Impacto
 
 - **Abandono en onboarding:** bajó de forma significativa gracias al pre-screen y la nueva secuencia de pasos
-- **Tiempo de onboarding:** se completó en un tiempo razonable para usuarios calificados, sin fricción innecesaria
-- **Consultas operativas de inmobiliarias:** se redujeron drásticamente en el primer mes tras el lanzamiento del panel
+- **Tiempo de onboarding:** completado en tiempo razonable para usuarios calificados, sin fricción innecesaria
+- **Consultas operativas:** se redujeron drásticamente en el primer mes tras el lanzamiento del portal
 - **Disputas post-contrato:** bajaron de forma significativa en el primer trimestre gracias al rediseño del flujo de firma
 - **Adopción:** inmediata por parte de las inmobiliarias desde el primer mes de operación
 
-El NPS de inmobiliarias fue positivo desde la primera encuesta post-lanzamiento.
+La plataforma pasó de un proceso opaco y telefónico a uno 100% digital con seguimiento visible en cada estado.
 
 <div class="callout">
 
 ## Reflexión
 
-End-to-end en fintech significa que tus decisiones de diseño tienen consecuencias legales. Aprendí a leer contratos — no por obligación sino porque si no entendés lo que el usuario está firmando, no podés diseñar el momento en que lo firma.
+Garantear me confirmó algo que ya sospechaba: en productos de alta fricción emocional, el diseño de comunicaciones es tan crítico como el diseño de pantallas — o más. Una interfaz bien diseñada puede perder todo su valor en el momento en que llega un email genérico que no dice nada.
 
-Lo que haría diferente: involucraría al equipo legal desde el día 1, no como revisores al final del proceso. Tres semanas antes del lanzamiento tuvimos que rehacer el flujo de firma completo porque el contrato había cambiado y yo no me había enterado. Esa coordinación rota costó una semana de trabajo que no estaba en el presupuesto.
+También aprendí a trabajar con sistemas de estados antes de pensar en componentes. Cuando el producto tiene muchas salidas posibles, la pregunta "¿qué pantalla diseño?" es prematura si no respondiste primero "¿en qué estado está el usuario?". Ese mapa es el diseño real. Las pantallas son la consecuencia.
 
 </div>
 
-<ImagePlaceholder src="/assets/cases/garantear/garantear08.png" />
+<ImagePlaceholder src="/assets/cases/garantear/garantear07.png" />

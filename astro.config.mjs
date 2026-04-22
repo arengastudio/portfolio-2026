@@ -13,8 +13,10 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false }
   },
   redirects: {
-    '/lab':    '/',
-    '/en/lab': '/en',
+    '/lab':            '/',
+    '/en/lab':         '/en',
+    '/work/arenga':    'https://arengastudio.com',
+    '/en/work/arenga': 'https://arengastudio.com',
   },
   output: 'static',
   adapter: vercel({ webAnalytics: { enabled: true } })

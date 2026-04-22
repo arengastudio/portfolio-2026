@@ -1,13 +1,9 @@
 ---
 /**
- * EN /work/[slug] — mirrors /work/[slug].astro.
+ * EN /work/[slug] — renders EN case MDX when available, falls back to ES.
  *
- * Until EN case MDX content exists, these routes render the ES case
- * with lang="en" on the <html> element. This keeps the language switcher
- * functional from any ES case page (it links to /en/work/[slug]).
- *
- * When EN MDX is ready: add a second getStaticPaths pass for locale='en'
- * and render those entries here instead.
+ * Priority: if locale='en' MDX exists for a slug, use it.
+ * Otherwise render ES content with lang="en" on <html>.
  */
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -17,22 +13,28 @@ import Type from '../../../components/ui/Type.astro';
 import Link from '../../../components/ui/Link.astro';
 import CaseHero from '../../../components/case/CaseHero.astro';
 import TLDR from '../../../components/case/TLDR.astro';
+import FigmaBanner from '../../../components/case/FigmaBanner.astro';
 import Footer from '../../../components/global/Footer.astro';
+import ReadingProgress from '../../../components/motion/ReadingProgress.tsx';
+import CaseHeroParallax from '../../../components/motion/CaseHeroParallax.tsx';
 import styles from '../../work/case.module.css';
 
 export async function getStaticPaths() {
-  /*
-   * Reuse ES case entries — EN content doesn't exist yet.
-   * Generates /en/work/librodepases, /en/work/arenga, /en/work/garantear.
-   */
-  const entries = await getCollection('cases', ({ data }) =>
+  const enEntries = await getCollection('cases', ({ data }) =>
+    data.locale === 'en' && data.slug !== ''
+  );
+  const esEntries = await getCollection('cases', ({ data }) =>
     data.locale === 'es' && data.slug !== ''
   );
 
-  return entries.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+  const enSlugs = new Set(enEntries.map(e => e.data.slug));
+
+  return [
+    ...enEntries.map(entry => ({ params: { slug: entry.data.slug }, props: { entry } })),
+    ...esEntries
+      .filter(entry => !enSlugs.has(entry.data.slug))
+      .map(entry => ({ params: { slug: entry.data.slug }, props: { entry } })),
+  ];
 }
 
 interface Props {
@@ -41,13 +43,15 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, figmaDeepDive } = entry.data;
+const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, coverImage, figmaDeepDive, bullets, figmaBannerLabel, figmaBannerUrl } = entry.data;
 ---
 <BaseLayout
   title={`${title} — Juan Cruz Luna`}
   description={outcome}
   lang="en"
 >
+  <ReadingProgress client:load />
+  <CaseHeroParallax client:load />
 
   {/* ─── Block 1: Hero ─── */}
   <CaseHero
@@ -57,6 +61,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
     outcome={outcome}
     client={client}
     colorKey={colorKey}
+    image={coverImage}
   />
 
   {/* ─── Block 2: TL;DR ─── */}
@@ -68,6 +73,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
     platforms={platforms}
     tags={tags}
     outcome={outcome}
+    bullets={bullets}
   />
 
   {/* ─── Blocks 3–9: MDX prose body ─── */}
@@ -86,6 +92,11 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
       </div>
     )}
   </Container>
+
+  {/* ─── Figma / Proto banner ─── */}
+  {figmaBannerLabel && (
+    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} />
+  )}
 
   <Footer />
 </BaseLayout>
