@@ -12,14 +12,11 @@ locale: 'es'
 publishedAt: 2025-01-01
 colorKey: 'dark'
 coverImage: '/assets/cases/garantear/cover.jpg'
-bullets:
-  - Redujo significativamente el abandono en onboarding
-  - Eliminó la mayoría de consultas operativas de inmobiliarias
-  - Redujo disputas post-contrato gracias al rediseño del flujo de firma
-  - Panel de inmobiliarias implementado y adoptado en el primer mes
 figmaBannerLabel: 'Ver workbook'
 figmaBannerUrl: '#'
 ---
+
+import ImagePlaceholder from '../../../src/components/case/ImagePlaceholder.astro';
 
 ## Contexto
 
@@ -41,7 +38,7 @@ Un principio guió todas las decisiones del producto: **la fricción correcta en
 
 En fintech, la tentación es reducir fricción al máximo para mejorar conversión. Pero un producto de garantía necesita que el usuario entienda lo que está firmando. Reducir fricción en los términos para ganar conversión es un problema legal y de confianza, no solo de UX.
 
-La distinción operativa: fricción de confusión (mala, eliminar) vs. fricción de confirmación (buena, conservar). El usuario puede sentarse a leer un contrato — pero no puede adivinar qué documentos tiene que subir antes de que se los pidan.
+> La distinción operativa: fricción de confusión —mala, eliminar— vs. fricción de confirmación —buena, conservar—. El usuario puede sentarse a leer un contrato. Pero no puede adivinar qué documentos tiene que subir antes de que se los pidan.
 
 ## Fundamentos de marca
 
@@ -49,9 +46,9 @@ El sistema visual del MVP usaba azul corporativo estándar — el color que usa 
 
 Garantear necesitaba sentirse como algo entre un banco y un asesor de confianza: profesional sin ser frío, seguro sin ser burocrático. Derivamos a un verde oscuro como color primario — confianza sin la frialdad del azul bancario — con crema como fondo.
 
-En tipografía: sans-serif moderna para la UI (legible, neutral, rápida de leer) y una serif en los momentos de contrato y términos. La serif señaliza "esto es serio, leelo" — una diferencia semántica que ayuda a que el usuario distinga entre llenar un formulario y firmar algo con consecuencias.
+En tipografía: sans-serif moderna para la UI y una serif en los momentos de contrato y términos. La serif señaliza "esto es serio, leelo" — una diferencia semántica que ayuda al usuario a distinguir entre llenar un formulario y firmar algo con consecuencias.
 
-El logo existente era funcional. No lo toqué.
+<ImagePlaceholder />
 
 ## Decisiones clave
 
@@ -61,7 +58,7 @@ Antes de pedir un solo documento, el flujo hace tres preguntas: tipo de empleo, 
 
 Si no califica: se le dice en ese momento, antes de que suba nada, con una explicación clara. Si califica: el sistema ya sabe exactamente qué documentación necesita y lo guía a eso.
 
-Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. El problema era que la mayoría de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza en el producto más que el rechazo en sí.
+Lo que descartamos: un formulario unificado donde el usuario llenaba todo y el sistema evaluaba al final. La mayoría de los usuarios que no iban a calificar igual completaban el formulario entero antes del rechazo. Eso destruye la confianza más que el rechazo en sí.
 
 ### Decisión 2 — Progress indicators con nombres, no números
 
@@ -77,15 +74,17 @@ La conversión bajó levemente en ese paso específico. Las disputas post-contra
 
 ### Decisión 4 — Panel para inmobiliarias como segundo producto
 
-El MVP solo tenía vista de inquilino. Pero el decisor real del negocio — la persona que acepta o rechaza a Garantear como garante — es la inmobiliaria. Sin una vista para ellos, cada consulta de estado llegaba por teléfono o email.
+El MVP solo tenía vista de inquilino. Pero el decisor real del negocio —la persona que acepta o rechaza a Garantear como garante— es la inmobiliaria. Sin una vista para ellos, cada consulta de estado llegaba por teléfono o email.
 
 Diseñé un panel que muestra el estado de cada garantía activa, fechas de vencimiento e historial de pagos. Sin formularios, sin gestión — solo visibilidad. La gran mayoría de las consultas operativas desaparecieron en el primer mes de uso.
+
+<ImagePlaceholder />
 
 ## Solución
 
 La plataforma tiene tres flujos: onboarding del inquilino (pre-screen + documentación + firma digital), dashboard de estado para el inquilino, y panel de gestión para inmobiliarias.
 
-El onboarding quedó en 5 pasos con un tiempo razonable para usuarios que califican. La mayoría de los usuarios que pasan el pre-screen completan el proceso.
+> El onboarding quedó en 5 pasos con un tiempo razonable para usuarios que califican. La mayoría de los que pasan el pre-screen completan el proceso — sin recordatorios, sin intervención manual.
 
 ## Impacto
 
@@ -97,8 +96,14 @@ El onboarding quedó en 5 pasos con un tiempo razonable para usuarios que califi
 
 El NPS de inmobiliarias fue positivo desde la primera encuesta post-lanzamiento.
 
+<div class="callout">
+
 ## Reflexión
 
 End-to-end en fintech significa que tus decisiones de diseño tienen consecuencias legales. Aprendí a leer contratos — no por obligación sino porque si no entendés lo que el usuario está firmando, no podés diseñar el momento en que lo firma.
 
-Lo que haría diferente: involucraría al equipo legal desde el día 1, no como revisores al final del proceso. Tres semanas antes del lanzamiento tuvimos que rehacer el flujo de firma completo porque el contrato había cambiado y yo no me había enterado. Esa coordinación rota costó una semana de trabajo que no estaba en el presupuesto de tiempo.
+Lo que haría diferente: involucraría al equipo legal desde el día 1, no como revisores al final del proceso. Tres semanas antes del lanzamiento tuvimos que rehacer el flujo de firma completo porque el contrato había cambiado y yo no me había enterado. Esa coordinación rota costó una semana de trabajo que no estaba en el presupuesto.
+
+</div>
+
+<ImagePlaceholder />

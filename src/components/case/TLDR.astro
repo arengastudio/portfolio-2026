@@ -18,7 +18,7 @@ export interface Props {
   bullets?: string[];
 }
 
-const { client, role, team, timeframe, platforms, tags, bullets } = Astro.props;
+const { client, role, team, timeframe, platforms, bullets } = Astro.props;
 ---
 <section class={styles.tldr} aria-label="Resumen del caso">
   <Container>
@@ -49,13 +49,6 @@ const { client, role, team, timeframe, platforms, tags, bullets } = Astro.props;
       <div class={styles.cell}>
         <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>PLATAFORMAS</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{platforms.join(', ')}</Type>
-      </div>
-
-      <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>TAGS</Type>
-        <div class={styles.tags}>
-          {tags.map((tag) => <span class={styles.tag}>{tag}</span>)}
-        </div>
       </div>
 
     </div>
