@@ -18,12 +18,10 @@ export interface Props {
   bullets?: string[];
 }
 
-const { client, role, team, timeframe, platforms, tags, outcome, bullets } = Astro.props;
+const { client, role, team, timeframe, platforms, tags, bullets } = Astro.props;
 ---
 <section class={styles.tldr} aria-label="Resumen del caso">
   <Container>
-
-    <Type as="p" variant="xs" color="muted" class={styles.sectionLabel}>TL;DR</Type>
 
     {/* ─── Metadata grid ─── */}
     <div class={styles.grid}>
@@ -78,9 +76,6 @@ const { client, role, team, timeframe, platforms, tags, outcome, bullets } = Ast
         ))}
       </ul>
     )}
-
-    {/* ─── Outcome ─── */}
-    <Type as="p" variant="lg" class={styles.outcomeText}>{outcome}</Type>
 
   </Container>
 </section>
