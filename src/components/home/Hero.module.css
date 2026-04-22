@@ -201,6 +201,15 @@
     padding-block: var(--space-5);
   }
 
+  /*
+   * Mirror the high-specificity base rules (.hero .panel = 0,2,0) inside
+   * this media query so they override the base rule rather than losing to it.
+   * Without these, the base .hero .leftPanel { grid-column: 1/5 } wins and
+   * both panels stay side-by-side on mobile — the stacking never triggers.
+   */
+  .hero .leftPanel  { grid-column: 1 / -1; }
+  .hero .rightPanel { grid-column: 1 / -1; }
+
   .displayWord {
     font-size: clamp(48px, 13vw, 160px);
   }
