@@ -12,6 +12,20 @@
  * System cursor is hidden globally for pointer: fine devices in global.css.
  */
 
+/* ─── Hide on touch devices ──────────────────────────────── */
+
+/*
+ * JS guard (pointer: fine) returns early but does NOT hide these elements —
+ * they stay at position: fixed top:0 left:0 with their default CSS styles,
+ * producing a visible 8px dot and 36px ring in the top-left corner on mobile.
+ * This CSS rule removes them from rendering on any non-mouse device.
+ */
+@media (pointer: coarse) {
+  .dot, .ring, .label {
+    display: none;
+  }
+}
+
 /* ─── Dot ────────────────────────────────────────────────── */
 
 /*
