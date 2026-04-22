@@ -52,6 +52,23 @@ export default function ScrollReveal({
     if (!el || el.children.length === 0) return;
 
     let ctx: { revert: () => void } | null = null;
+    const targets = Array.from(el.children) as HTMLElement[];
+
+    // Fallback: if GSAP hasn't started within 2.5s (slow mobile / bundle waterfall),
+    // reveal content immediately so the page doesn't look broken.
+    // fallbackFired prevents GSAP from re-hiding and re-animating if it loads after the fallback.
+    let gsapReady = false;
+    let fallbackFired = false;
+    const fallbackTimer = setTimeout(() => {
+      if (!gsapReady) {
+        fallbackFired = true;
+        targets.forEach((t) => {
+          t.style.opacity = '1';
+          t.style.transform = '';
+          t.style.clipPath = '';
+        });
+      }
+    }, 2500);
 
     void (async () => {
       const { gsap } = await import('gsap');
@@ -59,8 +76,10 @@ export default function ScrollReveal({
       gsap.registerPlugin(ScrollTrigger);
 
       if (!ref.current) return; // unmounted during async import
+      if (fallbackFired) return; // fallback already revealed content — don't re-hide and re-animate
 
-      const targets = Array.from(el.children) as HTMLElement[];
+      gsapReady = true;
+      clearTimeout(fallbackTimer);
       const trigger = targets[0]; // first child as trigger (display:contents has no box)
 
       const fromVars: gsap.TweenVars = {};
@@ -107,6 +126,7 @@ export default function ScrollReveal({
     })();
 
     return () => {
+      clearTimeout(fallbackTimer);
       ctx?.revert();
     };
   }, [variant, delay, duration, threshold, stagger, once]);

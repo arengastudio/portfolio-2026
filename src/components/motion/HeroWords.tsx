@@ -47,6 +47,18 @@ export default function HeroWords({ wordClass }: Props) {
     let ctx: { revert: () => void } | null = null;
     const splits: Array<{ revert: () => void }> = [];
 
+    // Fallback: if GSAP/SplitText hasn't loaded within 1.5s (slow mobile),
+    // reveal words immediately so the hero doesn't look blank.
+    // fallbackFired prevents GSAP from re-hiding and re-animating if it loads after the fallback.
+    let gsapReady = false;
+    let fallbackFired = false;
+    const fallbackTimer = setTimeout(() => {
+      if (!gsapReady) {
+        fallbackFired = true;
+        wordEls.forEach((el) => { el.style.opacity = '1'; });
+      }
+    }, 1500);
+
     void (async () => {
       try {
         const { gsap } = await import('gsap');
@@ -54,6 +66,10 @@ export default function HeroWords({ wordClass }: Props) {
         gsap.registerPlugin(SplitText);
 
         if (!containerRef.current) return; /* unmounted during async import */
+        if (fallbackFired) return; // fallback already revealed words — don't re-hide and re-animate
+
+        gsapReady = true;
+        clearTimeout(fallbackTimer);
 
         ctx = gsap.context(() => {
           wordEls.forEach((el, i) => {
@@ -91,6 +107,7 @@ export default function HeroWords({ wordClass }: Props) {
     })();
 
     return () => {
+      clearTimeout(fallbackTimer);
       ctx?.revert();
       splits.forEach((s) => s.revert());
     };
