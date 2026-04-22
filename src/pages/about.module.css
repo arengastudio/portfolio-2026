@@ -31,29 +31,23 @@
 }
 
 /*
- * Photo placeholder: fg-colored block, cream [FOTO] text.
- * Spans cols 1–4 on desktop. Fixed 4/5 aspect ratio (≈400×500 proportions).
+ * Profile photo: spans cols 1–4 on desktop.
+ * .intro prefix bumps specificity to (0,2,0) — beats Container's > * (0,1,0).
  */
-.photoBlock {
+.intro .photo {
   grid-column: 1 / 5;
-  background-color: var(--color-fg);
   aspect-ratio: 4 / 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
   align-self: start;
-}
-
-.photoLabel {
-  color: var(--color-bg);
-  letter-spacing: 0.05em;
-  margin: 0;
 }
 
 /*
  * Bio text: spans cols 5–9 on desktop.
+ * Same specificity bump as .photo above.
  */
-.bio {
+.intro .bio {
   grid-column: 5 / 9;
   display: flex;
   flex-direction: column;
@@ -113,11 +107,11 @@
 /* ─── Tablet (≤1023px) ────────────────────────────────────── */
 
 @media (max-width: 1023px) {
-  .photoBlock {
+  .intro .photo {
     grid-column: 1 / 3;
   }
 
-  .bio {
+  .intro .bio {
     grid-column: 3 / 5;
   }
 }
@@ -141,12 +135,12 @@
     padding-block-end: var(--space-6);
   }
 
-  .photoBlock {
+  .intro .photo {
     grid-column: 1 / -1;
     aspect-ratio: 3 / 2;
   }
 
-  .bio {
+  .intro .bio {
     grid-column: 1 / -1;
   }
 

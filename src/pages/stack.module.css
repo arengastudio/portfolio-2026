@@ -1,7 +1,7 @@
 /*
  * stack.module.css
  * /stack — Stack page styles.
- * Shell: hero, three tool category sections.
+ * Card grid layout: 3 cols desktop, 2 tablet, 1 mobile.
  */
 
 /* ─── Hero ────────────────────────────────────────────────── */
@@ -22,17 +22,13 @@
   margin-block-start: var(--space-2);
 }
 
-/* ─── Tool categories ─────────────────────────────────────── */
+/* ─── Categories ──────────────────────────────────────────── */
 
 .categories {
   padding-block-start: var(--space-8);
   padding-block-end: var(--space-8);
 }
 
-/*
- * Category wrapper — each category sits as a full-width grid item.
- * Multiple categories spaced by margin-block-start.
- */
 .category {
   grid-column: 1 / -1;
 }
@@ -46,36 +42,63 @@
 .categoryLabel {
   margin: 0;
   margin-block-end: var(--space-4);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
-/* ─── Tool list ───────────────────────────────────────────── */
+/* ─── Tool grid ───────────────────────────────────────────── */
 
-.toolList {
+.toolGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+/* ─── Tool card ───────────────────────────────────────────── */
+
+.toolCard {
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
-.toolItem {
+/*
+ * Tool icon: 20px × 20px, same color as text, very faint.
+ * Low opacity keeps them decorative — never competing with the name.
+ */
+.toolIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.18;
+}
+
+.toolText {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  padding-block-end: var(--space-2);
-  border-bottom: 1px solid var(--color-border);
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .toolName {
-  font-weight: 500;
   margin: 0;
+  font-weight: 500;
 }
 
 .toolNote {
-  letter-spacing: 0.02em;
   margin: 0;
+  letter-spacing: 0.02em;
 }
 
-/* ─── Mobile ──────────────────────────────────────────────── */
+/* ─── Tablet (≤1023px) ────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+  .toolGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Mobile (≤767px) ─────────────────────────────────────── */
 
 @media (max-width: 767px) {
   .hero {
@@ -83,7 +106,6 @@
     padding-block-end: var(--space-4);
   }
 
-  /* display-md (144px, nowrap) → fluid scale that fits on 375px phones */
   .heroTitle {
     font-size: clamp(48px, 13vw, 100px);
     white-space: normal;
@@ -94,9 +116,17 @@
     padding-block-end: var(--space-6);
   }
 
-  .toolItem {
-    flex-direction: column;
-    gap: var(--space-1);
+  .toolGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolCard {
+    flex-direction: row;
     align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .toolIcon {
+    margin-block-start: 0.2em;
   }
 }

@@ -5,50 +5,45 @@ import Type from '../../components/ui/Type.astro';
 import CaseEntry from '../../components/home/CaseEntry.astro';
 import Footer from '../../components/global/Footer.astro';
 import styles from './index.module.css';
+import { works } from '../../data/works';
 
 const cases = [
   {
     number: '01',
     title: 'Librodepases',
-    year: '2022 — PRESENTE',
-    tags: 'AI · SPORTS · SAAS',
+    year: '2022 — 2025',
+    tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
     role: 'PRODUCT DESIGN LEAD',
-    tagline: 'Lideré el diseño de una plataforma AI para scouting de fútbol durante tres años.',
+    tagline: 'Tres años liderando diseño en una plataforma que centraliza datos, video e IA para que los equipos de scouting de fútbol tomen mejores decisiones. De interfaz sin sistema a producto con design system propio.',
     href: '/work/librodepases',
     colorKey: 'accent' as const,
     image: '/assets/cases/librodepases/01.png',
   },
   {
     number: '02',
-    title: 'Arenga Studio',
-    year: '2024 — PRESENTE',
-    tags: 'FOUNDER · STUDIO · END-TO-END',
-    role: 'CO-FOUNDER & PRODUCT DESIGNER',
-    tagline: 'Co-fundé un estudio digital. 8 productos entregados en 18 meses.',
-    href: '/work/arenga',
+    title: 'SparkClub',
+    year: '2025',
+    tags: 'AI · EMPLOYEE ENGAGEMENT · MVP · END-TO-END',
+    role: 'PRODUCT DESIGNER',
+    tagline: 'MVP end-to-end para una plataforma de employee engagement con IA. Tres roles de usuario, design system desde cero, y prototipo interactivo listo para pitch a inversores. De brief a prototipo navegable en 6 semanas.',
+    href: '/work/sparkclub',
     colorKey: 'fg' as const,
-    image: '/assets/cases/arenga/cover.png',
+    image: '/assets/cases/sparkclub/cover.png',
   },
   {
     number: '03',
     title: 'Garantear',
     year: '2025',
-    tags: 'FINTECH · END-TO-END',
+    tags: 'FINTECH · BRAND',
     role: 'END-TO-END DESIGN',
-    tagline: 'End-to-end product design para una plataforma fintech.',
+    tagline: 'End-to-end product design para una fintech de garantías de alquiler en Argentina. Desde identidad visual hasta flujos de onboarding, firma digital y panel para inmobiliarias.',
     href: '/work/garantear',
     colorKey: 'dark' as const,
     image: '/assets/cases/garantear/01.png',
   },
 ];
 
-const archive = [
-  { name: 'SparkClub', year: '2025' },
-  { name: 'EEVA Studios', year: '2024' },
-  { name: 'Banndo', year: '2023' },
-  { name: 'SimplePass', year: '2023' },
-  { name: 'BeachWalk', year: '2022' },
-];
+const archive = works.slice(3);
 ---
 <BaseLayout
   title="Work — Juan Cruz Luna"
@@ -92,8 +87,8 @@ const archive = [
       <div class={styles.archiveList}>
         {archive.map((item) => (
           <div class={styles.archiveItem}>
-            <Type as="p" variant="lg" class={styles.archiveName}>{item.name}</Type>
-            <Type as="p" variant="xs" color="muted" class={styles.archiveYear}>— {item.year}</Type>
+            <Type as="p" variant="lg" class={styles.archiveName}>{item.title}</Type>
+            <Type as="p" variant="xs" color="muted" class={styles.archiveYear}>{item.year}</Type>
           </div>
         ))}
       </div>
