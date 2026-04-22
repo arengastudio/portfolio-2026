@@ -130,6 +130,14 @@
   .activities {
     grid-column: 1 / 5;
   }
+
+  /*
+   * .currently .activities base rule has specificity (0,2,0) — beats the
+   * .activities rule above (0,1,0). Mirror it here to ensure the override lands.
+   */
+  .currently .activities {
+    grid-column: 1 / 5;
+  }
 }
 
 /* ─── Mobile (≤767px) ─────────────────────────────────────── */
@@ -145,6 +153,11 @@
   }
 
   .activities {
+    grid-column: 1 / -1;
+  }
+
+  /* Same specificity override as tablet — needed for same reason */
+  .currently .activities {
     grid-column: 1 / -1;
   }
 

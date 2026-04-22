@@ -141,4 +141,12 @@
   .statement {
     font-size: clamp(32px, 8vw, 48px);
   }
+
+  /*
+   * bgNumber base clamp(80px, 12vw, 180px): at 375px the min (80px) kicks in,
+   * making it 2.5× the statement text. Reduce to keep it clearly decorative.
+   */
+  .bgNumber {
+    font-size: clamp(48px, 10vw, 72px);
+  }
 }
