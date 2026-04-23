@@ -5,6 +5,9 @@ import Link from '../ui/Link.astro';
 import LiveClock from './LiveClock.tsx';
 import ScrollReveal from '../motion/ScrollReveal.tsx';
 import styles from './Currently.module.css';
+
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
 ---
 <section class={styles.currently}>
   <Container>
@@ -13,7 +16,7 @@ import styles from './Currently.module.css';
     <ScrollReveal client:load variant="fade">
       <div class={styles.metaRow}>
         <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>CURRENTLY</Type>
-        <Type as="span" variant="xs" color="muted" class={styles.dateMeta}>ABRIL 2026</Type>
+        <Type as="span" variant="xs" color="muted" class={styles.dateMeta}>{lang === 'en' ? 'APRIL 2026' : 'ABRIL 2026'}</Type>
       </div>
     </ScrollReveal>
 
@@ -23,16 +26,16 @@ import styles from './Currently.module.css';
       children of nav, preserving gap and flex-direction from .activities.
       Stagger 0.1s: line 1 at 0s, line 2 at 0.1s, line 3 at 0.2s.
     */}
-    <nav class={styles.activities} aria-label="Actividad actual">
+    <nav class={styles.activities} aria-label={lang === 'en' ? 'Current activity' : 'Actividad actual'}>
       <ScrollReveal client:load variant="fade-up" stagger={0.1}>
-        <Link href="/work/sparkclub" variant="standalone" class={styles.activityLink}>
-          Buildeando con IA. Nuevos proyectos, nuevas ideas <span class={styles.arrow} aria-hidden="true">→</span>
+        <Link href={lang === 'en' ? '/en/work/sparkclub' : '/work/sparkclub'} variant="standalone" class={styles.activityLink}>
+          {lang === 'en' ? 'Building with AI. New projects, new ideas' : 'Buildeando con IA. Nuevos proyectos, nuevas ideas'} <span class={styles.arrow} aria-hidden="true">→</span>
         </Link>
-        <Link href="/work/arenga" variant="standalone" class={styles.activityLink}>
-          Co-fundador en Arenga Studio <span class={styles.arrow} aria-hidden="true">→</span>
+        <Link href={lang === 'en' ? '/en/work/arenga' : '/work/arenga'} variant="standalone" class={styles.activityLink}>
+          {lang === 'en' ? 'Co-founder at Arenga Studio' : 'Co-fundador en Arenga Studio'} <span class={styles.arrow} aria-hidden="true">→</span>
         </Link>
         <Link href="#contact" variant="standalone" class={styles.activityLink}>
-          Disponible para nuevos proyectos <span class={styles.arrow} aria-hidden="true">→</span>
+          {lang === 'en' ? 'Available for new projects' : 'Disponible para nuevos proyectos'} <span class={styles.arrow} aria-hidden="true">→</span>
         </Link>
       </ScrollReveal>
     </nav>

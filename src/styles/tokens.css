@@ -126,5 +126,7 @@
 @media (max-width: 767px) {
   :root {
     --grid-outer-margin: 24px;
+    --text-display-md-size: clamp(56px, 14vw, 100px);
+    --text-display-lg-size: clamp(48px, 13vw, 120px);
   }
 }

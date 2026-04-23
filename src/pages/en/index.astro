@@ -1,9 +1,4 @@
 ---
-/*
- * EN home shell — mirrors /index.astro.
- * Same components render for now; copy will be translated to English in a later pass.
- * TODO(juan): Replace all Spanish copy with English equivalents.
- */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/home/Hero.astro';
 import Currently from '../../components/home/Currently.astro';
@@ -17,10 +12,10 @@ import Footer from '../../components/global/Footer.astro';
   description="Product Designer & Builder. Buenos Aires."
   lang="en"
 >
-  <Hero />
-  <Currently />
-  <SelectedWork />
+  <Hero lang="en" />
+  <Currently lang="en" />
+  <SelectedWork lang="en" />
   <Philosophy />
-  <FinalCTA />
-  <Footer />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
 </BaseLayout>

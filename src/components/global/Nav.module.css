@@ -170,32 +170,35 @@
 /* ─── Mobile (<768px) ─────────────────────────────────────── */
 
 /*
- * Mobile: logo + lang toggle only. Nav links hidden — no hamburger menu.
- * Brand is shown (logo + name). justify-content: space-between keeps
- * brand at the left edge and lang switcher at the right.
+ * Mobile: hide brand name (logo only) to reclaim width for nav links.
+ * Links remain visible — work/about/stack fit at 13px mono with tighter gaps.
+ * Lang toggle touch target: 44px min-height + padding-inline (not min-width)
+ * so the langSwitch doesn't eat too much horizontal space.
  *
- * Lang toggle touch targets: min 44×44px per Apple HIG / WCAG 2.5.5.
- * Each .lang anchor gets an explicit hit area via padding so the visible
- * 11px text is still compact while the tappable zone is accessible.
- *
- * The .langSwitch border-left separator is removed — it existed only to
- * visually divide from the nav links, which are now hidden.
+ * Calculation at 375px container (~327px):
+ *   logo 24px + space-between + links(~142px) + gap(16) + langSwitch(~86px) ≈ 268px ✓
  */
 @media (max-width: 767px) {
-  .links {
+  .brandText {
     display: none;
   }
 
+  .right {
+    gap: var(--space-2);
+  }
+
+  .links {
+    gap: var(--space-2);
+  }
+
   .langSwitch {
-    padding-inline-start: 0;
-    border-left: none;
+    padding-inline-start: var(--space-2);
   }
 
   .lang {
     min-height: 44px;
-    min-width: 44px;
-    display: flex;
+    padding-inline: var(--space-1);
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
   }
 }

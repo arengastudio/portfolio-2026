@@ -8,6 +8,9 @@ import WebGLHero from '../motion/WebGLHero.tsx';
 import HeroWords from '../motion/HeroWords.tsx';
 import TextScramble from '../motion/TextScramble.tsx';
 import styles from './Hero.module.css';
+
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
 ---
 <section data-hero class={styles.hero}>
   <WebGLHero client:visible wrapperClass={styles.webglCanvas} />
@@ -43,14 +46,14 @@ import styles from './Hero.module.css';
         <Type as="p" variant="xs" color="muted" class={styles.location}>Buenos Aires · 2026</Type>
         {/* Subhead — italic, character-driven */}
         <Type as="p" variant="lg" color="fg" class={styles.subhead}>
-          <em>Diseño y construyo productos digitales. Del concepto a producción.</em>
+          <em>{lang === 'en' ? 'I design and build digital products. From concept to production.' : 'Diseño y construyo productos digitales. Del concepto a producción.'}</em>
         </Type>
         <div class={styles.trackWrapper}>
           <TrackRecord />
         </div>
         <div class={styles.ctas}>
-          <Button variant="primary" href="/work">VER MI TRABAJO →</Button>
-          <Button variant="secondary" href="#contact">Contactame</Button>
+          <Button variant="primary" href={lang === 'en' ? '/en/work' : '/work'}>{lang === 'en' ? 'VIEW MY WORK →' : 'VER MI TRABAJO →'}</Button>
+          <Button variant="secondary" href="#contact">{lang === 'en' ? 'Contact me' : 'Contactame'}</Button>
         </div>
       </div>
     </ScrollReveal>

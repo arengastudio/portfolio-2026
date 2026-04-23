@@ -112,6 +112,18 @@
   white-space: nowrap;
 }
 
+/* ─── Mobile — allow display text to wrap on narrow viewports ── */
+
+@media (max-width: 767px) {
+  .displayMd {
+    white-space: normal;
+  }
+
+  .displayLg {
+    white-space: normal;
+  }
+}
+
 /* ─── Color ──────────────────────────────────────────────── */
 
 .colorFg     { color: var(--color-fg); }

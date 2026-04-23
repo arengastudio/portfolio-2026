@@ -3,6 +3,9 @@ import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
 import styles from './Footer.module.css';
 
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
+
 /*
  * Activity grid — pseudo-random contribution graph.
  * Fixed seed (42) guarantees the same pattern on every render.
@@ -46,7 +49,9 @@ const levelOpacity = [0.08, 0.28, 0.48, 0.70, 1.0];
         />
 
         <Type as="p" variant="xs" color="muted" class={styles.tagline}>
-          Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.
+          {lang === 'en'
+            ? 'Made in Buenos Aires with coffee, brutalism, and an irresponsible amount of iterations.'
+            : 'Hecho en Buenos Aires con café, brutalismo y una cantidad irresponsable de iteraciones.'}
         </Type>
 
         <Type as="p" variant="xs" color="muted" class={styles.thatsAll}>
@@ -60,7 +65,7 @@ const levelOpacity = [0.08, 0.28, 0.48, 0.70, 1.0];
 
         {/* Activity block */}
         <div class={styles.activityBlock} aria-hidden="true">
-          <span class={styles.sectionLabel}>ACTIVIDAD</span>
+          <span class={styles.sectionLabel}>{lang === 'en' ? 'ACTIVITY' : 'ACTIVIDAD'}</span>
           <div class={styles.activityGrid}>
             {grid.map((row) =>
               row.map((level, _colIdx) => (

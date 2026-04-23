@@ -145,6 +145,11 @@
     gap: var(--space-1);
   }
 
+  .title {
+    font-size: clamp(36px, 9vw, 64px);
+    overflow-wrap: break-word;
+  }
+
   .visualWrap {
     overflow: hidden;
   }

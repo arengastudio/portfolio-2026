@@ -7,44 +7,86 @@ import ScrollReveal from '../motion/ScrollReveal.tsx';
 import styles from './SelectedWork.module.css';
 import { works } from '../../data/works';
 
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
+
 // Items 04, 05, 06 shown in the home archive preview (after the 3 featured cases)
 const archiveItems = works.slice(3, 6);
 
-const cases = [
-  {
-    number: '01',
-    title: 'Librodepases',
-    year: '2022 — 2025',
-    tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
-    role: 'PRODUCT DESIGN LEAD',
-    tagline: 'Tres años liderando diseño en una plataforma que centraliza datos, video e IA para que los equipos de scouting de fútbol tomen mejores decisiones. De interfaz sin sistema a producto con design system propio.',
-    href: '/work/librodepases',
-    colorKey: 'accent' as const,
-    image: '/assets/cases/librodepases/01.png',
-  },
-  {
-    number: '02',
-    title: 'SparkClub',
-    year: '2025',
-    tags: 'AI · EMPLOYEE ENGAGEMENT · MVP · END-TO-END',
-    role: 'PRODUCT DESIGNER',
-    tagline: 'MVP end-to-end para una plataforma de employee engagement con IA. Tres roles de usuario, design system desde cero, y prototipo interactivo listo para pitch a inversores. De brief a prototipo navegable en 6 semanas.',
-    href: '/work/sparkclub',
-    colorKey: 'fg' as const,
-    image: '/assets/cases/sparkclub/cover.png',
-  },
-  {
-    number: '03',
-    title: 'Garantear',
-    year: '2025',
-    tags: 'FINTECH · BRAND',
-    role: 'END-TO-END DESIGN',
-    tagline: 'End-to-end product design para una fintech de garantías de alquiler en Argentina. Desde identidad visual hasta flujos de onboarding, firma digital y panel para inmobiliarias.',
-    href: '/work/garantear',
-    colorKey: 'dark' as const,
-    image: '/assets/cases/garantear/01.png',
-  },
-];
+const casesCopy = {
+  es: [
+    {
+      number: '01',
+      title: 'Librodepases',
+      year: '2022 — 2025',
+      tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
+      role: 'PRODUCT DESIGN LEAD',
+      tagline: 'Tres años liderando diseño en una plataforma que centraliza datos, video e IA para que los equipos de scouting de fútbol tomen mejores decisiones. De interfaz sin sistema a producto con design system propio.',
+      href: '/work/librodepases',
+      colorKey: 'accent' as const,
+      image: '/assets/cases/librodepases/01.png',
+    },
+    {
+      number: '02',
+      title: 'SparkClub',
+      year: '2025',
+      tags: 'AI · EMPLOYEE ENGAGEMENT · MVP · END-TO-END',
+      role: 'PRODUCT DESIGNER',
+      tagline: 'MVP end-to-end para una plataforma de employee engagement con IA. Tres roles de usuario, design system desde cero, y prototipo interactivo listo para pitch a inversores. De brief a prototipo navegable en 6 semanas.',
+      href: '/work/sparkclub',
+      colorKey: 'fg' as const,
+      image: '/assets/cases/sparkclub/cover.png',
+    },
+    {
+      number: '03',
+      title: 'Garantear',
+      year: '2025',
+      tags: 'FINTECH · BRAND',
+      role: 'END-TO-END DESIGN',
+      tagline: 'End-to-end product design para una fintech de garantías de alquiler en Argentina. Desde identidad visual hasta flujos de onboarding, firma digital y panel para inmobiliarias.',
+      href: '/work/garantear',
+      colorKey: 'dark' as const,
+      image: '/assets/cases/garantear/01.png',
+    },
+  ],
+  en: [
+    {
+      number: '01',
+      title: 'Librodepases',
+      year: '2022 — 2025',
+      tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
+      role: 'PRODUCT DESIGN LEAD',
+      tagline: 'Three years leading design on a platform centralizing data, video, and AI for football scouting teams. From a system-less interface to a product with its own design system.',
+      href: '/work/librodepases',
+      colorKey: 'accent' as const,
+      image: '/assets/cases/librodepases/01.png',
+    },
+    {
+      number: '02',
+      title: 'SparkClub',
+      year: '2025',
+      tags: 'AI · EMPLOYEE ENGAGEMENT · MVP · END-TO-END',
+      role: 'PRODUCT DESIGNER',
+      tagline: 'End-to-end MVP for an AI-powered employee engagement platform. Three user roles, design system from scratch, and an interactive prototype ready for investor pitch. From brief to navigable prototype in 6 weeks.',
+      href: '/work/sparkclub',
+      colorKey: 'fg' as const,
+      image: '/assets/cases/sparkclub/cover.png',
+    },
+    {
+      number: '03',
+      title: 'Garantear',
+      year: '2025',
+      tags: 'FINTECH · BRAND',
+      role: 'END-TO-END DESIGN',
+      tagline: 'End-to-end product design for a rental guarantee fintech in Argentina. From visual identity to onboarding flows, digital signing, and a real estate agency dashboard.',
+      href: '/work/garantear',
+      colorKey: 'dark' as const,
+      image: '/assets/cases/garantear/01.png',
+    },
+  ],
+};
+
+const cases = casesCopy[lang];
 ---
 <section class={styles.selectedWork}>
   <Container>
@@ -64,7 +106,7 @@ const cases = [
     */}
     <div class={styles.dragHint} aria-hidden="true">
       <span class={styles.dragLine}></span>
-      <span class={styles.dragLabel}>DESLIZÁ</span>
+      <span class={styles.dragLabel}>{lang === 'en' ? 'SWIPE' : 'DESLIZÁ'}</span>
       <span class={styles.dragLine}></span>
     </div>
 
@@ -102,8 +144,8 @@ const cases = [
       <div class={styles.archiveBlock}>
 
         <div class={styles.archiveHeader}>
-          <Type as="h2" variant="display-md" class={styles.arcHeading}>ARCHIVO.</Type>
-          <Type as="p" variant="xs" color="muted" class={styles.arcEyebrow}>TODOS LOS PROYECTOS · 2017–2026</Type>
+          <Type as="h2" variant="display-md" class={styles.arcHeading}>{lang === 'en' ? 'ARCHIVE.' : 'ARCHIVO.'}</Type>
+          <Type as="p" variant="xs" color="muted" class={styles.arcEyebrow}>{lang === 'en' ? 'ALL PROJECTS · 2017–2026' : 'TODOS LOS PROYECTOS · 2017–2026'}</Type>
         </div>
 
         <ol class={styles.arcList}>
@@ -126,8 +168,8 @@ const cases = [
           })}
         </ol>
 
-        <Link href="/archivo" variant="standalone" class={styles.viewArchive}>
-          VER ARCHIVO COMPLETO →
+        <Link href={lang === 'en' ? '/en/archivo' : '/archivo'} variant="standalone" class={styles.viewArchive}>
+          {lang === 'en' ? 'VIEW FULL ARCHIVE →' : 'VER ARCHIVO COMPLETO →'}
         </Link>
 
       </div>
