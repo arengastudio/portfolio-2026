@@ -13,7 +13,7 @@ const { lang = 'es' } = Astro.props;
   <Container>
 
     {/* ─── Meta row: eyebrow left, date right ─── */}
-    <ScrollReveal client:load variant="fade">
+    <ScrollReveal client:visible variant="fade">
       <div class={styles.metaRow}>
         <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>CURRENTLY</Type>
         <Type as="span" variant="xs" color="muted" class={styles.dateMeta}>{lang === 'en' ? 'APRIL 2026' : 'ABRIL 2026'}</Type>
@@ -27,11 +27,11 @@ const { lang = 'es' } = Astro.props;
       Stagger 0.1s: line 1 at 0s, line 2 at 0.1s, line 3 at 0.2s.
     */}
     <nav class={styles.activities} aria-label={lang === 'en' ? 'Current activity' : 'Actividad actual'}>
-      <ScrollReveal client:load variant="fade-up" stagger={0.1}>
+      <ScrollReveal client:visible variant="fade-up" stagger={0.1}>
         <Link href={lang === 'en' ? '/en/work/sparkclub' : '/work/sparkclub'} variant="standalone" class={styles.activityLink}>
           {lang === 'en' ? 'Building with AI. New projects, new ideas' : 'Buildeando con IA. Nuevos proyectos, nuevas ideas'} <span class={styles.arrow} aria-hidden="true">→</span>
         </Link>
-        <Link href={lang === 'en' ? '/en/work/arenga' : '/work/arenga'} variant="standalone" class={styles.activityLink}>
+        <Link href="https://arengastudio.com" variant="standalone" class={styles.activityLink}>
           {lang === 'en' ? 'Co-founder at Arenga Studio' : 'Co-fundador en Arenga Studio'} <span class={styles.arrow} aria-hidden="true">→</span>
         </Link>
         <Link href="#contact" variant="standalone" class={styles.activityLink}>
@@ -41,7 +41,7 @@ const { lang = 'es' } = Astro.props;
     </nav>
 
     {/* ─── Live clock ticker (React island) ─── */}
-    <ScrollReveal client:load variant="fade" delay={0.3}>
+    <ScrollReveal client:visible variant="fade" delay={0.3}>
       <div class={styles.clockWrapper}>
         <span class={styles.clock}>
           <LiveClock client:only="react" />

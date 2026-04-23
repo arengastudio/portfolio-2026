@@ -37,10 +37,10 @@ const { lang = 'es' } = Astro.props;
       grid child with grid-column:5/9. Fires on page load (above fold),
       delay 1.2s lands after the statement finishes (0.3 + 3×0.15 + ~0.8s).
     */}
-    <ScrollReveal client:load variant="fade" delay={1.2}>
+    <ScrollReveal client:visible variant="fade" delay={1.2}>
       <div class={styles.rightPanel}>
         {/* Name — secondary label above the role */}
-        <TextScramble client:load text="Juan Cruz Luna" className={styles.name} />
+        <TextScramble client:idle text="Juan Cruz Luna" className={styles.name} />
         {/* Role — headline of the panel, bigger than the name */}
         <Type as="p" variant="2xl" class={styles.positioning}>Product Designer & Builder</Type>
         <Type as="p" variant="xs" color="muted" class={styles.location}>Buenos Aires · 2026</Type>

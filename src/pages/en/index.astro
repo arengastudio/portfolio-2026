@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Loader from '../../components/motion/Loader.tsx';
 import Hero from '../../components/home/Hero.astro';
 import Currently from '../../components/home/Currently.astro';
 import SelectedWork from '../../components/home/SelectedWork.astro';
@@ -9,9 +10,10 @@ import Footer from '../../components/global/Footer.astro';
 ---
 <BaseLayout
   title="Juan Cruz Luna — Product Designer & Builder"
-  description="Product Designer & Builder. Buenos Aires."
+  description="Product Designer & Builder based in Buenos Aires. Co-founder of Arenga Studio."
   lang="en"
 >
+  <Loader client:load />
   <Hero lang="en" />
   <Currently lang="en" />
   <SelectedWork lang="en" />

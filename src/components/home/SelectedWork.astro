@@ -18,7 +18,7 @@ const casesCopy = {
     {
       number: '01',
       title: 'Librodepases',
-      year: '2022 — 2025',
+      year: '2022 — 2026',
       tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
       role: 'PRODUCT DESIGN LEAD',
       tagline: 'Tres años liderando diseño en una plataforma que centraliza datos, video e IA para que los equipos de scouting de fútbol tomen mejores decisiones. De interfaz sin sistema a producto con design system propio.',
@@ -53,7 +53,7 @@ const casesCopy = {
     {
       number: '01',
       title: 'Librodepases',
-      year: '2022 — 2025',
+      year: '2022 — 2026',
       tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
       role: 'PRODUCT DESIGN LEAD',
       tagline: 'Three years leading design on a platform centralizing data, video, and AI for football scouting teams. From a system-less interface to a product with its own design system.',
@@ -92,7 +92,7 @@ const cases = casesCopy[lang];
   <Container>
 
     {/* ─── Section header: title left, eyebrow right ─── */}
-    <ScrollReveal client:load variant="clip-up" duration={1.0}>
+    <ScrollReveal client:visible variant="clip-up" duration={1.0}>
       <div class={styles.sectionHeader}>
         <Type as="h2" variant="display-md" class={styles.sectionTitle}>CASES.</Type>
         <Type as="p" variant="xs" color="muted" class={styles.sectionEyebrow}>SELECTED WORK · 2024–2026</Type>
@@ -118,7 +118,7 @@ const cases = casesCopy[lang];
       so .caseEntry:not(:first-of-type) margin spacing still works.
     */}
     <div class={styles.casesTrack}>
-      <ScrollReveal client:load variant="fade-up" stagger={0.15}>
+      <ScrollReveal client:visible variant="fade-up" stagger={0.15}>
         {cases.map((c) => (
           <CaseEntry
             number={c.number}
@@ -141,7 +141,7 @@ const cases = casesCopy[lang];
       Three projects from the archive (04–06) shown below the featured cases.
       Same list style as /archivo, data shared from src/data/works.ts.
     */}
-    <ScrollReveal client:load variant="fade">
+    <ScrollReveal client:visible variant="fade">
       <div class={styles.archiveBlock}>
 
         <div class={styles.archiveHeader}>
@@ -160,7 +160,7 @@ const cases = casesCopy[lang];
                 >
                   <span class={styles.arcNumber}>{item.number}</span>
                   <span class={styles.arcName}>{item.title}</span>
-                  <span class={styles.arcYear}>{item.year}</span>
+                  <span class={styles.arcYear}>{lang === 'en' && item.yearEn ? item.yearEn : item.year}</span>
                   <span class={styles.arcTags}>{item.tags.join(' · ')}</span>
                   {item.href && <span class={styles.arcArrow} aria-hidden="true">→</span>}
                 </Tag>

@@ -16,12 +16,12 @@ export default function SmoothScroll() {
     if (prefersReduced) return;
 
     let destroyed = false;
-    let lenisRef: { raf: (t: number) => void; destroy: () => void; on: (event: string, fn: () => void) => void } | null = null;
+    let lenisRef: { raf: (t: number) => void; destroy: () => void; on: (event: 'scroll', fn: () => void) => void } | null = null;
     let tickFn: ((time: number) => void) | null = null;
 
     void (async () => {
       const [{ default: Lenis }, { gsap }, { ScrollTrigger }] = await Promise.all([
-        import('@studio-freight/lenis'),
+        import('lenis'),
         import('gsap'),
         import('gsap/ScrollTrigger'),
       ]);

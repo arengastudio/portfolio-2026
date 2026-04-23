@@ -1,7 +1,6 @@
 ---
 /*
- * EN /about shell — mirrors /about.astro.
- * TODO(juan): Translate bio paragraphs to English.
+ * EN /about — mirrors /about.astro.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
@@ -34,7 +33,7 @@ const experience = [
 ---
 <BaseLayout
   title="About — Juan Cruz Luna"
-  description="Product Designer & Builder. Buenos Aires."
+  description="Product Designer & Builder based in Buenos Aires. Co-founder of Arenga Studio."
   lang="en"
 >
 
@@ -52,12 +51,16 @@ const experience = [
   <section class={styles.intro}>
     <Container>
 
-      {/* LEFT: photo placeholder */}
-      <div class={styles.photoBlock} role="img" aria-label="Photo of Juan Cruz Luna — coming soon">
-        <Type as="p" variant="xs" color="muted" class={styles.photoLabel}>[PHOTO]</Type>
-      </div>
+      {/* LEFT: profile photo */}
+      <img
+        src="/assets/profile.png"
+        alt="Juan Cruz Luna"
+        class={styles.photo}
+        width="400"
+        height="500"
+      />
 
-      {/* RIGHT: bio — TODO(juan): translate to English */}
+      {/* RIGHT: bio */}
       <div class={styles.bio}>
         <Type as="p" variant="base" class={styles.bioPara}>
           I'm Juan Cruz Luna. I design digital products from Buenos Aires. Started in Entre Ríos

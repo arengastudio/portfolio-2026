@@ -4,7 +4,14 @@ import { glob } from 'astro/loaders';
 // Loads MDX from root-level content/cases/ — files live outside src/ for easy editing.
 // See CLAUDE.md for the full content directory structure.
 const cases = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './content/cases' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './content/cases',
+    // Default generateId uses data.slug, which causes EN/ES files with the
+    // same slug to share one data-store entry — overwriting each other.
+    // Use the file path instead to ensure unique IDs per file.
+    generateId: ({ entry }: { entry: string }) => entry.replace(/\.(md|mdx)$/, ''),
+  }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),

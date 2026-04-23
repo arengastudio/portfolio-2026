@@ -17,8 +17,10 @@ export interface WorkItem {
   number: string;
   title: string;
   year: string;
+  yearEn?: string;
   tags: string[];
   description: string;
+  descriptionEn?: string;
   image: string;
   href?: string;
   external?: boolean;
@@ -26,9 +28,10 @@ export interface WorkItem {
 
 interface Props {
   items: WorkItem[];
+  lang?: 'es' | 'en';
 }
 
-export default function WorkArchive({ items }: Props) {
+export default function WorkArchive({ items, lang = 'es' }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const floatRef  = useRef<HTMLDivElement>(null);
   const imgRef    = useRef<HTMLImageElement>(null);
@@ -104,6 +107,10 @@ export default function WorkArchive({ items }: Props) {
   };
 
   const activeItem = activeIndex !== null ? items[activeIndex] : null;
+  const getDescription = (item: WorkItem) =>
+    lang === 'en' && item.descriptionEn ? item.descriptionEn : item.description;
+  const getYear = (item: WorkItem) =>
+    lang === 'en' && item.yearEn ? item.yearEn : item.year;
 
   return (
     <div className={styles.archiveWrap}>
@@ -117,7 +124,7 @@ export default function WorkArchive({ items }: Props) {
           {activeItem && (
             <>
               <p className={styles.descTitle}>{activeItem.title}</p>
-              <p className={styles.descText}>{activeItem.description}</p>
+              <p className={styles.descText}>{getDescription(activeItem)}</p>
             </>
           )}
         </div>
@@ -144,7 +151,7 @@ export default function WorkArchive({ items }: Props) {
               >
                 <span className={styles.rowNumber}>{item.number}</span>
                 <span className={styles.rowTitle}>{item.title}</span>
-                <span className={styles.rowYear}>{item.year}</span>
+                <span className={styles.rowYear}>{getYear(item)}</span>
                 <span className={styles.rowTags}>{item.tags.join(' · ')}</span>
                 {item.href && <span className={styles.rowArrow} aria-hidden="true">→</span>}
               </Tag>

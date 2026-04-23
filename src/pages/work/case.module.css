@@ -10,6 +10,18 @@
  * margin — no extra wrapper class needed in MDX.
  */
 
+/* ─── Overflow clip wrapper for full-bleed images ────────── */
+
+/*
+ * overflow-x: clip prevents the case-image and image-placeholder
+ * full-bleed elements from causing a horizontal scrollbar. Unlike
+ * overflow: hidden, clip does not create a scroll container, so
+ * position:sticky and position:fixed children still work correctly.
+ */
+.proseClip {
+  overflow-x: clip;
+}
+
 /* ─── Prose container ─────────────────────────────────────── */
 
 .prose {

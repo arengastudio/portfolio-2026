@@ -23,7 +23,7 @@ import { works } from '../data/works';
     <Container>
 
       {/* ─── Header ─── */}
-      <ScrollReveal client:load variant="clip-up">
+      <ScrollReveal client:visible variant="clip-up">
         <div class={styles.header}>
           <Type as="h1" variant="display-md" class={styles.title}>TRABAJO.</Type>
           <Type as="p" variant="xs" color="muted" class={styles.subtitle}>
@@ -33,7 +33,7 @@ import { works } from '../data/works';
       </ScrollReveal>
 
       {/* ─── Archive list ─── */}
-      <WorkArchive client:load items={works} />
+      <WorkArchive client:load items={works} lang="es" />
 
     </Container>
   </section>

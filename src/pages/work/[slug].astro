@@ -42,7 +42,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
   description={outcome}
   lang="es"
 >
-  <ReadingProgress client:load />
+  <ReadingProgress client:load lang="es" />
   <CaseHeroParallax client:load />
 
   {/* ─── Block 1: Hero ─── */}
@@ -69,21 +69,23 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
   />
 
   {/* ─── Blocks 3–9: MDX prose body ─── */}
-  <Container>
-    <div class={styles.prose}>
-      <Content />
-    </div>
-
-    {/* ─── Deep dive link (if Figma WorkBook exists) ─── */}
-    {figmaDeepDive && (
-      <div class={styles.deepDive}>
-        <Type as="p" variant="xs" color="muted" class={styles.deepDiveLabel}>DEEP DIVE</Type>
-        <Link href={figmaDeepDive} variant="standalone">
-          Ver el trabajo en Figma →
-        </Link>
+  <div class={styles.proseClip}>
+    <Container>
+      <div class={styles.prose}>
+        <Content />
       </div>
-    )}
-  </Container>
+
+      {/* ─── Deep dive link (if Figma WorkBook exists) ─── */}
+      {figmaDeepDive && (
+        <div class={styles.deepDive}>
+          <Type as="p" variant="xs" color="muted" class={styles.deepDiveLabel}>DEEP DIVE</Type>
+          <Link href={figmaDeepDive} variant="standalone">
+            Ver el trabajo en Figma →
+          </Link>
+        </div>
+      )}
+    </Container>
+  </div>
 
   {/* ─── Figma / Proto banner ─── */}
   {figmaBannerLabel && (

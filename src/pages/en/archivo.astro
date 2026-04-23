@@ -16,7 +16,7 @@ import { works } from '../../data/works';
   <section class={styles.page}>
     <Container>
 
-      <ScrollReveal client:load variant="clip-up">
+      <ScrollReveal client:visible variant="clip-up">
         <div class={styles.header}>
           <Type as="h1" variant="display-md" class={styles.title}>WORK.</Type>
           <Type as="p" variant="xs" color="muted" class={styles.subtitle}>
@@ -25,7 +25,7 @@ import { works } from '../../data/works';
         </div>
       </ScrollReveal>
 
-      <WorkArchive client:load items={works} />
+      <WorkArchive client:load items={works} lang="en" />
 
     </Container>
   </section>

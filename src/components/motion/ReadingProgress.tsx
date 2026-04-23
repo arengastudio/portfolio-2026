@@ -19,7 +19,11 @@
 import { useRef, useEffect } from 'react';
 import styles from './ReadingProgress.module.css';
 
-export default function ReadingProgress() {
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+export default function ReadingProgress({ lang = 'es' }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,7 +71,7 @@ export default function ReadingProgress() {
       ref={barRef}
       className={styles.bar}
       role="progressbar"
-      aria-label="Progreso de lectura"
+      aria-label={lang === 'en' ? 'Reading progress' : 'Progreso de lectura'}
       aria-valuemin={0}
       aria-valuemax={100}
     />

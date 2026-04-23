@@ -348,7 +348,7 @@ a.arcRowInner:hover {
   }
 
   .arcHeading {
-    font-size: clamp(56px, 14vw, 144px);
+    font-size: clamp(42px, 11vw, 100px);
   }
 
   .viewArchive {

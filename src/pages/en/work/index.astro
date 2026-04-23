@@ -1,8 +1,6 @@
 ---
 /*
- * EN /work shell — mirrors /work/index.astro.
- * Href links point to EN case slugs once those exist.
- * TODO(juan): Translate copy and update case taglines to English.
+ * EN /work — mirrors /work/index.astro.
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Container from '../../../components/ui/Container.astro';
@@ -16,7 +14,7 @@ const cases = [
   {
     number: '01',
     title: 'Librodepases',
-    year: '2022 — 2025',
+    year: '2022 — 2026',
     tags: 'AI · SPORTS · SAAS · DESIGN SYSTEM',
     role: 'PRODUCT DESIGN LEAD',
     tagline: 'Three years leading design on a platform centralizing data, video, and AI for football scouting teams. From a system-less interface to a product with its own design system.',
@@ -94,7 +92,7 @@ const archive = works.slice(3);
         {archive.map((item) => (
           <div class={styles.archiveItem}>
             <Type as="p" variant="lg" class={styles.archiveName}>{item.title}</Type>
-            <Type as="p" variant="xs" color="muted" class={styles.archiveYear}>{item.year}</Type>
+            <Type as="p" variant="xs" color="muted" class={styles.archiveYear}>{item.yearEn ?? item.year}</Type>
           </div>
         ))}
       </div>

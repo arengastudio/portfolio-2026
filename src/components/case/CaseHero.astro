@@ -12,9 +12,10 @@ export interface Props {
   colorKey: 'accent' | 'fg' | 'dark';
   /** Path to the hero cover image (relative to /public). When provided, replaces the colored placeholder. */
   image?: string;
+  lang?: 'es' | 'en';
 }
 
-const { title, role, timeframe, outcome, client, colorKey, image } = Astro.props;
+const { title, role, timeframe, outcome, client, colorKey, image, lang = 'es' } = Astro.props;
 ---
 <section class={styles.hero} data-case-hero>
   <Container>
@@ -47,7 +48,7 @@ const { title, role, timeframe, outcome, client, colorKey, image } = Astro.props
           <div class={styles.visualImg} data-case-visual>
             <img
               src={image}
-              alt={`Visual del proyecto ${title}`}
+              alt={lang === 'en' ? `${title} — project visual` : `Visual del proyecto ${title}`}
               class={styles.visualPhoto}
               loading="eager"
               decoding="async"
@@ -55,7 +56,7 @@ const { title, role, timeframe, outcome, client, colorKey, image } = Astro.props
           </div>
         )
         : (
-          <div class:list={[styles.visual, styles[colorKey]]} data-case-visual role="img" aria-label={`Visual del proyecto ${title}`}>
+          <div class:list={[styles.visual, styles[colorKey]]} data-case-visual role="img" aria-label={lang === 'en' ? `${title} — project visual` : `Visual del proyecto ${title}`}>
             <p class={styles.visualTitle} aria-hidden="true">{title}</p>
           </div>
         )

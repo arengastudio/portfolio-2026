@@ -19,6 +19,7 @@
   padding-block-start: var(--space-8);
   padding-block-end: var(--space-6);
   border-top: 1px solid var(--color-border);
+  overflow-x: clip;
 }
 
 /* ─── Content column (cols 2/7) ───────────────────────────── */

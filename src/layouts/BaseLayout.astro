@@ -2,7 +2,7 @@
 import '../styles/tokens.css';
 import '../styles/fonts.css';
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import SmoothScroll from '../components/motion/SmoothScroll.tsx';
 import Cursor from '../components/motion/Cursor.tsx';
 import Nav from '../components/global/Nav.astro';
@@ -35,8 +35,8 @@ const isHome = currentPath === '/' || currentPath === '/en';
     {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/assets/LogoJuan.svg" />
     <title>{title}</title>
-    <ViewTransitions />
-    {import.meta.env.DEV && <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>}
+    <ClientRouter />
+    {import.meta.env.DEV && <script is:inline src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>}
   </head>
   <body>
     {/*
@@ -57,7 +57,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
     )}
 
     {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
-    <SmoothScroll client:load />
+    <SmoothScroll client:idle />
 
     {/* Custom cursor — dot + ring + follow label, fine-pointer only */}
     <Cursor client:load lang={lang} />
@@ -129,10 +129,9 @@ const isHome = currentPath === '/' || currentPath === '/en';
   document.addEventListener('astro:page-load', initDarkSections);
 </script>
 
-<script is:inline>
+<script>
   /*
    * Console Easter egg — for the person who opens DevTools.
-   * is:inline so it runs immediately on every page, before any module bundling.
    * The %c trick applies CSS to console output in Chrome/Firefox/Safari.
    */
   (function () {

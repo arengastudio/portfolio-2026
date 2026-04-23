@@ -12,6 +12,22 @@ import Type from '../ui/Type.astro';
 import Link from '../ui/Link.astro';
 import ScrollReveal from '../motion/ScrollReveal.tsx';
 import styles from './AreFirst.module.css';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+
+const copy = {
+  eyebrow: lang === 'en' ? 'ARENGA STUDIO · 2024 — PRESENT' : 'ARENGA STUDIO · 2024 — PRESENTE',
+  heading: lang === 'en' ? ['I co-founded', 'a studio.'] : ['Co-fundé', 'un estudio.'],
+  description: lang === 'en'
+    ? 'Arenga Studio designs and builds digital products for startups and companies that want to move fast. MVPs, scalable products, design systems — from strategy to implementation.'
+    : 'Arenga Studio diseña y construye productos digitales para startups y empresas que quieren moverse rápido. MVP, productos escalables, sistemas de diseño — de la estrategia a la implementación.',
+  detail: lang === 'en'
+    ? 'Two people. No agency in between. Clients talk directly to the people who design and build.'
+    : 'Dos personas. Sin agencia intermedia. El cliente habla directo con quien diseña y construye.',
+};
 ---
 <section class={styles.areFirst}>
   {/* Decorative Arenga logo — background right, 50% opacity, overflows edge */}
@@ -24,28 +40,28 @@ import styles from './AreFirst.module.css';
   <Container>
 
     {/* ─── Top label ─── */}
-    <ScrollReveal client:load variant="fade">
+    <ScrollReveal client:visible variant="fade">
       <div class={styles.label}>
-        <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>ARENGA STUDIO · 2024 — PRESENTE</Type>
+        <Type as="span" variant="xs" color="muted" class={styles.eyebrow}>{copy.eyebrow}</Type>
       </div>
     </ScrollReveal>
 
     {/* ─── Two-col block: heading left / body right ─── */}
     <div class={styles.body}>
 
-      <ScrollReveal client:load variant="clip-up">
+      <ScrollReveal client:visible variant="clip-up">
         <Type as="h2" variant="3xl" class={styles.heading}>
-          Co-fundé<br />un estudio.
+          {copy.heading[0]}<br />{copy.heading[1]}
         </Type>
       </ScrollReveal>
 
-      <ScrollReveal client:load variant="fade-up" delay={0.15}>
+      <ScrollReveal client:visible variant="fade-up" delay={0.15}>
         <div class={styles.right}>
           <Type as="p" variant="lg" class={styles.description}>
-            Arenga Studio diseña y construye productos digitales para startups y empresas que quieren moverse rápido. MVP, productos escalables, sistemas de diseño — de la estrategia a la implementación.
+            {copy.description}
           </Type>
           <Type as="p" variant="base" color="muted" class={styles.detail}>
-            Dos personas. Sin agencia intermedia. El cliente habla directo con quien diseña y construye.
+            {copy.detail}
           </Type>
           {/*
             No manual ↗ here — Link.astro appends one automatically for all

@@ -14,7 +14,7 @@ const { lang = 'es' } = Astro.props;
     <div class={styles.inner}>
 
       {/* Headline — fades up on scroll */}
-      <ScrollReveal client:load variant="fade-up">
+      <ScrollReveal client:visible variant="fade-up">
         <Type as="p" variant="display-md" class={styles.headline}>{lang === 'en' ? "Let's talk." : 'Hablemos.'}</Type>
       </ScrollReveal>
 
@@ -26,13 +26,13 @@ const { lang = 'es' } = Astro.props;
       </Type>
 
       {/* email — 2xl mono, accent color at rest, fades up 0.2s after headline */}
-      <ScrollReveal client:load variant="fade-up" delay={0.2}>
+      <ScrollReveal client:visible variant="fade-up" delay={0.2}>
         <Link
-          href="mailto:juancruzluna234@gmail.com"
+          href="mailto:juancruzluna@arengastudio.com"
           variant="standalone"
           accent
           class={styles.email}
-        >juancruzluna234@gmail.com</Link>
+        >juancruzluna@arengastudio.com</Link>
       </ScrollReveal>
 
       {/* metadata row — location · status | social in xs mono muted */}
