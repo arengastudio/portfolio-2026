@@ -16,38 +16,43 @@ export interface Props {
    * Short statements, no percentages or specific figures.
    */
   bullets?: string[];
+  lang?: 'es' | 'en';
 }
 
-const { client, role, team, timeframe, platforms, bullets } = Astro.props;
+const { client, role, team, timeframe, platforms, bullets, lang = 'es' } = Astro.props;
+
+const L = lang === 'en'
+  ? { section: 'Case summary', client: 'CLIENT', role: 'ROLE', team: 'TEAM', period: 'TIMEFRAME', platforms: 'PLATFORMS' }
+  : { section: 'Resumen del caso', client: 'CLIENTE', role: 'ROL', team: 'EQUIPO', period: 'PERÍODO', platforms: 'PLATAFORMAS' };
 ---
-<section class={styles.tldr} aria-label="Resumen del caso">
+<section class={styles.tldr} aria-label={L.section}>
   <Container>
 
     {/* ─── Metadata grid ─── */}
     <div class={styles.grid}>
 
       <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>CLIENTE</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>{L.client}</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{client}</Type>
       </div>
 
       <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>ROL</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>{L.role}</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{role}</Type>
       </div>
 
       <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>EQUIPO</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>{L.team}</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{team}</Type>
       </div>
 
       <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>PERÍODO</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>{L.period}</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{timeframe}</Type>
       </div>
 
       <div class={styles.cell}>
-        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>PLATAFORMAS</Type>
+        <Type as="p" variant="xs" color="muted" class={styles.cellLabel}>{L.platforms}</Type>
         <Type as="p" variant="base" class={styles.cellValue}>{platforms.join(', ')}</Type>
       </div>
 

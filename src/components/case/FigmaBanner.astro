@@ -13,20 +13,32 @@
 import styles from './FigmaBanner.module.css';
 
 export interface Props {
-  /** CTA label — e.g. "Ver workbook" or "Ver prototipo interactivo" */
+  /** CTA label — e.g. "Ver workbook" or "See workbook" */
   label: string;
   /** Destination URL. Opens in new tab. Use '#' as placeholder. */
   url: string;
+  lang?: 'es' | 'en';
 }
 
-const { label, url } = Astro.props;
+const { label, url, lang = 'es' } = Astro.props;
+
+// Translate ES labels when the case falls back to ES MDX on EN routes
+const displayLabel = lang === 'en'
+  ? label
+      .replace('Ver workbook', 'See workbook')
+      .replace('Ver prototipo interactivo', 'View interactive prototype')
+  : label;
+
+const bajada = lang === 'en'
+  ? 'Explore flows, real screens, and UI design from the Figma file.'
+  : 'Visualizá flujos, pantallas reales y diseño UI del producto desde un archivo de Figma.';
 ---
-<section class={styles.banner} aria-label={label}>
+<section class={styles.banner} aria-label={displayLabel}>
   <div class={styles.inner}>
 
     <div class={styles.left}>
-      <p class={styles.label}>{label}</p>
-      <p class={styles.bajada}>Visualizá flujos, pantallas reales y diseño UI del producto desde un archivo de Figma.</p>
+      <p class={styles.label}>{displayLabel}</p>
+      <p class={styles.bajada}>{bajada}</p>
     </div>
 
     <a
@@ -35,7 +47,7 @@ const { label, url } = Astro.props;
       rel="noopener noreferrer"
       class={styles.cta}
     >
-      {label} →
+      {displayLabel} →
     </a>
 
   </div>

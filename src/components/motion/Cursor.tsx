@@ -19,7 +19,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './Cursor.module.css';
 
-export default function Cursor() {
+export default function Cursor({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   const dotRef   = useRef<HTMLDivElement>(null);
   const ringRef  = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
@@ -121,7 +121,7 @@ export default function Cursor() {
       <div ref={dotRef}   className={styles.dot}   aria-hidden="true" />
       <div ref={ringRef}  className={styles.ring}  aria-hidden="true" />
       <div ref={labelRef} className={styles.label} aria-hidden="true">
-        <span className={styles.labelText}>VER →</span>
+        <span className={styles.labelText}>{lang === 'en' ? 'VIEW →' : 'VER →'}</span>
       </div>
     </>
   );

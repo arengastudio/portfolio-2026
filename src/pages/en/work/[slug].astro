@@ -74,6 +74,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
     tags={tags}
     outcome={outcome}
     bullets={bullets}
+    lang="en"
   />
 
   {/* ─── Blocks 3–9: MDX prose body ─── */}
@@ -95,8 +96,8 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
 
   {/* ─── Figma / Proto banner ─── */}
   {figmaBannerLabel && (
-    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} />
+    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} lang="en" />
   )}
 
-  <Footer />
+  <Footer lang="en" />
 </BaseLayout>

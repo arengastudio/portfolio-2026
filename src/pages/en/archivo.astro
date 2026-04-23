@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Type from '../../components/ui/Type.astro';
+import ScrollReveal from '../../components/motion/ScrollReveal.tsx';
+import WorkArchive from '../../components/work/WorkArchive.tsx';
+import Footer from '../../components/global/Footer.astro';
+import styles from '../archivo.module.css';
+import { works } from '../../data/works';
+---
+<BaseLayout
+  title="Archive — Juan Cruz Luna"
+  description="All projects. No filters."
+  lang="en"
+>
+  <section class={styles.page}>
+    <Container>
+
+      <ScrollReveal client:load variant="clip-up">
+        <div class={styles.header}>
+          <Type as="h1" variant="display-md" class={styles.title}>WORK.</Type>
+          <Type as="p" variant="xs" color="muted" class={styles.subtitle}>
+            ALL PROJECTS · 2017–2026
+          </Type>
+        </div>
+      </ScrollReveal>
+
+      <WorkArchive client:load items={works} />
+
+    </Container>
+  </section>
+
+  <Footer lang="en" />
+</BaseLayout>

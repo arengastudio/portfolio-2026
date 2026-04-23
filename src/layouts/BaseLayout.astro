@@ -60,7 +60,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
     <SmoothScroll client:load />
 
     {/* Custom cursor — dot + ring + follow label, fine-pointer only */}
-    <Cursor client:load />
+    <Cursor client:load lang={lang} />
 
     {/* Grid overlay — press G to toggle column guides (dev only) */}
     {import.meta.env.DEV && <GridOverlay />}
@@ -69,7 +69,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
     {/* Fixed nav — scroll-aware via NavScroll island */}
     <Nav currentPath={currentPath} isHome={isHome} />
 
-    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <a href="#main-content" class="skip-link">{lang === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
 
     {/*
       padding-block-start accounts for the fixed nav height.

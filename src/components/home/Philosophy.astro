@@ -4,21 +4,30 @@ import Type from '../ui/Type.astro';
 import PhilosophyPin from '../motion/PhilosophyPin.tsx';
 import styles from './Philosophy.module.css';
 
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
+
 const principles = [
   {
     number: '01',
     statement: 'FUNCTION OVER POLISH.',
-    bajada: 'Si no resuelve un problema real, no es diseño. Es decoración.',
+    bajada: lang === 'en'
+      ? "If it doesn't solve a real problem, it's not design. It's decoration."
+      : 'Si no resuelve un problema real, no es diseño. Es decoración.',
   },
   {
     number: '02',
     statement: "PIXELS ARE CHEAP. DECISIONS AREN'T.",
-    bajada: 'Cualquiera puede mover píxeles. Decidir cuáles importan es el oficio.',
+    bajada: lang === 'en'
+      ? "Anyone can move pixels. Deciding which ones matter is the craft."
+      : 'Cualquiera puede mover píxeles. Decidir cuáles importan es el oficio.',
   },
   {
     number: '03',
     statement: 'DESIGNERS WHO BUILD, BUILD BETTER.',
-    bajada: 'Construir lo que diseñás te obliga a respetar la realidad. Y hace mejor diseño.',
+    bajada: lang === 'en'
+      ? "Building what you design forces you to respect reality. And makes for better design."
+      : 'Construir lo que diseñás te obliga a respetar la realidad. Y hace mejor diseño.',
   },
 ];
 ---

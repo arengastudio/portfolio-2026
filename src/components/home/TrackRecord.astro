@@ -1,21 +1,24 @@
 ---
 import styles from './TrackRecord.module.css';
+
+export interface Props { lang?: 'es' | 'en' }
+const { lang = 'es' } = Astro.props;
 ---
 <ul class={styles.track}>
   <li class={styles.line}>
     <span class={styles.year}>2025</span>
-    <span class={styles.text}>Lideré diseño de producto en Librodepases. Plataforma AI para fútbol.</span>
+    <span class={styles.text}>{lang === 'en' ? 'Led product design at Librodepases. AI platform for football scouting.' : 'Lideré diseño de producto en Librodepases. Plataforma AI para fútbol.'}</span>
   </li>
   <li class={styles.line}>
     <span class={styles.year}>2024</span>
-    <span class={styles.text}>Co-fundé Arenga Studio. Diseñamos y construimos productos digitales.</span>
+    <span class={styles.text}>{lang === 'en' ? 'Co-founded Arenga Studio. We design and build digital products.' : 'Co-fundé Arenga Studio. Diseñamos y construimos productos digitales.'}</span>
   </li>
   <li class={styles.line}>
     <span class={styles.year}>2022</span>
-    <span class={styles.text}>Formé parte del equipo de diseño en Librodepases, co-diseñando su nueva plataforma enfocada en datos e IA.</span>
+    <span class={styles.text}>{lang === 'en' ? 'Joined the design team at Librodepases, co-designing their new data and AI platform.' : 'Formé parte del equipo de diseño en Librodepases, co-diseñando su nueva plataforma enfocada en datos e IA.'}</span>
   </li>
   <li class={styles.line}>
     <span class={styles.year}>2017</span>
-    <span class={styles.text}>Empecé diseñando en Entre Ríos. Así conocí el diseño gráfico.</span>
+    <span class={styles.text}>{lang === 'en' ? 'Started designing in Entre Ríos. That\'s how I discovered graphic design.' : 'Empecé diseñando en Entre Ríos. Así conocí el diseño gráfico.'}</span>
   </li>
 </ul>

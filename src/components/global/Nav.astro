@@ -50,7 +50,7 @@ const isActive = (href: string) => currentPath.startsWith(href);
     <div class={styles.inner}>
 
       {/* Left — brand links to locale home */}
-      <a href={isEN ? '/en' : '/'} class={styles.brand} aria-label="Juan Cruz Luna — Inicio">
+      <a href={isEN ? '/en' : '/'} class={styles.brand} aria-label={isEN ? 'Juan Cruz Luna — Home' : 'Juan Cruz Luna — Inicio'}>
         <img
           src="/assets/LogoJuan.svg"
           alt=""
@@ -64,7 +64,7 @@ const isActive = (href: string) => currentPath.startsWith(href);
 
       {/* Right — primary navigation + language switcher */}
       <div class={styles.right}>
-        <nav class={styles.links} aria-label="Navegación principal">
+        <nav class={styles.links} aria-label={isEN ? 'Main navigation' : 'Navegación principal'}>
           {links.map((link) => (
             <a
               href={link.href}
@@ -77,7 +77,7 @@ const isActive = (href: string) => currentPath.startsWith(href);
         </nav>
 
         {/* Language switcher — compact ES · EN */}
-        <div class={styles.langSwitch} aria-label="Cambiar idioma">
+        <div class={styles.langSwitch} aria-label={isEN ? 'Change language' : 'Cambiar idioma'}>
           <a
             href={esUrl}
             hreflang="es"

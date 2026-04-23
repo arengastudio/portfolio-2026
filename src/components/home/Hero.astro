@@ -49,7 +49,7 @@ const { lang = 'es' } = Astro.props;
           <em>{lang === 'en' ? 'I design and build digital products. From concept to production.' : 'Diseño y construyo productos digitales. Del concepto a producción.'}</em>
         </Type>
         <div class={styles.trackWrapper}>
-          <TrackRecord />
+          <TrackRecord lang={lang} />
         </div>
         <div class={styles.ctas}>
           <Button variant="primary" href={lang === 'en' ? '/en/work' : '/work'}>{lang === 'en' ? 'VIEW MY WORK →' : 'VER MI TRABAJO →'}</Button>
