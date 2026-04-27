@@ -32,7 +32,7 @@ const experience = [
 ];
 ---
 <BaseLayout
-  title="About — Juan Cruz Luna"
+  title="About - Juan Cruz Luna"
   description="Product Designer & Builder based in Buenos Aires. Co-founder of Arenga Studio."
   lang="en"
 >
@@ -58,13 +58,15 @@ const experience = [
         class={styles.photo}
         width="400"
         height="500"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* RIGHT: bio */}
       <div class={styles.bio}>
         <Type as="p" variant="base" class={styles.bioPara}>
           I'm Juan Cruz Luna. I design digital products from Buenos Aires. Started in Entre Ríos
-          doing print and graphic design — now leading product design at Librodepases, an AI
+          doing print and graphic design, now leading product design at Librodepases, an AI
           platform for football scouting.
         </Type>
         <Type as="p" variant="base" class={styles.bioPara}>
@@ -73,7 +75,7 @@ const experience = [
           systems, and implementation.
         </Type>
         <Type as="p" variant="base" class={styles.bioPara}>
-          I believe designers who build make better design. That's why I don't just design — I also
+          I believe designers who build make better design. That's why I don't just design, I also
           build. This site is my own code, not a template.
         </Type>
       </div>

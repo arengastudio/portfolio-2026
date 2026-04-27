@@ -1,10 +1,4 @@
 ---
-/**
- * EN /work/[slug] — renders EN case MDX when available, falls back to ES.
- *
- * Priority: if locale='en' MDX exists for a slug, use it.
- * Otherwise render ES content with lang="en" on <html>.
- */
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -27,14 +21,13 @@ export async function getStaticPaths() {
     data.locale === 'es' && data.slug !== ''
   );
 
-const enSlugs = new Set(enEntries.map(e => e.data.slug));
+  const enSlugs = new Set(enEntries.map((e) => e.data.slug));
+  const fallbackEntries = esEntries.filter((e) => !enSlugs.has(e.data.slug));
 
-  return [
-    ...enEntries.map(entry => ({ params: { slug: entry.data.slug }, props: { entry } })),
-    ...esEntries
-      .filter(entry => !enSlugs.has(entry.data.slug))
-      .map(entry => ({ params: { slug: entry.data.slug }, props: { entry } })),
-  ];
+  return [...enEntries, ...fallbackEntries].map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
 }
 
 interface Props {
@@ -46,7 +39,7 @@ const { Content } = await render(entry);
 const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, coverImage, figmaDeepDive, bullets, figmaBannerLabel, figmaBannerUrl } = entry.data;
 ---
 <BaseLayout
-  title={`${title} — Juan Cruz Luna`}
+  title={`${title} - Juan Cruz Luna`}
   description={outcome}
   lang="en"
 >
@@ -90,7 +83,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
         <div class={styles.deepDive}>
           <Type as="p" variant="xs" color="muted" class={styles.deepDiveLabel}>DEEP DIVE</Type>
           <Link href={figmaDeepDive} variant="standalone">
-            See the work in Figma →
+            View the work in Figma →
           </Link>
         </div>
       )}
@@ -99,7 +92,7 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
 
   {/* ─── Figma / Proto banner ─── */}
   {figmaBannerLabel && (
-    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} lang="en" />
+    <FigmaBanner label={figmaBannerLabel} url={figmaBannerUrl ?? '#'} />
   )}
 
   <Footer lang="en" />

@@ -1,16 +1,4 @@
 ---
-/**
- * /1985 — Easter egg. Hidden page, not in sitemap or nav.
- * Retro terminal aesthetic. noindex meta prevents indexing.
- *
- * Standalone page — intentionally bypasses BaseLayout and the
- * design system color palette. This page earns the right to
- * break the rules by being a deliberate surprise.
- *
- * TODO(juan): Escribir el contenido. Qué pasó en 1985 para vos?
- * El texto va en la sección marcada abajo. Máx 3 párrafos en mono.
- * Recordá: voz conversacional, no nostálgica de manual.
- */
 import '../styles/fonts.css';
 ---
 <!doctype html>
@@ -31,20 +19,12 @@ import '../styles/fonts.css';
       {/* ─── Prompt header ─── */}
       <p class="prompt">
         <span class="cursor" aria-hidden="true">▋</span>
-        <span class="path">juancruzluna.com/1985</span>
+        <span class="path">juancruzluna.xyz/1985</span>
       </p>
 
       {/* ─── Year ─── */}
       <h1 class="year">1985.</h1>
 
-      {/* ─── Content ─── */}
-      {/*
-        TODO(juan): Tu historia de 1985.
-        Qué significa ese año para vos — puede ser tu año de nacimiento,
-        una referencia cultural, o algo completamente diferente.
-        Entre 1 y 3 párrafos. Mono. Conversacional.
-        No tiene que ser serio — puede ser raro, divertido, honesto.
-      */}
       <div class="content">
         <p>
           1985 fue el año en que nació alguien que todavía no sabe
@@ -55,8 +35,8 @@ import '../styles/fonts.css';
           También fue el año de Back to the Future, Windows 1.0,
           y la primera gran vuelta del rock en la calle en Argentina
           después de la dictadura. Hay algo en esa combinación
-          — el futuro como destino, el software como promesa,
-          la música en la calle — que describe bastante bien
+          (el futuro como destino, el software como promesa,
+          la música en la calle) que describe bastante bien
           lo que me interesa: cosas que la gente usa, que producen
           algo, que suenan bien mientras lo hacen.
         </p>
@@ -192,13 +172,6 @@ import '../styles/fonts.css';
 
   .content p:last-child {
     margin-block-end: 0;
-  }
-
-  /* Placeholder when content is empty — shown only in dev */
-  .placeholder:empty::before {
-    content: '/* TODO(juan): contenido pendiente */';
-    color: rgba(245, 242, 236, 0.2);
-    font-style: italic;
   }
 
   /* ── Return link ────────────────────────────────────────── */

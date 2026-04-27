@@ -2,7 +2,7 @@
 title: 'Librodepases'
 slug: 'librodepases'
 role: 'Product Design Lead'
-timeframe: '2022 — 2026'
+timeframe: '2022–2026'
 outcome: 'Led design for a professional soccer scouting SaaS platform for three years. From a design-free interface to a product with its own design system, AI modules, and multiple user types with differentiated logic.'
 client: 'librodepases'
 team: '1 Designer, 3 Devs, 1 CEO'
@@ -22,21 +22,21 @@ import ImagePlaceholder from '../../../src/components/case/ImagePlaceholder.astr
 
 Librodepases is a platform that centralizes performance data, video, and AI so clubs, agents, and professional scouts can make better market decisions. When I joined in 2022, the product had code, users, and data. What it didn't have was design.
 
-The team was three engineers and a CEO with a sports background. Nobody had made UX decisions deliberately. Clubs used the platform because there was no alternative in the Latin American market at that price — not because it was good.
+The team was three engineers and a CEO with a sports background. Nobody had made UX decisions deliberately. Clubs used the platform because there was no alternative in the Latin American market at that price. Not because it was good.
 
 The gap it filled was real: first and second division clubs that couldn't afford European tools like Wyscout, but needed something more structured than Excel spreadsheets shared over WhatsApp. The product logic was correct. The interface made users guess where everything was.
 
 ## The problem
 
-The product had more than twenty active features — advanced search, comparison, scouting boards, squad management, performance analysis, AI modules, reports — distributed without clear hierarchy across three distinct user types: clubs, agents, and independent scouts, each with different access and different logic. A scout opening the platform for the first time had no way to understand what was meant for them and what was meant for someone else.
+The product had more than twenty active features (advanced search, comparison, scouting boards, squad management, performance analysis, AI modules, reports) distributed without clear hierarchy across three distinct user types: clubs, agents, and independent scouts, each with different access and different logic. A scout opening the platform for the first time had no way to understand what was meant for them and what was meant for someone else.
 
-The insight that shifted the conversation in the first weeks: a significant portion of sessions ended with the user exporting data to Excel. They'd paid for the platform and were using it as a stepping stone toward another tool. That's not a UX problem — it's a signal that the product wasn't solving the real job.
+The insight that shifted the conversation in the first weeks: a significant portion of sessions ended with the user exporting data to Excel. They'd paid for the platform and were using it as a stepping stone toward another tool. That's not a UX problem: it's a signal that the product wasn't solving the real job.
 
 ## Approach
 
 Two principles guided the three years of work.
 
-**Scouts don't browse — they decide.** Every screen had to answer "what decision does the user make with this?", not "what data do they have available?". If a metric didn't help them decide, it had no place in the view.
+**Scouts don't browse: they decide.** Every screen had to answer "what decision does the user make with this?", not "what data do they have available?". If a metric didn't help them decide, it had no place in the view.
 
 **Speed is accessibility.** A scout on a tablet on the bench, rain falling, 30 seconds to take a note, can't deal with eight-level filter dropdowns. Task speed = accessibility in real context.
 
@@ -48,7 +48,7 @@ Two principles guided the three years of work.
 
 The first module to redesign was shortlisting. We replaced the flat player list with a board system where users group and evaluate candidates by search or requirement.
 
-The most internally contested change: we removed direct access to all players from the home screen for users in tracking mode. You only saw active boards. It was counterintuitive, but most sessions were follow-ups — users returning to already-identified players, not discovering new ones. We separated the two flows instead of mixing them on the same screen.
+The most internally contested change: we removed direct access to all players from the home screen for users in tracking mode. You only saw active boards. It was counterintuitive, but most sessions were follow-ups: users returning to already-identified players, not discovering new ones. We separated the two flows instead of mixing them on the same screen.
 
 What we dropped: a step-by-step tooltip onboarding. The user already knew the product. They needed things to be where they expected them.
 
@@ -58,7 +58,7 @@ The original request was "add a comparison view." What we built was different: a
 
 The central decision: we don't show the number, we show the relative position. A 67% pass success rate means nothing without knowing what percentile that places a player in for that position in that league. The module allows player vs. player, player vs. league, and player vs. club comparisons, with metrics that change based on the selected position.
 
-What we dropped: a radar chart. It's the most common representation in scouting. It's also the one that generates the most bias when you have twenty players under simultaneous evaluation — it trains the eye to look for what's missing rather than what works. With percentiles, the user compares on a shared baseline.
+What we dropped: a radar chart. It's the most common representation in scouting. It's also the one that generates the most bias when you have twenty players under simultaneous evaluation: it trains the eye to look for what's missing rather than what works. With percentiles, the user compares on a shared baseline.
 
 <ImagePlaceholder src="/assets/cases/librodepases/ldp04.png" />
 
@@ -68,30 +68,30 @@ After 18 months building component by component, the product had four different 
 
 The hardest decision: build the system directly in code, not just in Figma. With one designer and three developers, a system that lives only in Figma creates constant drift between what's documented and what's implemented. We built the components in React, documented with their variants and states, and Figma became a composition reference rather than an autonomous source of truth.
 
-The impact wasn't aesthetic — it was velocity. Implementation time for new features dropped noticeably because developers had a reference system that actually worked in production.
+The impact wasn't aesthetic: it was velocity. Implementation time for new features dropped noticeably because developers had a reference system that actually worked in production.
 
 ### Smart Match and Opportunities UI (2024)
 
 Adding recommendation models was the most significant change to the product: Smart Match suggests ideal destinations for a player and compatible players for a club; Opportunities generates market suggestions per player based on performance, career stage, and the club's business model.
 
-The central tension: showing the "why" behind each recommendation vs. not overloading with justifications nobody asked for. We solved it with progressive disclosure — the recommendation appears simple, with the option to expand the reasoning for anyone who wants to dig deeper.
+The central tension: showing the "why" behind each recommendation vs. not overloading with justifications nobody asked for. We solved it with progressive disclosure: the recommendation appears simple, with the option to expand the reasoning for anyone who wants to dig deeper.
 
-What we dropped: a compatibility score expressed as a prominent percentage. Early prototypes showed an "86%" as the headline for each recommendation. We cut it — the percentage creates false precision and shifts attention from the player to the number. Matching is expressed as relative position; the specific causes live in a secondary modal.
+What we dropped: a compatibility score expressed as a prominent percentage. Early prototypes showed an "86%" as the headline for each recommendation. We cut it: the percentage creates false precision and shifts attention from the player to the number. Matching is expressed as relative position; the specific causes live in a secondary modal.
 
 We also designed the feedback mechanism: if a recommendation isn't useful, the user can flag it with structured reasons. That feeds the model and tells the user the system learns from their decisions, not just executes them.
 
 ## Solution
 
-The current product has modules differentiated by user type with plan-based access logic — Free, Silver, Gold, Creator — that determines what each user can do in each module. Designing for that complexity without making it feel complex was the underlying work of three years.
+The current product has modules differentiated by user type with plan-based access logic (Free, Silver, Gold, Creator), that determines what each user can do in each module. Designing for that complexity without making it feel complex was the underlying work of three years.
 
-> The main flow — going from "I need a right winger under 23 for a loan" to having five documented candidates on a board, with benchmark comparisons and model recommendations — is now navigable linearly. In 2022, it required knowing by heart where each part of the process lived.
+> The main flow is now navigable linearly: going from "I need a right winger under 23 for a loan" to having five documented candidates on a board, with benchmark comparisons and model recommendations. In 2022, it required knowing by heart where each part of the process lived.
 
 ## Impact
 
 - **Average research time:** dropped significantly after the main dashboard redesign
 - **Candidate flow completion:** improved considerably after reorganizing navigation and the dashboard
 - **Monthly club retention:** improved steadily after the dashboard redesign
-- **Excel dependency:** dropped sharply — the most honest indicator of real adoption
+- **Excel dependency:** dropped sharply (the most honest indicator of real adoption)
 - **Active club base:** grew continuously across the three years
 
 The platform went from being "the tool we use because there's no alternative" to being the one the scouting team defends in budget meetings.
@@ -102,7 +102,7 @@ The platform went from being "the tool we use because there's no alternative" to
 
 Three years in the same product teach something short projects can't: 80% of design problems are information hierarchy problems, not novel UX. I arrived wanting to redesign everything and left convinced half the screens were solvable by moving a single piece of data.
 
-What I'd do differently: I'd have built the design system earlier. I left it for year two thinking it was premature, and that cost consistency I never fully recovered. Design debt accumulates just like technical debt — and it's just as hard to pay back later.
+What I'd do differently: I'd have built the design system earlier. I left it for year two thinking it was premature, and that cost consistency I never fully recovered. Design debt accumulates just like technical debt, and it's just as hard to pay back later.
 
 </div>
 

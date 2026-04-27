@@ -36,19 +36,14 @@ const { title, role, timeframe, outcome, client, colorKey, image, lang = 'es' } 
     <Type as="p" variant="lg" class={styles.outcome}>{outcome}</Type>
 
     {/* ─── Visual block ─── */}
-    {/*
-      When coverImage is provided: renders the real photo.
-      Fallback: colored placeholder block with watermark text.
-      TODO(juan): swap fallback for <video autoplay muted loop playsinline>
-      when screen recording is ready — keep the colorKey block as the poster.
-    */}
+    {/* When coverImage is provided: renders the real photo. Fallback: colored placeholder block. */}
     <div class={styles.visualWrap}>
       {image
         ? (
           <div class={styles.visualImg} data-case-visual>
             <img
               src={image}
-              alt={lang === 'en' ? `${title} — project visual` : `Visual del proyecto ${title}`}
+              alt={lang === 'en' ? `${title}: project visual` : `Visual del proyecto ${title}`}
               class={styles.visualPhoto}
               loading="eager"
               decoding="async"
@@ -56,7 +51,7 @@ const { title, role, timeframe, outcome, client, colorKey, image, lang = 'es' } 
           </div>
         )
         : (
-          <div class:list={[styles.visual, styles[colorKey]]} data-case-visual role="img" aria-label={lang === 'en' ? `${title} — project visual` : `Visual del proyecto ${title}`}>
+          <div class:list={[styles.visual, styles[colorKey]]} data-case-visual role="img" aria-label={lang === 'en' ? `${title}: project visual` : `Visual del proyecto ${title}`}>
             <p class={styles.visualTitle} aria-hidden="true">{title}</p>
           </div>
         )

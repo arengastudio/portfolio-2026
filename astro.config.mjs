@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://juancruzluna.com',
+  site: 'https://www.juancruzluna.xyz',
   integrations: [react(), mdx(), sitemap()],
   i18n: {
     defaultLocale: 'es',

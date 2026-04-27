@@ -34,5 +34,5 @@ export default function LiveClock() {
 
   // Render nothing until first tick fires (avoids "--:--:--" flash)
   if (!time) return null;
-  return <>BUENOS AIRES — {time} ART</>;
+  return <>BUENOS AIRES · {time} ART</>;
 }

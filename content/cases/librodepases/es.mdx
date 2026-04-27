@@ -2,7 +2,7 @@
 title: 'Librodepases'
 slug: 'librodepases'
 role: 'Product Design Lead'
-timeframe: '2022 — 2026'
+timeframe: '2022–2026'
 outcome: 'Lideré el diseño de una plataforma SaaS para scouting de fútbol profesional durante tres años. De interfaz sin sistema a producto con design system propio, módulos de AI y múltiples tipos de usuario con lógica diferenciada.'
 client: 'librodepases'
 team: '1 Designer, 3 Devs, 1 CEO'
@@ -22,21 +22,21 @@ import ImagePlaceholder from '../../../src/components/case/ImagePlaceholder.astr
 
 Librodepases es una plataforma que centraliza datos de rendimiento, video e inteligencia artificial para que clubes, agentes y scouts profesionales tomen mejores decisiones de mercado. Cuando llegué en 2022, el producto tenía código, usuarios y datos. Lo que no tenía era diseño.
 
-El equipo era tres ingenieros y un CEO con fondo deportivo. Nadie había tomado decisiones de UX de forma deliberada. Los clubes usaban la plataforma porque no había alternativa en el mercado latinoamericano a ese precio — no porque fuera buena.
+El equipo era tres ingenieros y un CEO con fondo deportivo. Nadie había tomado decisiones de UX de forma deliberada. Los clubes usaban la plataforma porque no había alternativa en el mercado latinoamericano a ese precio. No porque fuera buena.
 
 El gap que cubría era real: clubes de primera y segunda división que no podían pagar herramientas europeas como Wyscout, pero necesitaban algo más estructurado que planillas de Excel compartidas por WhatsApp. La lógica del producto era correcta. La interfaz los obligaba a adivinar dónde estaba cada cosa.
 
 ## El problema
 
-El producto tenía más de veinte funcionalidades activas — búsqueda avanzada, comparativa, tableros de scouting, gestión de plantilla, análisis de rendimiento, módulos de inteligencia artificial, reportes — distribuidas sin jerarquía clara entre tres tipos de usuario distintos: clubes, agentes y scouts independientes, cada uno con accesos y lógicas diferentes. Un scout que abría la plataforma por primera vez no tenía forma de entender qué era para él y qué era para otro tipo de usuario.
+El producto tenía más de veinte funcionalidades activas (búsqueda avanzada, comparativa, tableros de scouting, gestión de plantilla, análisis de rendimiento, módulos de inteligencia artificial, reportes) distribuidas sin jerarquía clara entre tres tipos de usuario distintos: clubes, agentes y scouts independientes, cada uno con accesos y lógicas diferentes. Un scout que abría la plataforma por primera vez no tenía forma de entender qué era para él y qué era para otro tipo de usuario.
 
-El dato que cambió la conversación en las primeras semanas: una porción significativa de las sesiones terminaba con el usuario exportando datos a Excel. Habían pagado por la plataforma y la estaban usando como etapa intermedia hacia otra herramienta. Eso no es un problema de UX — es una señal de que el producto no estaba resolviendo el trabajo real.
+El dato que cambió la conversación en las primeras semanas: una porción significativa de las sesiones terminaba con el usuario exportando datos a Excel. Habían pagado por la plataforma y la estaban usando como etapa intermedia hacia otra herramienta. Eso no es un problema de UX: es una señal de que el producto no estaba resolviendo el trabajo real.
 
 ## Approach
 
 Dos principios guiaron todo el trabajo de los tres años.
 
-**Los scouts no buscan — deciden.** Cada pantalla tenía que responder "¿qué decisión toma el usuario con esto?", no "¿qué datos tiene disponibles?". Si una métrica no ayudaba a decidir, sobraba.
+**Los scouts no buscan: deciden.** Cada pantalla tenía que responder "¿qué decisión toma el usuario con esto?", no "¿qué datos tiene disponibles?". Si una métrica no ayudaba a decidir, sobraba.
 
 **La velocidad es accesibilidad.** Un scout en una tableta en el banco de suplentes, con lluvia y 30 segundos para tomar una nota, no puede lidiar con filtros de ocho niveles. Velocidad de tarea = accesibilidad en contexto real.
 
@@ -48,7 +48,7 @@ Dos principios guiaron todo el trabajo de los tres años.
 
 El primer módulo en rediseñar fue el de seguimiento. Reemplazamos el listado plano de jugadores por un sistema de tableros donde el usuario agrupa y evalúa candidatos por búsqueda o requerimiento.
 
-El cambio más resistido internamente: quitamos el acceso directo a todos los jugadores desde la home para usuarios en modo seguimiento. Solo veías los tableros activos. Era contraintuitivo, pero la mayoría de las sesiones eran de seguimiento — usuarios volviendo a jugadores ya identificados, no descubriendo nuevos. Separamos los dos flujos en lugar de mezclarlos en la misma pantalla.
+El cambio más resistido internamente: quitamos el acceso directo a todos los jugadores desde la home para usuarios en modo seguimiento. Solo veías los tableros activos. Era contraintuitivo, pero la mayoría de las sesiones eran de seguimiento: usuarios volviendo a jugadores ya identificados, no descubriendo nuevos. Separamos los dos flujos en lugar de mezclarlos en la misma pantalla.
 
 Lo que descartamos: un onboarding con tooltips paso a paso. El usuario ya conocía el producto. Necesitaba que las cosas estuvieran donde esperaba que estuvieran.
 
@@ -58,7 +58,7 @@ El pedido original era "agregar una vista de comparación". Lo que construimos f
 
 La decisión central: no mostramos el número, mostramos la posición relativa. Un 67% de pases exitosos no significa nada sin saber en qué percentil ubica eso para esa posición en esa liga. El módulo permite comparar jugador vs jugador, jugador vs liga y jugador vs club, con métricas que cambian según la posición seleccionada.
 
-Lo que descartamos: un radar chart. Es la representación más común en scouting. También es la que más sesgo genera cuando tenés veinte jugadores en evaluación simultánea — entrena el ojo a buscar lo que falta en lugar de lo que sirve. Con percentiles, el usuario compara sobre una base compartida.
+Lo que descartamos: un radar chart. Es la representación más común en scouting. También es la que más sesgo genera cuando tenés veinte jugadores en evaluación simultánea: entrena el ojo a buscar lo que falta en lugar de lo que sirve. Con percentiles, el usuario compara sobre una base compartida.
 
 <ImagePlaceholder src="/assets/cases/librodepases/ldp04.png" />
 
@@ -68,30 +68,30 @@ Después de 18 meses construyendo componente por componente, el producto tenía 
 
 La decisión más difícil: construir el sistema directamente en código, no solo en Figma. Con un diseñador y tres desarrolladores, un sistema que vive únicamente en Figma genera drift constante entre lo documentado y lo implementado. Construimos los componentes en React, documentados con sus variantes y estados, y Figma se convirtió en referencia de composición, no en fuente de verdad autónoma.
 
-El impacto no fue estético — fue de velocidad. El tiempo de implementación de nuevas features bajó de forma apreciable porque los developers tenían un sistema de referencia que funcionaba en producción.
+El impacto no fue estético: fue de velocidad. El tiempo de implementación de nuevas features bajó de forma apreciable porque los developers tenían un sistema de referencia que funcionaba en producción.
 
 ### UI de Smart Match y Oportunidades (2024)
 
 La incorporación de modelos de recomendación fue el cambio más significativo del producto: Smart Match sugiere destinos ideales para un jugador y jugadores compatibles para un club; Oportunidades genera sugerencias de mercado por jugador basadas en rendimiento, momento de carrera y modelo de negocio del club.
 
-La tensión central: mostrar el "por qué" de cada recomendación vs. no sobrecargar con justificaciones que nadie pidió. Resolvimos con progressive disclosure — la recomendación aparece simple, con la posibilidad de expandir el razonamiento para quien quiera profundizar.
+La tensión central: mostrar el "por qué" de cada recomendación vs. no sobrecargar con justificaciones que nadie pidió. Resolvimos con progressive disclosure: la recomendación aparece simple, con la posibilidad de expandir el razonamiento para quien quiera profundizar.
 
-Lo que descartamos: un score de compatibilidad expresado como porcentaje prominente. Los primeros prototipos mostraban un "86%" como titular de cada recomendación. Lo sacamos — el porcentaje genera falsa precisión y desplaza la atención del jugador al número. El matching se expresa como posición relativa; las causas específicas viven en un modal secundario.
+Lo que descartamos: un score de compatibilidad expresado como porcentaje prominente. Los primeros prototipos mostraban un "86%" como titular de cada recomendación. Lo sacamos: el porcentaje genera falsa precisión y desplaza la atención del jugador al número. El matching se expresa como posición relativa; las causas específicas viven en un modal secundario.
 
 También diseñamos el mecanismo de feedback: si una recomendación no es útil, el usuario puede indicarlo con motivos estructurados. Eso alimenta el modelo y le dice al usuario que el sistema aprende de sus decisiones, no solo las ejecuta.
 
 ## Solución
 
-El producto actual tiene módulos diferenciados por tipo de usuario con lógica de acceso por plan — Free, Silver, Gold, Creator — que determina qué puede hacer cada usuario en cada módulo. Diseñar para esa complejidad sin que parezca compleja fue el trabajo de fondo de los tres años.
+El producto actual tiene módulos diferenciados por tipo de usuario con lógica de acceso por plan (Free, Silver, Gold, Creator), que determina qué puede hacer cada usuario en cada módulo. Diseñar para esa complejidad sin que parezca compleja fue el trabajo de fondo de los tres años.
 
-> El flujo principal — ir de "necesito un extremo derecho menor de 23 años para préstamo" a tener cinco candidatos documentados en un tablero, con comparativa de benchmarks y recomendaciones del modelo — hoy es navegable de forma lineal. En 2022 requería saber de memoria dónde vivía cada parte del proceso.
+> El flujo principal es navegable de forma lineal: ir de "necesito un extremo derecho menor de 23 años para préstamo" a tener cinco candidatos documentados en un tablero, con comparativa de benchmarks y recomendaciones del modelo. En 2022 requería saber de memoria dónde vivía cada parte del proceso.
 
 ## Impacto
 
 - **Tiempo promedio de research:** se redujo de forma significativa tras el rediseño del dashboard principal
 - **Completación del flujo de candidatos:** mejoró considerablemente tras reorganizar la navegación y el dashboard
 - **Retención mensual de clubes:** mejoró de forma sostenida tras el rediseño del dashboard
-- **Dependencia de Excel:** se redujo drásticamente — el indicador más honesto de adopción real
+- **Dependencia de Excel:** se redujo drásticamente (el indicador más honesto de adopción real)
 - **Base de clubes activos:** creció de forma continua durante los tres años
 
 La plataforma pasó de ser "la herramienta que usamos porque no hay otra" a ser la que el equipo de scouting defiende en las reuniones de presupuesto.
@@ -102,7 +102,7 @@ La plataforma pasó de ser "la herramienta que usamos porque no hay otra" a ser 
 
 Tres años en el mismo producto enseñan algo que los proyectos cortos no pueden: el 80% de los problemas de diseño son problemas de información mal jerarquizada, no de UX novedosa. Llegué queriendo rediseñar todo y terminé convencido de que la mitad de las pantallas se resolvían moviendo un dato de lugar.
 
-Lo que haría diferente: hubiera construido el design system antes. Lo dejé para el año 2 pensando que era prematuro, y eso costó coherencia que no recuperé completamente. La deuda de diseño se acumula igual que la técnica — y es igual de difícil de pagar después.
+Lo que haría diferente: hubiera construido el design system antes. Lo dejé para el año 2 pensando que era prematuro, y eso costó coherencia que no recuperé completamente. La deuda de diseño se acumula igual que la técnica, y es igual de difícil de pagar después.
 
 </div>
 

@@ -11,20 +11,41 @@ import GridOverlay from '../components/dev/GridOverlay.astro';
 export interface Props {
   /** Page title. Default: 'Juan Cruz Luna'. */
   title?: string;
-  /** Optional — omitted from <head> when not provided. */
+  /** Page description for <meta name="description"> and OG/Twitter tags. */
   description?: string;
   /** HTML lang attribute. Default: 'es'. */
   lang?: 'es' | 'en';
+  /** Canonical URL override. Defaults to current page URL. */
+  canonical?: string;
+  /** OG image path (absolute from root). Default: /assets/profile.png. */
+  ogImage?: string;
+  /** OG type. Default: 'website'. */
+  ogType?: string;
 }
 
 const {
   title = 'Juan Cruz Luna',
   description,
   lang = 'es',
+  canonical: canonicalOverride,
+  ogImage = '/assets/profile.png',
+  ogType = 'website',
 } = Astro.props;
+
+const siteUrl = 'https://www.juancruzluna.xyz';
+const canonical = canonicalOverride ?? `${siteUrl}${Astro.url.pathname}`;
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === '/' || currentPath === '/en';
+
+// Hreflang alternates
+const esPath = lang === 'en'
+  ? (currentPath.replace(/^\/en/, '') || '/')
+  : currentPath;
+const enPath = lang === 'en'
+  ? currentPath
+  : (currentPath === '/' ? '/en' : `/en${currentPath}`);
 ---
 <!doctype html>
 <html lang={lang}>
@@ -33,6 +54,26 @@ const isHome = currentPath === '/' || currentPath === '/en';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={ogImageAbsolute} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <!-- Hreflang alternates -->
+    <link rel="alternate" hreflang="es" href={`${siteUrl}${esPath}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}${enPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${esPath}`} />
+
     <link rel="icon" type="image/svg+xml" href="/assets/LogoJuan.svg" />
     <title>{title}</title>
     <ClientRouter />
@@ -56,25 +97,20 @@ const isHome = currentPath === '/' || currentPath === '/en';
       </script>
     )}
 
-    {/* Smooth scroll + GSAP ticker — renders nothing, pure side effect */}
+    {/* Smooth scroll + GSAP ticker */}
     <SmoothScroll client:idle />
 
-    {/* Custom cursor — dot + ring + follow label, fine-pointer only */}
+    {/* Custom cursor */}
     <Cursor client:load lang={lang} />
 
     {/* Grid overlay — press G to toggle column guides (dev only) */}
     {import.meta.env.DEV && <GridOverlay />}
 
-
-    {/* Fixed nav — scroll-aware via NavScroll island */}
+    {/* Fixed nav */}
     <Nav currentPath={currentPath} isHome={isHome} />
 
     <a href="#main-content" class="skip-link">{lang === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
 
-    {/*
-      padding-block-start accounts for the fixed nav height.
-      All page content starts below the nav bar.
-    */}
     <main id="main-content" style={`padding-block-start: var(--nav-height)`}>
       <slot />
     </main>
@@ -84,14 +120,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
 <script>
   /*
    * Dark section inversion — IntersectionObserver approach.
-   *
-   * Watches all [data-dark-section] elements. When any one enters the viewport,
-   * ALL of them receive .is-dark (creating a unified dark zone at the bottom
-   * of the page). When none are visible, .is-dark is removed from all.
-   *
-   * threshold: 0.15 — fires when 15% of the section is visible. Avoids
-   * premature flip at the very first pixel of entry (a common glitch).
-   *
+   * threshold: 0.15 fires when 15% of the section is visible.
    * Re-runs on astro:page-load so View Transitions don't orphan observers.
    */
   function initDarkSections() {
@@ -120,11 +149,9 @@ const isHome = currentPath === '/' || currentPath === '/en';
 
     sections.forEach((el) => observer.observe(el));
 
-    // Cleanup on next navigation so observers don't stack
     document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
   }
 
-  // Initial run + re-run after every View Transition
   initDarkSections();
   document.addEventListener('astro:page-load', initDarkSections);
 </script>
@@ -132,7 +159,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
 <script>
   /*
    * Console Easter egg — for the person who opens DevTools.
-   * The %c trick applies CSS to console output in Chrome/Firefox/Safari.
+   * Intentionally runs in production: this is for curious developers visiting the site.
    */
   (function () {
     const style = {
@@ -146,7 +173,7 @@ const isHome = currentPath === '/' || currentPath === '/en';
       style.bold
     );
     console.log(
-      '%cSí, vos — el que abrió la consola.\nSi llegaste hasta acá, probablemente sepas leer código.\nY si sabés leer código, probablemente seamos amigos.',
+      '%cSí, vos: el que abrió la consola.\nSi llegaste hasta acá, probablemente sepas leer código.\nY si sabés leer código, probablemente seamos amigos.',
       style.reset
     );
     console.log(

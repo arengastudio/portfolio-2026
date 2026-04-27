@@ -29,7 +29,7 @@ const experience = [
 ];
 ---
 <BaseLayout
-  title="About — Juan Cruz Luna"
+  title="About - Juan Cruz Luna"
   description="Diseñador de producto y builder basado en Buenos Aires. Co-fundador de Arenga Studio. 3 años liderando diseño en plataformas SaaS."
   lang="es"
 >
@@ -55,6 +55,8 @@ const experience = [
         class={styles.photo}
         width="400"
         height="500"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* RIGHT: bio paragraphs */}
@@ -70,7 +72,7 @@ const experience = [
           UI, sistemas de diseño e implementación.
         </Type>
         <Type as="p" variant="base" class={styles.bioPara}>
-          Creo que los diseñadores que construyen hacen mejor diseño. Por eso no solo diseño — también
+          Creo que los diseñadores que construyen hacen mejor diseño. Por eso no solo diseño, también
           buildeo. Este sitio es código propio, no un template.
         </Type>
       </div>

@@ -5,7 +5,7 @@ role: 'Product Designer'
 timeframe: '2025'
 outcome: 'Designed a rental guarantee product end-to-end: quote calculator, applicant portal, and transactional communications for every state of the process.'
 client: 'Garantear'
-team: '1 Designer, 1 Dev — Arenga Studio'
+team: '1 Designer, 1 Dev (Arenga Studio)'
 platforms: ['Web']
 tags: ['Fintech', 'End-to-end', 'Product Design', 'Communications']
 locale: 'en'
@@ -22,13 +22,13 @@ import ImagePlaceholder from '../../../src/components/case/ImagePlaceholder.astr
 
 Getting a rental guarantee in Argentina is, for most people, a black box. You know you need one. You don't know exactly what documentation to submit, how long it takes, or what state your application is in while you wait. The result is an experience that mixes uncertainty, phone calls, and documents going back and forth with no clarity on who does what.
 
-Garantear wanted to break that model with something 100% digital. The design challenge was twofold: build a clear interface for the applicant, and design the operational communications that accompany each milestone of the process — because a well-designed platform loses all its value the moment a generic, confusing email arrives that doesn't tell you what to do next.
+Garantear wanted to break that model with something 100% digital. The design challenge was twofold: build a clear interface for the applicant, and design the operational communications that accompany each milestone of the process. Because a well-designed platform loses all its value the moment a generic, confusing email arrives that doesn't tell you what to do next.
 
 ## The problem
 
-This wasn't a single screen or a single flow. It was a system with multiple actors and branching paths depending on the state of each application: a quote calculator, a documentation portal, communications for every key moment, a risk assessment team, and a closing process. The possible states of an application are numerous — initial quote, pre-approved, under review, returned by risk, rejected, approved with or without co-guarantor, guarantee granted. Each state creates a different experience and requires a different communication.
+This wasn't a single screen or a single flow. It was a system with multiple actors and branching paths depending on the state of each application: a quote calculator, a documentation portal, communications for every key moment, a risk assessment team, and a closing process. The possible states of an application are numerous (initial quote, pre-approved, under review, returned by risk, rejected, approved with or without co-guarantor, guarantee granted). Each state creates a different experience and requires a different communication.
 
-The real problem wasn't missing features. It was that each actor in the system saw a different product — or nothing at all. The applicant didn't know what state their application was in. The sales team received inquiries by phone. The real estate agency had no visibility into anything. Designing this without mapping the system states first was impossible.
+The real problem wasn't missing features. It was that each actor in the system saw a different product, or nothing at all. The applicant didn't know what state their application was in. The sales team received inquiries by phone. The real estate agency had no visibility into anything. Designing this without mapping the system states first was impossible.
 
 ## Approach
 
@@ -36,7 +36,7 @@ Two principles structured the work.
 
 **State first, then screen.** The question "which screen do I design?" is premature if you haven't answered "what state is the user in, what do they know, what do they need to know, and what's the next possible action?". That map is the real design. The screens are the consequence.
 
-**Communications are product.** In a process with high emotional friction — the user about to sign a contract, waiting on an approval, or receiving a rejection — the email that arrives is part of the product experience. Designing it as a generic template is a scoping error, not an execution one.
+**Communications are product.** In a process with high emotional friction (the user about to sign a contract, waiting on an approval, or receiving a rejection) the email that arrives is part of the product experience. Designing it as a generic template is a scoping error, not an execution one.
 
 <ImagePlaceholder src="/assets/cases/garantear/garantear05.png" />
 
@@ -46,7 +46,7 @@ Two principles structured the work.
 
 The user's first contact with the product couldn't be a registration form. It needed to be a tool that lets them understand whether the service works for them before committing to anything.
 
-The calculator serves that function: surface conditions upfront, reduce anxiety around the process, and allow a first validation before the formal evaluation. Putting that tool at the top of the funnel wasn't obvious — it delays registration — but it was the only way to reduce real friction at the system entry point.
+The calculator serves that function: surface conditions upfront, reduce anxiety around the process, and allow a first validation before the formal evaluation. Putting that tool at the top of the funnel wasn't obvious (it delays registration) but it was the only way to reduce real friction at the system entry point.
 
 What we dropped: starting with a personal data form. It's the most common pattern in financial services and the one with the highest abandonment. If the user doesn't yet understand whether the service works for them, asking for their data doesn't make sense.
 
@@ -56,7 +56,7 @@ The densest block of work on the project was the operational communications syst
 
 The pre-approval lands when someone is about to sign a lease. The rejection lands when they expected it to go through. The risk review return lands when the process stalls and they don't know for how long.
 
-The decision was consistent across all states: each communication ends with a concrete next step and a human contact identified by name, phone, and email. Not "the Garantear team" — a person. That detail completely changes how the user processes the information they receive.
+The decision was consistent across all states: each communication ends with a concrete next step and a human contact identified by name, phone, and email. Not "the Garantear team": a person. That detail completely changes how the user processes the information they receive.
 
 What we dropped: generic states like "your application is being processed." Informationally valid, emotionally useless. A user who receives that message knows exactly as much as they did before opening it.
 
@@ -66,19 +66,19 @@ What we dropped: generic states like "your application is being processed." Info
 
 When an application is approved, the flow splits depending on whether a co-guarantor exists. With a co-guarantor, there's an additional electronic signature step that changes the next steps for the applicant and requires extra coordination.
 
-The decision was to not unify the approval communications into a single "generic with variables" piece. The experiences are different emotionally and operationally — they deserve different communications. The co-guarantor version explicitly explains the electronic signature step from the first approval message, so the user arrives at that stage without surprise.
+The decision was to not unify the approval communications into a single "generic with variables" piece. The experiences are different emotionally and operationally, they deserve different communications. The co-guarantor version explicitly explains the electronic signature step from the first approval message, so the user arrives at that stage without surprise.
 
 ### The preliminary certificate and expectation management
 
-The preliminary approval certificate was one of the most delicate artifacts in the system. It's a document the applicant can present to a real estate agency before the formal guarantee is issued — which has enormous practical value — but it is not the guarantee. Confusing the two states is a real risk.
+The preliminary approval certificate was one of the most delicate artifacts in the system. It's a document the applicant can present to a real estate agency before the formal guarantee is issued (which has enormous practical value) but it is not the guarantee. Confusing the two states is a real risk.
 
-The decision was to include in the certificate itself an explicit clarification: it's purely informational and preliminary, does not imply effective issuance, and the guarantee is only formally granted after payment, contract signing, and completion of all remaining steps. That clarification isn't fine print. It's content design — placed visibly, in plain language, so the user understands exactly what they're holding.
+The decision was to include in the certificate itself an explicit clarification: it's purely informational and preliminary, does not imply effective issuance, and the guarantee is only formally granted after payment, contract signing, and completion of all remaining steps. That clarification isn't fine print. It's content design, placed visibly, in plain language, so the user understands exactly what they're holding.
 
 ## Solution
 
 The final product has three layers: the commercial site with the quote calculator as entry point, the applicant portal with state-based tracking and document upload, and the transactional communications system covering every bifurcation of the process.
 
-> The full flow — from "how much does the guarantee cost?" to "guarantee issued" — is now navigable without calling anyone. Every milestone has a communication that says exactly what happened, what comes next, and who to contact if something isn't clear.
+> The full flow: from "how much does the guarantee cost?" to "guarantee issued", now navigable without calling anyone. Every milestone has a communication that says exactly what happened, what comes next, and who to contact if something isn't clear.
 
 ## Impact
 
@@ -94,7 +94,7 @@ The platform went from an opaque, phone-based process to one that's 100% digital
 
 ## Reflection
 
-Garantear confirmed something I already suspected: in products with high emotional friction, communications design is as critical as screen design — or more. A well-designed interface can lose all its value the moment a generic email arrives that says nothing.
+Garantear confirmed something I already suspected: in products with high emotional friction, communications design is as critical as screen design, or more. A well-designed interface can lose all its value the moment a generic email arrives that says nothing.
 
 I also learned to work with state systems before thinking about components. When a product has many possible outcomes, asking "which screen do I design?" is premature if you haven't answered "what state is the user in?". That map is the real design. The screens are the consequence.
 
