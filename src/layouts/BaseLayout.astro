@@ -5,6 +5,7 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import SmoothScroll from '../components/motion/SmoothScroll.tsx';
 import Cursor from '../components/motion/Cursor.tsx';
+import FilmGrain from '../components/motion/FilmGrain.astro';
 import Nav from '../components/global/Nav.astro';
 import GridOverlay from '../components/dev/GridOverlay.astro';
 
@@ -96,6 +97,9 @@ const enPath = lang === 'en'
         }
       </script>
     )}
+
+    {/* Film grain overlay — fixed canvas, mix-blend-mode: overlay */}
+    <FilmGrain />
 
     {/* Smooth scroll + GSAP ticker */}
     <SmoothScroll client:idle />

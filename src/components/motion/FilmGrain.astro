@@ -1,0 +1,75 @@
+---
+/**
+ * FilmGrain.astro
+ * Fixed canvas noise overlay — adds analog texture to the whole site.
+ * Tiled: 200×200 noise tile repeated via canvas pattern (performance-safe).
+ * Refreshes every 3 rAF frames (~20fps grain churn at 60fps).
+ * Skipped entirely for prefers-reduced-motion users.
+ */
+---
+
+<canvas data-film-grain aria-hidden="true" class="grain"></canvas>
+
+<style>
+  .grain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 8000;
+    mix-blend-mode: overlay;
+    opacity: 0.04;
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.querySelector<HTMLCanvasElement>('[data-film-grain]');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const TILE = 200;
+    const off = Object.assign(document.createElement('canvas'), { width: TILE, height: TILE });
+    const offCtx = off.getContext('2d');
+    if (!offCtx) return;
+
+    let fc = 0;
+    let raf: number;
+
+    function resize() {
+      canvas!.width = window.innerWidth;
+      canvas!.height = window.innerHeight;
+    }
+
+    function tick() {
+      raf = requestAnimationFrame(tick);
+      if (++fc % 3 !== 0) return;
+
+      const d = offCtx!.createImageData(TILE, TILE);
+      const buf = d.data;
+      for (let i = 0; i < buf.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        buf[i] = buf[i + 1] = buf[i + 2] = v;
+        buf[i + 3] = 255;
+      }
+      offCtx!.putImageData(d, 0, 0);
+      const pat = ctx!.createPattern(off, 'repeat');
+      if (!pat) return;
+      ctx!.fillStyle = pat;
+      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    tick();
+
+    document.addEventListener('astro:before-swap', () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    }, { once: true });
+  })();
+</script>
