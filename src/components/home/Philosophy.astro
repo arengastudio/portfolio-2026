@@ -57,3 +57,54 @@ const principles = [
   {/* Pin controller — renders nothing, pure GSAP side-effect */}
   <PhilosophyPin client:visible />
 </section>
+
+<style is:global>
+  /*
+   * Philosophy accent state — triggered by IntersectionObserver below.
+   * Overrides CSS custom properties so all child type components
+   * (which read var(--color-fg) / var(--color-muted)) update automatically.
+   * border-top-color matches the new bg to erase the visual divider.
+   */
+  [data-philosophy-section] {
+    transition:
+      background-color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      border-top-color 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-philosophy-section].philosophy-accent {
+    background-color: var(--color-accent);
+    border-top-color: var(--color-accent);
+    --color-fg:     #F5F2EC;
+    --color-muted:  rgba(245, 242, 236, 0.65);
+    --color-border: rgba(245, 242, 236, 0.15);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-philosophy-section] { transition: none; }
+  }
+</style>
+
+<script>
+  /*
+   * Toggle .philosophy-accent on the section when 30% of it is visible.
+   * Removes the class when the section leaves the viewport.
+   * Re-runs on astro:page-load for View Transitions.
+   */
+  function initPhilosophyAccent() {
+    const section = document.querySelector<HTMLElement>('[data-philosophy-section]');
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        section.classList.toggle('philosophy-accent', entry.isIntersecting);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+  }
+
+  initPhilosophyAccent();
+  document.addEventListener('astro:page-load', initPhilosophyAccent);
+</script>
