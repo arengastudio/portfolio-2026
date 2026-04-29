@@ -23,9 +23,10 @@
   --space-11: 384px;
 
   /* ─── Typography — font families ─────────────────────── */
-  --font-display: 'PP Formula', sans-serif;
-  --font-body:    'PP Neue Montreal', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font-display:      'PP Formula', sans-serif;
+  --font-body:         'PP Neue Montreal', sans-serif;
+  --font-mono:         'JetBrains Mono', monospace;
+  --font-handwriting:  'Caveat', cursive;
 
   /* ─── Type scale ──────────────────────────────────────── */
   /* --text-xs: 12px | Mono 400 | lh 1.4 | tracking 0 */

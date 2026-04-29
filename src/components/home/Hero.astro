@@ -29,6 +29,8 @@ const { lang = 'es' } = Astro.props;
     */}
     <div class={styles.leftPanel}>
       <HeroWords client:load wordClass={styles.displayWord} />
+      {/* Handwriting date — decorative, bottom-left of left panel */}
+      <span class={styles.heroDate} aria-hidden="true">ABR. 2026</span>
     </div>
 
     {/* ─── RIGHT — identity + info, fades in after words ─── */}

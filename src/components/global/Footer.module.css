@@ -56,16 +56,20 @@
 }
 
 /*
- * "That's all." — barely there closing note.
- * font-style: italic is the one italic moment on the site.
- * opacity: 0.4 — noticed only if you're looking.
+ * "That's all." — handwriting closing note. Caveat font gives it a
+ * human, off-the-cuff quality against the mono stack and the technical
+ * activity grid beside it. rotate(-2deg) adds personality, not distraction.
+ * opacity: 0.75 — more visible than before (font is less legible at 0.4).
  */
 .thatsAll {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs-size);
-  letter-spacing: 0.05em;
-  opacity: 0.4;
+  font-family: var(--font-handwriting);
+  font-size: 20px;
+  letter-spacing: 0;
+  opacity: 0.75;
+  display: inline-block;
+  transform: rotate(-2deg);
+  transform-origin: left center;
 }
 
 /* ─── RIGHT column ────────────────────────────────────────── */

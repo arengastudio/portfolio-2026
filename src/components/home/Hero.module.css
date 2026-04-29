@@ -68,6 +68,7 @@
   justify-content: center;           /* words centered vertically */
   gap: var(--space-2);               /* breathing room between BUILD / BREAK / SHIP */
   padding-block: var(--space-7);
+  position: relative;                /* stacking context for .heroDate absolute position */
 }
 
 .rightPanel {
@@ -238,6 +239,34 @@
   .displayWord {
     font-size: clamp(2.8rem, 13vw, 9rem);
   }
+}
+
+/* ─── Handwriting date ───────────────────────────────────── */
+
+/*
+ * Decorative "ABR. 2026" in Caveat — bottom-left of the left panel.
+ * `position: absolute` keeps it out of the flex flow so the words
+ * remain centered without it pushing them off-center.
+ * opacity 0.45 — visible but clearly secondary. rotate(-8deg) for personality.
+ */
+.heroDate {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 0;
+  font-family: var(--font-handwriting);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: var(--color-fg);
+  opacity: 0.45;
+  transform: rotate(-8deg);
+  transform-origin: left bottom;
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .heroDate { display: none; }
 }
 
 /* ─── CTA column layout (≤640px) ─────────────────────────── */
