@@ -12,7 +12,7 @@
  */
 ---
 <div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
+  <div class="marquee-track" data-marquee-track>
     {/*
       Content repeats 3× inside each span so the span is always wider than
       any viewport. -50% translate = exactly one span width = seamless loop.
@@ -78,3 +78,44 @@
     }
   }
 </style>
+
+<script>
+  /*
+   * Marquee speed reacts to scroll velocity.
+   * Fast scroll → shorter animation-duration → faster strip.
+   * Smoothly lerps back to the base speed (28s) after scrolling stops.
+   * Skipped for prefers-reduced-motion (animation is paused there anyway).
+   */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const track = document.querySelector<HTMLElement>('[data-marquee-track]');
+    if (!track) return;
+
+    const BASE = 28;   // seconds — matches CSS animation-duration
+    const FAST = 7;    // minimum duration at peak scroll speed
+    let current = BASE;
+    let target = BASE;
+    let lastY = window.scrollY;
+    let lastT = performance.now();
+
+    window.addEventListener('scroll', () => {
+      const now = performance.now();
+      const dt = now - lastT;
+      if (dt < 8) return; // debounce: skip frames closer than ~8ms
+      const velocity = Math.abs(window.scrollY - lastY) / dt; // px/ms
+      lastY = window.scrollY;
+      lastT = now;
+      // velocity 0 → BASE, ≥1.5 px/ms → FAST
+      const factor = Math.min(velocity / 1.5, 1);
+      target = BASE - (BASE - FAST) * factor;
+    }, { passive: true });
+
+    (function tick() {
+      requestAnimationFrame(tick);
+      current += (target - current) * 0.12;    // lerp to target
+      target  += (BASE - target)   * 0.04;     // target eases back to BASE
+      track!.style.animationDuration = `${current.toFixed(2)}s`;
+    })();
+  })();
+</script>
