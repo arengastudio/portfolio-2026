@@ -25,6 +25,8 @@ const cases = defineCollection({
     locale: z.enum(['es', 'en']),
     publishedAt: z.date(),
     figmaDeepDive: z.string().url().optional(),
+    /** Zero-padded case number shown in the hero meta row (e.g. '01', '04'). */
+    caseNumber: z.string().optional(),
     /** Color key for the case hero visual block. Matches CaseEntry colorKey. */
     colorKey: z.enum(['accent', 'fg', 'dark']).default('accent'),
     /** Path to the hero cover image (relative to /public). Replaces the colored placeholder. */

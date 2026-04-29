@@ -130,17 +130,17 @@
 
 /*
  * Break out of the prose column and container padding to span
- * the full viewport width. Requires overflow-x: clip on body
- * (global.css) to prevent a horizontal scrollbar.
+ * the full viewport width. margin-inline: calc(50% - 50vw) uses
+ * negative margins so the flow box stays within the prose width —
+ * prevents horizontal scrollbar on mobile (no overflow-x: clip needed
+ * for this to work, but body still has overflow-x: clip as safety net).
  */
 .prose :global(.case-image) {
   display: block;
   width: 100vw;
   max-width: none;
   height: auto;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-inline: calc(50% - 50vw);
   margin-block: var(--space-7);
 }
 
@@ -150,9 +150,7 @@
   width: 100vw;
   max-width: none;
   aspect-ratio: 16 / 7;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-inline: calc(50% - 50vw);
   border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -212,5 +210,21 @@
   .prose {
     padding-block-start: var(--space-5);
     padding-block-end: var(--space-7);
+  }
+
+  /* Scale section headings for mobile — fixed 40px/28px is too large */
+  .prose :global(h2) {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-block-start: var(--space-5);
+  }
+
+  .prose :global(h3) {
+    font-size: clamp(20px, 5vw, 24px);
+    margin-block-start: var(--space-4);
+  }
+
+  /* Reduce callout padding so content width stays readable */
+  .prose :global(.callout) {
+    padding: var(--space-3);
   }
 }

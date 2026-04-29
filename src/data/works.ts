@@ -63,13 +63,12 @@ export const works: WorkItem[] = [
   {
     number: '05',
     title: 'EEVA Studios',
-    year: '2025',
-    tags: ['E-commerce', 'Redesign', 'Brand', 'Fashion', 'Web'],
-    description: 'Rediseño completo de e-commerce para marca de ropa con estética futurista. Experiencia de compra, identidad visual y usabilidad.',
-    descriptionEn: 'Full e-commerce redesign for a fashion brand with futurist aesthetics. Shopping experience, visual identity, and usability.',
+    year: '2024',
+    tags: ['Ecommerce', 'Fashion Tech', 'UI', 'Visual Design'],
+    description: 'Diseño end-to-end de ecommerce de moda con identidad futurista. De logo y paleta inicial a experiencia de compra completa con design system.',
+    descriptionEn: 'End-to-end design of a fashion ecommerce with futurist identity. From logo and palette to a complete shopping experience with design system.',
     image: '/assets/archive/eeva01.png',
-    href: 'https://www.figma.com/design/nZmhkavuxCzhlNcxBKXvM7/Portfolio-2026---Juan-Luna?node-id=1029-1851',
-    external: true,
+    href: '/work/eeva-studios',
   },
   {
     number: '06',
