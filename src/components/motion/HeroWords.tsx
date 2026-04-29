@@ -71,6 +71,14 @@ export default function HeroWords({ wordClass }: Props) {
         gsapReady = true;
         clearTimeout(fallbackTimer);
 
+        // On first visit the Loader covers the screen for ~3.5s.
+        // Glitch fires after loader clears so user actually sees it.
+        const isFirstVisit = !sessionStorage.getItem('jcl-loaded');
+        const loaderOffset = isFirstVisit ? 3.2 : 0;
+
+        // Cursor blink element for SHIP's period — appended after SHIP animates in
+        let cursorEl: HTMLSpanElement | null = null;
+
         ctx = gsap.context(() => {
           wordEls.forEach((el, i) => {
             /*
@@ -98,6 +106,25 @@ export default function HeroWords({ wordClass }: Props) {
                 ease: 'power4.out',
               }
             );
+
+            // Glitch: rapid skew + shift then snap back (80ms total)
+            const glitchDelay = loaderOffset + (DELAYS[i] ?? 0) + 0.75 + chars.length * 0.022 + 0.15;
+            const tl = gsap.timeline({ delay: glitchDelay });
+            tl.to(el, { skewX: 1.8, x: 3, duration: 0.04, ease: 'none' })
+              .to(el, { skewX: -1.2, x: -2, duration: 0.03, ease: 'none' })
+              .to(el, { skewX: 0, x: 0, duration: 0.04, ease: 'none' });
+
+            // Terminal cursor blink on the period of SHIP (last word)
+            if (i === WORDS.length - 1) {
+              const shipDelay = loaderOffset + (DELAYS[i] ?? 0) + 0.75 + chars.length * 0.022 + 0.3;
+              gsap.delayedCall(shipDelay, () => {
+                if (!containerRef.current) return;
+                cursorEl = document.createElement('span');
+                cursorEl.setAttribute('data-cursor-blink', '');
+                cursorEl.setAttribute('aria-hidden', 'true');
+                el.appendChild(cursorEl);
+              });
+            }
           });
         }, container);
       } catch {

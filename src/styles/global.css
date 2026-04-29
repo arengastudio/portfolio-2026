@@ -40,6 +40,7 @@ body {
   line-height: var(--text-base-line-height);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 /* ─── Focus ──────────────────────────────────────────────── */
@@ -121,6 +122,33 @@ a:hover {
   [data-hero-word] {
     opacity: 1 !important;
   }
+}
+
+/* ─── Terminal cursor blink (SHIP period) ───────────────── */
+/*
+ * Appended to the last hero word (SHIP.) by HeroWords.tsx after entrance.
+ * Block cursor that blinks at 1fps — mimics terminal shell prompt.
+ * Inherits color from the hero word (--color-fg).
+ */
+[data-cursor-blink] {
+  display: inline-block;
+  width: 3px;
+  height: 0.65em;
+  background-color: currentColor;
+  margin-left: 5px;
+  vertical-align: middle;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-cursor-blink] {
+    animation: cursor-blink 1s steps(1, end) infinite;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 /* ─── ScrollReveal initial states ────────────────────────── */
