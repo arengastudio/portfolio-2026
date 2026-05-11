@@ -1,13 +1,29 @@
 ---
+import { Image } from 'astro:assets';
+import { resolveCaseImage } from '../../lib/caseImages';
+
 export interface Props {
   src?: string;
   alt?: string;
   label?: string;
 }
 const { src, alt = '', label = 'Imagen' } = Astro.props;
+const resolvedImage = resolveCaseImage(src);
 ---
-{src
-  ? <img src={src} alt={alt} class="case-image" />
+{resolvedImage
+  ? (
+    <Image
+      src={resolvedImage}
+      alt={alt}
+      class="case-image"
+      decoding="async"
+      loading="lazy"
+      format="webp"
+      quality="high"
+      widths={[390, 640, 768, 1024, 1280, 1600]}
+      sizes="100vw"
+    />
+  )
   : (
     <div class="image-placeholder">
       <span class="image-placeholder-label">{label}</span>

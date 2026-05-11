@@ -43,8 +43,8 @@ const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey
   description={outcome}
   lang="en"
 >
-  <ReadingProgress client:load lang="en" />
-  <CaseHeroParallax client:load />
+  <ReadingProgress client:idle lang="en" />
+  <CaseHeroParallax client:media="(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)" />
 
   {/* ─── Block 1: Hero ─── */}
   <CaseHero

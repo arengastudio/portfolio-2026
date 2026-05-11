@@ -10,8 +10,8 @@
  * Works with Lenis because Lenis calls window.scrollTo() internally —
  * the native scroll event fires on each Lenis animation frame tick.
  *
- * GSAP quickTo (duration: 0.1s) smooths micro-jitter from scroll events.
- * prefers-reduced-motion: instant set via gsap.set() (no duration).
+ * CSS transitions smooth micro-jitter from scroll events.
+ * prefers-reduced-motion: instant transform updates.
  *
  * Placed in /work/[slug].astro only — reading progress is for long-form
  * case studies, not for the home or index pages.
@@ -31,38 +31,33 @@ export default function ReadingProgress({ lang = 'es' }: Props) {
     if (!bar) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let destroyed = false;
-    let cleanup: (() => void) | null = null;
+    let rafId: number | null = null;
 
-    void (async () => {
-      const { gsap } = await import('gsap');
-      if (destroyed) return;
+    if (prefersReduced) {
+      bar.style.transition = 'none';
+    }
 
-      gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
+    const getProgress = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      return total > 0 ? Math.min(window.scrollY / total, 1) : 0;
+    };
 
-      const getProgress = () => {
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        return total > 0 ? Math.min(window.scrollY / total, 1) : 0;
-      };
+    const renderProgress = () => {
+      rafId = null;
+      bar.style.transform = `scaleX(${getProgress()})`;
+    };
 
-      let updateProgress: () => void;
+    const updateProgress = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(renderProgress);
+    };
 
-      if (prefersReduced) {
-        updateProgress = () => gsap.set(bar, { scaleX: getProgress() });
-      } else {
-        const setScaleX = gsap.quickTo(bar, 'scaleX', { duration: 0.1, ease: 'none' });
-        updateProgress = () => { setScaleX(getProgress()); };
-      }
-
-      window.addEventListener('scroll', updateProgress, { passive: true });
-      updateProgress(); // initialize on mount
-
-      cleanup = () => window.removeEventListener('scroll', updateProgress);
-    })();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    renderProgress();
 
     return () => {
-      destroyed = true;
-      cleanup?.();
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', updateProgress);
     };
   }, []);
 

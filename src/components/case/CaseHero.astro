@@ -1,6 +1,8 @@
 ---
 import Container from '../ui/Container.astro';
 import Type from '../ui/Type.astro';
+import { Image } from 'astro:assets';
+import { resolveCaseImage } from '../../lib/caseImages';
 import styles from './CaseHero.module.css';
 
 export interface Props {
@@ -18,6 +20,7 @@ export interface Props {
 }
 
 const { title, role, timeframe, outcome, client, colorKey, image, lang = 'es', caseNumber } = Astro.props;
+const resolvedImage = resolveCaseImage(image);
 ---
 <section class={styles.hero} data-case-hero>
   <Container>
@@ -46,15 +49,20 @@ const { title, role, timeframe, outcome, client, colorKey, image, lang = 'es', c
     {/* ─── Visual block ─── */}
     {/* When coverImage is provided: renders the real photo. Fallback: colored placeholder block. */}
     <div class={styles.visualWrap}>
-      {image
+      {resolvedImage
         ? (
           <div class={styles.visualImg} data-case-visual>
-            <img
-              src={image}
+            <Image
+              src={resolvedImage}
               alt={lang === 'en' ? `${title}: project visual` : `Visual del proyecto ${title}`}
               class={styles.visualPhoto}
-              loading="eager"
               decoding="async"
+              loading="eager"
+              priority
+              format="webp"
+              quality="high"
+              widths={[480, 768, 1024, 1280, 1600]}
+              sizes="(max-width: 767px) 100vw, min(100vw - 96px, 1280px)"
             />
           </div>
         )
