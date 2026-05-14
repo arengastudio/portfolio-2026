@@ -1,0 +1,26 @@
+---
+/**
+ * IndexToC.astro
+ * Tabla de contenidos editorial al top de homepage.
+ * Cuatro secciones, smooth-scroll a anclas.
+ */
+import styles from './IndexToC.module.css';
+
+const entries = [
+  { num: '01', label: 'Index',   href: '#sec-index'   },
+  { num: '02', label: 'Tiempo',  href: '#sec-tiempo'  },
+  { num: '03', label: 'Señales', href: '#sec-senales' },
+  { num: '04', label: 'Cierre',  href: '#sec-cierre'  },
+];
+---
+<nav class={styles.toc} aria-label="Tabla de contenidos">
+  <span class={styles.label}>Índice ↘</span>
+  <div class={styles.entries}>
+    {entries.map((e) => (
+      <a href={e.href} class={styles.entry}>
+        <span class={styles.entryNum}>{e.num}</span>
+        <span>{e.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>

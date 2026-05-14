@@ -1,9 +1,9 @@
 ---
 /**
  * Timeline.astro
- * Homepage Bloque 2 — Línea de tiempo (4 hitos).
- * Layout editorial: año en mono, título display, nota en body.
+ * Homepage Bloque 2 — Línea de tiempo. Año como folder tab.
  */
+import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 
 const entries = [
@@ -29,8 +29,15 @@ const entries = [
   },
 ];
 ---
-<section class={`${styles.section} ${styles.timeline}`} aria-labelledby="home-timeline-label">
-  <h2 id="home-timeline-label" class={styles.timelineLabel}>Línea de tiempo</h2>
+<section id="sec-tiempo" class={`${styles.section} ${styles.timeline}`} aria-label="Línea de tiempo">
+  <SectionTab
+    number="02"
+    label="Tiempo"
+    filename="home/timeline.astro"
+    date="2021–2025"
+    extra={`${entries.length} entradas`}
+  />
+
   {entries.map((e) => (
     <div class={styles.timelineEntry}>
       <span class={styles.timelineYear}>{e.year}</span>

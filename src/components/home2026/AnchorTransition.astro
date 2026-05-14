@@ -1,47 +1,45 @@
 ---
 /**
  * AnchorTransition.astro
- * Homepage Bloque 4 — Ancla + transición.
- * Statement + CTA al archivo. Cambia bg a accent al entrar en viewport.
- *
- * El IntersectionObserver toggle .isActive cuando entra.
- * Vuelve al color base al salir.
- *
- * prefers-reduced-motion: no toggle (queda en bg estático).
+ * Homepage Bloque 4 — Cierre + sello diagonal. Bg shift a accent al entrar.
  */
+import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 ---
-<section class={styles.anchor} data-anchor-transition>
-  <h2 class={styles.anchorStatement}>Diseño productos. También los construyo.</h2>
-  <a href="/archivo" class={styles.anchorCta}>→ Ver archivo</a>
-</section>
+<div id="sec-cierre" class={styles.anchorWrap}>
+  <SectionTab
+    number="04"
+    label="Cierre"
+    filename="home/anchor.astro"
+    date="2026-05-14"
+    revision="FINAL"
+  />
+
+  <section class={styles.anchor} data-anchor-transition>
+    <span class={styles.anchorStampDiagonal} aria-hidden="true">Fin de archivo</span>
+
+    <h2 class={styles.anchorStatement}>Diseño productos. También los construyo.</h2>
+    <a href="/archivo" class={styles.anchorCta}>→ Ver archivo</a>
+  </section>
+</div>
 
 <script>
   function initAnchor() {
     const anchor = document.querySelector<HTMLElement>('[data-anchor-transition]');
     if (!anchor) return;
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const activeClass = anchor.className.split(' ').find((c) => c.endsWith('_anchor')) ?? '';
-    /* Buscar la clase generada por CSS Modules para .isActive */
-    const moduleClassPrefix = activeClass.replace('_anchor', '');
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            anchor.setAttribute('data-active', 'true');
-          } else {
-            anchor.removeAttribute('data-active');
-          }
+          if (entry.isIntersecting) anchor.setAttribute('data-active', 'true');
+          else anchor.removeAttribute('data-active');
         });
       },
       { threshold: 0.4 }
     );
 
     io.observe(anchor);
-
     document.addEventListener('astro:before-swap', () => io.disconnect(), { once: true });
   }
 
@@ -49,8 +47,7 @@ import styles from './home2026.module.css';
   document.addEventListener('astro:page-load', initAnchor);
 </script>
 
-<style>
-  /* Usar data-attribute en lugar de toggle de clase CSS Module (más simple) */
+<style is:global>
   [data-anchor-transition][data-active="true"] {
     background-color: var(--color-accent);
     color: var(--color-bg);

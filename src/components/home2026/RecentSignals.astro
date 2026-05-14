@@ -1,33 +1,41 @@
 ---
 /**
  * RecentSignals.astro
- * Homepage Bloque 3 — Señales recientes.
- * Lo que está leyendo / probando / aprendiendo.
+ * Homepage Bloque 3 — Señales recientes. Index numerado.
  */
+import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 
 const signals = [
   {
-    date: 'May 2026',
+    date: '2026-05',
     title: 'Leyendo Click, de los creadores de Sprint.',
     note: 'El mejor libro sobre arrancar proyectos que leí en mucho tiempo.',
   },
   {
-    date: 'May 2026',
+    date: '2026-05',
     title: 'Probando vibe coding en serio.',
     note: 'La línea entre diseñar y construir se está borrando de formas interesantes.',
   },
   {
-    date: 'Abr 2026',
+    date: '2026-04',
     title: 'Aprendiendo Git. Tarde, sí.',
     note: 'Pero entender el proceso de construcción desde adentro vale la pena.',
   },
 ];
 ---
-<section class={`${styles.section} ${styles.signals}`} aria-labelledby="home-signals-label">
-  <h2 id="home-signals-label" class={styles.signalsLabel}>Señales recientes</h2>
-  {signals.map((s) => (
+<section id="sec-senales" class={`${styles.section} ${styles.signals}`} aria-label="Señales recientes">
+  <SectionTab
+    number="03"
+    label="Señales"
+    filename="home/signals.astro"
+    date="May 2026"
+    extra={`${signals.length} entries`}
+  />
+
+  {signals.map((s, i) => (
     <div class={styles.signal}>
+      <span class={styles.signalIndex}>0{i + 1}/</span>
       <span class={styles.signalDate}>{s.date}</span>
       <div class={styles.signalBody}>
         <p class={styles.signalTitle}>{s.title}</p>

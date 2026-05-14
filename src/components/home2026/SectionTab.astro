@@ -1,0 +1,36 @@
+---
+/**
+ * SectionTab.astro
+ * Folder tab editorial — encabezado de sección. Metáfora archivo.
+ * Tab oscuro + filename + meta (rev, date, count) tipo working draft.
+ */
+import styles from './SectionTab.module.css';
+
+export interface Props {
+  number: string;
+  label: string;
+  filename?: string;
+  date?: string;
+  revision?: string;
+  extra?: string;
+}
+
+const { number, label, filename, date, revision, extra } = Astro.props;
+---
+<header class={styles.wrap}>
+  <span class={styles.tab}>
+    <span class={styles.num}>{number}</span>
+    <span class={styles.label}>{label}</span>
+  </span>
+
+  <span class={styles.meta}>
+    {filename && (
+      <span class={styles.metaItem}>
+        <span class={styles.filename}>{filename}</span>
+      </span>
+    )}
+    {date && <span class={styles.metaItem}>{date}</span>}
+    {revision && <span class={styles.metaItem}>{revision}</span>}
+    {extra && <span class={styles.metaItem}>{extra}</span>}
+  </span>
+</header>
