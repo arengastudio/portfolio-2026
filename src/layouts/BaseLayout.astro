@@ -6,7 +6,9 @@ import { ClientRouter } from 'astro:transitions';
 import SmoothScroll from '../components/motion/SmoothScroll.tsx';
 import Cursor from '../components/motion/Cursor.tsx';
 import FilmGrain from '../components/motion/FilmGrain.astro';
-import Nav from '../components/global/Nav.astro';
+import Ticker from '../components/global/Ticker.astro';
+import Sidebar from '../components/global/Sidebar.astro';
+import SidebarMobile from '../components/global/SidebarMobile.tsx';
 import GridOverlay from '../components/dev/GridOverlay.astro';
 
 export interface Props {
@@ -110,12 +112,22 @@ const enPath = lang === 'en'
     {/* Grid overlay — press G to toggle column guides (dev only) */}
     {import.meta.env.DEV && <GridOverlay />}
 
-    {/* Fixed nav */}
-    <Nav currentPath={currentPath} isHome={isHome} />
+    {/* Sistema Global 01 — Ticker en vivo */}
+    <Ticker />
+
+    {/* Sistema Global 03 — Sidebar contextual (desktop + drawer mobile) */}
+    <Sidebar currentPath={currentPath}>
+      <Fragment slot="context">
+        <slot name="sidebar-context" />
+      </Fragment>
+    </Sidebar>
+
+    {/* Toggle drawer mobile — solo visible en ≤1023px */}
+    <SidebarMobile client:load />
 
     <a href="#main-content" class="skip-link">{lang === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
 
-    <main id="main-content" style={`padding-block-start: var(--nav-height)`}>
+    <main id="main-content" class="site-main">
       <slot />
     </main>
   </body>

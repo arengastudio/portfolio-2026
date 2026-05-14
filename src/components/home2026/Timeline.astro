@@ -1,0 +1,43 @@
+---
+/**
+ * Timeline.astro
+ * Homepage Bloque 2 — Línea de tiempo (4 hitos).
+ * Layout editorial: año en mono, título display, nota en body.
+ */
+import styles from './home2026.module.css';
+
+const entries = [
+  {
+    year: '2021',
+    title: 'Primeros proyectos freelance.',
+    note: 'Aprendí que diseñar sin entender el negocio es decoración.',
+  },
+  {
+    year: '2022',
+    title: 'Me sumé a Librodepases.',
+    note: 'Por primera vez diseñé junto a desarrollo. Cambió cómo pienso un producto.',
+  },
+  {
+    year: '2024',
+    title: 'Fundé Arenga Studio.',
+    note: 'Pasé de ejecutar proyectos a tener que conseguirlos también.',
+  },
+  {
+    year: '2025',
+    title: 'Lideré el equipo de diseño de LDP.',
+    note: 'Dejé de ser el único que decidía. Fue mejor así.',
+  },
+];
+---
+<section class={`${styles.section} ${styles.timeline}`} aria-labelledby="home-timeline-label">
+  <h2 id="home-timeline-label" class={styles.timelineLabel}>Línea de tiempo</h2>
+  {entries.map((e) => (
+    <div class={styles.timelineEntry}>
+      <span class={styles.timelineYear}>{e.year}</span>
+      <div class={styles.timelineBody}>
+        <h3 class={styles.timelineTitle}>{e.title}</h3>
+        <p class={styles.timelineNote}>{e.note}</p>
+      </div>
+    </div>
+  ))}
+</section>

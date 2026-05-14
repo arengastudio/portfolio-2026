@@ -1,42 +1,33 @@
 ---
 /**
- * archivo.astro
- * All-works archive — every project, no case studies required.
- * List format with floating hover image + description panel.
- * Linked from SelectedWork "VER ARCHIVO COMPLETO →".
+ * /archivo — Canvas navegable (Página 2 del redesign).
+ * Reemplaza la lista WorkArchive con un canvas 2D libre.
+ *
+ * El sidebar muestra contexto de archivo (contador + instrucciones nav).
+ * No tiene scroll convencional — el contenido vive en el canvas.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
-import Type from '../components/ui/Type.astro';
-import ScrollReveal from '../components/motion/ScrollReveal.tsx';
-import WorkArchive from '../components/work/WorkArchive.tsx';
-import Footer from '../components/global/Footer.astro';
-import styles from './archivo.module.css';
-import { works } from '../data/works';
+import SidebarContextArchive from '../components/global/SidebarContextArchive.astro';
+import Canvas from '../components/archive/Canvas.tsx';
 ---
 <BaseLayout
-  title="Archivo - Juan Cruz Luna"
-  description="Todos los proyectos. Sin filtros."
+  title="Archivo — Juan Cruz Luna"
+  description="El archivo: proyectos, artefactos, notas. Drag para explorar."
   lang="es"
 >
-  <section class={styles.page}>
-    <Container>
+  <SidebarContextArchive slot="sidebar-context" />
 
-      {/* ─── Header ─── */}
-      <ScrollReveal client:visible variant="clip-up">
-        <div class={styles.header}>
-          <Type as="h1" variant="display-md" class={styles.title}>TRABAJO.</Type>
-          <Type as="p" variant="xs" color="muted" class={styles.subtitle}>
-            TODOS LOS PROYECTOS · 2017–2026
-          </Type>
-        </div>
-      </ScrollReveal>
-
-      {/* ─── Archive list ─── */}
-      <WorkArchive client:load items={works} lang="es" />
-
-    </Container>
-  </section>
-
-  <Footer />
+  <Canvas client:load />
 </BaseLayout>
+
+<style>
+  /* El canvas usa toda la altura del .site-main, sin padding extra. */
+  :global(.site-main:has([data-canvas-page])) {
+    padding-top: var(--ticker-height);
+  }
+
+  /* Anular padding heredado de site-main para el canvas */
+  main.site-main > :first-child:not(:global(footer)) {
+    margin: 0;
+  }
+</style>

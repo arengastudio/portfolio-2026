@@ -122,6 +122,22 @@
 
   /* ─── Nav ─────────────────────────────────────────────── */
   --nav-height:         56px;
+
+  /* ─── Sidebar + Ticker (redesign 2026) ──────────────── */
+  --sidebar-width:      240px;
+  --ticker-height:      28px;
+
+  /* ─── Status indicators ─────────────────────────────── */
+  --color-status-active: #4CAF50;
+  --color-status-idle:   rgba(10, 10, 10, 0.4);
+  --color-status-rec:    #E53935;
+
+  /* ─── Canvas placeholder tones ──────────────────────── */
+  --tone-accent-dark:    #2E33A6;
+  --tone-green-dark:     #1F4D3A;
+  --tone-blue-dark:      #1A3A66;
+  --tone-warm-dark:      #5C3826;
+  --tone-near-black:     #0A0A0A;
 }
 
 @media (max-width: 767px) {

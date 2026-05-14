@@ -1,0 +1,27 @@
+---
+/**
+ * Bloque contextual del sidebar para /archivo (canvas).
+ * Contador + instrucciones de navegación.
+ */
+import { archiveStats } from '../../config/projects';
+import { tickerConfig } from '../../config/ticker';
+import styles from './SidebarContext.module.css';
+---
+<div class={styles.block}>
+  <div class={styles.group}>
+    <span class={styles.label}>Archivo</span>
+    <span class={styles.value}>{archiveStats.projects} proyectos · {archiveStats.artifacts} artefactos</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Navegación</span>
+    <span class={styles.value}>Drag para explorar</span>
+    <span class={styles.value}>Scroll para zoom</span>
+    <span class={styles.value}>Click para abrir</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Actualizado</span>
+    <span class={styles.value}>{tickerConfig.lastUpdated}</span>
+  </div>
+</div>

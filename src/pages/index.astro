@@ -1,29 +1,38 @@
 ---
+/**
+ * Homepage (redesign 2026).
+ * Estructura:
+ *   - Sidebar contextual (slot)
+ *   - Bloque 1 — Hero above the fold
+ *   - Bloque 2 — Línea de tiempo
+ *   - Bloque 3 — Señales recientes
+ *   - Bloque 4 — Ancla + transición a accent
+ *   - Reconocimiento del visitante (Sistema Global 02, solo home)
+ *   - Footer
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Loader from '../components/motion/Loader.tsx';
-import Hero from '../components/home/Hero.astro';
-import Marquee from '../components/home/Marquee.astro';
-import Currently from '../components/home/Currently.astro';
-import SelectedWork from '../components/home/SelectedWork.astro';
-import AreFirst from '../components/home/AreFirst.astro';
-import Philosophy from '../components/home/Philosophy.astro';
-import FinalCTA from '../components/home/FinalCTA.astro';
+import SidebarContextHome from '../components/global/SidebarContextHome.astro';
+import HeroBlock from '../components/home2026/HeroBlock.astro';
+import Timeline from '../components/home2026/Timeline.astro';
+import RecentSignals from '../components/home2026/RecentSignals.astro';
+import AnchorTransition from '../components/home2026/AnchorTransition.astro';
+import VisitorRecognition from '../components/global/VisitorRecognition.tsx';
 import Footer from '../components/global/Footer.astro';
 ---
 <BaseLayout
-  title="Juan Cruz Luna - Product Designer & Builder"
+  title="Juan Cruz Luna — Product Designer & Builder"
   description="Diseñador de producto y builder. Co-fundador de Arenga Studio. Buenos Aires."
   lang="es"
 >
-  {/* Splash loader — first visit only, sessionStorage prevents replay */}
-  <Loader client:load />
+  <SidebarContextHome slot="sidebar-context" />
 
-  <Hero />
-  <Marquee />
-  <Currently />
-  <SelectedWork />
-  <AreFirst />
-  <Philosophy />
-  <FinalCTA />
+  <HeroBlock />
+  <Timeline />
+  <RecentSignals />
+  <AnchorTransition />
+
+  {/* Sistema Global 02 — Reconocimiento del visitante (solo home) */}
+  <VisitorRecognition client:idle />
+
   <Footer />
 </BaseLayout>

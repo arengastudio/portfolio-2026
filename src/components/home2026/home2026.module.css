@@ -1,0 +1,351 @@
+/*
+ * home2026.module.css
+ * Estilos compartidos por los 4 bloques del homepage redesign.
+ * Layout brutalist editorial, sin cards ni contenedores.
+ */
+
+/* ─── Sección base ───────────────────────────────────────── */
+.section {
+  padding: var(--space-8) var(--space-7);
+  max-width: 1280px;
+}
+
+.section + .section {
+  padding-top: 0;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+/* ─── Hero Block 1 ───────────────────────────────────────── */
+.hero {
+  min-height: calc(100vh - var(--ticker-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-7) var(--space-7) var(--space-6);
+  max-width: 1280px;
+  gap: var(--space-6);
+}
+
+.heroTop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 10vw, 144px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--color-fg);
+  display: block;
+}
+
+.glitchWord {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: glitchIn 800ms var(--ease-out) forwards;
+}
+
+.glitchWord:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.glitchWord:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+@keyframes glitchIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) skewX(0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) skewX(2deg);
+  }
+  70% {
+    transform: translateY(0) skewX(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0);
+  }
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.production {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.prodLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.prodList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.prodItem {
+  display: grid;
+  grid-template-columns: 24px 1fr 1fr;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-base-size);
+  color: var(--color-fg);
+  align-items: baseline;
+}
+
+.prodArrow {
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.prodTitle {
+  font-weight: 500;
+}
+
+.prodDescription {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--color-fg);
+  border-bottom: 1.5px solid var(--color-fg);
+  padding-bottom: 4px;
+  width: fit-content;
+  transition: color var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              transform var(--duration-base) var(--ease-out);
+}
+
+.cta:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+/* ─── Timeline Block 2 ───────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 880px;
+}
+
+.timelineLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-3);
+}
+
+.timelineEntry {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-5);
+  align-items: baseline;
+}
+
+.timelineYear {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fg);
+  letter-spacing: 0.02em;
+}
+
+.timelineBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.timelineTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl-size);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+}
+
+.timelineNote {
+  font-family: var(--font-body);
+  font-size: var(--text-base-size);
+  color: var(--color-muted);
+  max-width: 560px;
+  line-height: 1.55;
+}
+
+@media (max-width: 767px) {
+  .timelineEntry {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .timelineTitle {
+    font-size: 26px;
+  }
+}
+
+/* ─── Recent Signals Block 3 ─────────────────────────────── */
+.signals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 880px;
+}
+
+.signalsLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-3);
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-5);
+  align-items: baseline;
+}
+
+.signalDate {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.signalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.signalTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg-size);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-fg);
+}
+
+.signalNote {
+  font-family: var(--font-body);
+  font-size: var(--text-base-size);
+  color: var(--color-muted);
+  line-height: 1.55;
+  max-width: 560px;
+}
+
+@media (max-width: 767px) {
+  .signal {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}
+
+/* ─── Anchor Block 4 ─────────────────────────────────────── */
+.anchor {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-9) var(--space-7);
+  max-width: 1280px;
+  transition: background-color var(--duration-cinematic) var(--ease-in-out),
+              color var(--duration-cinematic) var(--ease-in-out);
+}
+
+.anchor.isActive {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.anchorStatement {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 96px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  max-width: 12ch;
+}
+
+.anchorCta {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 4px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.anchorCta:hover {
+  transform: translateX(4px);
+}
+
+@media (max-width: 767px) {
+  .anchor {
+    padding: var(--space-7) var(--space-4);
+    min-height: 60vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitchWord {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .anchor {
+    transition: none;
+  }
+}

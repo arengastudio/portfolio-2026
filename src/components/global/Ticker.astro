@@ -1,0 +1,59 @@
+---
+/**
+ * Ticker.astro
+ * Sistema Global 01 — Ticker en vivo.
+ * Barra fija top con scroll horizontal continuo.
+ * Si reduced-motion: estático.
+ *
+ * El contenido se duplica dos veces dentro del track para conseguir
+ * loop seamless: la animación traslada el track -50% y vuelve a 0,
+ * sin salto perceptible.
+ */
+import { tickerConfig, tickerStatusLabel } from '../../config/ticker';
+import styles from './Ticker.module.css';
+
+const { active, items, lastUpdated } = tickerConfig;
+const label = active ? 'EN PRODUCCIÓN' : 'ENTRE PROYECTOS';
+
+/* Velocidad: ~40px/s. Estimación de duración por ancho de contenido. */
+const totalChars = items.join(' ').length + label.length + lastUpdated.length + 20;
+const estimatedWidth = totalChars * 8; // ~8px por char en mono 11px
+const duration = Math.max(40, Math.round(estimatedWidth / 40)); // segundos
+---
+<div
+  class={styles.ticker}
+  role="status"
+  aria-live="off"
+  aria-label="Estado en vivo del estudio"
+>
+  <div class={styles.track} style={`--ticker-duration: ${duration}s`}>
+    {/* Segmento 1 */}
+    <div class={styles.segment}>
+      <span class={styles.dot} data-idle={!active}></span>
+      <span class={styles.label}>{label}</span>
+      {items.map((item) => (
+        <>
+          <span class={styles.separator}>—</span>
+          <span class={styles.item}>{item}</span>
+        </>
+      ))}
+      <span class={styles.separator}>—</span>
+      <span class={styles.meta}>Última actualización: {lastUpdated}</span>
+      <span class={styles.separator}>—</span>
+    </div>
+    {/* Segmento 2 — duplicado para loop seamless */}
+    <div class={styles.segment} aria-hidden="true">
+      <span class={styles.dot} data-idle={!active}></span>
+      <span class={styles.label}>{label}</span>
+      {items.map((item) => (
+        <>
+          <span class={styles.separator}>—</span>
+          <span class={styles.item}>{item}</span>
+        </>
+      ))}
+      <span class={styles.separator}>—</span>
+      <span class={styles.meta}>Última actualización: {lastUpdated}</span>
+      <span class={styles.separator}>—</span>
+    </div>
+  </div>
+</div>

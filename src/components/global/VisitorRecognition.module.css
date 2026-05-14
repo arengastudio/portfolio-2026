@@ -1,0 +1,69 @@
+/*
+ * VisitorRecognition.module.css
+ * Corner inferior derecho. Mono pequeño, opacity 0.6, no intrusivo.
+ * Fade-out a 6s o al primer scroll.
+ */
+
+.recognition {
+  position: fixed;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  z-index: 800;
+  max-width: 280px;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+}
+
+.recognition[data-visible="true"] {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.line {
+  display: block;
+}
+
+.line + .line {
+  margin-top: 2px;
+}
+
+.spacer {
+  height: var(--space-1);
+}
+
+.meta {
+  margin-top: var(--space-1);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+}
+
+.delta {
+  margin-top: var(--space-1);
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--color-border);
+}
+
+.deltaItem {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .recognition {
+    bottom: var(--space-2);
+    right: var(--space-2);
+    left: var(--space-2);
+    max-width: none;
+    font-size: 10px;
+  }
+}

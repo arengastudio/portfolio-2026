@@ -1,0 +1,39 @@
+---
+/**
+ * HeroBlock.astro
+ * Homepage Bloque 1 — above the fold.
+ * Nombre con glitch entrance, lista de proyectos activos, CTA al archivo.
+ */
+import { tickerConfig } from '../../config/ticker';
+import styles from './home2026.module.css';
+
+/* Bloques de "En producción" en la home. Mismo source que el ticker. */
+const items = [
+  { title: 'Oncoliq',     desc: 'Rediseño institucional web' },
+  { title: 'Prode 2026',  desc: 'Producto · Arenga Studio' },
+  { title: '+3 proyectos', desc: 'En etapa de desarrollo' },
+];
+---
+<section class={styles.hero} aria-labelledby="home-hero-name">
+  <div class={styles.heroTop}>
+    <h1 id="home-hero-name" class={styles.name}>
+      <span class={styles.glitchWord}>Juan</span>{' '}<span class={styles.glitchWord}>Cruz</span>{' '}<span class={styles.glitchWord}>Luna</span>
+    </h1>
+    <p class={styles.tagline}>Product Designer · Co-founder @ Arenga Studio</p>
+  </div>
+
+  <div class={styles.production}>
+    <span class={styles.prodLabel}>En producción</span>
+    <ul class={styles.prodList}>
+      {items.map((it) => (
+        <li class={styles.prodItem}>
+          <span class={styles.prodArrow}>↳</span>
+          <span class={styles.prodTitle}>{it.title}</span>
+          <span class={styles.prodDescription}>{it.desc}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <a href="/archivo" class={styles.cta}>→ Ver archivo</a>
+</section>

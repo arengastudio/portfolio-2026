@@ -1,0 +1,25 @@
+---
+/**
+ * Bloque contextual del sidebar para la homepage.
+ * Estudio · activo ahora · último entregado.
+ */
+import { tickerConfig } from '../../config/ticker';
+import { lastDelivered } from '../../config/projects';
+import styles from './SidebarContext.module.css';
+---
+<div class={styles.block}>
+  <div class={styles.group}>
+    <span class={styles.label}>Estudio</span>
+    <span class={styles.value}>En producción desde 2024</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Activo ahora</span>
+    <span class={styles.value}>{tickerConfig.activeCount ?? tickerConfig.items.length} proyectos en curso</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Último entregado</span>
+    <span class={styles.value}>{lastDelivered?.title} · {lastDelivered?.year}</span>
+  </div>
+</div>

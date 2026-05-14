@@ -1,0 +1,194 @@
+/*
+ * ProjectCard.module.css
+ * Tarjeta del canvas. Dos estados: reposo / hover.
+ */
+
+.card {
+  position: absolute;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  /* Pattern grain sutil sobre tono base */
+  background-color: var(--tone, var(--tone-near-black));
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.card[data-tone="accent-dark"]   { --tone: var(--tone-accent-dark); }
+.card[data-tone="green-dark"]    { --tone: var(--tone-green-dark); }
+.card[data-tone="blue-dark"]     { --tone: var(--tone-blue-dark); }
+.card[data-tone="warm-dark"]     { --tone: var(--tone-warm-dark); }
+.card[data-tone="near-black"]    { --tone: var(--tone-near-black); }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0);
+  transition: background-color 400ms var(--ease-out);
+  pointer-events: none;
+}
+
+.card:hover .overlay {
+  background-color: rgba(10, 10, 10, 0.55);
+}
+
+.titleBlock {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-3);
+  color: var(--color-bg);
+  z-index: 2;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.card:hover .titleBlock {
+  opacity: 0;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: 6px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+.credit {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.7;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* Hover content: process line + Ver case */
+.hoverContent {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-bg);
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out);
+}
+
+.card:hover .hoverContent {
+  opacity: 1;
+}
+
+.processLine {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 80%;
+}
+
+.hoverCta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  align-self: flex-start;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* Variante "in production" — sin imagen, near-black, dot REC parpadeante */
+.cardProduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-4);
+  color: var(--color-bg);
+  background-image: none;
+}
+
+.cardProduction .titleBlock,
+.cardProduction .overlay,
+.cardProduction .hoverContent {
+  display: none;
+}
+
+.prodTitle {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-2);
+}
+
+.prodSub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.recDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-status-rec);
+  animation: recPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes recPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recDot {
+    animation: none;
+  }
+
+  .card:hover .overlay {
+    background-color: rgba(10, 10, 10, 0.4);
+  }
+}
+
+/* Mobile/touch: no hover, mostrar siempre el título */
+@media (hover: none), (max-width: 1023px) {
+  .card:hover .overlay,
+  .card:hover .hoverContent,
+  .card:active .overlay {
+    background-color: rgba(10, 10, 10, 0);
+    opacity: 0;
+  }
+
+  .card:hover .titleBlock {
+    opacity: 1;
+  }
+}

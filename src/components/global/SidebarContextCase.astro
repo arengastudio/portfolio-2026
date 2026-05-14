@@ -1,0 +1,51 @@
+---
+/**
+ * Bloque contextual del sidebar para case studies.
+ * Recibe ficha técnica como props (desde frontmatter de cada case o config).
+ */
+import styles from './SidebarContext.module.css';
+
+export interface Props {
+  projectTitle: string;
+  duration: string;
+  role: string;
+  status: 'Entregado' | 'En producción';
+  teamSize?: number;
+}
+
+const { projectTitle, duration, role, status, teamSize } = Astro.props;
+const statusKey = status === 'Entregado' ? 'delivered' : 'active';
+---
+<div class={styles.block}>
+  <div class={styles.group}>
+    <span class={styles.label}>Viendo</span>
+    <span class={styles.valueDisplay}>{projectTitle}</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Duración</span>
+    <span class={styles.value}>{duration}</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Rol</span>
+    <span class={styles.value}>{role}</span>
+  </div>
+
+  <div class={styles.group}>
+    <span class={styles.label}>Estado</span>
+    <span class={styles.value}>
+      <span class={styles.dotInline} data-status={statusKey}></span>
+      {status}
+    </span>
+  </div>
+
+  {teamSize && (
+    <div class={styles.group}>
+      <span class={styles.label}>Equipo</span>
+      <span class={styles.value}>{teamSize} personas</span>
+    </div>
+  )}
+
+  <a href="/archivo" class={styles.backLink}>↑ Volver al archivo</a>
+</div>

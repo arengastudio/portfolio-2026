@@ -1,0 +1,91 @@
+/*
+ * Ticker.module.css
+ * Live ticker: barra fija top, scroll horizontal continuo D→I.
+ * Animación pure CSS (translateX) para evitar overhead JS.
+ */
+
+.ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  user-select: none;
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  /* Track duplicado dos veces para loop seamless. Animación traslada -50%. */
+  animation: ticker-scroll var(--ticker-duration, 60s) linear infinite;
+  will-change: transform;
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.item {
+  padding: 0 var(--space-3);
+  flex-shrink: 0;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-status-active);
+  margin: 0 var(--space-2);
+  flex-shrink: 0;
+}
+
+.dot[data-idle="true"] {
+  background-color: var(--color-status-idle);
+}
+
+.label {
+  padding: 0 var(--space-2);
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.separator {
+  padding: 0 var(--space-2);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.meta {
+  padding: 0 var(--space-3);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: translateX(0);
+  }
+}

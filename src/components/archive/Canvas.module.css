@@ -1,0 +1,89 @@
+/*
+ * Canvas.module.css
+ * Espacio 2D libre estilo Figma/Miro. Pan + zoom.
+ * El viewport rellena .site-main; el world se transforma con translate + scale.
+ */
+
+.viewport {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--ticker-height));
+  overflow: hidden;
+  cursor: grab;
+  background-color: var(--color-bg);
+  user-select: none;
+  touch-action: none;
+  /* Grid pattern muy sutil para hacer perceptible el espacio infinito */
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: 0 0;
+}
+
+.viewport[data-panning="true"] {
+  cursor: grabbing;
+}
+
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* Hint inicial */
+.hint {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.hint[data-visible="true"] {
+  opacity: 1;
+}
+
+.hintIcon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* Indicador zoom (esquina) */
+.zoomBadge {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+  background-color: var(--color-bg);
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .viewport {
+    height: calc(100vh - var(--ticker-height));
+  }
+}

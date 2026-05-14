@@ -9,6 +9,7 @@ import CaseHero from '../../components/case/CaseHero.astro';
 import TLDR from '../../components/case/TLDR.astro';
 import FigmaBanner from '../../components/case/FigmaBanner.astro';
 import Footer from '../../components/global/Footer.astro';
+import SidebarContextCase from '../../components/global/SidebarContextCase.astro';
 import ReadingProgress from '../../components/motion/ReadingProgress.tsx';
 import CaseHeroParallax from '../../components/motion/CaseHeroParallax.tsx';
 import styles from './case.module.css';
@@ -36,12 +37,25 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const { title, role, timeframe, outcome, client, team, platforms, tags, colorKey, coverImage, figmaDeepDive, bullets, figmaBannerLabel, figmaBannerUrl, caseNumber } = entry.data;
+
+/* Parsear cantidad de equipo desde el string (e.g. "Equipo de 4" → 4) */
+const teamSizeMatch = team.match(/\d+/);
+const teamSize = teamSizeMatch ? parseInt(teamSizeMatch[0], 10) : undefined;
 ---
 <BaseLayout
   title={`${title} - Juan Cruz Luna`}
   description={outcome}
   lang="es"
 >
+  <SidebarContextCase
+    slot="sidebar-context"
+    projectTitle={title}
+    duration={timeframe}
+    role={role}
+    status="Entregado"
+    teamSize={teamSize}
+  />
+
   <ReadingProgress client:idle lang="es" />
   <CaseHeroParallax client:media="(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)" />
 

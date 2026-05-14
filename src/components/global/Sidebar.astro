@@ -1,0 +1,72 @@
+---
+/**
+ * Sidebar.astro
+ * Sistema Global 03 — Columna fija izquierda. Reemplaza Nav top.
+ *
+ * Estructura:
+ *   - Header: nombre + rol + status mini
+ *   - Slot "context": bloque contextual por página
+ *   - Footer: navegación 01/02/03
+ *
+ * Cada página inyecta su <SidebarContext*> via named slot:
+ *   <Sidebar currentPath={...}>
+ *     <SidebarContextHome slot="context" />
+ *   </Sidebar>
+ */
+import { tickerConfig, tickerStatusLabel } from '../../config/ticker';
+import styles from './Sidebar.module.css';
+
+export interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (path: string) => {
+  if (path === '/') return currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
+  return currentPath.startsWith(path);
+};
+
+const navLinks = [
+  { num: '01.', href: '/',        label: 'Inicio'  },
+  { num: '02.', href: '/archivo', label: 'Archivo' },
+  { num: '03.', href: '/about',   label: 'About'   },
+];
+---
+<aside id="site-sidebar" data-sidebar class={styles.sidebar} aria-label="Navegación principal">
+  {/* Header — brand + status */}
+  <a href="/" class={styles.brand} aria-label="Juan Cruz Luna · Inicio">
+    <span class={styles.name}>Juan Cruz Luna</span>
+    <span class={styles.role}>Product Designer</span>
+    <span class={styles.role}>Co-founder, Arenga Studio</span>
+  </a>
+
+  <div class={styles.status}>
+    <span class={styles.statusDot} data-idle={!tickerConfig.active}></span>
+    <span>{tickerStatusLabel}</span>
+  </div>
+
+  <div class={styles.divider}></div>
+
+  {/* Contextual block (changes per page) */}
+  <div class={styles.contextSlot}>
+    <slot name="context" />
+  </div>
+
+  <div class={styles.divider}></div>
+
+  {/* Nav footer */}
+  <nav class={styles.nav} aria-label="Páginas">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class={styles.navItem}
+        aria-current={isActive(link.href) ? 'page' : undefined}
+        style="position: relative;"
+      >
+        <span><span class={styles.navNum}>{link.num}</span><span class={styles.navLabel}>{link.label}</span></span>
+        <span class={styles.navArrow}>→</span>
+      </a>
+    ))}
+  </nav>
+</aside>

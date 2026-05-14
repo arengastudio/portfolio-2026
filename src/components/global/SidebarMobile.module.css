@@ -1,0 +1,65 @@
+/*
+ * SidebarMobile.module.css
+ * Botón flotante top-left + backdrop + transición del drawer.
+ * El drawer real es la Sidebar — esta isla solo controla apertura.
+ */
+
+.toggle {
+  position: fixed;
+  top: calc(var(--ticker-height) + var(--space-2));
+  left: var(--space-2);
+  z-index: 950;
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-fg);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-fg);
+  cursor: pointer;
+  padding: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
+}
+
+.toggle:hover {
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0.4);
+  z-index: 890;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms var(--ease-out);
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .toggle {
+    display: flex;
+  }
+
+  .backdrop {
+    display: block;
+  }
+
+  :global(body.sidebar-open) .backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* body.sidebar-open: el drawer entra desde la izquierda */
+  :global(body.sidebar-open) :global([data-sidebar]) {
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+}

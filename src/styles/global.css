@@ -43,6 +43,28 @@ body {
   overflow-x: clip;
 }
 
+/* ─── Site main offset ───────────────────────────────────── */
+/*
+ * Desktop: sidebar fija (240px) + ticker (28px) → main offset por ambos.
+ * Mobile (<1024px): sidebar oculto, drawer toma su lugar, main offset solo por ticker.
+ */
+.site-main {
+  padding-top: var(--ticker-height);
+  margin-left: var(--sidebar-width);
+  min-height: calc(100vh - var(--ticker-height));
+}
+
+@media (max-width: 1023px) {
+  .site-main {
+    margin-left: 0;
+  }
+}
+
+/* Body lock cuando el drawer mobile está abierto */
+body.sidebar-open {
+  overflow: hidden;
+}
+
 /* ─── Focus ──────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--color-accent);

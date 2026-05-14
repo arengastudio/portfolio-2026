@@ -1,0 +1,158 @@
+/*
+ * Sidebar.module.css
+ * Columna fija izquierda. Reemplaza Nav top.
+ * Mobile: collapsa completamente, drawer toggled via SidebarMobile island.
+ */
+
+.sidebar {
+  position: fixed;
+  top: var(--ticker-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--ticker-height));
+  background-color: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: inherit;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-fg);
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-status-active);
+  flex-shrink: 0;
+}
+
+.statusDot[data-idle="true"] {
+  background-color: var(--color-status-idle);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-4) 0;
+}
+
+.contextSlot {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Navegación inferior */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+.navItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-fg);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.navItem:hover {
+  color: var(--color-accent);
+}
+
+.navItem[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+.navItem[aria-current="page"]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 4px;
+  height: 16px;
+  background-color: var(--color-accent);
+  margin-left: calc(var(--space-3) * -1);
+}
+
+.navNum {
+  opacity: 0.5;
+  margin-right: var(--space-2);
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navArrow {
+  opacity: 0.4;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.navItem:hover .navArrow {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+/* Desktop: visible y fija (default).
+   Mobile (≤1023px): se transforma en drawer.
+   El sidebar siempre está en el DOM y rendereado; en mobile
+   queda fuera del viewport (translateX -100%) y solo entra cuando
+   body.sidebar-open. Ver SidebarMobile.module.css para las rules. */
+@media (max-width: 1023px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 250ms var(--ease-out);
+    pointer-events: none;
+    box-shadow: none;
+  }
+}
+
