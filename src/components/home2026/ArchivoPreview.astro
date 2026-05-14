@@ -1,0 +1,114 @@
+---
+/**
+ * ArchivoPreview.astro
+ * Bloque preview del canvas /archivo en homepage.
+ * Mini-canvas con imágenes reales de proyectos + star watermark.
+ * Click → /archivo (cualquier card también).
+ */
+import SectionStrip from './SectionStrip.astro';
+import styles from './home2026.module.css';
+
+interface PreviewCard {
+  title: string;
+  year: string;
+  image: string;
+  href: string;
+  /* Posiciones en % del contenedor */
+  x: string;
+  y: string;
+  w: string;
+  rotation?: number;
+}
+
+const previews: PreviewCard[] = [
+  {
+    title: 'Librodepases',
+    year: '2022–2025',
+    image: '/assets/cases/librodepases/cover.png',
+    href: '/work/librodepases',
+    x: '6%',  y: '14%', w: '36%', rotation: -1.5,
+  },
+  {
+    title: 'SparkClub',
+    year: '2023',
+    image: '/assets/cases/sparkclub/cover.png',
+    href: '/work/sparkclub',
+    x: '46%', y: '26%', w: '22%', rotation: 1.2,
+  },
+  {
+    title: 'Garantear',
+    year: '2023',
+    image: '/assets/cases/garantear/cover.png',
+    href: '/work/garantear',
+    x: '74%', y: '8%',  w: '20%', rotation: -2.5,
+  },
+  {
+    title: 'EEVA Studios',
+    year: '2024',
+    image: '/assets/cases/eeva/eeva01.png',
+    href: '/work/eeva-studios',
+    x: '10%', y: '62%', w: '28%', rotation: 2,
+  },
+  {
+    title: 'Arenga Studio',
+    year: '2024–',
+    image: '/assets/cases/arenga/cover.png',
+    href: 'https://arengastudio.com',
+    x: '56%', y: '60%', w: '32%', rotation: -1,
+  },
+];
+---
+<section id="sec-archivo" class={`${styles.section} ${styles.archivoBlock}`} aria-labelledby="home-archivo-title">
+  <SectionStrip
+    left={[
+      { label: '02', value: 'Archivo', tag: true },
+      { value: '5 proyectos · 4 artefactos' },
+      { value: 'Canvas navegable' },
+    ]}
+    right={[
+      { value: 'home/archivo.astro' },
+      { label: 'Updated', value: '14 May 2026' },
+    ]}
+  />
+
+  <div class={styles.archivoIntro}>
+    <h2 id="home-archivo-title" class={styles.archivoTitle}>
+      No leas el portfolio.<br />
+      <span class={styles.archivoTitleAccent}>Explorá el archivo.</span>
+    </h2>
+    <p class={styles.archivoLead}>
+      Cinco años de trabajo dispersos en un canvas. Drag para explorar, click para entrar.
+      Cada proyecto está donde tiene que estar — no en orden, en relación.
+    </p>
+  </div>
+
+  <a href="/archivo" class={styles.archivoCanvas} aria-label="Entrar al archivo">
+    {/* Star watermark — anchora visualmente el bloque */}
+    <img
+      src="/assets/star-constellation.svg"
+      alt=""
+      class={styles.archivoStar}
+      aria-hidden="true"
+      loading="lazy"
+    />
+
+    {/* Cards posicionadas en mini-canvas */}
+    {previews.map((p) => (
+      <div
+        class={styles.previewCard}
+        style={`left: ${p.x}; top: ${p.y}; width: ${p.w}; transform: rotate(${p.rotation ?? 0}deg);`}
+      >
+        <img src={p.image} alt={p.title} loading="lazy" class={styles.previewImg} />
+        <div class={styles.previewCaption}>
+          <span class={styles.previewTitle}>{p.title}</span>
+          <span class={styles.previewYear}>{p.year}</span>
+        </div>
+      </div>
+    ))}
+
+    <span class={styles.archivoCta}>
+      <span>→ Entrar al archivo</span>
+      <span class={styles.archivoCtaCount}>09 artefactos</span>
+    </span>
+  </a>
+</section>

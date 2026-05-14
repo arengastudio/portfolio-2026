@@ -1,12 +1,15 @@
 ---
 /**
  * Timeline.astro
- * Homepage Bloque 2 — Línea de tiempo como cinta de medir.
- * Scroll horizontal. Cada año = un tick + card si hay entrada, vacío si no.
+ * Homepage — Línea de tiempo horizontal.
+ * - Scrollbar oculto
+ * - Vertical wheel scrolls horizontal (small inline script)
+ * - Cards con image placeholder por tono (reemplazar por fotos reales)
  *
- * Metáfora: cinta métrica / regla impresa. Físico digitalizado.
+ * TODO: subir imágenes reales por hito a /public/assets/timeline/{year}.jpg
+ *       y reemplazar el placeholder por <img>.
  */
-import SectionTab from './SectionTab.astro';
+import SectionStrip from './SectionStrip.astro';
 import styles from './home2026.module.css';
 
 interface Entry {
@@ -14,6 +17,8 @@ interface Entry {
   title: string;
   note: string;
   tag: string;
+  image: string;
+  imageAlt: string;
 }
 
 const entries: Entry[] = [
@@ -22,24 +27,32 @@ const entries: Entry[] = [
     title: 'Primeros proyectos freelance.',
     note: 'Aprendí que diseñar sin entender el negocio es decoración.',
     tag: 'FREELANCE',
+    image: '/assets/photos/2021-balcony.jpg',
+    imageAlt: 'Trabajando solo en un balcón al atardecer',
   },
   {
     year: 2022,
     title: 'Me sumé a Librodepases.',
     note: 'Por primera vez diseñé junto a desarrollo. Cambió cómo pienso un producto.',
     tag: 'PRODUCT',
+    image: '/assets/photos/2022-meet.jpg',
+    imageAlt: 'Reunión remota con el equipo de LDP',
   },
   {
     year: 2024,
     title: 'Fundé Arenga Studio.',
     note: 'Pasé de ejecutar proyectos a tener que conseguirlos también.',
     tag: 'STUDIO',
+    image: '/assets/photos/2024-coworking.jpg',
+    imageAlt: 'Co-working con el equipo de Arenga Studio',
   },
   {
     year: 2025,
     title: 'Lideré el equipo de diseño de LDP.',
     note: 'Dejé de ser el único que decidía. Fue mejor así.',
     tag: 'LEAD',
+    image: '/assets/photos/2025-tablet.jpg',
+    imageAlt: 'Diseñando en tablet en la oficina',
   },
 ];
 
@@ -47,17 +60,19 @@ const yearRange = [2021, 2022, 2023, 2024, 2025, 2026];
 const byYear = new Map(entries.map((e) => [e.year, e]));
 ---
 <section id="sec-tiempo" class={`${styles.section} ${styles.timeline}`} aria-label="Línea de tiempo">
-  <SectionTab
-    number="02"
-    label="Tiempo"
-    filename="home/timeline.astro"
-    date={`${yearRange[0]}–${yearRange[yearRange.length - 1]}`}
-    extra={`${entries.length} hitos`}
+  <SectionStrip
+    left={[
+      { label: '03', value: 'Tiempo', tag: true },
+      { value: `${yearRange[0]}–${yearRange[yearRange.length - 1]}` },
+      { value: `${entries.length} hitos · ${yearRange.length - entries.length} sin registro` },
+    ]}
+    right={[
+      { value: 'home/timeline.astro' },
+      { value: 'Scroll horizontal' },
+    ]}
   />
 
-  <span class={styles.timelineHint}>Scroll horizontal · cinta de medir</span>
-
-  <div class={styles.tape} tabindex="0" role="region" aria-label="Línea de tiempo de hitos">
+  <div class={styles.tape} data-timeline-tape tabindex="0" role="region" aria-label="Línea de tiempo de hitos">
     {yearRange.map((year) => {
       const entry = byYear.get(year);
       return (
@@ -66,12 +81,17 @@ const byYear = new Map(entries.map((e) => [e.year, e]));
 
           {entry ? (
             <article class={styles.entryCard}>
-              <div class={styles.entryCardLabel}>
-                <span>HITO · {entry.tag}</span>
-                <span>{entry.year}</span>
+              <div class={styles.entryCardImage}>
+                <img src={entry.image} alt={entry.imageAlt} loading="lazy" />
               </div>
-              <h3 class={styles.entryCardTitle}>{entry.title}</h3>
-              <p class={styles.entryCardNote}>{entry.note}</p>
+              <div class={styles.entryCardBody}>
+                <div class={styles.entryCardLabel}>
+                  <span>HITO · {entry.tag}</span>
+                  <span>{entry.year}</span>
+                </div>
+                <h3 class={styles.entryCardTitle}>{entry.title}</h3>
+                <p class={styles.entryCardNote}>{entry.note}</p>
+              </div>
             </article>
           ) : (
             <span class={styles.tickEmpty}>
@@ -83,3 +103,26 @@ const byYear = new Map(entries.map((e) => [e.year, e]));
     })}
   </div>
 </section>
+
+<script>
+  /* Convierte wheel vertical en scroll horizontal sobre el tape. */
+  function initTimelineWheel() {
+    const tapes = document.querySelectorAll<HTMLElement>('[data-timeline-tape]');
+    tapes.forEach((tape) => {
+      if ((tape as any)._wheelBound) return;
+      (tape as any)._wheelBound = true;
+
+      tape.addEventListener('wheel', (e) => {
+        const dx = Math.abs(e.deltaX);
+        const dy = Math.abs(e.deltaY);
+        if (dy > dx) {
+          e.preventDefault();
+          tape.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+    });
+  }
+
+  initTimelineWheel();
+  document.addEventListener('astro:page-load', initTimelineWheel);
+</script>

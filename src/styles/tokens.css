@@ -126,6 +126,7 @@
   /* ─── Sidebar + Ticker (redesign 2026) ──────────────── */
   --sidebar-width:      240px;
   --ticker-height:      28px;
+  --color-sidebar-bg:   #ECE5D5;
 
   /* ─── Status indicators ─────────────────────────────── */
   --color-status-active: #4CAF50;

@@ -27,7 +27,8 @@
       "WebFetch(domain:portfolio-2026-plum.vercel.app)",
       "Bash(npm audit *)",
       "Bash(pnpm audit *)",
-      "Bash(pnpm install *)"
+      "Bash(pnpm install *)",
+      "Bash(git checkout *)"
     ]
   }
 }

@@ -1,0 +1,44 @@
+---
+/**
+ * SectionStrip.astro
+ * Header de sección estilo file-ID card.
+ * Items izquierda + spacer + items derecha. Sep visual entre ellos.
+ */
+import styles from './SectionStrip.module.css';
+
+export interface StripItem {
+  label?: string;
+  value: string;
+  tag?: boolean;
+}
+
+export interface Props {
+  left: StripItem[];
+  right?: StripItem[];
+}
+
+const { left, right = [] } = Astro.props;
+---
+<header class={styles.strip}>
+  {left.map((it, i) => (
+    <>
+      {i > 0 && <span class={styles.divider} aria-hidden="true">│</span>}
+      <span class={`${styles.item} ${it.tag ? styles.tag : ''}`}>
+        {it.label && <strong>{it.label}</strong>}
+        <span>{it.value}</span>
+      </span>
+    </>
+  ))}
+
+  <span class={styles.flex}></span>
+
+  {right.map((it, i) => (
+    <>
+      {i > 0 && <span class={styles.divider} aria-hidden="true">│</span>}
+      <span class={`${styles.item} ${it.tag ? styles.tag : ''}`}>
+        {it.label && <strong>{it.label}</strong>}
+        <span>{it.value}</span>
+      </span>
+    </>
+  ))}
+</header>

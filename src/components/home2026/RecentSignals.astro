@@ -9,40 +9,34 @@
  *   - POL-02: timelapse vibe coding (poster frame o gif)
  *   - POL-03: cover del curso de Git que estés tomando
  */
-import SectionTab from './SectionTab.astro';
+import SectionStrip from './SectionStrip.astro';
 import styles from './home2026.module.css';
 
 interface Signal {
-  variant: 'book' | 'screen' | 'course';
-  imageTitle: string;
-  imageSub: string;
+  image: string;
+  imageAlt: string;
   caption: string;
   date: string;
   ref?: { label: string; href: string };
-  hasPlay?: boolean;
 }
 
 const signals: Signal[] = [
   {
-    variant: 'book',
-    imageTitle: 'Click',
-    imageSub: 'Knapp · Zeratsky · 2024',
-    caption: 'El mejor libro sobre arrancar proyectos que leí en mucho tiempo.',
+    image: '/assets/photos/cafe-planning.jpg',
+    imageAlt: 'Trabajando en café',
+    caption: 'Leyendo Click — el mejor libro para arrancar proyectos.',
     date: '2026 · MAY',
     ref: { label: 'Ver libro ↗', href: 'https://www.thesprintbook.com/click' },
   },
   {
-    variant: 'screen',
-    imageTitle: '$ pnpm dev\n  ✓ ready in 412ms\n\n  → vibe coding\n  → 03:42:18 elapsed',
-    imageSub: 'TIMELAPSE · arenga lab',
-    caption: 'Probando vibe coding en serio con el equipo.',
+    image: '/assets/photos/2021-balcony.jpg',
+    imageAlt: 'Vibe coding en balcón al atardecer',
+    caption: 'Vibe coding en serio. Domingo de balcón.',
     date: '2026 · MAY',
-    hasPlay: true,
   },
   {
-    variant: 'course',
-    imageTitle: 'git',
-    imageSub: 'commit · push · merge',
+    image: '/assets/photos/2025-tablet.jpg',
+    imageAlt: 'Aprendiendo en tablet',
     caption: 'Aprendiendo Git tarde. Vale la pena.',
     date: '2026 · ABR',
     ref: { label: 'Curso ↗', href: '#' },
@@ -50,22 +44,24 @@ const signals: Signal[] = [
 ];
 ---
 <section id="sec-senales" class={`${styles.section} ${styles.signals}`} aria-label="Señales recientes">
-  <SectionTab
-    number="03"
-    label="Señales"
-    filename="home/signals.astro"
-    date="May 2026"
-    extra={`${signals.length} entries`}
+  <SectionStrip
+    left={[
+      { label: '04', value: 'Señales', tag: true },
+      { value: 'May 2026' },
+      { value: `${signals.length} entries` },
+    ]}
+    right={[
+      { value: 'home/signals.astro' },
+      { value: 'Lo que estoy mirando' },
+    ]}
   />
 
   <div class={styles.moodboard}>
     <div class={styles.moodboardGrid}>
       {signals.map((s) => (
         <article class={styles.polaroid}>
-          <div class={styles.polaroidImage} data-variant={s.variant} aria-hidden="true">
-            <span class={styles.polaroidImageTitle}>{s.imageTitle}</span>
-            <span class={styles.polaroidImageSub}>{s.imageSub}</span>
-            {s.hasPlay && <span class={styles.polaroidPlay}>Reel</span>}
+          <div class={styles.polaroidImage}>
+            <img src={s.image} alt={s.imageAlt} loading="lazy" />
           </div>
           <p class={styles.polaroidCaption}>{s.caption}</p>
           <div class={styles.polaroidMeta}>

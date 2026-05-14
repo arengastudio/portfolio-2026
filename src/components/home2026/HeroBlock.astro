@@ -1,30 +1,28 @@
 ---
 /**
  * HeroBlock.astro
- * Homepage Bloque 1 — above the fold. File-system / archive metaphor.
- *
- * Layout:
- *  - ID card strip (file metadata)
- *  - Name (glitch entrance) + tagline
- *  - File-table de producción activa
- *  - Footer: CTA + stamp Arenga
+ * Homepage Bloque 1 — Above the fold liviano.
+ * Strip header → nombre glitch → tagline → línea breve activa.
+ * El "En producción" se mostró antes como file-table (parecía la obra completa).
+ * Ahora es una línea, y el block de Archivo asume el rol de centerpiece.
  */
-import SectionTab from './SectionTab.astro';
+import SectionStrip from './SectionStrip.astro';
 import styles from './home2026.module.css';
 
-const items = [
-  { code: 'OBJ-01', title: 'Oncoliq',     desc: 'Rediseño institucional web' },
-  { code: 'OBJ-02', title: 'Prode 2026',  desc: 'Producto · Arenga Studio' },
-  { code: 'OBJ-03', title: '+3 proyectos', desc: 'En etapa de desarrollo' },
-];
+const activeBrief = ['Oncoliq', 'Prode 2026', '+3 proyectos'];
 ---
 <section id="sec-index" class={styles.hero} aria-labelledby="home-hero-name">
-  <SectionTab
-    number="01"
-    label="Index"
-    filename="home/index.astro"
-    date="2026-05-14"
-    revision="REV 14"
+  <SectionStrip
+    left={[
+      { label: '01', value: 'Index', tag: true },
+      { label: 'ID', value: 'JCL-2026' },
+      { value: 'Buenos Aires, AR' },
+    ]}
+    right={[
+      { value: 'home/index.astro' },
+      { value: '2026-05-14' },
+      { label: 'Rev', value: '14' },
+    ]}
   />
 
   <div class={styles.heroTop}>
@@ -34,28 +32,23 @@ const items = [
     <p class={styles.tagline}>Product Designer · Co-founder @ Arenga Studio</p>
   </div>
 
-  <div class={styles.production} role="table" aria-label="Proyectos en producción">
-    <div class={styles.prodHeader} role="row">
-      <span role="columnheader">Cod</span>
-      <span role="columnheader">Proyecto</span>
-      <span role="columnheader">Detalle</span>
-      <span role="columnheader" style="text-align:right">Estado</span>
-    </div>
-    <ul class={styles.prodList}>
-      {items.map((it) => (
-        <li class={styles.prodItem} role="row">
-          <span class={styles.prodCode} role="cell">{it.code}</span>
-          <span class={styles.prodTitle} role="cell">{it.title}</span>
-          <span class={styles.prodDescription} role="cell">{it.desc}</span>
-          <span class={styles.prodStatus} role="cell">Activo</span>
-        </li>
+  <div class={styles.heroActive}>
+    <span class={styles.heroActiveLabel}>
+      <span class={styles.heroActiveDot} aria-hidden="true"></span>
+      En producción
+    </span>
+    <span class={styles.heroActiveList}>
+      {activeBrief.map((t, i) => (
+        <>
+          {i > 0 && <span class={styles.heroActiveSep}>·</span>}
+          <span>{t}</span>
+        </>
       ))}
-    </ul>
+    </span>
+    <a href="#sec-archivo" class={styles.heroActiveLink}>el archivo completo ↓</a>
   </div>
 
   <div class={styles.heroFoot}>
-    <a href="/archivo" class={styles.cta}>→ Ver archivo</a>
-
     <div class={styles.stamp} aria-hidden="true">
       <span class={styles.stampMain}>Arenga Studio</span>
       <span class={styles.stampSub}>Buenos Aires · MMXXVI</span>
