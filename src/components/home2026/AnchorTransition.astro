@@ -1,27 +1,28 @@
 ---
 /**
  * AnchorTransition.astro
- * Homepage Bloque 4 — Cierre + sello diagonal. Bg shift a accent al entrar.
+ * Homepage Bloque 4 — Cierre / manifesto.
+ * Sin section tab. Textura grid + grain + bandas diagonales.
+ * Bg shift a accent al entrar en viewport.
  */
-import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 ---
-<div id="sec-cierre" class={styles.anchorWrap}>
-  <SectionTab
-    number="04"
-    label="Cierre"
-    filename="home/anchor.astro"
-    date="2026-05-14"
-    revision="FINAL"
-  />
+<section id="sec-cierre" class={styles.anchor} data-anchor-transition>
+  <div class={styles.anchorTexture} aria-hidden="true"></div>
 
-  <section class={styles.anchor} data-anchor-transition>
-    <span class={styles.anchorStampDiagonal} aria-hidden="true">Fin de archivo</span>
+  <span class={styles.anchorStampDiagonal} aria-hidden="true">Fin de archivo</span>
 
-    <h2 class={styles.anchorStatement}>Diseño productos. También los construyo.</h2>
-    <a href="/archivo" class={styles.anchorCta}>→ Ver archivo</a>
-  </section>
-</div>
+  <h2 class={styles.anchorStatement}>Diseño productos. También los construyo.</h2>
+  <a href="/archivo" class={styles.anchorCta}>→ Ver archivo</a>
+
+  <div class={styles.anchorFootnote} aria-hidden="true">
+    <span>JUAN CRUZ LUNA</span>
+    <span>—</span>
+    <span>PORTFOLIO 2026</span>
+    <span>—</span>
+    <span>BUENOS AIRES</span>
+  </div>
+</section>
 
 <script>
   function initAnchor() {

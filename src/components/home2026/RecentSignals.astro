@@ -1,26 +1,51 @@
 ---
 /**
  * RecentSignals.astro
- * Homepage Bloque 3 — Señales recientes. Index numerado.
+ * Homepage Bloque 3 — Moodboard de polaroides.
+ * Cada señal = imagen placeholder + caption handwritten + meta.
+ *
+ * TODO: reemplazar placeholders por imágenes/videos reales:
+ *   - POL-01: tapa de "Click" (Knapp & Zeratsky)
+ *   - POL-02: timelapse vibe coding (poster frame o gif)
+ *   - POL-03: cover del curso de Git que estés tomando
  */
 import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 
-const signals = [
+interface Signal {
+  variant: 'book' | 'screen' | 'course';
+  imageTitle: string;
+  imageSub: string;
+  caption: string;
+  date: string;
+  ref?: { label: string; href: string };
+  hasPlay?: boolean;
+}
+
+const signals: Signal[] = [
   {
-    date: '2026-05',
-    title: 'Leyendo Click, de los creadores de Sprint.',
-    note: 'El mejor libro sobre arrancar proyectos que leí en mucho tiempo.',
+    variant: 'book',
+    imageTitle: 'Click',
+    imageSub: 'Knapp · Zeratsky · 2024',
+    caption: 'El mejor libro sobre arrancar proyectos que leí en mucho tiempo.',
+    date: '2026 · MAY',
+    ref: { label: 'Ver libro ↗', href: 'https://www.thesprintbook.com/click' },
   },
   {
-    date: '2026-05',
-    title: 'Probando vibe coding en serio.',
-    note: 'La línea entre diseñar y construir se está borrando de formas interesantes.',
+    variant: 'screen',
+    imageTitle: '$ pnpm dev\n  ✓ ready in 412ms\n\n  → vibe coding\n  → 03:42:18 elapsed',
+    imageSub: 'TIMELAPSE · arenga lab',
+    caption: 'Probando vibe coding en serio con el equipo.',
+    date: '2026 · MAY',
+    hasPlay: true,
   },
   {
-    date: '2026-04',
-    title: 'Aprendiendo Git. Tarde, sí.',
-    note: 'Pero entender el proceso de construcción desde adentro vale la pena.',
+    variant: 'course',
+    imageTitle: 'git',
+    imageSub: 'commit · push · merge',
+    caption: 'Aprendiendo Git tarde. Vale la pena.',
+    date: '2026 · ABR',
+    ref: { label: 'Curso ↗', href: '#' },
   },
 ];
 ---
@@ -33,14 +58,22 @@ const signals = [
     extra={`${signals.length} entries`}
   />
 
-  {signals.map((s, i) => (
-    <div class={styles.signal}>
-      <span class={styles.signalIndex}>0{i + 1}/</span>
-      <span class={styles.signalDate}>{s.date}</span>
-      <div class={styles.signalBody}>
-        <p class={styles.signalTitle}>{s.title}</p>
-        <p class={styles.signalNote}>{s.note}</p>
-      </div>
+  <div class={styles.moodboard}>
+    <div class={styles.moodboardGrid}>
+      {signals.map((s) => (
+        <article class={styles.polaroid}>
+          <div class={styles.polaroidImage} data-variant={s.variant} aria-hidden="true">
+            <span class={styles.polaroidImageTitle}>{s.imageTitle}</span>
+            <span class={styles.polaroidImageSub}>{s.imageSub}</span>
+            {s.hasPlay && <span class={styles.polaroidPlay}>Reel</span>}
+          </div>
+          <p class={styles.polaroidCaption}>{s.caption}</p>
+          <div class={styles.polaroidMeta}>
+            <span>{s.date}</span>
+            {s.ref && <a href={s.ref.href} target={s.ref.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{s.ref.label}</a>}
+          </div>
+        </article>
+      ))}
     </div>
-  ))}
+  </div>
 </section>

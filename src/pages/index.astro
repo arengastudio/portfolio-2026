@@ -12,7 +12,6 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SidebarContextHome from '../components/global/SidebarContextHome.astro';
-import IndexToC from '../components/home2026/IndexToC.astro';
 import HeroBlock from '../components/home2026/HeroBlock.astro';
 import Timeline from '../components/home2026/Timeline.astro';
 import RecentSignals from '../components/home2026/RecentSignals.astro';
@@ -27,9 +26,6 @@ import Footer from '../components/global/Footer.astro';
 >
   <SidebarContextHome slot="sidebar-context" />
 
-  <div class="home-index-toc-wrap">
-    <IndexToC />
-  </div>
   <HeroBlock />
   <Timeline />
   <RecentSignals />
@@ -40,16 +36,3 @@ import Footer from '../components/global/Footer.astro';
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .home-index-toc-wrap {
-    padding: var(--space-3) var(--space-7) 0;
-    max-width: 1280px;
-  }
-
-  @media (max-width: 767px) {
-    .home-index-toc-wrap {
-      padding: var(--space-2) var(--space-4) 0;
-    }
-  }
-</style>

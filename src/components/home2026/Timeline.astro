@@ -1,50 +1,85 @@
 ---
 /**
  * Timeline.astro
- * Homepage Bloque 2 — Línea de tiempo. Año como folder tab.
+ * Homepage Bloque 2 — Línea de tiempo como cinta de medir.
+ * Scroll horizontal. Cada año = un tick + card si hay entrada, vacío si no.
+ *
+ * Metáfora: cinta métrica / regla impresa. Físico digitalizado.
  */
 import SectionTab from './SectionTab.astro';
 import styles from './home2026.module.css';
 
-const entries = [
+interface Entry {
+  year: number;
+  title: string;
+  note: string;
+  tag: string;
+}
+
+const entries: Entry[] = [
   {
-    year: '2021',
+    year: 2021,
     title: 'Primeros proyectos freelance.',
     note: 'Aprendí que diseñar sin entender el negocio es decoración.',
+    tag: 'FREELANCE',
   },
   {
-    year: '2022',
+    year: 2022,
     title: 'Me sumé a Librodepases.',
     note: 'Por primera vez diseñé junto a desarrollo. Cambió cómo pienso un producto.',
+    tag: 'PRODUCT',
   },
   {
-    year: '2024',
+    year: 2024,
     title: 'Fundé Arenga Studio.',
     note: 'Pasé de ejecutar proyectos a tener que conseguirlos también.',
+    tag: 'STUDIO',
   },
   {
-    year: '2025',
+    year: 2025,
     title: 'Lideré el equipo de diseño de LDP.',
     note: 'Dejé de ser el único que decidía. Fue mejor así.',
+    tag: 'LEAD',
   },
 ];
+
+const yearRange = [2021, 2022, 2023, 2024, 2025, 2026];
+const byYear = new Map(entries.map((e) => [e.year, e]));
 ---
 <section id="sec-tiempo" class={`${styles.section} ${styles.timeline}`} aria-label="Línea de tiempo">
   <SectionTab
     number="02"
     label="Tiempo"
     filename="home/timeline.astro"
-    date="2021–2025"
-    extra={`${entries.length} entradas`}
+    date={`${yearRange[0]}–${yearRange[yearRange.length - 1]}`}
+    extra={`${entries.length} hitos`}
   />
 
-  {entries.map((e) => (
-    <div class={styles.timelineEntry}>
-      <span class={styles.timelineYear}>{e.year}</span>
-      <div class={styles.timelineBody}>
-        <h3 class={styles.timelineTitle}>{e.title}</h3>
-        <p class={styles.timelineNote}>{e.note}</p>
-      </div>
-    </div>
-  ))}
+  <span class={styles.timelineHint}>Scroll horizontal · cinta de medir</span>
+
+  <div class={styles.tape} tabindex="0" role="region" aria-label="Línea de tiempo de hitos">
+    {yearRange.map((year) => {
+      const entry = byYear.get(year);
+      return (
+        <div class={styles.tick}>
+          <span class={styles.tickYear}>{year}</span>
+
+          {entry ? (
+            <article class={styles.entryCard}>
+              <div class={styles.entryCardLabel}>
+                <span>HITO · {entry.tag}</span>
+                <span>{entry.year}</span>
+              </div>
+              <h3 class={styles.entryCardTitle}>{entry.title}</h3>
+              <p class={styles.entryCardNote}>{entry.note}</p>
+            </article>
+          ) : (
+            <span class={styles.tickEmpty}>
+              {year === 2026 ? 'En curso' : 'Sin registro'}
+            </span>
+          )}
+        </div>
+      );
+    })}
+  </div>
 </section>
